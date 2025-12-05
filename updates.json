@@ -1,15 +1,10 @@
 [
   {
-  "updates": [
-    {
-      "id": "update_2025_top3",
       "title": "Only 3 Top Rated Anime of 2025",
-      "description": "Anime ANICADE releases a new highlight featuring the top 3 highest-rated anime of 2025.",
-      "image": "https://i.postimg.cc/4ds0WL2Y/IMG-20251127-WA0271.jpg",
-      "category": "anime_news",
-      "timestamp": "2025-11-27T00:00:00Z"
-    }
-  }{
+      "description": "highlight featuring the top 3 highest-rated anime of 2025.",
+      "image": "https://i.postimg.cc/4ds0WL2Y/IMG-20251127-WA0271.jpg"
+    },
+  {
   "title": "One Punch Man Season 3",
   "description": "One Punch Man is officially coming back with Season 3 on October 2025! 💪",
   "image": "https://i.postimg.cc/qMFbhgNk/FB-IMG-17559271751275512.jpg"
