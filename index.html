@@ -1,223 +1,373 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo" />
-  <title>Anime Wrld Wars | ANICADE | Official Hub</title>
-  <link rel="icon" href="https://i.imgur.com/AnimeANICADE_PFP.png" type="image/png" />
-  <meta property="og:title" content="Anime Wrld Wars | ANICADE" />
-  <meta property="og:description" content="Daily anime updates, edits, memes & more!" />
-  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg" />
-  <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/" />
-  <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Dark/Light Toggle -->
-  <button class="toggle-btn" id="modeToggle">🌙</button>
 
-  <!-- Floating Menu Button -->
-  <button class="menu-btn" id="menuBtn">☰</button>
+<!DOCTYPE html>  <html lang="en">
 
-  <!-- Floating Nav Menu -->
-  <nav id="floatingNav" class="floating-nav hidden">
-    <ul>
-      <li><a href="#home">🏠 Home</a></li>
-      <li><a href="about.html">📖 About</a></li>
-      <li><a href="#updates">📰 Updates</a></li>
-      <li><a href="media.html">🖼 Media</a></li>
-      <li><a href="watch-download-anime.html">🎥 Watch Anime</a></li>
-      <li><a href="manga.html">📚 Manga & Manhwa</a></li>
-      <li><a href="#reviews">⭐ Reviews</a></li>
-      <li><a href="community.html">👥 Community</a></li>
-      <li><a href="community.html#contact">📩 Contact</a></li>
-      <li><a href="#events">🎉 Events</a></li>
-    </ul>
-  </nav>
+<head>    
+  <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo" />    
+  <title>Anime Wrld Wars | ANICADE | Official Hub</title>    <link rel="icon" href="https://i.imgur.com/AnimeANICADE_PFP.png" type="image/png" />    
+  <meta property="og:title" content="Anime Wrld Wars | ANICADE" />    
+  <meta property="og:description" content="Daily anime updates, edits, memes & more!" />    
+  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg" />    
+  <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/" />    
+  <meta name="twitter:card" content="summary_large_image" />    <style>    
+    :root {    
+      --bg-color: #ffffff;    
+      --text-color: #000000;    
+      --accent-red: #e53935;    
+      --accent-blue: #1e88e5;    
+      --accent-yellow: #fbc02d;    
+      --gray-dark: #212121;    
+      --gray-light: #f5f5f5;    
+    }    
+    body {    
+      margin: 0;    
+      background-color: var(--bg-color);    
+      color: var(--text-color);    
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+      transition: background-color 0.3s ease, color 0.3s ease;    }    
+header {    
+  <link rel="manifest" href="manifest.webmanifest">
 
-  <header>Anime Wrld Wars | ANICADE |</header>
+<meta name="theme-color" content="#ff0000">    
+      background-color: var(--gray-dark);    
+      padding: 2rem 1rem;    
+      text-align: center;    
+      font-size: 2.5rem;    
+      font-weight: 900;    
+      letter-spacing: 3px;    
+      color: var(--accent-yellow);    
+      text-shadow: 0 0 10px var(--accent-yellow);    
+    }    
+    nav {    
+      background-color: var(--accent-blue);    
+      display: flex;    
+      flex-wrap: wrap;    
+      justify-content: center;    
+      gap: 1.5rem;    
+      padding: 1rem;    
+      font-weight: 700;    
+    }    
+    nav a {    
+      color: var(--bg-color);    
+      text-decoration: none;    
+      font-size: 1.1rem;    
+      transition: color 0.3s ease;    
+    }    
+    nav a:hover {    
+      color: var(--accent-yellow);    
+      text-shadow: 0 0 10px var(--accent-yellow);    
+    }    
+    main {    
+      max-width: 1000px;    
+      margin: 2rem auto;    
+      padding: 0 1rem;    
+    }    
+    section {    
+      margin-bottom: 3.5rem;    
+    }    
+    h2 {    
+      border-left: 6px solid var(--accent-red);    
+      padding-left: 1rem;    
+      margin-bottom: 1rem;    
+      font-size: 1.8rem;    
+      color: var(--accent-red);    
+    }    
+    p, ul {    
+      font-size: 1.1rem;    
+      line-height: 1.6;    
+    }    
+    ul li {    
+      margin-bottom: 0.6rem;    
+    }    
+    a.button {    
+      display: inline-block;    
+      background-color: var(--accent-red);    
+      color: var(--text-color);    
+      padding: 0.8rem 1.6rem;    
+      border-radius: 6px;    
+      font-weight: 800;    
+      text-decoration: none;    
+      box-shadow: 0 0 15px var(--accent-red);    
+      transition: background-color 0.3s ease;    
+      margin-top: 1rem;    
+    }    
+    a.button:hover {    
+      background-color: #b71c1c;    
+      box-shadow: 0 0 20px #b71c1c;    
+    }    
+    footer {    
+      background-color: var(--gray-dark);    
+      text-align: center;    
+      padding: 1.5rem 1rem;    
+      font-size: 0.9rem;    
+      color: var(--accent-blue);    
+      text-shadow: 0 0 6px var(--accent-blue);    
+    }    
+    .update-item img {    
+      max-width: 100%;    
+      border-radius: 12px;    
+      margin: 1rem 0;    
+    }    /* Dark Mode */    
+body.dark-mode {    
+  background-color: #121212;    
+  color: #eee;    
+}    
+body.dark-mode header,    
+body.dark-mode footer,    
+body.dark-mode nav {    
+  background-color: #1e1e1e;    
+  color: #fbc02d;    
+}    
+body.dark-mode nav a {    
+  color: #fbc02d;    
+}    
+body.dark-mode nav a:hover {    
+  color: #fff;    
+  text-shadow: none;    
+}    
 
-  <div style="text-align: center; margin-top: -1.5rem; margin-bottom: 1rem;">
-    <img src="https://i.postimg.cc/tgqFRJkf/ANIME-ANICADE-2-0-20251205-160222.jpg"
-         alt="ANICADE PFP"
-         style="width: 130px; height: 130px; border-radius: 50%; box-shadow: 0 0 10px #fbc02d;" />
-  </div>
+/* Toggle Button */    
+.toggle-btn {    
+  position: fixed;    
+  top: 1rem;    
+  right: 1rem;    
+  background-color: #fbc02d; /* light mode bg */    
+  color: #000;               /* light mode icon */    
+  padding: 0.6rem;    
+  border: none;    
+  border-radius: 50%;    
+  font-size: 1.3rem;    
+  font-weight: bold;    
+  cursor: pointer;    
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);    
+  z-index: 9999;    
+  transition: background-color 0.3s, color 0.3s;    
+}    
+body.dark-mode .toggle-btn {    
+  background-color: #1e1e1e; /* dark mode bg */    
+  color: #fbc02d;            /* dark mode icon */    
+}    
 
-  <main>
-    <section id="home">
-      <h2>Welcome to Anime Wrld Wars | ANICADE |</h2>
-      <p>🎌 Your ultimate anime hub. Dive into daily anime updates, epic memes, waifu spotlights, PFP drops, fan art showcases & exclusive content.</p>
-      <p>⚡ Whether you're here to chill, battle, or vibe — join the anime revolution today!</p>
-      <div style="text-align: center;">
-        <a href="https://bit.ly/AnimeANICADE" target="_blank" class="button">Reload Hub</a>
-      </div>
-    </section>
+/* Floating Menu Button */    
+.menu-btn {    
+  position: fixed;    
+  top: 4.5rem;    
+  right: 1rem;    
+  z-index: 9999;    
+  background: var(--accent-yellow);    
+  color: var(--gray-dark);    
+  border: none;    
+  border-radius: 50%;    
+  width: 3rem;    
+  height: 3rem;    
+  font-size: 1.6rem;    
+  font-weight: bold;    
+  cursor: pointer;    
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);    
+}    
 
-    <a href="subscription.html" style="
-        display:inline-block;
-        background:#0073ff;
-        color:white;
-        padding:12px 20px;
-        border-radius:8px;
-        text-decoration:none;
-        font-weight:bold;
-    ">
-        Subscribe for Email Updates
-    </a>
+/* Floating Nav */    
+.floating-nav {    
+  position: fixed;    
+  top: 8rem;    
+  right: 1rem;    
+  background: var(--gray-dark);    
+  padding: 1rem;    
+  border-radius: 10px;    
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);    
+  z-index: 9998;    
+}    
+.floating-nav.hidden {    
+  display: none;    
+}    
+.floating-nav ul {    
+  list-style: none;    
+  padding: 0;    
+  margin: 0;    
+}    
+.floating-nav ul li {    
+  margin: 0.6rem 0;    
+}    
+.floating-nav ul li a {    
+  color: var(--accent-yellow);    
+  text-decoration: none;    
+  font-weight: bold;    
+}
 
-    <section id="anime-news">
-      <h2>📰 Latest Anime News</h2>
-      <ul id="news-feed">
-        <li>Loading anime news...</li>
-      </ul>
-    </section>
+</style>  </head>
 
-    <section id="updates">
-      <h2>Latest Anime Updates</h2>
-      <div id="updates-container"></div>
-    </section>
+<body>    
+  <!-- Dark/Light Toggle -->    
+  <button class="toggle-btn" id="modeToggle">🌙</button>    
+  <!-- Floating Menu Button -->    
+  <button class="menu-btn" id="menuBtn">☰</button>    <!-- Floating Nav Menu -->    <nav id="floatingNav" class="floating-nav hidden">    
+    <ul>    
+      <li><a href="#home">🏠 Home</a></li>    
+      <li><a href="about.html">📖 About</a></li>    
+      <li><a href="#updates">📰 Updates</a></li>    
+      <li><a href="media.html">🖼 Media</a></li>    
+    <li><a href="watch-download-anime.html">🎥 Watch Anime</a></li>    
+<li><a href="manga.html">📚 Manga & Manhwa</a></li>    
+      <li><a href="#reviews">⭐ Reviews</a></li>    
+      <li><a href="community.html">👥 Community</a></li>    
+      <li><a href="community.html#contact">📩 Contact</a></li>    
+      <li><a href="#events">🎉 Events</a></li>    
+    </ul>    
+  </nav>    <header>Anime Wrld Wars | ANICADE |</header>    <div style="text-align: center; margin-top: -1.5rem; margin-bottom: 1rem;">    
+    <img src="https://i.postimg.cc/tgqFRJkf/ANIME-ANICADE-2-0-20251205-160222.jpg"    
+         alt="ANICADE PFP"    
+         style="width: 130px; height: 130px; border-radius: 50%; box-shadow: 0 0 10px #fbc02d;" />    
+  </div>    <main>    
+    <section id="home">    
+      <h2>Welcome to Anime Wrld Wars | ANICADE |</h2>    
+      <p>🎌 Your ultimate anime hub. Dive into daily anime updates, epic memes, waifu spotlights, PFP drops, fan art showcases & exclusive content.</p>    
+      <p>⚡ Whether you're here to chill, battle, or vibe — join the anime revolution today!</p>    
+      <div style="text-align: center;">    
+        <a href="https://bit.ly/AnimeANICADE" target="_blank" class="button">Reload Hub</a>    
+      </div>    
+    </section>    
+<a href="subscription.html" style="    
+    display:inline-block;    
+    background:#0073ff;    
+    color:white;    
+    padding:12px 20px;    
+    border-radius:8px;    
+    text-decoration:none;    
+    font-weight:bold;    
+">    
+    Subscribe for Email Updates    
+</a>    
+    <section id="anime-news">    
+      <h2>📰 Latest Anime News</h2>    
+      <ul id="news-feed">    
+        <li>Loading anime news...</li>    
+      </ul>    
+    </section>  <section id="updates">    
+  <h2>Latest Anime Updates</h2>    
+  <div id="updates-container"></div>    
+</section>    <section id="media">    
+  <h2>Featured Media</h2>    
+  <p>Explore a collection of community creations — edits, memes, and fan art made by and for the ANICADE family!</p>    
+</section>    <section id="reviews">    
+  <h2>Community Reviews ⭐</h2>    
+  <blockquote>“This anime community is 🔥🔥🔥 Best edits, best vibes!”<br/><strong>– Otaku_King</strong></blockquote>    
+  <blockquote>“The events and giveaways are insane! Happy to be part of ANICADE.”<br/><strong>– AnimeQueen_77</strong></blockquote>    
+</section>    <section id="events">    
+  <h2>Upcoming Events</h2>    
+  <div class="event-card" style="border: 2px solid #ff4d4d; padding: 20px; border-radius: 10px; background: #1a1a1a; color: #fff;">    
+    <h3 style="font-size: 1.8em; color: #ffd700;">🎊 ANICADE ANNIVERSARY GIVEAWAY 🎊</h3>    
+    <p><strong>🗓️ Date:</strong> July 27, 2025</p>    
+    <p><strong>🎉 Celebrate one epic year of Anime WrldWars | ANICADE!</strong><br>    
+    We're going all out with a <strong>legendary giveaway</strong> for 3 lucky winners:</p>    
+    <ul style="list-style-type: '✨ '; padding-left: 1em;">    
+      <li><strong>🎨 Fanart & Stickers Channel (500+ Followers)</strong><br>    
+        <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" style="color: #00ffff;">Join Now</a></li>    
+      <li><strong>😂 Quotes & Comedy Channel (200+ Followers)</strong><br>    
+        <a href="https://whatsapp.com/channel/0029VafzOi78PgsBHYRUjK2g" target="_blank" style="color: #00ffff;">Join Now</a></li>    
+      <li><strong>🏆 Admin Spot in the Main Channel (14K+ Followers)</strong><br>    
+        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" style="color: #00ffff;">Enter the Wrld</a></li>    
+    </ul>    
+    <p style="margin-top: 20px;">🎭 <strong>Tresfor Wrld — Where Legends Rise</strong> ✌️🔥<br>    
+      🔗 <strong>Powered by Anime WrldWars | ANICADE</strong> ⛩️    
+    </p>    
+  </div>    
+</section>    <section id="contact">    
+  <h2>Contact Us</h2>    
+  <p>Got questions, feedback, or ideas? Reach out anytime!</p>    
+  <ul>    
+    <li><strong>Email:</strong> <a href="mailto:tresforzulu@gmail.com">tresforzulu@gmail.com</a></li>    
+    <li><strong>NGL:</strong> <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Send Feedback</a></li>    
+  </ul>    
+</section>    </main>    
+<a href="subscription.html" style="    
+    display:inline-block;    
+    background:#0073ff;    
+    color:white;    
+    padding:12px 20px;    
+    border-radius:8px;    
+    text-decoration:none;    
+    font-weight:bold;    
+">    
+    Subscribe for Email Updates    
+</a>    
+  <footer>© 2025 Anime Wrld Wars | ANICADE | — BROUGHT TO YOU BY TRESFOR WRLD ✌️🔥</footer>    <!-- Scripts -->    <script>    
+    document.addEventListener("DOMContentLoaded", () => {    
+      // Toggle Mode    
+      const toggleBtn = document.getElementById("modeToggle");    
+      const savedMode = localStorage.getItem("mode");    
+      const isDark = savedMode === "dark";    
+      document.body.classList.toggle("dark-mode", isDark);    
+      toggleBtn.textContent = isDark ? "☀️" : "🌙";    
+      toggleBtn.style.backgroundColor = isDark ? "#1e1e1e" : "#fbc02d";    
+      toggleBtn.style.color = isDark ? "#fbc02d" : "#000";    
+      toggleBtn.addEventListener("click", () => {    
+        const dark = document.body.classList.toggle("dark-mode");    
+        localStorage.setItem("mode", dark ? "dark" : "light");    
+        toggleBtn.textContent = dark ? "☀️" : "🌙";    
+        toggleBtn.style.backgroundColor = dark ? "#1e1e1e" : "#fbc02d";    
+        toggleBtn.style.color = dark ? "#fbc02d" : "#000";    
+      });    // Floating Menu    
+  const menuBtn = document.getElementById("menuBtn");    
+  const floatingNav = document.getElementById("floatingNav");    
+  menuBtn.addEventListener("click", () => floatingNav.classList.toggle("hidden"));    
+  document.querySelectorAll("#floatingNav a").forEach(link => {    
+    link.addEventListener("click", () => floatingNav.classList.add("hidden"));    
+  });    
 
-    <section id="media">
-      <h2>Featured Media</h2>
-      <p>Explore a collection of community creations — edits, memes, and fan art made by and for the ANICADE family!</p>
-    </section>
+  // Load Updates    
+  fetch('updates.json')    
+    .then(res => res.json())    
+    .then(updates => {    
+      const container = document.getElementById('updates-container');    
+      updates.forEach(u => {    
+        const div = document.createElement('div');    
+        div.className = 'update-item';    
+        div.innerHTML = `<h3>${u.title}</h3><p>${u.description}</p>${u.image?`<img src="${u.image}" alt="${u.title}" />`:''}`;    
+        container.appendChild(div);    
+      });    
+    })    
+    .catch(console.error);    
 
-    <section id="reviews">
-      <h2>Community Reviews ⭐</h2>
-      <blockquote>“This anime community is 🔥🔥🔥 Best edits, best vibes!”<br/><strong>– Otaku_King</strong></blockquote>
-      <blockquote>“The events and giveaways are insane! Happy to be part of ANICADE.”<br/><strong>– AnimeQueen_77</strong></blockquote>
-    </section>
+  // Anime News    
+  fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://myanimelist.net/rss/news.xml'))    
+    .then(r => r.json())    
+    .then(data => {    
+      const xml = new DOMParser().parseFromString(data.contents, "text/xml");    
+      const items = xml.querySelectorAll("item");    
+      const feed = document.getElementById("news-feed");    
+      feed.innerHTML = "";    
+      items.forEach((it, i) => {    
+        if(i<5){    
+          const li = document.createElement('li');    
+          li.innerHTML = `<a href="${it.querySelector('link').textContent}" target="_blank">${it.querySelector('title').textContent}</a>`;    
+          feed.appendChild(li);    
+        }    
+      });    
+    })    
+    .catch(() => {    
+      document.getElementById("news-feed").innerHTML = "<li>❌ Could not load news.</li>";    
+    });    
+});
 
-    <section id="events">
-      <h2>Upcoming Events</h2>
-      <div class="event-card" style="border: 2px solid #ff4d4d; padding: 20px; border-radius: 10px; background: #1a1a1a; color: #fff;">
-        <h3 style="font-size: 1.8em; color: #ffd700;">🎊 ANICADE ANNIVERSARY GIVEAWAY 🎊</h3>
-        <p><strong>🗓️ Date:</strong> July 27, 2025</p>
-        <p><strong>🎉 Celebrate one epic year of Anime WrldWars | ANICADE!</strong><br>
-        We're going all out with a <strong>legendary giveaway</strong> for 3 lucky winners:</p>
-        <ul style="list-style-type: '✨ '; padding-left: 1em;">
-          <li><strong>🎨 Fanart & Stickers Channel (500+ Followers)</strong><br>
-            <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" style="color: #00ffff;">Join Now</a></li>
-          <li><strong>😂 Quotes & Comedy Channel (200+ Followers)</strong><br>
-            <a href="https://whatsapp.com/channel/0029VafzOi78PgsBHYRUjK2g" target="_blank" style="color: #00ffff;">Join Now</a></li>
-          <li><strong>🏆 Admin Spot in the Main Channel (14K+ Followers)</strong><br>
-            <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" style="color: #00ffff;">Enter the Wrld</a></li>
-        </ul>
-        <p style="margin-top: 20px;">🎭 <strong>Tresfor Wrld — Where Legends Rise</strong> ✌️🔥<br>
-          🔗 <strong>Powered by Anime WrldWars | ANICADE</strong> ⛩️
-        </p>
-      </div>
-    </section>
+</script>    <!-- Chatbase Chatbot -->    <script>
+(function(){
+if (!window.chatbase || window.chatbase("getState")!=="initialized") {
+window.chatbase=(...args)=>{(window.chatbase.q=window.chatbase.q||[]).push(args)};
+window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});
+}
+const onLoad=()=>{
+const s=document.createElement("script");
+s.src="https://www.chatbase.co/embed.min.js";
+s.id="xda32KgOFfKmwpwKmpWtw";
+document.body.appendChild(s);
+};
+document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);
+})();
+</script>    <script>
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker.register("/sw.js");
+}
+</script>  </body>
 
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <p>Got questions, feedback, or ideas? Reach out anytime!</p>
-      <ul>
-        <li><strong>Email:</strong> <a href="mailto:tresforzulu@gmail.com">tresforzulu@gmail.com</a></li>
-        <li><strong>NGL:</strong> <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Send Feedback</a></li>
-      </ul>
-    </section>
-  </main>
-
-  <a href="subscription.html" style="
-      display:inline-block;
-      background:#0073ff;
-      color:white;
-      padding:12px 20px;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:bold;
-  ">
-      Subscribe for Email Updates
-  </a>
-
-  <footer>© 2025 Anime Wrld Wars | ANICADE | — BROUGHT TO YOU BY TRESFOR WRLD ✌️🔥</footer>
-
-  <!-- Scripts -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Toggle Mode
-      const toggleBtn = document.getElementById("modeToggle");
-      const savedMode = localStorage.getItem("mode");
-      const isDark = savedMode === "dark";
-      document.body.classList.toggle("dark-mode", isDark);
-      toggleBtn.textContent = isDark ? "☀️" : "🌙";
-      toggleBtn.style.backgroundColor = isDark ? "#1e1e1e" : "#fbc02d";
-      toggleBtn.style.color = isDark ? "#fbc02d" : "#000";
-      toggleBtn.addEventListener("click", () => {
-        const dark = document.body.classList.toggle("dark-mode");
-        localStorage.setItem("mode", dark ? "dark" : "light");
-        toggleBtn.textContent = dark ? "☀️" : "🌙";
-        toggleBtn.style.backgroundColor = dark ? "#1e1e1e" : "#fbc02d";
-        toggleBtn.style.color = dark ? "#fbc02d" : "#000";
-      });
-
-      // Floating Menu
-      const menuBtn = document.getElementById("menuBtn");
-      const floatingNav = document.getElementById("floatingNav");
-      menuBtn.addEventListener("click", () => floatingNav.classList.toggle("hidden"));
-      document.querySelectorAll("#floatingNav a").forEach(link => {
-        link.addEventListener("click", () => floatingNav.classList.add("hidden"));
-      });
-
-      // Load Updates
-      fetch('updates.json')
-        .then(res => res.json())
-        .then(updates => {
-          const container = document.getElementById('updates-container');
-          updates.forEach(u => {
-            const div = document.createElement('div');
-            div.className = 'update-item';
-            div.innerHTML = `<h3>${u.title}</h3><p>${u.description}</p>${u.image?`<img src="${u.image}" alt="${u.title}" />`:''}`;
-            container.appendChild(div);
-          });
-        })
-        .catch(console.error);
-
-      // Anime News
-      fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://myanimelist.net/rss/news.xml'))
-        .then(r => r.json())
-        .then(data => {
-          const xml = new DOMParser().parseFromString(data.contents, "text/xml");
-          const items = xml.querySelectorAll("item");
-          const feed = document.getElementById("news-feed");
-          feed.innerHTML = "";
-          items.forEach((it, i) => {
-            if(i<5){
-              const li = document.createElement('li');
-              li.innerHTML = `<a href="${it.querySelector('link').textContent}" target="_blank">${it.querySelector('title').textContent}</a>`;
-              feed.appendChild(li);
-            }
-          });
-        })
-        .catch(() => {
-          document.getElementById("news-feed").innerHTML = "<li>❌ Could not load news.</li>";
-        });
-    });
-  </script>
-
-  <!-- Chatbase Chatbot -->
-  <script>
-    (function(){
-      if (!window.chatbase || window.chatbase("getState")!=="initialized") {
-        window.chatbase=(...args)=>{(window.chatbase.q=window.chatbase.q||[]).push(args)};
-        window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});
-      }
-      const onLoad=()=>{
-        const s=document.createElement("script");
-        s.src="https://www.chatbase.co/embed.min.js";
-        s.id="xda32KgOFfKmwpwKmpWtw";
-        document.body.appendChild(s);
-      };
-      document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);
-    })();
-  </script>
-
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js");
-    }
-  </script>
-</body>
-  </html>
+</html>    
+
