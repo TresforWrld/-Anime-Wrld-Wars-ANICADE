@@ -1,1 +1,237 @@
+/* ===========================
+   ANIME Wrld THEME (ANICADE)
+   High-Quality UI Redesign
+   =========================== */
 
+:root {
+  --bg: #0a0a10;
+  --bg-light: #11111a;
+  --text: #ffffff;
+  --accent-1: #ff0048;    /* neon red/pink */
+  --accent-2: #009dff;    /* neon blue */
+  --accent-3: #ffd500;    /* anime yellow */
+  --card: #141421;
+  --glow-1: #ff0048aa;
+  --glow-2: #009dffaa;
+  --radius: 14px;
+  --transition: 0.3s ease;
+}
+
+/* ===== General Layout ===== */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url("https://i.postimg.cc/4dJ2GLpN/galaxy-anime-bg.jpg") no-repeat center/cover fixed, var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ===== Header ===== */
+
+header {
+  background: rgba(10,10,20,0.85);
+  backdrop-filter: blur(8px);
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--accent-3);
+  text-shadow: 0 0 18px var(--accent-3), 0 0 5px #fff;
+  border-bottom: 2px solid var(--accent-2);
+}
+
+/* ===== Navigation ===== */
+
+nav {
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+nav a {
+  color: var(--accent-2);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--accent-3);
+  text-shadow: 0 0 12px var(--accent-3);
+}
+
+/* ===== Main Sections ===== */
+
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+section {
+  background: rgba(20,20,35,0.75);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 0 20px #0006;
+  border: 1px solid #1f1f2f;
+}
+
+/* ===== Headings ===== */
+
+h2 {
+  color: var(--accent-1);
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+  border-left: 6px solid var(--accent-1);
+  padding-left: 1rem;
+  text-shadow: 0 0 12px var(--glow-1);
+}
+
+/* ===== Text ===== */
+
+p,
+ul,
+li {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* ===== Buttons ===== */
+
+.button,
+a.button,
+a[href="subscription.html"] {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #fff !important;
+  padding: 0.9rem 1.7rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 0 18px var(--glow-1), 0 0 10px var(--glow-2);
+  transition: var(--transition);
+}
+
+.button:hover,
+a.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--glow-1);
+}
+
+/* ===== Update Items (Images / Cards) ===== */
+
+.update-item img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  box-shadow: 0 0 15px var(--glow-2);
+}
+
+/* ===== Event Card ===== */
+
+.event-card {
+  background: rgba(10,10,25,0.9) !important;
+  border: 2px solid var(--accent-1) !important;
+  border-radius: var(--radius);
+  box-shadow: 0 0 20px var(--glow-1);
+}
+
+/* ===== Footer ===== */
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(10,10,20,0.8);
+  color: var(--accent-2);
+  font-size: 0.95rem;
+  border-top: 2px solid var(--accent-2);
+  text-shadow: 0 0 8px var(--accent-2);
+}
+
+/* ===== Floating Buttons ===== */
+
+.toggle-btn,
+.menu-btn {
+  position: fixed;
+  right: 1rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background: var(--accent-3);
+  color: #000;
+  box-shadow: 0 0 12px var(--accent-3);
+  transition: var(--transition);
+}
+
+.toggle-btn:hover,
+.menu-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Menu button position */
+.menu-btn {
+  top: 4.7rem;
+}
+
+/* ===== Floating Navigation ===== */
+
+.floating-nav {
+  position: fixed;
+  top: 9rem;
+  right: 1rem;
+  background: rgba(15,15,30,0.9);
+  padding: 1rem;
+  border-radius: var(--radius);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px var(--glow-2);
+}
+
+.floating-nav.hidden {
+  display: none;
+}
+
+.floating-nav a {
+  color: var(--accent-3);
+  font-weight: 700;
+}
+
+/* ===== Dark Mode ===== */
+
+body.dark-mode {
+  background: #050509;
+  color: #eee;
+}
+
+body.dark-mode header {
+  background: rgba(5,5,15,0.9);
+}
+
+body.dark-mode section {
+  background: rgba(20,20,35,0.85);
+}
+
+body.dark-mode nav {
+  background: rgba(0,0,0,0.5);
+}
+
+body.dark-mode .toggle-btn {
+  background: var(--bg-light);
+  color: var(--accent-3);
+  }
