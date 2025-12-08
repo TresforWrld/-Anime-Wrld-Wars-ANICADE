@@ -395,6 +395,11 @@
       document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);
     })();
   </script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js");
+  }
+  </script>
 </body>
 </html>
 
