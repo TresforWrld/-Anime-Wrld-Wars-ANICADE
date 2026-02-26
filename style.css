@@ -163,12 +163,12 @@ header::before {
 /* ===== Main Content ===== */
 
 main {
-  max-width: 1100px;
-  margin: 2.5rem auto;
-  padding: 0 1.5rem;
+  max-width: 100%;
+  margin: 2.5rem 1rem;
+  padding: 0 1rem;
   position: relative;
   z-index: 1;
-  width: 100%;
+  width: calc(100% - 2rem);
   box-sizing: border-box;
 }
 
@@ -188,6 +188,7 @@ section {
   position: relative;
   overflow: hidden;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
 
