@@ -4,97 +4,222 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Watch & Download Anime - Dandadan S2 Episodes</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      background: #121212;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      text-align: center;
-    }
-    h1 {
-      color: #fbc02d;
-      margin-bottom: 1.5rem;
-    }
-    h2 {
-      color: #fbc02d;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-    }
-    .video-frame {
-      margin: 2rem 0;
-      box-shadow: 0 0 20px #000;
-      border-radius: 10px;
+    /* Watch page specific styles */
+    .video-section {
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      padding: 2.5rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      position: relative;
       overflow: hidden;
     }
-    a.button {
+    
+    .video-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple), var(--gojo-red));
+    }
+    
+    .video-section h2 {
+      color: var(--gojo-blue);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px var(--gojo-blue-glow);
+      margin-bottom: 1.5rem;
+    }
+    
+    .video-frame {
+      margin: 2rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 
+        0 0 30px var(--gojo-blue-glow),
+        0 10px 40px rgba(0, 0, 0, 0.5);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .video-frame:hover {
+      box-shadow: 
+        0 0 40px var(--gojo-blue-glow),
+        0 15px 50px rgba(0, 0, 0, 0.6);
+      border-color: rgba(0, 212, 255, 0.5);
+    }
+    
+    .video-frame iframe {
+      display: block;
+      width: 100%;
+      height: 480px;
+      border: none;
+    }
+    
+    .download-btn {
       display: inline-block;
-      margin: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: #1e88e5;
-      color: #fff;
-      border-radius: 6px;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff !important;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-weight: 800;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px var(--gojo-blue-glow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin: 1rem 0.5rem;
     }
-    a.button:hover {
-      background: #1565c0;
+    
+    .download-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--gojo-blue-glow);
+      border-color: var(--gojo-purple);
     }
-    p.note {
-      margin-top: 2rem;
+    
+    .back-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gojo-purple), var(--gojo-red));
+      color: #fff !important;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px var(--gojo-purple-glow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .back-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--gojo-purple-glow);
+      border-color: var(--gojo-red);
+    }
+    
+    .note {
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
+      border-radius: 10px;
+      border-left: 4px solid var(--gojo-blue);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 3rem;
+    }
+    
+    .episode-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, var(--gojo-red), var(--gojo-purple));
+      border-radius: 20px;
       font-size: 0.9rem;
-      color: #aaa;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    @media (max-width: 768px) {
+      .video-frame iframe {
+        height: 300px;
+      }
+      
+      .video-section {
+        padding: 1.5rem;
+      }
+      
+      .download-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0.5rem auto;
+        display: block;
+      }
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
+
 <body>
-  <h1>📺 Watch & Download Dandadan Season 2 Episodes</h1>
+  <header>🎬 Watch & Download Anime</header>
 
-  <section id="dandadan-s2-ep1">
-    <h2>Dandadan Season 2 - Episode 1</h2>
-    <div class="video-frame">
-      <iframe
-        src="https://drive.google.com/file/d/1U_K5LseK7bLinS5ZB6XJyR23UwQRu1u8/preview"
-        width="100%"
-        height="480"
-        allow="autoplay"
-        style="border:none;"
-        allowfullscreen
-      ></iframe>
+  <main>
+    <div style="text-align: center; margin: 2rem 0;">
+      <a href="index.html" class="back-button">⬅️ Back to Home</a>
     </div>
-    <a
-      href="https://drive.google.com/uc?export=download&id=1U_K5LseK7bLinS5ZB6XJyR23UwQRu1u8"
-      class="button"
-      target="_blank"
-      rel="noopener noreferrer"
-      >⬇️ Download Dandadan S2 Ep 1</a
-    >
-  </section>
 
-  <section id="dandadan-s2-ep2">
-    <h2>Dandadan Season 2 - Episode 2</h2>
-    <div class="video-frame">
-      <iframe
-        src="https://drive.google.com/file/d/1S0hhCKw8EqsLJvHOt9MUdSiqGKuKJHIm/preview"
-        width="100%"
-        height="480"
-        allow="autoplay"
-        style="border:none;"
-        allowfullscreen
-      ></iframe>
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h1 style="color: var(--gojo-blue); font-size: 2.5rem; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 20px var(--gojo-blue-glow);">
+        Dandadan Season 2
+      </h1>
+      <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 1rem;">
+        Stream and download the latest episodes
+      </p>
     </div>
-    <a
-      href="https://drive.google.com/uc?export=download&id=1S0hhCKw8EqsLJvHOt9MUdSiqGKuKJHIm"
-      class="button"
-      target="_blank"
-      rel="noopener noreferrer"
-      >⬇️ Download Dandadan S2 Ep 2</a
-    >
-  </section>
 
-  <p class="note">
-    Make sure you're logged into Google to stream properly on some devices.
-  </p>
+    <section class="video-section" id="dandadan-s2-ep1">
+      <span class="episode-badge">Episode 1</span>
+      <h2>Dandadan Season 2 - Episode 1</h2>
+      <div class="video-frame">
+        <iframe
+          src="https://drive.google.com/file/d/1U_K5LseK7bLinS5ZB6XJyR23UwQRu1u8/preview"
+          width="100%"
+          height="480"
+          allow="autoplay"
+          style="border:none;"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div style="text-align: center;">
+        <a
+          href="https://drive.google.com/uc?export=download&id=1U_K5LseK7bLinS5ZB6XJyR23UwQRu1u8"
+          class="download-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >⬇️ Download Episode 1</a>
+      </div>
+    </section>
+
+    <section class="video-section" id="dandadan-s2-ep2">
+      <span class="episode-badge">Episode 2</span>
+      <h2>Dandadan Season 2 - Episode 2</h2>
+      <div class="video-frame">
+        <iframe
+          src="https://drive.google.com/file/d/1S0hhCKw8EqsLJvHOt9MUdSiqGKuKJHIm/preview"
+          width="100%"
+          height="480"
+          allow="autoplay"
+          style="border:none;"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div style="text-align: center;">
+        <a
+          href="https://drive.google.com/uc?export=download&id=1S0hhCKw8EqsLJvHOt9MUdSiqGKuKJHIm"
+          class="download-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >⬇️ Download Episode 2</a>
+      </div>
+    </section>
+
+    <div class="note">
+      <strong>📌 Note:</strong> Make sure you're logged into Google to stream properly on some devices.
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Anime Wrld Wars | ANICADE ✌️🔥 — BROUGHT TO YOU BY TRESFOR WRLD
+  </footer>
+
 </body>
 </html>

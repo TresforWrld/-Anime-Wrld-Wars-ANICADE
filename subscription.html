@@ -1,53 +1,230 @@
-<div id="mc_embed_shell">
-  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-
-  <style type="text/css">
-    #mc_embed_signup {
-      background: #fff;
-      clear: left;
-      font: 14px Helvetica, Arial, sans-serif;
-      width: 600px;
-      padding: 20px;
-      border-radius: 10px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscribe | ANICADE</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Subscription page specific styles */
+    .subscription-container {
+      max-width: 700px;
+      margin: 3rem auto;
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      padding: 3rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .subscription-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple), var(--gojo-red));
+    }
+    
+    .subscription-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    
+    .subscription-header h2 {
+      color: var(--gojo-blue);
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px var(--gojo-blue-glow);
+      margin-bottom: 1rem;
+    }
+    
+    .subscription-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+    }
+    
+    .benefits-list li {
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
+      border-radius: 8px;
+      border-left: 4px solid var(--gojo-blue);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .benefits-list li:hover {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(155, 89, 182, 0.15));
+      transform: translateX(5px);
+      border-left-color: var(--gojo-purple);
+    }
+    
+    .benefits-list li span {
+      font-size: 1.5rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--gojo-blue);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--gojo-blue);
+      box-shadow: 0 0 15px var(--gojo-blue-glow);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px var(--gojo-blue-glow);
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px var(--gojo-blue-glow);
+    }
+    
+    .back-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gojo-purple), var(--gojo-red));
+      color: #fff !important;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px var(--gojo-purple-glow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .back-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--gojo-purple-glow);
+      border-color: var(--gojo-red);
+    }
+    
+    .required-note {
+      color: var(--gojo-red);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .subscription-container {
+        padding: 2rem 1.5rem;
+        margin: 2rem 1rem;
+      }
+      
+      .subscription-header h2 {
+        font-size: 1.6rem;
+      }
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
 
-  <div id="mc_embed_signup">
-    <form action="https://bit.us8.list-manage.com/subscribe/post?u=df7a2aaccb1bea06ec34cb2b0&amp;id=5ab4ecd287&amp;f_id=001172e1f0" 
-          method="post" 
-          id="mc-embedded-subscribe-form" 
-          name="mc-embedded-subscribe-form" 
-          class="validate" 
-          target="_blank">
+<body>
+  <header>📧 Subscribe | ANICADE</header>
 
-      <div id="mc_embed_signup_scroll">
-        <h2>Subscribe</h2>
+  <main>
+    <div style="text-align: center; margin: 2rem 0;">
+      <a href="index.html" class="back-button">⬅️ Back to Home</a>
+    </div>
 
-        <div class="indicates-required">
-          <span class="asterisk">*</span> indicates required
+    <div class="subscription-container">
+      <div class="subscription-header">
+        <h2>Stay Updated!</h2>
+        <p>Subscribe to get the latest anime news, updates, and exclusive content delivered straight to your inbox!</p>
+      </div>
+
+      <ul class="benefits-list">
+        <li><span>🎬</span> Latest anime news and announcements</li>
+        <li><span>📺</span> New episode alerts and release dates</li>
+        <li><span>🎁</span> Exclusive giveaways and contests</li>
+        <li><span>🎨</span> Featured fan art and community highlights</li>
+        <li><span>📚</span> Manga and manhwa recommendations</li>
+      </ul>
+
+      <form action="https://bit.us8.list-manage.com/subscribe/post?u=df7a2aaccb1bea06ec34cb2b0&amp;id=5ab4ecd287&amp;f_id=001172e1f0" 
+            method="post" 
+            id="mc-embedded-subscribe-form" 
+            name="mc-embedded-subscribe-form" 
+            class="validate" 
+            target="_blank">
+        
+        <div class="form-group">
+          <label for="mce-EMAIL">Email Address <span class="required-note">*</span></label>
+          <input type="email" 
+                 name="EMAIL" 
+                 class="required email" 
+                 id="mce-EMAIL" 
+                 required 
+                 placeholder="your@email.com" />
         </div>
 
-        <div class="mc-field-group">
-          <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-          <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required>
-        </div>
-
-        <div id="mce-responses" class="clear foot">
-          <div class="response" id="mce-error-response" style="display:none"></div>
-          <div class="response" id="mce-success-response" style="display:none"></div>
-        </div>
-
-        <!-- Bot protection field (keep this hidden) -->
-        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
           <input type="text" name="b_df7a2aaccb1bea06ec34cb2b0_5ab4ecd287" tabindex="-1" value="">
         </div>
 
-        <div class="optionalParent">
-          <div class="clear foot">
-            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+        <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="submit-btn">
+          🚀 Subscribe Now
+        </button>
+      </form>
 
-            <p style="margin-top: 10px;">
-              <a href="http://eepurl.com/jtPr7-" title="Mailchimp - email marketing made easy and fun">
-                <img class="refferal_badge" 
-                     src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" 
-                     alt="Intuit Mailchimp"
+      <p style="text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        We respect your privacy. Unsubscribe at any time.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Anime Wrld Wars | ANICADE ✌️🔥 — BROUGHT TO YOU BY TRESFOR WRLD
+  </footer>
+
+</body>
+</html>

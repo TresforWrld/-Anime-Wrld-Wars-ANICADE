@@ -4,60 +4,221 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Featured Media | ANICADE</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      background-color: #121212;
-      color: #f5f5f5;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
+    /* Media page specific styles */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
     }
-    header {
-      background-color: #1e1e1e;
-      padding: 2rem;
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #fbc02d;
-      text-shadow: 0 0 10px #fbc02d;
+    
+    .media-card {
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      position: relative;
     }
-    main {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+    
+    .media-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple), var(--gojo-red));
     }
-    h2 {
-      color: #e53935;
-      border-left: 6px solid #e53935;
-      padding-left: 1rem;
+    
+    .media-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 212, 255, 0.15);
+      border-color: rgba(0, 212, 255, 0.4);
     }
-    p {
-      font-size: 1.1rem;
+    
+    .media-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    
+    .media-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .media-content {
+      padding: 1.5rem;
+    }
+    
+    .media-content h3 {
+      color: var(--gojo-blue);
+      margin: 0 0 0.8rem;
+      font-size: 1.3rem;
+      text-shadow: 0 0 10px var(--gojo-blue-glow);
+    }
+    
+    .media-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
       line-height: 1.6;
+      margin: 0;
     }
-    a.back-btn {
+    
+    .media-tag {
       display: inline-block;
-      margin-top: 2rem;
-      background: #fbc02d;
-      color: #212121;
-      padding: 0.8rem 1.6rem;
-      text-decoration: none;
-      font-weight: bold;
+      padding: 0.3rem 0.8rem;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(155, 89, 182, 0.2));
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gojo-blue);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .back-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff !important;
+      padding: 1rem 2rem;
       border-radius: 8px;
-      box-shadow: 0 0 10px #fbc02d;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px var(--gojo-blue-glow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .back-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--gojo-blue-glow);
+      border-color: var(--gojo-purple);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin: 3rem 0 2rem;
+    }
+    
+    .section-header h2 {
+      color: var(--gojo-blue);
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px var(--gojo-blue-glow);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple));
+      border-radius: 2px;
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
+
 <body>
   <header>🎨 ANICADE Featured Media</header>
+
   <main>
-    <h2>Community Creations</h2>
-    <p>Explore a collection of epic edits, fan arts, memes, and more — all made by the ANICADE family!</p>
+    <div style="text-align: center; margin: 2rem 0;">
+      <a href="index.html#media" class="back-button">⬅️ Back to Main Hub</a>
+    </div>
 
-    <!-- Placeholder for images or media items -->
-    <p>[Media items will go here — you can embed image grids, carousels, etc.]</p>
+    <div class="section-header">
+      <h2>Community Creations</h2>
+    </div>
 
-    <a href="index.html#media" class="back-btn">← Back to Main Hub</a>
+    <p style="text-align: center; font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+      Explore a collection of epic edits, fan arts, memes, and more — all made by the ANICADE family!
+    </p>
+
+    <div class="media-grid">
+      <div class="media-card">
+        <img src="https://i.postimg.cc/tgqFRJkf/ANIME-ANICADE-2-0-20251205-160222.jpg" alt="ANICADE Logo">
+        <div class="media-content">
+          <span class="media-tag">Official</span>
+          <h3>ANICADE Logo</h3>
+          <p>The official ANICADE branding and logo design featuring our signature style.</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <img src="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg" alt="Anime Wrld Wars">
+        <div class="media-content">
+          <span class="media-tag">Featured</span>
+          <h3>Anime Wrld Wars</h3>
+          <p>Epic anime crossover artwork showcasing multiple popular series characters.</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <img src="https://i.postimg.cc/x8nJcMmn/IMG-20251120-WA0137.jpg" alt="Classroom of the Elite">
+        <div class="media-content">
+          <span class="media-tag">News</span>
+          <h3>Classroom of the Elite S4</h3>
+          <p>Season 4 announcement artwork - Coming April 2026!</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <img src="https://i.postimg.cc/4ds0WL2Y/IMG-20251127-WA0271.jpg" alt="Top Rated Anime 2025">
+        <div class="media-content">
+          <span class="media-tag">Ranking</span>
+          <h3>Top Rated Anime 2025</h3>
+          <p>Highlight featuring the top 3 highest-rated anime of 2025.</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <img src="https://i.postimg.cc/qMFbhgNk/FB-IMG-17559271751275512.jpg" alt="One Punch Man S3">
+        <div class="media-content">
+          <span class="media-tag">Coming Soon</span>
+          <h3>One Punch Man Season 3</h3>
+          <p>One Punch Man returns with Season 3 in October 2025!</p>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <img src="https://i.postimg.cc/pLg4t9yT/IMG-20250716-000659-921.jpg" alt="Madoka Magica">
+        <div class="media-content">
+          <span class="media-tag">Movie</span>
+          <h3>Walpurgisnacht Rising</h3>
+          <p>New trailer & visual released! Scheduled for February 2026 in Japan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="color: var(--text-muted); font-style: italic;">
+        Want your artwork featured? Join our community channels and share your creations!
+      </p>
+      <a href="community.html" class="back-button" style="margin-top: 1rem;">Join Community</a>
+    </div>
   </main>
+
+  <footer>
+    © 2025 Anime Wrld Wars | ANICADE ✌️🔥 — BROUGHT TO YOU BY TRESFOR WRLD
+  </footer>
+
 </body>
 </html>

@@ -4,111 +4,163 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About | ANICADE</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --bg: #121212;
-      --fg: #f5f5f5;
-      --accent-red: #e53935;
-      --accent-yellow: #fbc02d;
-      --accent-blue: #1e88e5;
+    /* About page specific styles */
+    .about-section {
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      padding: 2.5rem;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
-    body {
-      margin: 0; padding: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Segoe UI', sans-serif;
-      line-height: 1.6;
+    
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
-    header {
-      background: var(--accent-red);
-      padding: 2rem;
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: var(--fg);
-      text-shadow: 0 0 8px var(--accent-yellow);
+    
+    .channel-card {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
+      padding: 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--gojo-blue);
+      transition: all 0.3s ease;
     }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    
+    .channel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+      border-left-color: var(--gojo-purple);
     }
-    h2 {
-      border-left: 6px solid var(--accent-yellow);
-      padding-left: 1rem;
-      margin-bottom: 1rem;
-      color: var(--accent-yellow);
-      font-size: 1.8rem;
+    
+    .channel-card h3 {
+      color: var(--gojo-blue);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
     }
-    p, ul {
-      margin-bottom: 1rem;
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
     }
-    ul {
-      list-style: '✨ ' inside;
+    
+    .feature-list li {
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.8rem;
+      background: rgba(0, 212, 255, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid var(--gojo-purple);
+      transition: all 0.3s ease;
     }
-    a.link-btn {
+    
+    .feature-list li:hover {
+      background: rgba(0, 212, 255, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .feature-list li strong {
+      color: var(--gojo-blue);
+    }
+    
+    .back-btn {
       display: inline-block;
-      background: var(--accent-blue);
-      color: var(--fg);
-      padding: 0.6rem 1.2rem;
-      margin: 0.5rem 0;
-      border-radius: 6px;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff !important;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 800;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 8px var(--accent-blue);
-      transition: background 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin-top: 1rem;
     }
-    a.link-btn:hover {
-      background: var(--accent-yellow);
-      color: var(--bg);
-      box-shadow: 0 0 12px var(--accent-yellow);
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: var(--bg);
-      font-size: 0.9rem;
-      color: var(--accent-red);
+    
+    .back-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.6);
+      border-color: var(--gojo-purple);
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
   <header>🌌 About ANICADE</header>
+  
   <main>
-    <h2>Our Mission</h2>
-    <p>Welcome to Anime WrldWars | ANICADE—your ultimate anime multiverse hub! We unite fans, creators, and dreamers to:</p>
-    <ul>
-      <li>Share daily <strong>anime updates</strong> and <strong>breaking news</strong></li>
-      <li>Discover and trade <strong>wallpapers</strong>, <strong>fanart</strong>, and <strong>stickers</strong></li>
-      <li>Join epic community <strong>events</strong>, <strong>giveaways</strong>, and <strong>polls</strong></li>
-      <li>Connect across platforms—Telegram, WhatsApp, and beyond!</li>
-    </ul>
+    <section class="about-section">
+      <h2>Our Mission</h2>
+      <p>Welcome to <strong>Anime WrldWars | ANICADE</strong> — your ultimate anime multiverse hub! We unite fans, creators, and dreamers to:</p>
+      <ul class="feature-list">
+        <li>Share daily <strong>anime updates</strong> and <strong>breaking news</strong></li>
+        <li>Discover and trade <strong>wallpapers</strong>, <strong>fanart</strong>, and <strong>stickers</strong></li>
+        <li>Join epic community <strong>events</strong>, <strong>giveaways</strong>, and <strong>polls</strong></li>
+        <li>Connect across platforms — Telegram, WhatsApp, and beyond!</li>
+      </ul>
+    </section>
 
-    <h2>Official Channels</h2>
-    <p>Tap to join our vibrant communities:</p>
-    <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" class="link-btn" target="_blank">Main WhatsApp Channel</a><br/>
-    <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" class="link-btn" target="_blank">Fanart & Stickers</a><br/>
-    <a href="https://whatsapp.com/channel/0029VafzOi78PgsBHYRUjK2g" class="link-btn" target="_blank">Quotes & Comedy</a><br/>
-    <a href="https://t.me/Tresfor_anime_wrld_wars" class="link-btn" target="_blank">Telegram Channel</a>
+    <section class="about-section">
+      <h2>Official Channels</h2>
+      <p>Join our vibrant communities across multiple platforms:</p>
+      
+      <div class="channel-grid">
+        <div class="channel-card">
+          <h3>📱 Main WhatsApp Channel</h3>
+          <p>14K+ followers • Daily updates • Exclusive content</p>
+          <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" class="button" target="_blank" style="margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Join Now</a>
+        </div>
+        
+        <div class="channel-card">
+          <h3>🎨 Fanart & Stickers</h3>
+          <p>500+ followers • Creative community • Art showcases</p>
+          <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" class="button" target="_blank" style="margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Join Now</a>
+        </div>
+        
+        <div class="channel-card">
+          <h3>😂 Quotes & Comedy</h3>
+          <p>200+ followers • Daily memes • Anime humor</p>
+          <a href="https://whatsapp.com/channel/0029VafzOi78PgsBHYRUjK2g" class="button" target="_blank" style="margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Join Now</a>
+        </div>
+        
+        <div class="channel-card">
+          <h3>✈️ Telegram Channel</h3>
+          <p>Instant updates • Quick access • Community hub</p>
+          <a href="https://t.me/Tresfor_anime_wrld_wars" class="button" target="_blank" style="margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Join Now</a>
+        </div>
+      </div>
+    </section>
 
-    <h2>Your Anime AI Assistant</h2>
-    <p>Meet <strong>ANICADE Ai</strong> — created by Tresfor Wrld to serve all your anime needs:</p>
-    <ul>
-      <li>Get <strong>personalized recommendations</strong> by mood, genre, or popularity</li>
-      <li>Fetch <strong>wallpapers</strong>, <strong>fanart</strong>, and <strong>downloads</strong> instantly</li>
-      <li>Stay updated with the latest <strong>anime news</strong> and <strong>events</strong></li>
-    </ul>
-    <p>Just tap the chat icon on any page to start chatting!</p>
+    <section class="about-section">
+      <h2>Your Anime AI Assistant</h2>
+      <p>Meet <strong>ANICADE Ai</strong> — created by Tresfor Wrld to serve all your anime needs:</p>
+      <ul class="feature-list">
+        <li>Get <strong>personalized recommendations</strong> by mood, genre, or popularity</li>
+        <li>Fetch <strong>wallpapers</strong>, <strong>fanart</strong>, and <strong>downloads</strong> instantly</li>
+        <li>Stay updated with the latest <strong>anime news</strong> and <strong>events</strong></li>
+      </ul>
+      <p>Just tap the chat icon on any page to start chatting!</p>
+    </section>
 
-    <h2>Contact & Feedback</h2>
-    <p>Questions, suggestions, or collabs? Let us know:</p>
-    <ul>
-      <li>Email: <a href="mailto:tresforzulu@gmail.com" style="color: var(--accent-yellow);">tresforzulu@gmail.com</a></li>
-      <li>NGL: <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" style="color: var(--accent-yellow);" target="_blank">Send Feedback</a></li>
-    </ul>
+    <section class="about-section">
+      <h2>Contact & Feedback</h2>
+      <p>Questions, suggestions, or collabs? Let us know:</p>
+      <ul class="feature-list">
+        <li><strong>Email:</strong> <a href="mailto:tresforzulu@gmail.com" style="color: var(--gojo-blue);">tresforzulu@gmail.com</a></li>
+        <li><strong>NGL:</strong> <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" style="color: var(--gojo-blue);" target="_blank">Send Feedback</a></li>
+      </ul>
+    </section>
 
-    <a href="index.html" class="link-btn">← Back to Home</a>
+    <div style="text-align: center;">
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
   </main>
+  
   <footer>© 2025 Anime WrldWars | ANICADE</footer>
 </body>
 </html>

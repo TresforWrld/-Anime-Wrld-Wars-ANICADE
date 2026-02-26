@@ -5,168 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ANICADE Manga & Manhwa</title>
   <link rel="icon" href="https://i.imgur.com/AnimeANICADE_PFP.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --bg-color: #121212;
-      --text-color: #f5f5f5;
-      --accent-yellow: #fbc02d;
-      --accent-red: #e53935;
-      --accent-blue: #1e88e5;
-      --card-bg: #1f1f1f;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      background-color: var(--card-bg);
-      color: var(--accent-yellow);
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px var(--accent-yellow);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    h2 {
-      text-align: center;
-      color: var(--accent-blue);
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
-    }
-
-    .grid {
+    /* Manga page specific styles */
+    .manga-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
     }
-
-    .card {
-      background-color: var(--card-bg);
+    
+    .manga-card {
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      position: relative;
     }
-
-    .card:hover {
-      transform: scale(1.03);
-    }
-
-    .card img {
+    
+    .manga-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple), var(--gojo-red));
+    }
+    
+    .manga-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 212, 255, 0.15);
+      border-color: rgba(0, 212, 255, 0.4);
+    }
+    
+    .manga-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
       display: block;
+      transition: all 0.3s ease;
     }
-
-    .card-content {
-      padding: 1rem;
+    
+    .manga-card:hover img {
+      transform: scale(1.05);
     }
-
-    .card-content h3 {
-      color: var(--accent-yellow);
-      margin: 0 0 0.5rem;
+    
+    .manga-content {
+      padding: 1.5rem;
     }
-
-    .card-content p {
-      font-size: 0.95rem;
-      line-height: 1.5;
+    
+    .manga-content h3 {
+      color: var(--gojo-blue);
+      margin: 0 0 0.8rem;
+      font-size: 1.4rem;
+      text-shadow: 0 0 10px var(--gojo-blue-glow);
     }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      background-color: var(--card-bg);
-      color: var(--accent-blue);
-      text-shadow: 0 0 5px var(--accent-blue);
-    }
-
-    a.back-button {
-      display: inline-block;
-      margin-bottom: 2rem;
-      background: var(--accent-yellow);
-      color: #000;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      font-weight: bold;
+    
+    .manga-content h3 a {
+      color: var(--gojo-blue);
       text-decoration: none;
-      box-shadow: 0 0 10px var(--accent-yellow);
+      transition: all 0.3s ease;
     }
-
-    a.back-button:hover {
-      background: #e0b100;
+    
+    .manga-content h3 a:hover {
+      color: var(--gojo-purple);
+      text-shadow: 0 0 15px var(--gojo-purple-glow);
+    }
+    
+    .manga-content p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    .back-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff !important;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px var(--gojo-blue-glow);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .back-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px var(--gojo-blue-glow);
+      border-color: var(--gojo-purple);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin: 3rem 0 2rem;
+    }
+    
+    .section-header h2 {
+      color: var(--gojo-blue);
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px var(--gojo-blue-glow);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple));
+      border-radius: 2px;
     }
   </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
-<body>
 
+<body>
   <header>📚 Manga & Manhwa | ANICADE</header>
 
   <main>
-    <div style="text-align:center;">
+    <div style="text-align: center; margin: 2rem 0;">
       <a href="index.html" class="back-button">⬅️ Back to Home</a>
     </div>
 
-    <h2>🔥 Top Picks This Week</h2>
+    <div class="section-header">
+      <h2>🔥 Top Picks This Week</h2>
+    </div>
 
-    <div class="grid">
-
-      <div class="card">
+    <div class="manga-grid">
+      <div class="manga-card">
         <img src="https://i.postimg.cc/Nfg51486/IMG-20250716-011828-361.jpg" alt="Solo Leveling">
-        <div class="card-content">
-         <h3>
-  <a href="solo-leveling-ch1.html" style="text-decoration: none; color: #fbc02d;">
-    📘 Solo Leveling
-  </a>
-</h3>
-          <p>Follow Sung Jin-Woo, the weakest hunter of all mankind, as he levels up to become the world’s strongest in this thrilling manhwa sensation.</p>
+        <div class="manga-content">
+          <h3>
+            <a href="solo-leveling-ch1.html">
+              📖 Solo Leveling
+            </a>
+          </h3>
+          <p>Follow Sung Jin-Woo, the weakest hunter of all mankind, as he levels up to become the world's strongest in this thrilling manhwa sensation.</p>
         </div>
       </div>
 
-      <div class="card">
+      <div class="manga-card">
         <img src="https://i.postimg.cc/RVXqGHGj/IMG-20250716-011845-911.jpg" alt="One Piece">
-        <div class="card-content">
-          <h3><a href="https://drive.google.com/file/d/1E0mTiAAI8CDAmoR_zed_yZJVrtaju2ym/view?usp=drivesdk" target="_blank">
-  <img src="https://your-one-piece-cover.jpg" alt="One Piece Volume 1" style="width:100%; border-radius:10px;" />
-  <h3 style="color:#fbc02d;">One Piece</h3>
-</a>
+        <div class="manga-content">
+          <h3>
+            <a href="https://drive.google.com/file/d/1E0mTiAAI8CDAmoR_zed_yZJVrtaju2ym/view?usp=drivesdk" target="_blank">
+              One Piece
+            </a>
+          </h3>
           <p>Join Monkey D. Luffy and his pirate crew in their search for the legendary One Piece treasure in this epic journey across the Grand Line!</p>
         </div>
       </div>
 
-      <div class="card">
+      <div class="manga-card">
         <img src="https://i.postimg.cc/hjWGhbP7/IMG-20250716-011922-920.jpg" alt="Tower of God">
-        <div class="card-content">
-          <h3><a href="https://drive.google.com/file/d/1m7PJ6oXOpXdMKeZJN8t7pSvybkWJwAfx/view?usp=drivesdk" target="_blank">
-  📖 Tower of God – Season 1 (Chapters 1–78)
-</a></h3>
+        <div class="manga-content">
+          <h3>
+            <a href="https://drive.google.com/file/d/1m7PJ6oXOpXdMKeZJN8t7pSvybkWJwAfx/view?usp=drivesdk" target="_blank">
+              📕 Tower of God – Season 1
+            </a>
+          </h3>
           <p>Bam enters the mysterious Tower to find his only friend, Rachel. Each floor brings new challenges, power struggles, and secrets untold.</p>
         </div>
       </div>
 
-      <div class="card">
+      <div class="manga-card">
         <img src="https://i.postimg.cc/gkk2w0d4/IMG-20250716-011930-282.jpg" alt="Jujutsu Kaisen">
-        <div class="card-content">
-          <h3><a href="https://drive.google.com/file/d/1BtUyJCLhu4yxYzNls6lsvWQGz3cf4zdK/view?usp=drivesdk" target="_blank">
-  📘 Jujutsu Kaisen – Chapter 1
-</a></h3>
+        <div class="manga-content">
+          <h3>
+            <a href="https://drive.google.com/file/d/1BtUyJCLhu4yxYzNls6lsvWQGz3cf4zdK/view?usp=drivesdk" target="_blank">
+              📗 Jujutsu Kaisen – Chapter 1
+            </a>
+          </h3>
           <p>When Yuji Itadori swallows a cursed object, he enters a dangerous world of sorcery, spirits, and one powerful demon—Ryomen Sukuna.</p>
         </div>
       </div>
-
     </div>
   </main>
 

@@ -6,196 +6,250 @@
   <title>Community & Contact | ANICADE</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body.dark-mode {
-      background-color: #121212;
-      color: #f5f5f5;
+    /* Community page specific styles */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
-
-    .toggle-btn {
-      background-color: #fbc02d;
-      border: none;
-      color: black;
-      padding: 10px 20px;
-      margin: 1rem auto;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px #fbc02d;
-    }
-
-    body.dark-mode .toggle-btn {
-      background-color: #f5f5f5;
-      color: #121212;
-      box-shadow: 0 0 10px #f5f5f5;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #000;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #1e88e5;
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 2rem;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    main {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section {
-      margin-bottom: 2.5rem;
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #e53935;
-      text-align: center;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      margin: 0.5rem 1rem 1rem 0;
-      font-size: 1.8rem;
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
+      border-radius: 10px;
+      border-left: 4px solid var(--gojo-blue);
       text-decoration: none;
-      color: #1e88e5;
+      color: var(--text-primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.1);
     }
-
-    footer {
-      background-color: #1e88e5;
-      text-align: center;
-      color: #fff;
+    
+    .social-link:hover {
+      transform: translateY(-5px) translateX(5px);
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(155, 89, 182, 0.15));
+      border-left-color: var(--gojo-purple);
+      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+    }
+    
+    .social-link img {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 0 5px var(--gojo-blue-glow));
+    }
+    
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--gojo-blue);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
       padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gojo-blue);
+      box-shadow: 0 0 15px var(--gojo-blue-glow);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px var(--gojo-blue-glow);
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px var(--gojo-blue-glow);
+    }
+    
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gojo-blue), var(--gojo-purple), transparent);
+      margin: 3rem 0;
+      opacity: 0.5;
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 
 <body>
   <header>Community & Contact | ANICADE</header>
 
-  <!-- Toggle Button -->
-  <div style="text-align: center;">
-    <button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
-  </div>
-
   <main>
     <!-- Community Section -->
     <section>
       <h2>Join the Community</h2>
-      <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto;">
-        <a href="https://chat.whatsapp.com/EzBa9R9BocWFrkq91zeCvW?mode=ac_t" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" width="32" />
-          WhatsApp Group Chat
+      <p>Connect with us across multiple platforms and stay updated with the latest anime content!</p>
+      
+      <div class="social-grid">
+        <a href="https://chat.whatsapp.com/EzBa9R9BocWFrkq91zeCvW?mode=ac_t" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" />
+          <span>WhatsApp Group Chat</span>
         </a>
-        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" width="32" />
-          WhatsApp Channel
+        
+        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" />
+          <span>WhatsApp Channel (14K+)</span>
         </a>
-        <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" width="32" />
-          Telegram Group
+        
+        <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="Telegram" />
+          <span>Telegram Group</span>
         </a>
-        <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" width="32" />
-          Telegram Channel
+        
+        <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="Telegram" />
+          <span>Telegram Channel</span>
         </a>
-        <a href="https://t.me/TresforwrldBot" target="_blank">
-          <img src="https://img.icons8.com/fluency/48/robot-2.png" width="32" />
-          Telegram Anime Bot
+        
+        <a href="https://t.me/TresforwrldBot" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/fluency/48/robot-2.png" alt="Bot" />
+          <span>Telegram Anime Bot</span>
         </a>
-        <a href="https://discord.gg/yQkthryT" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/discord-logo.png" width="32" />
-          Discord Server
+        
+        <a href="https://discord.gg/yQkthryT" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/discord-logo.png" alt="Discord" />
+          <span>Discord Server</span>
         </a>
-        <a href="https://www.instagram.com/reel/DK_waUqNHeE/?utm_source=ig_web_copy_link" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/instagram-new.png" width="32" />
-          Instagram
+        
+        <a href="https://www.instagram.com/reel/DK_waUqNHeE/?utm_source=ig_web_copy_link" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" />
+          <span>Instagram</span>
         </a>
-        <a href="https://vm.tiktok.com/ZMHbNe8UXTHm2-iUteL/" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/tiktok--v1.png" width="32" />
-          TikTok
+        
+        <a href="https://vm.tiktok.com/ZMHbNe8UXTHm2-iUteL/" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/tiktok--v1.png" alt="TikTok" />
+          <span>TikTok</span>
         </a>
-        <a href="https://www.youtube.com/@AnimeWrldWars_ANICADE" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/youtube-play.png" width="32" />
-          YouTube Channel
+        
+        <a href="https://www.youtube.com/@AnimeWrldWars_ANICADE" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube" />
+          <span>YouTube Channel</span>
         </a>
-        <a href="https://www.facebook.com/tresforwrldanicade" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" width="32" />
-          Facebook Page
+        
+        <a href="https://www.facebook.com/tresforwrldanicade" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
+          <span>Facebook Page</span>
         </a>
-        <a href="https://facebook.com/groups/1158584398690857/" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" width="32" />
-          Facebook Group
+        
+        <a href="https://facebook.com/groups/1158584398690857/" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
+          <span>Facebook Group</span>
         </a>
       </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Contact Section -->
     <section>
       <h2>Contact Us</h2>
-      <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto;">
-        <a href="mailto:tresforzulu@gmail.com" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/gmail--v1.png" width="32" />
-          Email: tresforzulu@gmail.com
+      <p>Have questions or feedback? Reach out to us directly!</p>
+      
+      <div class="social-grid">
+        <a href="mailto:tresforzulu@gmail.com" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/gmail--v1.png" alt="Email" />
+          <span>Email: tresforzulu@gmail.com</span>
         </a>
-        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">
-          <img src="https://img.icons8.com/external-flat-juicy-fish/48/external-anonymous-social-media-flat-flat-juicy-fish.png" width="32" />
-          Send Anonymous Feedback (NGL)
+        
+        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/external-flat-juicy-fish/48/external-anonymous-social-media-flat-flat-juicy-fish.png" alt="NGL" />
+          <span>Send Anonymous Feedback</span>
         </a>
-        <a href="https://bit.ly/AnimeANICADE" target="_blank">
-          <img src="https://img.icons8.com/color/48/000000/internet.png" width="32" />
-          Official Website
+        
+        <a href="https://bit.ly/AnimeANICADE" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/color/48/000000/internet.png" alt="Website" />
+          <span>Official Website</span>
         </a>
-        <a href="https://m.webnovel.com/profile/4501474390" target="_blank">
-          <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-webnovel-a-website-and-mobile-app-that-provides-online-literature-logo-color-tal-revivo.png" width="32" />
-          Read on Webnovel
+        
+        <a href="https://m.webnovel.com/profile/4501474390" target="_blank" class="social-link">
+          <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-webnovel-a-website-and-mobile-app-that-provides-online-literature-logo-color-tal-revivo.png" alt="Webnovel" />
+          <span>Read on Webnovel</span>
         </a>
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Feedback Form -->
-    <section id="feedback" style="margin: 4rem auto; padding-top: 2rem;">
+    <section id="feedback">
       <h2>💬 Send Us Feedback</h2>
-      <form action="https://formspree.io/f/xovwbden" method="POST" style="max-width: 500px; margin: 0 auto;">
-        <input type="hidden" name="_next" value="https://tresforwrld.github.io/Anime-Wrld-Wars-ANICADE/thank-you.html">
-        <label for="name">Name:</label><br>
-        <input type="text" name="name" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" name="_replyto" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;"><br>
-        <label for="message">Message:</label><br>
-        <textarea name="message" rows="5" required style="width: 100%; padding: 0.5rem;"></textarea><br>
-        <button type="submit" class="button" style="margin-top: 1rem;">Send Feedback</button>
-      </form>
+      <p>We'd love to hear from you! Share your thoughts, suggestions, or questions.</p>
+      
+      <div class="form-container">
+        <form action="https://formspree.io/f/xovwbden" method="POST">
+          <input type="hidden" name="_next" value="https://tresforwrld.github.io/Anime-Wrld-Wars-ANICADE/thank-you.html">
+          
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required placeholder="Your name" />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="_replyto" required placeholder="your@email.com" />
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea name="message" rows="5" required placeholder="Your message here..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Send Feedback</button>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer>
     &copy; 2025 Anime Wrld Wars | ANICADE | — BROUGHT TO YOU BY TRESFOR WRLD ✌️🔥
   </footer>
-
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-
-    window.onload = function () {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-      }
-    };
-  </script>
 </body>
 </html>
