@@ -51,6 +51,8 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
+  width: 100%;
 }
 
 /* Animated background */
@@ -86,6 +88,8 @@ header {
   position: relative;
   z-index: 1;
   margin-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 header::before {
@@ -164,6 +168,8 @@ main {
   padding: 0 1.5rem;
   position: relative;
   z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ===== Sections ===== */
@@ -181,6 +187,8 @@ section {
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 section::before {
@@ -663,7 +671,9 @@ footer {
   border: 2px solid var(--border-color);
   z-index: 9998;
   min-width: 220px;
+  max-width: 90vw;
   transition: all var(--transition);
+  box-sizing: border-box;
 }
 
 .floating-nav.hidden {
@@ -729,27 +739,41 @@ body.dark-mode section {
 /* ===== Responsive Design ===== */
 
 @media (max-width: 768px) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  
   main {
     padding: 0 1rem;
     margin: 2rem auto;
+    width: calc(100% - 2rem);
   }
   
   section {
     padding: 1.8rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   h2 {
     font-size: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   h3 {
     font-size: 1.3rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .floating-nav {
     top: 9rem;
     right: 1rem;
     left: 1rem;
+    width: auto;
+    max-width: calc(100vw - 2rem);
   }
   
   .toggle-btn,
@@ -761,10 +785,12 @@ body.dark-mode section {
   
   .toggle-btn {
     top: 1rem;
+    right: 1rem;
   }
   
   .menu-btn {
     top: 4.5rem;
+    right: 1rem;
   }
   
   .event-card {
@@ -774,12 +800,14 @@ body.dark-mode section {
   .cta-container {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
   
   .button,
   a.button {
     width: 100%;
     max-width: 320px;
+    box-sizing: border-box;
   }
 }
 
@@ -787,26 +815,46 @@ body.dark-mode section {
   header {
     font-size: 1.3rem;
     padding: 1.5rem 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   section {
     padding: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   h2 {
     font-size: 1.3rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   h3 {
     font-size: 1.2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   p, ul, li {
     font-size: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .hero-image img {
     width: 140px;
     height: 140px;
+  }
+  
+  .event-links li {
+    padding: 1rem;
+  }
+  
+  .event-links li a {
+    font-size: 0.95rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
