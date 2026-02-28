@@ -44,6 +44,13 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -53,6 +60,7 @@ body {
   position: relative;
   min-height: 100vh;
   width: 100%;
+  touch-action: manipulation;
 }
 
 /* Animated background */
@@ -69,6 +77,19 @@ body::before {
     radial-gradient(circle at 40% 40%, rgba(231, 76, 60, 0.05) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* Prevent zooming */
+@viewport {
+  width: device-width;
+  zoom: 1;
+}
+
+/* Additional zoom prevention */
+body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* ===== Header ===== */
