@@ -164,11 +164,11 @@ header::before {
 
 main {
   max-width: 100%;
-  margin: 2.5rem 1rem;
-  padding: 0 1rem;
+  margin: 2rem auto;
+  padding: 0 2rem;
   position: relative;
   z-index: 1;
-  width: calc(100% - 2rem);
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -176,9 +176,9 @@ main {
 
 section {
   background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
-  padding: 2.5rem;
+  padding: 1.5rem 2rem;
   border-radius: var(--radius);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   border: 1px solid var(--border-color);
   box-shadow: 
     0 8px 32px var(--shadow-color),
@@ -193,14 +193,7 @@ section {
 }
 
 section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--gojo-blue), var(--gojo-purple), var(--gojo-red));
-  opacity: 0.5;
+  display: none;
 }
 
 section:hover {
@@ -219,25 +212,19 @@ section h2 {
 
 h2 {
   color: var(--gojo-blue);
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px var(--gojo-blue-glow);
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px var(--gojo-blue-glow);
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 100%;
 }
 
 h2::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple));
-  border-radius: 2px;
+  display: none;
 }
 
 h3 {
@@ -251,10 +238,11 @@ h3 {
 /* ===== Text & Links ===== */
 
 p {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  line-height: 1.6;
   color: var(--text-secondary);
   margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 ul, li {
@@ -483,9 +471,11 @@ a.button:hover {
   box-shadow: 
     0 0 40px var(--gojo-red-glow),
     0 10px 30px rgba(0, 0, 0, 0.5);
-  padding: 2.5rem !important;
+  padding: 1.5rem 2rem !important;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 .event-card::before {
@@ -511,12 +501,14 @@ a.button:hover {
 }
 
 .event-links li {
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.2rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
   border-radius: 10px;
   border-left: 5px solid var(--gojo-blue);
   transition: all var(--transition);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .event-links li:hover {
@@ -747,24 +739,24 @@ body.dark-mode section {
   
   main {
     padding: 0 1rem;
-    margin: 2rem auto;
-    width: calc(100% - 2rem);
+    margin: 1.5rem auto;
+    width: 100%;
   }
   
   section {
-    padding: 1.8rem;
+    padding: 1.2rem 1rem;
     width: 100%;
     box-sizing: border-box;
   }
   
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
   
   h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
@@ -795,7 +787,7 @@ body.dark-mode section {
   }
   
   .event-card {
-    padding: 1.8rem !important;
+    padding: 1.2rem 1rem !important;
   }
   
   .cta-container {
