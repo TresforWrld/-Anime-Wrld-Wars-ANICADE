@@ -1,236 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo" />
-  <title>Anime Wrld Wars | ANICADE</title>
-  <link rel="icon" href="https://h.uguu.se/uTjnvYJW.jpg" type="image/jpeg" />
-  
-  <meta property="og:title" content="Anime Wrld Wars | ANICADE" />
-  <meta property="og:description" content="Daily anime updates, edits, memes & more!" />
+  <title>ANICADE — Anime News & Hub</title>
+  <meta name="description" content="ANICADE — Your official anime news hub. Daily updates, seasonal picks, trending anime and community events." />
+  <meta property="og:title" content="ANICADE — Anime News & Hub" />
+  <meta property="og:description" content="Daily anime news, trending titles, seasonal picks & community events from ANICADE." />
   <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg" />
   <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/" />
   <meta name="twitter:card" content="summary_large_image" />
-  
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#00d4ff">
-  <link rel="stylesheet" href="style.css">
-  
+  <meta name="theme-color" content="#00d4ff" />
+  <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
-    /* Only keep essential inline styles that need to override */
-    .toggle-btn {
-      padding: 0.8rem 1rem !important;
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --ink:#06080f; --panel:#0d1120; --panel2:#111827; --border:#1e2d4a;
+      --paper:#e8eef8; --aged:#a8b8d0; --muted:#546480;
+      --neon:#00d4ff; --neon2:#0099cc; --neon-glow:rgba(0,212,255,.25);
+    }
+    html { scroll-behavior:smooth; }
+    body { background:var(--ink); color:var(--paper); font-family:'Rajdhani',sans-serif; font-size:16px; overflow-x:hidden; touch-action:pan-y; }
+    body::before { content:''; position:fixed; inset:0; background-image:radial-gradient(circle,rgba(0,212,255,.015) 1px,transparent 1px); background-size:6px 6px; pointer-events:none; z-index:0; }
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:var(--ink); }
+    ::-webkit-scrollbar-thumb { background:var(--neon); border-radius:3px; }
+
+    /* ── NAVBAR ── */
+    .navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:64px; display:flex; align-items:center; background:rgba(6,8,15,.95); border-bottom:2px solid var(--neon); backdrop-filter:blur(14px); padding:0 28px; box-shadow:0 0 30px rgba(0,212,255,.12); gap:0; }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0; }
+    .brand-logo { height:42px; width:auto; display:block; object-fit:contain; border-radius:4px; }
+    .brand-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--paper); line-height:1; }
+    .brand-name .bh { color:var(--neon); text-shadow:0 0 12px var(--neon); }
+    .nav-pill { margin-left:12px; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.3); color:var(--neon); font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; padding:3px 9px; text-transform:uppercase; white-space:nowrap; }
+    .nav-links { display:flex; align-items:center; gap:2px; margin-left:auto; }
+    .nav-links a { display:flex; align-items:center; gap:6px; padding:8px 12px; color:var(--aged); text-decoration:none; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; border:1px solid transparent; transition:all .2s; white-space:nowrap; }
+    .nav-links a:hover, .nav-links a.active { color:var(--neon); border-color:var(--border); background:rgba(0,212,255,.07); }
+    .nav-links a.manga-btn { background:rgba(0,212,255,.12); color:var(--neon); border-color:var(--neon); clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,6% 100%,0 80%); }
+    .nav-links a.manga-btn:hover { background:rgba(0,212,255,.25); }
+    .menu-toggle { width:36px; height:36px; border:1px solid var(--border); background:transparent; color:var(--aged); cursor:pointer; display:none; align-items:center; justify-content:center; transition:all .2s; margin-left:10px; font-size:14px; }
+    .menu-toggle:hover { color:var(--neon); border-color:var(--neon); }
+
+    /* ── MOBILE NAV ── */
+    @media(max-width:820px) {
+      .menu-toggle { display:flex; }
+      .nav-links { display:none; flex-direction:column; position:fixed; top:64px; left:0; right:0; background:var(--panel2); border-bottom:2px solid var(--neon); padding:14px; gap:4px; z-index:999; }
+      .nav-links.open { display:flex; }
+      .nav-pill { display:none; }
+    }
+
+    /* ── HERO ── */
+    .hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:90px 40px 140px; overflow:hidden; background:linear-gradient(135deg,rgba(0,212,255,.07) 0%,transparent 55%),linear-gradient(to bottom,var(--ink),#070c18); }
+    .hero-bg-img { position:absolute; inset:0; background-image:url('https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg'); background-size:cover; background-position:center; opacity:.07; pointer-events:none; }
+    .hero-content { position:relative; z-index:2; max-width:860px; width:100%; }
+    .hero-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .hero-eyebrow::before { content:''; display:block; width:36px; height:2px; background:var(--neon); box-shadow:0 0 8px var(--neon); }
+    .hero-eyebrow span { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--neon); }
+    .hero-title { font-family:'Bebas Neue',sans-serif; margin-bottom:22px; }
+    .hero-title .row1 { display:flex; align-items:baseline; gap:18px; line-height:.92; flex-wrap:wrap; }
+    .hero-title .t1 { font-size:clamp(48px,8vw,130px); color:var(--paper); letter-spacing:-1px; }
+    .hero-title .t2 { font-size:clamp(48px,8vw,130px); color:var(--neon); text-shadow:0 0 30px rgba(0,212,255,.55),0 0 60px rgba(0,212,255,.25); letter-spacing:-1px; }
+    .hero-title .row2 .t3 { font-size:clamp(32px,5vw,80px); color:var(--paper); letter-spacing:2px; opacity:.75; display:block; line-height:.95; }
+    .hero-desc { font-size:16px; color:var(--muted); line-height:1.7; max-width:560px; margin-bottom:28px; font-family:'Rajdhani',sans-serif; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-primary { background:var(--neon); border:2px solid var(--neon); color:var(--ink); padding:11px 26px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:all .2s; clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,0 100%); font-weight:700; }
+    .btn-primary:hover { background:#33ddff; box-shadow:0 0 22px var(--neon-glow); }
+    .btn-outline { background:transparent; border:2px solid var(--border); color:var(--aged); padding:11px 22px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:all .2s; }
+    .btn-outline:hover { border-color:var(--neon); color:var(--neon); }
+
+    /* live dot */
+    .live-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--neon); margin-right:6px; animation:pulse 1.4s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    /* ── STATS STRIP ── */
+    .stats-strip { position:absolute; bottom:0; left:0; right:0; background:rgba(13,17,32,.9); border-top:1px solid var(--border); display:flex; backdrop-filter:blur(8px); flex-wrap:wrap; }
+    .stat-item { flex:1; min-width:120px; padding:14px 22px; border-right:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+    .stat-item:last-child { border-right:none; }
+    .stat-icon { color:var(--neon); font-size:16px; }
+    .stat-value { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--neon); line-height:1; text-shadow:0 0 10px rgba(0,212,255,.35); }
+    .stat-label { font-size:10px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; }
+
+    /* ── SECTION STRUCTURE ── */
+    .section { position:relative; z-index:2; max-width:1400px; margin:0 auto; padding:72px 40px 60px; }
+    .section + .section { padding-top:0; }
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+    .section-title-wrap { display:flex; align-items:center; gap:12px; }
+    .section-num { font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:3px; color:var(--neon); background:rgba(0,212,255,.08); border:1px solid var(--neon); padding:3px 7px; }
+    .section-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--paper); }
+    .section-title .acc { color:var(--neon); text-shadow:0 0 10px rgba(0,212,255,.3); }
+    .section-sub { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+
+    /* ── LOADING / SKELETON ── */
+    .loading-row { display:flex; gap:20px; overflow:hidden; }
+    .skel { background:linear-gradient(90deg,var(--panel) 25%,var(--panel2) 50%,var(--panel) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:2px; }
+    @keyframes shimmer { to{background-position:-200% 0} }
+    .skel-card { width:220px; flex-shrink:0; height:320px; }
+    .skel-news { width:100%; height:180px; margin-bottom:12px; }
+
+    /* ── NEWS GRID ── */
+    .news-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; }
+    .news-card { background:var(--panel); border:1px solid var(--border); overflow:hidden; transition:all .25s; cursor:default; clip-path:polygon(0 0,97% 0,100% 3%,100% 100%,3% 100%,0 97%); position:relative; }
+    .news-card:hover { border-color:var(--neon); box-shadow:0 0 24px rgba(0,212,255,.12); transform:translateY(-3px); }
+    .news-card:hover::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent var(--neon) transparent transparent; z-index:2; }
+    .news-img { width:100%; height:190px; object-fit:cover; display:block; background:var(--panel2); }
+    .news-img-placeholder { width:100%; height:190px; background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%); display:flex; align-items:center; justify-content:center; color:var(--border); font-size:32px; }
+    .news-body { padding:16px; }
+    .news-source { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+    .news-source::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
+    .news-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:8px; }
+    .news-excerpt { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px; }
+    .news-date { font-family:'Space Mono',monospace; font-size:9px; color:var(--border); letter-spacing:1px; }
+
+    /* ── TRENDING CAROUSEL ── */
+    .carousel-wrap { position:relative; overflow:hidden; }
+    .carousel { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+    .carousel::-webkit-scrollbar { height:3px; }
+    .carousel::-webkit-scrollbar-thumb { background:var(--neon); }
+    .anime-card { flex-shrink:0; width:190px; scroll-snap-align:start; cursor:default; animation:fadeUp .4s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .anime-card-frame { border:2px solid var(--border); overflow:hidden; aspect-ratio:3/4; background:var(--panel); transition:all .22s; clip-path:polygon(0 0,92% 0,100% 8%,100% 100%,8% 100%,0 92%); position:relative; }
+    .anime-card:hover .anime-card-frame { border-color:var(--neon); box-shadow:0 0 18px rgba(0,212,255,.16); }
+    .anime-cover { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+    .anime-card:hover .anime-cover { transform:scale(1.05); }
+    .anime-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(6,8,15,.96) 0%,rgba(6,8,15,.2) 60%,transparent 100%); padding:10px; display:flex; flex-direction:column; justify-content:flex-end; }
+    .anime-score { position:absolute; top:8px; left:8px; background:rgba(0,0,0,.75); border:1px solid var(--neon); color:var(--neon); font-family:'Space Mono',monospace; font-size:10px; padding:2px 7px; display:flex; align-items:center; gap:3px; }
+    .anime-format { position:absolute; top:8px; right:8px; background:var(--neon); color:var(--ink); font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:1px; padding:2px 7px; font-weight:700; }
+    .anime-name { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:3px; }
+    .anime-meta { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); }
+    .anime-meta .ep { color:var(--neon); }
+
+    /* ── SEASONAL GRID ── */
+    .seasonal-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+
+    /* ── EVENTS SECTION ── */
+    .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+    .event-card { background:var(--panel); border:1px solid var(--border); padding:24px; transition:all .22s; clip-path:polygon(0 0,96% 0,100% 4%,100% 100%,4% 100%,0 96%); position:relative; }
+    .event-card::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 36px 36px 0; border-color:transparent var(--neon) transparent transparent; opacity:.5; }
+    .event-card:hover { border-color:var(--neon); box-shadow:0 0 20px rgba(0,212,255,.1); }
+    .event-tag { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+    .event-tag::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
+    .event-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:var(--paper); line-height:1.1; margin-bottom:10px; }
+    .event-date { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+    .event-date i { color:var(--neon); }
+    .event-desc { font-size:14px; color:var(--muted); line-height:1.65; margin-bottom:16px; }
+    .event-links { display:flex; flex-direction:column; gap:8px; }
+    .event-link { display:flex; align-items:center; justify-content:space-between; background:rgba(0,212,255,.06); border:1px solid var(--border); padding:9px 14px; text-decoration:none; color:var(--aged); font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; transition:all .2s; }
+    .event-link:hover { border-color:var(--neon); color:var(--neon); background:rgba(0,212,255,.1); }
+    .event-link i { font-size:12px; color:var(--neon); }
+
+    /* ── REVIEWS ── */
+    .reviews-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+    .review-card { background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--neon); padding:20px; }
+    .review-text { font-size:14px; color:var(--aged); line-height:1.7; margin-bottom:12px; font-style:italic; }
+    .review-author { font-family:'Space Mono',monospace; font-size:10px; color:var(--neon); letter-spacing:1px; }
+
+    /* ── COMMUNITY CHANNELS ── */
+    .channels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+    .channel-card { display:flex; align-items:center; gap:14px; background:var(--panel); border:1px solid var(--border); padding:16px; text-decoration:none; color:var(--paper); transition:all .22s; }
+    .channel-card:hover { border-color:var(--neon); background:rgba(0,212,255,.05); }
+    .ch-icon { width:44px; height:44px; border-radius:50%; border:1px solid var(--border); background:rgba(0,212,255,.08); display:flex; align-items:center; justify-content:center; font-size:18px; color:var(--neon); flex-shrink:0; transition:all .22s; }
+    .channel-card:hover .ch-icon { border-color:var(--neon); box-shadow:0 0 12px rgba(0,212,255,.25); }
+    .ch-name { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; color:var(--paper); }
+    .ch-desc { font-size:12px; color:var(--muted); margin-top:2px; }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip { background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--neon); padding:24px 28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+    .contact-strip-text h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--paper); }
+    .contact-strip-text p { font-size:13px; color:var(--muted); margin-top:4px; }
+    .contact-strip-links { display:flex; gap:10px; flex-wrap:wrap; }
+    .contact-chip { display:inline-flex; align-items:center; gap:7px; padding:8px 16px; border:1px solid var(--border); color:var(--aged); text-decoration:none; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:1px; transition:all .2s; }
+    .contact-chip:hover { border-color:var(--neon); color:var(--neon); }
+    .contact-chip i { color:var(--neon); }
+
+    /* ── DIVIDER ── */
+    .divider { display:flex; align-items:center; gap:16px; color:var(--muted); font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin:0 40px; }
+    .divider::before, .divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--border)); }
+    .divider::after { background:linear-gradient(to left,transparent,var(--border)); }
+    .divider i { color:var(--neon); }
+
+    /* ── FOOTER ── */
+    footer { position:relative; z-index:2; background:rgba(6,8,15,.95); border-top:1px solid var(--border); padding:36px 40px; }
+    .footer-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; }
+    .footer-brand { display:flex; align-items:center; gap:10px; }
+    .footer-logo { height:36px; border-radius:3px; }
+    .footer-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--paper); }
+    .footer-name span { color:var(--neon); text-shadow:0 0 10px var(--neon); }
+    .footer-copy { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:1px; text-align:center; }
+    .footer-links { display:flex; gap:16px; }
+    .footer-links a { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); text-decoration:none; letter-spacing:1px; transition:color .2s; }
+    .footer-links a:hover { color:var(--neon); }
+
+    /* ── TOAST ── */
+    .toast-container { position:fixed; bottom:20px; right:20px; z-index:2000; display:flex; flex-direction:column; gap:8px; }
+    .toast { background:var(--panel2); border:1px solid var(--border); border-left:3px solid var(--neon); padding:10px 16px; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:14px; color:var(--paper); display:flex; align-items:center; gap:8px; animation:slideIn .3s ease; min-width:240px; }
+    @keyframes slideIn { from{opacity:0;transform:translateX(24px)} to{opacity:1;transform:translateX(0)} }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position:fixed; bottom:28px; left:28px; z-index:500; width:40px; height:40px; background:var(--neon); border:none; color:var(--ink); cursor:pointer; display:none; align-items:center; justify-content:center; font-size:14px; clip-path:polygon(50% 0%,100% 50%,85% 50%,85% 100%,15% 100%,15% 50%,0% 50%); transition:background .2s; }
+    .back-to-top.show { display:flex; }
+    .back-to-top:hover { background:#33ddff; }
+
+    /* ── LIGHT MODE ── */
+    body.light { --ink:#f0f4fc; --panel:#e4eaf6; --panel2:#dce4f0; --border:#b8c8e0; --paper:#0d1828; --aged:#2a3a56; --muted:#5a7090; }
+    body.light .navbar { background:rgba(240,244,252,.96); }
+    body.light footer { background:rgba(240,244,252,.96); }
+
+    @media(max-width:700px) {
+      .hero { padding:90px 18px 140px; }
+      .section { padding:56px 16px 44px; }
+      .divider { margin:0 16px; }
+      .news-grid { grid-template-columns:1fr; }
+      .hero-title .row1 { flex-direction:column; gap:4px; }
+      footer { padding:24px 16px; }
+      .footer-inner { flex-direction:column; text-align:center; }
+      .contact-strip { flex-direction:column; }
     }
   </style>
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
-
 <body>
-  <!-- Dark/Light Toggle -->
-  <button class="toggle-btn" id="modeToggle">🌙</button>
-  
-  <!-- Floating Menu Button -->
-  <button class="menu-btn" id="menuBtn">☰</button>
-  
-  <!-- Floating Nav Menu -->
-  <nav id="floatingNav" class="floating-nav hidden">
-    <ul>
-      <li><a href="#home">🏠 Home</a></li>
-      <li><a href="about.html">📖 About</a></li>
-      <li><a href="#updates">📰 Updates</a></li>
-      <li><a href="media.html">🖼 Media</a></li>
-      <li><a href="watch-download-anime.html">🎥 Watch Anime</a></li>
-      <li><a href="manga.html">📚 Manga & Manhwa</a></li>
-      <li><a href="#reviews">⭐ Reviews</a></li>
-      <li><a href="community.html">👥 Community</a></li>
-      <li><a href="community.html#contact">📧 Contact</a></li>
-      <li><a href="#events">🎉 Events</a></li>
-    </ul>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="nav-brand" href="#">
+      <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" />
+      <span class="brand-name">ANICADE<span class="bh"> ANIME</span></span>
+    </a>
+    <span class="nav-pill"><span class="live-dot"></span>Live Updates</span>
+    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#news" class="active"><i class="fas fa-newspaper"></i> News</a>
+      <a href="#trending"><i class="fas fa-fire"></i> Trending</a>
+      <a href="#seasonal"><i class="fas fa-calendar-alt"></i> Seasonal</a>
+      <a href="#events"><i class="fas fa-star"></i> Events</a>
+      <a href="#community"><i class="fas fa-users"></i> Community</a>
+      <a href="index.html" class="manga-btn"><i class="fas fa-book"></i> Manga</a>
+    </div>
   </nav>
 
-  <header>Anime Wrld Wars | ANICADE</header>
-  
-  <div class="hero-image">
-    <img src="https://h.uguu.se/uTjnvYJW.jpg"
-         alt="ANICADE Logo" />
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg-img"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span>Official Anime News Hub</span></div>
+      <h1 class="hero-title">
+        <div class="row1">
+          <span class="t1">ANIME</span>
+          <span class="t2">WRLD</span>
+        </div>
+        <div class="row2"><span class="t3">WARS · ANICADE</span></div>
+      </h1>
+      <p class="hero-desc">Your go-to source for daily anime news, seasonal picks, trending titles, fan community events and exclusive ANICADE drops. Stay informed. Stay in the wrld.</p>
+      <div class="hero-actions">
+        <a href="#news" class="btn-primary"><i class="fas fa-newspaper"></i> Latest News</a>
+        <a href="#community" class="btn-outline"><i class="fas fa-users"></i> Join Community</a>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-item"><i class="fas fa-bolt stat-icon"></i><div><div class="stat-value">Daily</div><div class="stat-label">Updates</div></div></div>
+      <div class="stat-item"><i class="fas fa-tv stat-icon"></i><div><div class="stat-value" id="statSeasonalCount">—</div><div class="stat-label">Airing Now</div></div></div>
+      <div class="stat-item"><i class="fas fa-users stat-icon"></i><div><div class="stat-value">10K+</div><div class="stat-label">Community</div></div></div>
+      <div class="stat-item"><i class="fas fa-globe stat-icon"></i><div><div class="stat-value">Global</div><div class="stat-label">Coverage</div></div></div>
+    </div>
+  </section>
+
+  <!-- ── NEWS ── -->
+  <div class="section" id="news">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">01</span>
+        <h2 class="section-title">LATEST <span class="acc">NEWS</span></h2>
+      </div>
+      <span class="section-sub"><span class="live-dot"></span> Live · Via MAL &amp; ANN</span>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <!-- skeletons -->
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+    </div>
   </div>
 
-  <main>
-    <section id="home">
-      <h2>Welcome to Anime Wrld Wars | ANICADE</h2>
-      <p>🌏 Your ultimate anime hub. Dive into daily anime updates, epic memes, waifu spotlights, PFP drops, fan art showcases & exclusive content.</p>
-      <p>⚡ Whether you're here to chill, battle, or vibe — join the anime revolution today!</p>
-      <div class="cta-container">
-        <a href="https://bit.ly/AnimeANICADE" target="_blank" class="button">Reload Hub</a>
-        <a href="subscription.html" class="button">Subscribe for Updates</a>
+  <div class="divider"><i class="fas fa-star"></i></div>
+
+  <!-- ── TRENDING ── -->
+  <div class="section" id="trending">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">02</span>
+        <h2 class="section-title">TRENDING <span class="acc">ANIME</span></h2>
       </div>
-    </section>
+      <span class="section-sub">Via AniList · This Week</span>
+    </div>
+    <div class="carousel" id="trendingCarousel">
+      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+    </div>
+  </div>
 
-    <section id="anime-news">
-      <h3>📰 Latest Anime News</h3>
-      <ul id="news-feed">
-        <li>Loading anime news...</li>
-      </ul>
-    </section>
+  <div class="divider"><i class="fas fa-calendar-alt"></i></div>
 
-    <section id="updates">
-      <h2>Latest Anime Updates</h2>
-      <div id="updates-container"></div>
-    </section>
+  <!-- ── SEASONAL ── -->
+  <div class="section" id="seasonal">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">03</span>
+        <h2 class="section-title">THIS <span class="acc">SEASON</span></h2>
+      </div>
+      <span class="section-sub" id="seasonLabel">Loading season…</span>
+    </div>
+    <div class="seasonal-grid" id="seasonalGrid">
+      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+    </div>
+  </div>
 
-    <section id="media">
-      <h2>Featured Media</h2>
-      <p>Explore a collection of community creations — edits, memes, and fan art made by and for the ANICADE family!</p>
-    </section>
+  <div class="divider"><i class="fas fa-star"></i></div>
 
-    <section id="reviews">
-      <h2>Community Reviews ⭐</h2>
-      <blockquote>"This anime community is 🔥🔥🔥 Best edits, best vibes!"<br/><strong>– Otaku_King</strong></blockquote>
-      <blockquote>"The events and giveaways are insane! Happy to be part of ANICADE."<br/><strong>– AnimeQueen_77</strong></blockquote>
-    </section>
+  <!-- ── EVENTS ── -->
+  <div class="section" id="events">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">04</span>
+        <h2 class="section-title">UPCOMING <span class="acc">EVENTS</span></h2>
+      </div>
+    </div>
+    <div class="events-grid">
 
-    <section id="events">
-      <h2>Upcoming Events</h2>
       <div class="event-card">
-        <h3>🎊 ANICADE ANNIVERSARY GIVEAWAY 🎊</h3>
-        <p><strong>📅 Date:</strong> July 27, 2026</p>
-        <p><strong>ANICADE CHANNELS!</strong><br>
-        We're going all OUT! <strong>ANICADE COMMUNITY</strong>JOIN FAST:</p>
-        <ul class="links">
-          <li><strong>🎨 Fanart Wallpaper</strong><br>
-            <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank">Join Now</a></li>
-          <li><strong></strong><br>
-            <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank">Join Now</a>MUSIC Channel</li>
-          <li><strong>Main Channel</strong><br>
-            <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank">Enter the Wrld</a></li>
-        </ul>
-        <p class="event-footer">🎭 <strong>Tresfor Wrld — Where Legends Rise</strong> ✌️🔥<br>
-          🛠️ <strong>Powered by Anime WrldWars | ANICADE</strong> ☯️
-        </p>
+        <div class="event-tag">Giveaway</div>
+        <div class="event-title">ANICADE Anniversary Giveaway</div>
+        <div class="event-date"><i class="fas fa-calendar"></i> July 27, 2026</div>
+        <p class="event-desc">We're going all out for the ANICADE anniversary! Join the community channels below to participate in our biggest giveaway yet. All platforms, all genres, one wrld.</p>
+        <div class="event-links">
+          <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="event-link"><span><i class="fas fa-palette" style="margin-right:7px"></i>Fanart & Wallpaper Channel</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link"><span><i class="fas fa-music" style="margin-right:7px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link"><span><i class="fas fa-globe" style="margin-right:7px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
+        </div>
       </div>
-    </section>
 
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <p>Got questions, feedback, or ideas? Reach out anytime!</p>
-      <ul class="contact-list">
-        <li><strong>Email:</strong> <a href="mailto: animewrldwarsanicade@gmail.com">animewrldwarsanicade@gmail.com</a></li>
-        <li><strong>NGL:</strong> <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Send Feedback</a></li>
-      </ul>
-    </section>
-  </main>
+      <div class="event-card">
+        <div class="event-tag">Community</div>
+        <div class="event-title">Weekly Fan Art Showcase</div>
+        <div class="event-date"><i class="fas fa-calendar"></i> Every Sunday</div>
+        <p class="event-desc">Submit your anime fan art, edits and illustrations every week. The best submissions get featured on the ANICADE main channel and pinned for the community.</p>
+        <div class="event-links">
+          <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="event-link"><span><i class="fas fa-image" style="margin-right:7px"></i>Submit Fan Art</span><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
 
-  <footer>© 2026 Anime Wrld Wars | ANICADE | — BROUGHT TO YOU BY TRESFOR WRLD ✌️🔥</footer>
+      <div class="event-card">
+        <div class="event-tag">Discussion</div>
+        <div class="event-title">Seasonal Anime Rankings</div>
+        <div class="event-date"><i class="fas fa-calendar"></i> End of Each Season</div>
+        <p class="event-desc">Vote for the best anime of the season. ANICADE community rankings are compiled every season and shared across all channels with commentary from the team.</p>
+        <div class="event-links">
+          <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="event-link"><span><i class="fas fa-poll" style="margin-right:7px"></i>Submit Your Vote</span><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
 
-  <!-- Scripts -->
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Toggle Mode
-    const toggleBtn = document.getElementById("modeToggle");
-    const savedMode = localStorage.getItem("mode");
-    const isDark = savedMode === "dark";
-    document.body.classList.toggle("dark-mode", isDark);
-    toggleBtn.textContent = isDark ? "☀️" : "🌙";
-    toggleBtn.style.backgroundColor = isDark ? "#1e1e1e" : "#fbc02d";
-    toggleBtn.style.color = isDark ? "#fbc02d" : "#000";
-    
-    toggleBtn.addEventListener("click", () => {
-      const dark = document.body.classList.toggle("dark-mode");
-      localStorage.setItem("mode", dark ? "dark" : "light");
-      toggleBtn.textContent = dark ? "☀️" : "🌙";
-      toggleBtn.style.backgroundColor = dark ? "#1e1e1e" : "#fbc02d";
-      toggleBtn.style.color = dark ? "#fbc02d" : "#000";
-    });
+    </div>
+  </div>
 
-    // Floating Menu
-    const menuBtn = document.getElementById("menuBtn");
-    const floatingNav = document.getElementById("floatingNav");
-    menuBtn.addEventListener("click", () => floatingNav.classList.toggle("hidden"));
-    document.querySelectorAll("#floatingNav a").forEach(link => {
-      link.addEventListener("click", () => floatingNav.classList.add("hidden"));
-    });
+  <div class="divider"><i class="fas fa-users"></i></div>
 
-    // Load Updates
-    fetch('updates.json')
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to load updates');
-        return res.json();
-      })
-      .then(updates => {
-        const container = document.getElementById('updates-container');
-        updates.forEach(u => {
-          const div = document.createElement('div');
-          div.className = 'update-item';
-          const title = u.title || 'Anime Update';
-          const description = u.description || '';
-          const image = u.image ? `<img src="${u.image}" alt="${title}" loading="lazy" />` : '';
-          div.innerHTML = `<h3>${title}</h3>${description ? `<p>${description}</p>` : ''}${image}`;
-          container.appendChild(div);
-        });
-      })
-      .catch(err => {
-        console.error('Error loading updates:', err);
-        document.getElementById('updates-container').innerHTML = '<p class="error">⚠️ Unable to load updates. Please try again later.</p>';
-      });
+  <!-- ── COMMUNITY ── -->
+  <div class="section" id="community">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">05</span>
+        <h2 class="section-title">JOIN THE <span class="acc">COMMUNITY</span></h2>
+      </div>
+    </div>
+    <div class="channels-grid">
+      <a href="https://github.com/TresforWrld" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fab fa-github"></i></div>
+        <div><div class="ch-name">GitHub</div><div class="ch-desc">@TresforWrld · Projects & Code</div></div>
+      </a>
+      <a href="https://t.me/TresforWrld" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fab fa-telegram"></i></div>
+        <div><div class="ch-name">Telegram</div><div class="ch-desc">@TresforWrld · Quick Responses</div></div>
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fab fa-whatsapp"></i></div>
+        <div><div class="ch-name">Main Channel</div><div class="ch-desc">ANICADE HQ · Updates & Drops</div></div>
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fas fa-comment-dots"></i></div>
+        <div><div class="ch-name">Direct Chat</div><div class="ch-desc">TresforWrld · +260 777 083 995</div></div>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fas fa-palette"></i></div>
+        <div><div class="ch-name">Fanart Channel</div><div class="ch-desc">Wallpapers · Edits · Fan Art</div></div>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fas fa-music"></i></div>
+        <div><div class="ch-name">Music Channel</div><div class="ch-desc">OSTs · AMVs · Anime Music</div></div>
+      </a>
+    </div>
 
-    // Anime News
-    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://myanimelist.net/rss/news.xml'))
-      .then(r => {
-        if (!r.ok) throw new Error('Network response was not ok');
-        return r.json();
-      })
-      .then(data => {
-        const xml = new DOMParser().parseFromString(data.contents, "text/xml");
-        const items = xml.querySelectorAll("item");
-        const feed = document.getElementById("news-feed");
-        feed.innerHTML = "";
-        if (items.length === 0) {
-          feed.innerHTML = "<li>⚠️ No news items available at this time.</li>";
-          return;
-        }
-        items.forEach((it, i) => {
-          if(i < 5) {
-            const li = document.createElement('li');
-            const link = it.querySelector('link')?.textContent || '#';
-            const title = it.querySelector('title')?.textContent || 'Untitled';
-            li.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-            feed.appendChild(li);
-          }
-        });
-      })
-      .catch(err => {
-        console.error('Error loading news:', err);
-        document.getElementById("news-feed").innerHTML = "<li>⚠️ Could not load anime news. Please check back later.</li>";
-      });
-  });
-  </script>
+    <!-- Reviews -->
+    <div style="margin-top:40px;">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div class="section-title-wrap"><span class="section-num">05b</span><h2 class="section-title">COMMUNITY <span class="acc">REVIEWS</span></h2></div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card"><p class="review-text">"This anime community is the best. The edits, the vibes, the energy — unmatched. Best decision joining ANICADE."</p><div class="review-author">— Otaku_King</div></div>
+        <div class="review-card"><p class="review-text">"The events and giveaways are insane! The team puts in real work. Happy to be part of this family."</p><div class="review-author">— AnimeQueen_77</div></div>
+        <div class="review-card"><p class="review-text">"ANICADE delivers news faster than any other source I follow. And the community is genuinely welcoming."</p><div class="review-author">— ShinobiX</div></div>
+      </div>
+    </div>
+
+    <!-- Contact strip -->
+    <div style="margin-top:36px;">
+      <div class="contact-strip">
+        <div class="contact-strip-text">
+          <h3>Get In Touch</h3>
+          <p>Questions, feedback, collabs or just want to talk anime? We're always around.</p>
+        </div>
+        <div class="contact-strip-links">
+          <a href="mailto:animewrldwarsanicade@gmail.com" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Send Feedback</a>
+          <a href="contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" />
+        <div class="footer-name">ANICADE <span>ANIME</span></div>
+      </div>
+      <div class="footer-copy">© 2026 Anime Wrld Wars · ANICADE<br>Brought to you by <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
+      <div class="footer-links">
+        <a href="index.html">Manga</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Feedback</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
   <!-- Chatbase Chatbot -->
   <script>
   (function(){
-    if (!window.chatbase || window.chatbase("getState")!=="initialized") {
-      window.chatbase=(...args)=>{(window.chatbase.q=window.chatbase.q||[]).push(args)};
+    if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+      window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};
       window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});
     }
-    const onLoad=()=>{
-      const s=document.createElement("script");
-      s.src="https://www.chatbase.co/embed.min.js";
-      s.id="xda32KgOFfKmwpwKmpWtw";
-      document.body.appendChild(s);
-    };
+    const onLoad=()=>{ const s=document.createElement("script"); s.src="https://www.chatbase.co/embed.min.js"; s.id="xda32KgOFfKmwpwKmpWtw"; document.body.appendChild(s); };
     document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);
   })();
   </script>
-  
+
   <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").catch(err => {
-      console.error('Service Worker registration failed:', err);
-    });
+  // ── UTILS ──
+  function showToast(msg) {
+    const tc = document.getElementById('toastContainer');
+    const t = document.createElement('div'); t.className='toast';
+    t.innerHTML=`<i class="fas fa-info-circle" style="color:var(--neon)"></i> ${msg}`;
+    tc.appendChild(t); setTimeout(()=>t.remove(), 3200);
+  }
+  function fmtDate(str) {
+    if (!str) return '';
+    try { return new Date(str).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch(e){ return str; }
+  }
+  function currentSeason() {
+    const m = new Date().getMonth();
+    const y = new Date().getFullYear();
+    const seasons = ['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
+    return { season: seasons[m], year: y };
+  }
+
+  // ── THEME ──
+  let dark = true;
+  function applyTheme() { document.body.classList.toggle('light', !dark); }
+  applyTheme();
+
+  // ── MOBILE NAV ──
+  const navLinks = document.getElementById('navLinks');
+  document.getElementById('menuToggle').addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ── BACK TO TOP ──
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 400));
+  btt.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // ── ANIME CARD BUILDER ──
+  function buildAnimeCard(anime, delay=0) {
+    const title = anime.title?.english || anime.title?.romaji || 'Unknown';
+    const cover = anime.coverImage?.large || anime.coverImage?.medium || '';
+    const score = anime.averageScore ? (anime.averageScore/10).toFixed(1) : null;
+    const fmt = anime.format || '';
+    const eps = anime.episodes || anime.nextAiringEpisode?.episode ? `EP ${anime.nextAiringEpisode?.episode || anime.episodes}` : '';
+    const genres = (anime.genres||[]).slice(0,2).join(' · ');
+    return `<div class="anime-card" style="animation-delay:${delay}s">
+      <div class="anime-card-frame">
+        <img class="anime-cover" src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/300x400/0d1120/00d4ff?text=NO+IMG'" />
+        ${score?`<div class="anime-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>`:''}
+        ${fmt?`<div class="anime-format">${fmt}</div>`:''}
+        <div class="anime-overlay">
+          <div class="anime-name">${title}</div>
+          <div class="anime-meta">${genres}${eps?` · <span class="ep">${eps}</span>`:''}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ── API 1: AniList — Trending ──
+  async function loadTrending() {
+    const q = `query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
+    try {
+      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const data = await res.json();
+      const items = data.data.Page.media;
+      const el = document.getElementById('trendingCarousel');
+      el.innerHTML = items.map((a,i) => buildAnimeCard(a, i*0.04)).join('');
+    } catch(e) {
+      document.getElementById('trendingCarousel').innerHTML = '<p style="color:var(--muted);font-family:Space Mono,monospace;font-size:11px;padding:20px;">Could not load trending anime.</p>';
+    }
+  }
+
+  // ── API 2: AniList — Seasonal ──
+  async function loadSeasonal() {
+    const {season, year} = currentSeason();
+    document.getElementById('seasonLabel').textContent = `${season} ${year}`;
+    const q = `query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
+    try {
+      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const data = await res.json();
+      const items = data.data.Page.media;
+      document.getElementById('statSeasonalCount').textContent = items.length;
+      const el = document.getElementById('seasonalGrid');
+      el.innerHTML = items.map((a,i) => buildAnimeCard(a, i*0.03)).join('');
+    } catch(e) {
+      document.getElementById('seasonalGrid').innerHTML = '<p style="color:var(--muted);font-family:Space Mono,monospace;font-size:11px;padding:20px;">Could not load seasonal anime.</p>';
+    }
+  }
+
+  // ── API 3: News — Jikan (MAL) with images ──
+  async function loadNewsJikan() {
+    // Jikan returns MAL news with images
+    // We pull recent reviews/news from popular anime via Jikan
+    const topAnimeIds = [21,1535,269,16498,1,6702,918,11061,38524,40748]; // One Piece, Death Note, etc.
+    const picked = topAnimeIds.sort(()=>Math.random()-.5).slice(0,4);
+    const results = [];
+    await Promise.all(picked.map(async (id) => {
+      try {
+        const r = await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`, {signal:AbortSignal.timeout(8000)});
+        if (!r.ok) return;
+        const d = await r.json();
+        (d.data||[]).slice(0,2).forEach(item => {
+          results.push({
+            title: item.title,
+            excerpt: item.excerpt||'',
+            image: item.images?.jpg?.image_url || null,
+            date: item.date,
+            source: 'MyAnimeList'
+          });
+        });
+      } catch(e){}
+    }));
+    return results;
+  }
+
+  // ── API 4: News — AniList recent activity ──
+  async function loadNewsAniList() {
+    const q = `query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false) updatedAt genres startDate{year month day} nextAiringEpisode{episode airingAt}}}}`;
+    try {
+      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const data = await res.json();
+      return (data.data.Page.media||[]).map(a=>({
+        title: `${a.title?.english||a.title?.romaji} — New Episode Update`,
+        excerpt: a.description ? a.description.slice(0,140)+'…' : '',
+        image: a.coverImage?.large || null,
+        date: a.nextAiringEpisode?.airingAt ? new Date(a.nextAiringEpisode.airingAt*1000).toISOString() : null,
+        source: 'AniList',
+        ep: a.nextAiringEpisode?.episode
+      }));
+    } catch(e) { return []; }
+  }
+
+  // ── NEWS CARD BUILDER ──
+  function buildNewsCard(item) {
+    const imgEl = item.image
+      ? `<img class="news-img" src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas fa-newspaper></i></div>'" />`
+      : `<div class="news-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
+    const epBadge = item.ep ? `<span style="color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;"> · EP ${item.ep} AIRING</span>` : '';
+    return `<div class="news-card">
+      ${imgEl}
+      <div class="news-body">
+        <div class="news-source">${item.source||'ANICADE'}${epBadge}</div>
+        <div class="news-title">${item.title||'Anime Update'}</div>
+        ${item.excerpt?`<p class="news-excerpt">${item.excerpt.replace(/<[^>]+>/g,'').slice(0,120)}…</p>`:''}
+        ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:4px"></i>${fmtDate(item.date)}</div>`:''}
+      </div>
+    </div>`;
+  }
+
+  // ── LOAD ALL NEWS ──
+  async function loadNews() {
+    const grid = document.getElementById('newsGrid');
+    try {
+      // Run both sources in parallel
+      const [jikanNews, anilistNews] = await Promise.all([loadNewsJikan(), loadNewsAniList()]);
+      // Merge and shuffle for variety
+      let all = [...jikanNews, ...anilistNews];
+      all = all.sort(()=>Math.random()-.5).slice(0,12);
+      if (!all.length) throw new Error('No news');
+      grid.innerHTML = all.map(item => buildNewsCard(item)).join('');
+    } catch(e) {
+      // Final fallback: just AniList seasonal news cards
+      try {
+        const anilistNews = await loadNewsAniList();
+        if (anilistNews.length) { grid.innerHTML = anilistNews.slice(0,9).map(i=>buildNewsCard(i)).join(''); return; }
+      } catch(e2){}
+      grid.innerHTML = `<div style="grid-column:1/-1;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;padding:40px;text-align:center;letter-spacing:2px;"><i class="fas fa-wifi-slash" style="font-size:28px;display:block;margin-bottom:14px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
+    }
+  }
+
+  // ── INIT ──
+  loadNews();
+  loadTrending();
+  loadSeasonal();
+
+  // ── SERVICE WORKER ──
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
   }
   </script>
 </body>
-
 </html>
