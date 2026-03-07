@@ -1,273 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo"/>
   <title>ANICADE — Anime News & Hub</title>
-  <meta name="description" content="ANICADE — Your official anime news hub. Daily updates, seasonal picks, trending anime and community events." />
-  <meta property="og:title" content="ANICADE — Anime News & Hub" />
-  <meta property="og:description" content="Daily anime news, trending titles, seasonal picks & community events from ANICADE." />
-  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg" />
-  <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#00d4ff" />
-  <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
+  <meta name="description" content="ANICADE — Your official anime news hub. Daily updates, seasonal picks, trending anime and community events."/>
+  <meta property="og:title" content="ANICADE — Anime News & Hub"/>
+  <meta property="og:description" content="Daily anime news, trending titles, seasonal picks & community events from ANICADE."/>
+  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg"/>
+  <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#00d4ff"/>
+  <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    :root {
-      --ink:#06080f; --panel:#0d1120; --panel2:#111827; --border:#1e2d4a;
-      --paper:#e8eef8; --aged:#a8b8d0; --muted:#546480;
-      --neon:#00d4ff; --neon2:#0099cc; --neon-glow:rgba(0,212,255,.25);
-    }
-    html { scroll-behavior:smooth; }
-    body { background:var(--ink); color:var(--paper); font-family:'Rajdhani',sans-serif; font-size:16px; overflow-x:hidden; touch-action:pan-y; }
-    body::before { content:''; position:fixed; inset:0; background-image:radial-gradient(circle,rgba(0,212,255,.015) 1px,transparent 1px); background-size:6px 6px; pointer-events:none; z-index:0; }
-    ::-webkit-scrollbar { width:5px; }
-    ::-webkit-scrollbar-track { background:var(--ink); }
-    ::-webkit-scrollbar-thumb { background:var(--neon); border-radius:3px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--ink:#06080f;--panel:#0d1120;--panel2:#111827;--border:#1e2d4a;--paper:#e8eef8;--aged:#a8b8d0;--muted:#546480;--neon:#00d4ff;--neon2:#0099cc;--neon-glow:rgba(0,212,255,.25)}
+    html{scroll-behavior:smooth}
+    body{background:var(--ink);color:var(--paper);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;touch-action:pan-y}
+    body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(0,212,255,.015) 1px,transparent 1px);background-size:6px 6px;pointer-events:none;z-index:0}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--ink)}
+    ::-webkit-scrollbar-thumb{background:var(--neon);border-radius:3px}
 
-    /* ── NAVBAR ── */
-    .navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:64px; display:flex; align-items:center; background:rgba(6,8,15,.95); border-bottom:2px solid var(--neon); backdrop-filter:blur(14px); padding:0 28px; box-shadow:0 0 30px rgba(0,212,255,.12); gap:0; }
-    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0; }
-    .brand-logo { height:42px; width:auto; display:block; object-fit:contain; border-radius:4px; }
-    .brand-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--paper); line-height:1; }
-    .brand-name .bh { color:var(--neon); text-shadow:0 0 12px var(--neon); }
-    .nav-pill { margin-left:12px; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.3); color:var(--neon); font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; padding:3px 9px; text-transform:uppercase; white-space:nowrap; }
-    .nav-links { display:flex; align-items:center; gap:2px; margin-left:auto; }
-    .nav-links a { display:flex; align-items:center; gap:6px; padding:8px 12px; color:var(--aged); text-decoration:none; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; border:1px solid transparent; transition:all .2s; white-space:nowrap; }
-    .nav-links a:hover, .nav-links a.active { color:var(--neon); border-color:var(--border); background:rgba(0,212,255,.07); }
-    .nav-links a.manga-btn { background:rgba(0,212,255,.12); color:var(--neon); border-color:var(--neon); clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,6% 100%,0 80%); }
-    .nav-links a.manga-btn:hover { background:rgba(0,212,255,.25); }
-    .menu-toggle { width:36px; height:36px; border:1px solid var(--border); background:transparent; color:var(--aged); cursor:pointer; display:none; align-items:center; justify-content:center; transition:all .2s; margin-left:10px; font-size:14px; }
-    .menu-toggle:hover { color:var(--neon); border-color:var(--neon); }
+    /* NAVBAR */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;background:rgba(6,8,15,.96);border-bottom:2px solid var(--neon);backdrop-filter:blur(14px);padding:0 20px;box-shadow:0 0 30px rgba(0,212,255,.12);gap:0}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+    .brand-logo{height:42px;width:auto;display:block;object-fit:contain;border-radius:4px}
+    .brand-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper);line-height:1;white-space:nowrap}
+    .brand-name .bh{color:var(--neon);text-shadow:0 0 12px var(--neon)}
+    .nav-pill{margin-left:10px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:3px 8px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+    .nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .nav-icon-btn{width:44px;height:44px;border:2px solid var(--border);background:rgba(0,212,255,.05);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:16px;flex-shrink:0;border-radius:2px}
+    .nav-icon-btn:hover,.nav-icon-btn.active{color:var(--neon);border-color:var(--neon);background:rgba(0,212,255,.12)}
+    .nav-links{display:flex;align-items:center;gap:2px}
+    .nav-links a{display:flex;align-items:center;gap:6px;padding:8px 11px;color:var(--aged);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+    .nav-links a:hover,.nav-links a.active{color:var(--neon);border-color:var(--border);background:rgba(0,212,255,.07)}
+    .nav-links a.manga-btn{background:rgba(0,212,255,.12);color:var(--neon);border-color:var(--neon);clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,6% 100%,0 80%)}
+    .nav-links a.manga-btn:hover{background:rgba(0,212,255,.25)}
 
-    /* ── MOBILE NAV ── */
-    @media(max-width:820px) {
-      .menu-toggle { display:flex; }
-      .nav-links { display:none; flex-direction:column; position:fixed; top:64px; left:0; right:0; background:var(--panel2); border-bottom:2px solid var(--neon); padding:14px; gap:4px; z-index:999; }
-      .nav-links.open { display:flex; }
-      .nav-pill { display:none; }
+    /* MOBILE */
+    @media(max-width:820px){
+      .nav-pill{display:none}
+      .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--panel2);border-bottom:2px solid var(--neon);padding:14px;gap:6px;z-index:999}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px 16px;font-size:15px;border:1px solid var(--border);width:100%}
     }
 
-    /* ── HERO ── */
-    .hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:90px 40px 140px; overflow:hidden; background:linear-gradient(135deg,rgba(0,212,255,.07) 0%,transparent 55%),linear-gradient(to bottom,var(--ink),#070c18); }
-    .hero-bg-img { position:absolute; inset:0; background-image:url('https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg'); background-size:cover; background-position:center; opacity:.07; pointer-events:none; }
-    .hero-content { position:relative; z-index:2; max-width:860px; width:100%; }
-    .hero-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
-    .hero-eyebrow::before { content:''; display:block; width:36px; height:2px; background:var(--neon); box-shadow:0 0 8px var(--neon); }
-    .hero-eyebrow span { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--neon); }
-    .hero-title { font-family:'Bebas Neue',sans-serif; margin-bottom:22px; }
-    .hero-title .row1 { display:flex; align-items:baseline; gap:18px; line-height:.92; flex-wrap:wrap; }
-    .hero-title .t1 { font-size:clamp(48px,8vw,130px); color:var(--paper); letter-spacing:-1px; }
-    .hero-title .t2 { font-size:clamp(48px,8vw,130px); color:var(--neon); text-shadow:0 0 30px rgba(0,212,255,.55),0 0 60px rgba(0,212,255,.25); letter-spacing:-1px; }
-    .hero-title .row2 .t3 { font-size:clamp(32px,5vw,80px); color:var(--paper); letter-spacing:2px; opacity:.75; display:block; line-height:.95; }
-    .hero-desc { font-size:16px; color:var(--muted); line-height:1.7; max-width:560px; margin-bottom:28px; font-family:'Rajdhani',sans-serif; }
-    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn-primary { background:var(--neon); border:2px solid var(--neon); color:var(--ink); padding:11px 26px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:all .2s; clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,0 100%); font-weight:700; }
-    .btn-primary:hover { background:#33ddff; box-shadow:0 0 22px var(--neon-glow); }
-    .btn-outline { background:transparent; border:2px solid var(--border); color:var(--aged); padding:11px 22px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:all .2s; }
-    .btn-outline:hover { border-color:var(--neon); color:var(--neon); }
+    /* HERO */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:90px 40px 140px;overflow:hidden;background:linear-gradient(135deg,rgba(0,212,255,.07) 0%,transparent 55%),linear-gradient(to bottom,var(--ink),#070c18)}
+    .hero-bg-img{position:absolute;inset:0;background-image:url('https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg');background-size:cover;background-position:center;opacity:.07;pointer-events:none}
+    .hero-content{position:relative;z-index:2;max-width:860px;width:100%}
+    .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .hero-eyebrow::before{content:'';display:block;width:36px;height:2px;background:var(--neon);box-shadow:0 0 8px var(--neon)}
+    .hero-eyebrow span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--neon)}
+    .hero-title{font-family:'Bebas Neue',sans-serif;margin-bottom:22px;line-height:1}
+    .hero-t1{font-size:clamp(44px,9vw,120px);color:var(--paper);letter-spacing:-1px;display:block;white-space:nowrap;line-height:.92}
+    .hero-t1 .wars{color:var(--neon);text-shadow:0 0 30px rgba(0,212,255,.55),0 0 60px rgba(0,212,255,.25)}
+    .hero-t2{font-size:clamp(30px,5vw,72px);color:var(--paper);letter-spacing:4px;display:block;opacity:.8;line-height:.95;margin-top:6px}
+    .hero-desc{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;margin-bottom:28px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{background:var(--neon);border:2px solid var(--neon);color:var(--ink);padding:11px 26px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:all .2s;clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,0 100%);font-weight:700}
+    .btn-primary:hover{background:#33ddff;box-shadow:0 0 22px var(--neon-glow)}
+    .btn-outline{background:transparent;border:2px solid var(--border);color:var(--aged);padding:11px 22px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:all .2s}
+    .btn-outline:hover{border-color:var(--neon);color:var(--neon)}
+    .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--neon);margin-right:6px;animation:pulse 1.4s ease infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+    .stats-strip{position:absolute;bottom:0;left:0;right:0;background:rgba(13,17,32,.9);border-top:1px solid var(--border);display:flex;backdrop-filter:blur(8px);flex-wrap:wrap}
+    .stat-item{flex:1;min-width:100px;padding:12px 18px;border-right:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .stat-item:last-child{border-right:none}
+    .stat-icon{color:var(--neon);font-size:15px}
+    .stat-value{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--neon);line-height:1;text-shadow:0 0 10px rgba(0,212,255,.35)}
+    .stat-label{font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
 
-    /* live dot */
-    .live-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--neon); margin-right:6px; animation:pulse 1.4s ease infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+    /* SECTIONS */
+    .section{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:72px 40px 60px}
+    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+    .section-title-wrap{display:flex;align-items:center;gap:12px}
+    .section-num{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:3px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid var(--neon);padding:3px 7px}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--paper)}
+    .section-title .acc{color:var(--neon);text-shadow:0 0 10px rgba(0,212,255,.3)}
+    .section-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
 
-    /* ── STATS STRIP ── */
-    .stats-strip { position:absolute; bottom:0; left:0; right:0; background:rgba(13,17,32,.9); border-top:1px solid var(--border); display:flex; backdrop-filter:blur(8px); flex-wrap:wrap; }
-    .stat-item { flex:1; min-width:120px; padding:14px 22px; border-right:1px solid var(--border); display:flex; align-items:center; gap:10px; }
-    .stat-item:last-child { border-right:none; }
-    .stat-icon { color:var(--neon); font-size:16px; }
-    .stat-value { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--neon); line-height:1; text-shadow:0 0 10px rgba(0,212,255,.35); }
-    .stat-label { font-size:10px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; }
+    /* SKELETON */
+    .skel{background:linear-gradient(90deg,var(--panel) 25%,var(--panel2) 50%,var(--panel) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:2px}
+    @keyframes shimmer{to{background-position:-200% 0}}
+    .skel-card{width:200px;flex-shrink:0;height:300px}
+    .skel-news{width:100%;height:180px;margin-bottom:12px}
 
-    /* ── SECTION STRUCTURE ── */
-    .section { position:relative; z-index:2; max-width:1400px; margin:0 auto; padding:72px 40px 60px; }
-    .section + .section { padding-top:0; }
-    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:14px; border-bottom:1px solid var(--border); }
-    .section-title-wrap { display:flex; align-items:center; gap:12px; }
-    .section-num { font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:3px; color:var(--neon); background:rgba(0,212,255,.08); border:1px solid var(--neon); padding:3px 7px; }
-    .section-title { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--paper); }
-    .section-title .acc { color:var(--neon); text-shadow:0 0 10px rgba(0,212,255,.3); }
-    .section-sub { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+    /* NEWS GRID */
+    .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+    .news-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:all .25s;clip-path:polygon(0 0,97% 0,100% 3%,100% 100%,3% 100%,0 97%);position:relative}
+    .news-card:hover{border-color:var(--neon);box-shadow:0 0 24px rgba(0,212,255,.12)}
+    .news-img{width:100%;height:180px;object-fit:cover;display:block;background:var(--panel2)}
+    .news-img-placeholder{width:100%;height:180px;background:linear-gradient(135deg,var(--panel),var(--panel2));display:flex;align-items:center;justify-content:center;color:var(--border);font-size:32px}
+    .news-body{padding:14px}
+    .news-source{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+    .news-source::before{content:'';display:block;width:14px;height:1px;background:var(--neon)}
+    .news-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--paper);line-height:1.2;margin-bottom:7px}
+    .news-excerpt{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+    .news-full{font-size:13px;color:var(--aged);line-height:1.7;display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;margin-bottom:10px;word-break:break-word}
+    .news-full.open{display:block;animation:fadeIn .25s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+    .news-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+    .news-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--border);letter-spacing:1px}
+    .news-view-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;padding:5px 12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+    .news-view-btn:hover,.news-view-btn.open{border-color:var(--neon);color:var(--neon)}
+    .news-view-btn i{font-size:10px;transition:transform .2s}
+    .news-view-btn.open i{transform:rotate(180deg)}
+    /* share row */
+    .news-share-row{display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid var(--border);background:rgba(0,212,255,.03)}
+    .share-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+    .share-btn:hover{border-color:var(--neon);color:var(--neon)}
+    .share-count{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);margin-left:auto}
 
-    /* ── LOADING / SKELETON ── */
-    .loading-row { display:flex; gap:20px; overflow:hidden; }
-    .skel { background:linear-gradient(90deg,var(--panel) 25%,var(--panel2) 50%,var(--panel) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:2px; }
-    @keyframes shimmer { to{background-position:-200% 0} }
-    .skel-card { width:220px; flex-shrink:0; height:320px; }
-    .skel-news { width:100%; height:180px; margin-bottom:12px; }
+    /* TRENDING CAROUSEL */
+    .carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+    .carousel::-webkit-scrollbar{height:3px}
+    .carousel::-webkit-scrollbar-thumb{background:var(--neon)}
+    .anime-card{flex-shrink:0;width:180px;scroll-snap-align:start;cursor:default;animation:fadeUp .4s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .anime-card-frame{border:2px solid var(--border);overflow:hidden;aspect-ratio:3/4;background:var(--panel);transition:all .22s;clip-path:polygon(0 0,92% 0,100% 8%,100% 100%,8% 100%,0 92%);position:relative}
+    .anime-card:hover .anime-card-frame{border-color:var(--neon);box-shadow:0 0 16px rgba(0,212,255,.16)}
+    .anime-cover{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+    .anime-card:hover .anime-cover{transform:scale(1.05)}
+    .anime-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,15,.96) 0%,rgba(6,8,15,.2) 60%,transparent 100%);padding:10px;display:flex;flex-direction:column;justify-content:flex-end}
+    .anime-score{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.75);border:1px solid var(--neon);color:var(--neon);font-family:'Space Mono',monospace;font-size:10px;padding:2px 6px;display:flex;align-items:center;gap:3px}
+    .anime-format{position:absolute;top:8px;right:8px;background:var(--neon);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1px;padding:2px 6px;font-weight:700}
+    .anime-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--paper);line-height:1.2;margin-bottom:2px}
+    .anime-meta{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted)}
+    .anime-meta .ep{color:var(--neon)}
+    /* airing countdown badge */
+    .airing-countdown{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);padding:2px 6px;margin-top:4px;letter-spacing:1px}
 
-    /* ── NEWS GRID ── */
-    .news-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; }
+    /* SEASONAL */
+    .seasonal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
 
-    /* ── TRENDING CAROUSEL ── */
-    .carousel-wrap { position:relative; overflow:hidden; }
-    .carousel { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
-    .carousel::-webkit-scrollbar { height:3px; }
-    .carousel::-webkit-scrollbar-thumb { background:var(--neon); }
-    .anime-card { flex-shrink:0; width:190px; scroll-snap-align:start; cursor:default; animation:fadeUp .4s ease both; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-    .anime-card-frame { border:2px solid var(--border); overflow:hidden; aspect-ratio:3/4; background:var(--panel); transition:all .22s; clip-path:polygon(0 0,92% 0,100% 8%,100% 100%,8% 100%,0 92%); position:relative; }
-    .anime-card:hover .anime-card-frame { border-color:var(--neon); box-shadow:0 0 18px rgba(0,212,255,.16); }
-    .anime-cover { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
-    .anime-card:hover .anime-cover { transform:scale(1.05); }
-    .anime-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(6,8,15,.96) 0%,rgba(6,8,15,.2) 60%,transparent 100%); padding:10px; display:flex; flex-direction:column; justify-content:flex-end; }
-    .anime-score { position:absolute; top:8px; left:8px; background:rgba(0,0,0,.75); border:1px solid var(--neon); color:var(--neon); font-family:'Space Mono',monospace; font-size:10px; padding:2px 7px; display:flex; align-items:center; gap:3px; }
-    .anime-format { position:absolute; top:8px; right:8px; background:var(--neon); color:var(--ink); font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:1px; padding:2px 7px; font-weight:700; }
-    .anime-name { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:3px; }
-    .anime-meta { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); }
-    .anime-meta .ep { color:var(--neon); }
+    /* WATCH SECTION */
+    .watch-notice{background:rgba(0,212,255,.05);border:1px solid var(--neon);border-left:4px solid var(--neon);padding:16px 20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;border-radius:2px}
+    .watch-notice i{color:var(--neon);font-size:18px;margin-top:2px;flex-shrink:0}
+    .watch-notice p{font-size:14px;color:var(--aged);line-height:1.6}
+    .watch-notice strong{color:var(--neon)}
+    /* Collapsible platforms toggle */
+    .platforms-toggle{width:100%;background:rgba(0,212,255,.08);border:1px solid var(--neon);color:var(--neon);padding:14px 20px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:0}
+    .platforms-toggle:hover{background:rgba(0,212,255,.15)}
+    .platforms-toggle i.toggle-arrow{transition:transform .25s}
+    .platforms-toggle.open i.toggle-arrow{transform:rotate(180deg)}
+    .platforms-body{display:none;padding-top:16px}
+    .platforms-body.open{display:block;animation:fadeIn .3s ease}
+    .watch-platforms{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .platform-card{background:var(--panel);border:1px solid var(--border);padding:20px;transition:all .22s;position:relative;overflow:hidden;text-decoration:none;display:block;clip-path:polygon(0 0,95% 0,100% 5%,100% 100%,5% 100%,0 95%)}
+    .platform-card:hover{border-color:var(--neon);box-shadow:0 0 18px rgba(0,212,255,.1);transform:translateY(-2px)}
+    .plat-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .plat-icon{width:40px;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .plat-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:var(--paper)}
+    .plat-tag{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);letter-spacing:1px;margin-top:1px}
+    .plat-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+    .plat-genres{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+    .plat-genre{font-family:'Space Mono',monospace;font-size:9px;color:var(--aged);background:rgba(0,212,255,.06);border:1px solid var(--border);padding:2px 7px;letter-spacing:1px}
+    .plat-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,255,.1);border:1px solid var(--neon);color:var(--neon);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:7px 14px;transition:all .2s}
+    .platform-card:hover .plat-btn{background:rgba(0,212,255,.2)}
 
-    /* ── SEASONAL GRID ── */
-    .seasonal-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+    /* EVENTS */
+    .events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+    .event-card{background:var(--panel);border:1px solid var(--border);padding:22px;transition:all .22s;clip-path:polygon(0 0,96% 0,100% 4%,100% 100%,4% 100%,0 96%);position:relative}
+    .event-card::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 32px 32px 0;border-color:transparent var(--neon) transparent transparent;opacity:.5}
+    .event-card:hover{border-color:var(--neon);box-shadow:0 0 18px rgba(0,212,255,.1)}
+    .event-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .event-tag::before{content:'';display:block;width:14px;height:1px;background:var(--neon)}
+    .event-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper);line-height:1.1;margin-bottom:8px}
+    .event-date-row{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .event-date-row i{color:var(--neon)}
+    .event-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+    /* countdown */
+    .countdown-box{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+    .cd-unit{background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);padding:8px 4px;text-align:center;border-radius:2px}
+    .cd-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--neon);line-height:1;text-shadow:0 0 8px rgba(0,212,255,.4)}
+    .cd-lbl{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+    .event-links{display:flex;flex-direction:column;gap:7px}
+    .event-link{display:flex;align-items:center;justify-content:space-between;background:rgba(0,212,255,.06);border:1px solid var(--border);padding:9px 12px;text-decoration:none;color:var(--aged);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;transition:all .2s}
+    .event-link:hover{border-color:var(--neon);color:var(--neon);background:rgba(0,212,255,.1)}
+    .event-link i{font-size:11px;color:var(--neon)}
 
-    /* ── EVENTS SECTION ── */
-    .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
-    .event-card { background:var(--panel); border:1px solid var(--border); padding:24px; transition:all .22s; clip-path:polygon(0 0,96% 0,100% 4%,100% 100%,4% 100%,0 96%); position:relative; }
-    .event-card::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 36px 36px 0; border-color:transparent var(--neon) transparent transparent; opacity:.5; }
-    .event-card:hover { border-color:var(--neon); box-shadow:0 0 20px rgba(0,212,255,.1); }
-    .event-tag { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
-    .event-tag::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
-    .event-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:var(--paper); line-height:1.1; margin-bottom:10px; }
-    .event-date { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
-    .event-date i { color:var(--neon); }
-    .event-desc { font-size:14px; color:var(--muted); line-height:1.65; margin-bottom:16px; }
-    .event-links { display:flex; flex-direction:column; gap:8px; }
-    .event-link { display:flex; align-items:center; justify-content:space-between; background:rgba(0,212,255,.06); border:1px solid var(--border); padding:9px 14px; text-decoration:none; color:var(--aged); font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; transition:all .2s; }
-    .event-link:hover { border-color:var(--neon); color:var(--neon); background:rgba(0,212,255,.1); }
-    .event-link i { font-size:12px; color:var(--neon); }
+    /* UPCOMING ANIME RELEASE TIMER */
+    .release-timer{font-family:'Space Mono',monospace;font-size:10px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);padding:4px 10px;letter-spacing:1px;display:inline-flex;align-items:center;gap:5px;margin-bottom:8px}
+    .release-timer i{font-size:9px}
 
-    /* ── REVIEWS ── */
-    .reviews-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
-    .review-card { background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--neon); padding:20px; }
-    .review-text { font-size:14px; color:var(--aged); line-height:1.7; margin-bottom:12px; font-style:italic; }
-    .review-author { font-family:'Space Mono',monospace; font-size:10px; color:var(--neon); letter-spacing:1px; }
+    /* CHANNELS */
+    .channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+    .channel-card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);padding:14px;text-decoration:none;color:var(--paper);transition:all .22s}
+    .channel-card:hover{border-color:var(--neon);background:rgba(0,212,255,.05)}
+    .ch-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:rgba(0,212,255,.08);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--neon);flex-shrink:0;transition:all .22s}
+    .channel-card:hover .ch-icon{border-color:var(--neon);box-shadow:0 0 12px rgba(0,212,255,.25)}
+    .ch-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--paper)}
+    .ch-desc{font-size:12px;color:var(--muted);margin-top:2px}
 
-    /* ── COMMUNITY CHANNELS ── */
-    .channels-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
-    .channel-card { display:flex; align-items:center; gap:14px; background:var(--panel); border:1px solid var(--border); padding:16px; text-decoration:none; color:var(--paper); transition:all .22s; }
-    .channel-card:hover { border-color:var(--neon); background:rgba(0,212,255,.05); }
-    .ch-icon { width:44px; height:44px; border-radius:50%; border:1px solid var(--border); background:rgba(0,212,255,.08); display:flex; align-items:center; justify-content:center; font-size:18px; color:var(--neon); flex-shrink:0; transition:all .22s; }
-    .channel-card:hover .ch-icon { border-color:var(--neon); box-shadow:0 0 12px rgba(0,212,255,.25); }
-    .ch-name { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; color:var(--paper); }
-    .ch-desc { font-size:12px; color:var(--muted); margin-top:2px; }
+    /* REVIEWS */
+    .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .review-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--neon);padding:18px}
+    .review-text{font-size:13px;color:var(--aged);line-height:1.7;margin-bottom:10px;font-style:italic}
+    .review-author{font-family:'Space Mono',monospace;font-size:10px;color:var(--neon);letter-spacing:1px}
 
-    /* ── CONTACT STRIP ── */
-    .contact-strip { background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--neon); padding:24px 28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
-    .contact-strip-text h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--paper); }
-    .contact-strip-text p { font-size:13px; color:var(--muted); margin-top:4px; }
-    .contact-strip-links { display:flex; gap:10px; flex-wrap:wrap; }
-    .contact-chip { display:inline-flex; align-items:center; gap:7px; padding:8px 16px; border:1px solid var(--border); color:var(--aged); text-decoration:none; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px; letter-spacing:1px; transition:all .2s; }
-    .contact-chip:hover { border-color:var(--neon); color:var(--neon); }
-    .contact-chip i { color:var(--neon); }
+    /* CONTACT */
+    .contact-strip{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--neon);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+    .contact-strip-text h3{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:var(--paper)}
+    .contact-strip-text p{font-size:13px;color:var(--muted);margin-top:3px}
+    .contact-strip-links{display:flex;gap:8px;flex-wrap:wrap}
+    .contact-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid var(--border);color:var(--aged);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;transition:all .2s}
+    .contact-chip:hover{border-color:var(--neon);color:var(--neon)}
+    .contact-chip i{color:var(--neon)}
 
-    /* ── DIVIDER ── */
-    .divider { display:flex; align-items:center; gap:16px; color:var(--muted); font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin:0 40px; }
-    .divider::before, .divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--border)); }
-    .divider::after { background:linear-gradient(to left,transparent,var(--border)); }
-    .divider i { color:var(--neon); }
+    /* DIVIDER */
+    .divider{display:flex;align-items:center;gap:16px;color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin:0 40px}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border))}
+    .divider::after{background:linear-gradient(to left,transparent,var(--border))}
+    .divider i{color:var(--neon)}
 
-    /* ── FOOTER ── */
-    footer { position:relative; z-index:2; background:rgba(6,8,15,.95); border-top:1px solid var(--border); padding:36px 40px; }
-    .footer-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; }
-    .footer-brand { display:flex; align-items:center; gap:10px; }
-    .footer-logo { height:36px; border-radius:3px; }
-    .footer-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--paper); }
-    .footer-name span { color:var(--neon); text-shadow:0 0 10px var(--neon); }
-    .footer-copy { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:1px; text-align:center; }
-    .footer-links { display:flex; gap:16px; }
-    .footer-links a { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); text-decoration:none; letter-spacing:1px; transition:color .2s; }
-    .footer-links a:hover { color:var(--neon); }
+    /* FOOTER */
+    footer{position:relative;z-index:2;background:rgba(6,8,15,.95);border-top:1px solid var(--border);padding:32px 40px}
+    .footer-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-logo{height:34px;border-radius:3px}
+    .footer-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:var(--paper)}
+    .footer-name span{color:var(--neon);text-shadow:0 0 10px var(--neon)}
+    .footer-copy{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-align:center}
+    .footer-links{display:flex;gap:14px}
+    .footer-links a{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
+    .footer-links a:hover{color:var(--neon)}
 
-    /* ── TOAST ── */
-    .toast-container { position:fixed; bottom:20px; right:20px; z-index:2000; display:flex; flex-direction:column; gap:8px; }
-    .toast { background:var(--panel2); border:1px solid var(--border); border-left:3px solid var(--neon); padding:10px 16px; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:14px; color:var(--paper); display:flex; align-items:center; gap:8px; animation:slideIn .3s ease; min-width:240px; }
-    @keyframes slideIn { from{opacity:0;transform:translateX(24px)} to{opacity:1;transform:translateX(0)} }
+    /* TOAST */
+    .toast-container{position:fixed;bottom:20px;right:20px;z-index:3000;display:flex;flex-direction:column;gap:8px}
+    .toast{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--neon);padding:10px 16px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;color:var(--paper);display:flex;align-items:center;gap:8px;animation:slideIn .3s ease;min-width:240px;max-width:320px}
+    @keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+    .toast.success{border-left-color:#22c55e}
+    .toast.warning{border-left-color:#f59e0b}
 
-    /* ── BACK TO TOP ── */
-    .back-to-top { position:fixed; bottom:28px; left:28px; z-index:500; width:40px; height:40px; background:var(--neon); border:none; color:var(--ink); cursor:pointer; display:none; align-items:center; justify-content:center; font-size:14px; clip-path:polygon(50% 0%,100% 50%,85% 50%,85% 100%,15% 100%,15% 50%,0% 50%); transition:background .2s; }
-    .back-to-top.show { display:flex; }
-    .back-to-top:hover { background:#33ddff; }
+    /* BACK TO TOP */
+    .back-to-top{position:fixed;bottom:28px;left:28px;z-index:500;width:40px;height:40px;background:var(--neon);border:none;color:var(--ink);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:14px;clip-path:polygon(50% 0%,100% 50%,85% 50%,85% 100%,15% 100%,15% 50%,0% 50%);transition:background .2s}
+    .back-to-top.show{display:flex}
+    .back-to-top:hover{background:#33ddff}
 
-    /* ── THEME TOGGLE ── */
-    .theme-toggle { width:36px; height:36px; border:1px solid var(--border); background:transparent; color:var(--aged); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; margin-left:8px; font-size:14px; flex-shrink:0; }
-    .theme-toggle:hover { color:var(--neon); border-color:var(--neon); }
+    /* PWA INSTALL POPUP */
+    .install-popup{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:4000;background:var(--panel2);border:2px solid var(--neon);padding:18px 22px;display:none;align-items:center;gap:14px;max-width:380px;width:calc(100% - 32px);box-shadow:0 0 40px rgba(0,212,255,.2);animation:slideUp .4s ease}
+    .install-popup.show{display:flex}
+    @keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+    .install-popup img{width:48px;height:48px;border-radius:8px;flex-shrink:0}
+    .install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:var(--paper)}
+    .install-popup-text span{font-size:12px;color:var(--muted)}
+    .install-popup-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0}
+    .install-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:8px 14px;cursor:pointer;transition:all .2s}
+    .install-btn:hover{background:#33ddff}
+    .install-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:1px;padding:8px 12px;cursor:pointer;transition:all .2s}
+    .install-dismiss:hover{border-color:var(--neon);color:var(--neon)}
 
-    /* ── NEWS COLLAPSIBLE ── */
-    .news-card { background:var(--panel); border:1px solid var(--border); overflow:hidden; transition:all .25s; clip-path:polygon(0 0,97% 0,100% 3%,100% 100%,3% 100%,0 97%); position:relative; }
-    .news-card:hover { border-color:var(--neon); box-shadow:0 0 24px rgba(0,212,255,.12); }
-    .news-card:hover::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent var(--neon) transparent transparent; z-index:2; }
-    .news-img { width:100%; height:190px; object-fit:cover; display:block; background:var(--panel2); }
-    .news-img-placeholder { width:100%; height:190px; background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%); display:flex; align-items:center; justify-content:center; color:var(--border); font-size:32px; }
-    .news-body { padding:16px; }
-    .news-source { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
-    .news-source::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
-    .news-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:8px; }
-    .news-excerpt { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px; }
-    .news-full { font-size:13px; color:var(--aged); line-height:1.7; margin-bottom:12px; display:none; border-top:1px solid var(--border); padding-top:12px; margin-top:4px; }
-    .news-full.open { display:block; animation:fadeIn .25s ease; }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-    .news-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-    .news-date { font-family:'Space Mono',monospace; font-size:9px; color:var(--border); letter-spacing:1px; }
-    .news-view-btn { background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:2px; padding:5px 12px; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:5px; }
-    .news-view-btn:hover { border-color:var(--neon); color:var(--neon); }
-    .news-view-btn i { font-size:10px; transition:transform .2s; }
-    .news-view-btn.open i { transform:rotate(180deg); }
+    /* NOTIF BANNER */
+    .notif-banner{position:fixed;top:64px;left:0;right:0;z-index:990;background:rgba(0,212,255,.1);border-bottom:1px solid var(--neon);padding:10px 20px;display:none;align-items:center;gap:10px;backdrop-filter:blur(10px)}
+    .notif-banner.show{display:flex}
+    .notif-banner p{font-size:13px;color:var(--paper);flex:1}
+    .notif-banner strong{color:var(--neon)}
+    .notif-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+    .notif-close{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px;margin-left:6px}
+    .notif-close:hover{color:var(--neon)}
 
-    /* ── WATCH SECTION ── */
-    .watch-notice { background:var(--panel); border:1px solid var(--neon); border-left:3px solid var(--neon); padding:18px 22px; margin-bottom:28px; display:flex; align-items:flex-start; gap:14px; }
-    .watch-notice i { color:var(--neon); font-size:18px; margin-top:2px; flex-shrink:0; }
-    .watch-notice p { font-size:14px; color:var(--aged); line-height:1.65; }
-    .watch-notice strong { color:var(--neon); }
-    .watch-platforms { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
-    .platform-card { background:var(--panel); border:1px solid var(--border); padding:22px; transition:all .22s; position:relative; overflow:hidden; text-decoration:none; display:block; clip-path:polygon(0 0,95% 0,100% 5%,100% 100%,5% 100%,0 95%); }
-    .platform-card::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 32px 32px 0; border-color:transparent var(--border) transparent transparent; transition:border-color .2s; }
-    .platform-card:hover { border-color:var(--neon); box-shadow:0 0 20px rgba(0,212,255,.1); transform:translateY(-2px); }
-    .platform-card:hover::before { border-color:transparent var(--neon) transparent transparent; }
-    .plat-header { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-    .plat-icon { width:42px; height:42px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
-    .plat-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; color:var(--paper); }
-    .plat-tag { font-family:'Space Mono',monospace; font-size:9px; color:var(--neon); letter-spacing:1px; margin-top:1px; }
-    .plat-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
-    .plat-genres { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
-    .plat-genre { font-family:'Space Mono',monospace; font-size:9px; color:var(--aged); background:rgba(0,212,255,.06); border:1px solid var(--border); padding:2px 8px; letter-spacing:1px; }
-    .plat-btn { display:inline-flex; align-items:center; gap:7px; background:rgba(0,212,255,.1); border:1px solid var(--neon); color:var(--neon); font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:2px; padding:7px 16px; transition:all .2s; }
-    .platform-card:hover .plat-btn { background:rgba(0,212,255,.2); }
+    /* LIGHT MODE */
+    body.light{--ink:#f0f4fc;--panel:#e4eaf6;--panel2:#dce4f0;--border:#b8c8e0;--paper:#0d1828;--aged:#2a3a56;--muted:#5a7090}
+    body.light .navbar,body.light footer{background:rgba(240,244,252,.96)}
+    body.light .news-full{border-top-color:var(--border)}
+    body.light .install-popup{background:#e4eaf6;border-color:var(--neon)}
 
-    /* ── LIGHT MODE ── */
-    body.light { --ink:#f0f4fc; --panel:#e4eaf6; --panel2:#dce4f0; --border:#b8c8e0; --paper:#0d1828; --aged:#2a3a56; --muted:#5a7090; }
-    body.light .navbar { background:rgba(240,244,252,.96); }
-    body.light footer { background:rgba(240,244,252,.96); }
-    body.light .news-full { border-top-color:var(--border); }
-
-    @media(max-width:700px) {
-      .hero { padding:90px 18px 140px; }
-      .section { padding:56px 16px 44px; }
-      .divider { margin:0 16px; }
-      .news-grid { grid-template-columns:1fr; }
-      .hero-title .row1 { flex-direction:column; gap:4px; }
-      footer { padding:24px 16px; }
-      .footer-inner { flex-direction:column; text-align:center; }
-      .contact-strip { flex-direction:column; }
+    /* MOBILE FIXES */
+    @media(max-width:700px){
+      .hero{padding:88px 18px 140px}
+      .section{padding:52px 16px 40px}
+      .divider{margin:0 16px}
+      .news-grid{grid-template-columns:1fr}
+      footer{padding:22px 16px}
+      .footer-inner{flex-direction:column;text-align:center}
+      .contact-strip{flex-direction:column}
+      .countdown-box{grid-template-columns:repeat(4,1fr)}
     }
   </style>
 </head>
 <body>
 
+  <!-- NOTIFICATION PERMISSION BANNER -->
+  <div class="notif-banner" id="notifBanner">
+    <i class="fas fa-bell" style="color:var(--neon);flex-shrink:0"></i>
+    <p>Get <strong>live notifications</strong> whenever new anime news drops on ANICADE.</p>
+    <button class="notif-btn" id="notifEnableBtn"><i class="fas fa-bell"></i> Enable</button>
+    <button class="notif-close" id="notifCloseBtn"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- PWA INSTALL POPUP -->
+  <div class="install-popup" id="installPopup">
+    <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+    <div class="install-popup-text">
+      <p>Install ANICADE</p>
+      <span>Add to home screen for fast access</span>
+    </div>
+    <div class="install-popup-actions">
+      <button class="install-btn" id="installBtn"><i class="fas fa-download"></i> Install</button>
+      <button class="install-dismiss" id="installDismiss">Later</button>
+    </div>
+  </div>
+
   <!-- NAVBAR -->
   <nav class="navbar">
     <a class="nav-brand" href="#">
-      <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" />
+      <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
       <span class="brand-name">ANICADE<span class="bh"> ANIME</span></span>
     </a>
-    <span class="nav-pill"><span class="live-dot"></span>Live Updates</span>
-    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
-    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+    <span class="nav-pill"><span class="live-dot"></span>Live</span>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="nav-icon-btn" id="menuToggle" title="Menu"><i class="fas fa-bars"></i></button>
+    </div>
     <div class="nav-links" id="navLinks">
       <a href="#news" class="active"><i class="fas fa-newspaper"></i> News</a>
       <a href="#trending"><i class="fas fa-fire"></i> Trending</a>
@@ -285,10 +335,8 @@
     <div class="hero-content">
       <div class="hero-eyebrow"><span>Official Anime News Hub</span></div>
       <h1 class="hero-title">
-        <div class="row1">
-          <span class="t1">ANIME WRLD </span><span class="t2">WARS</span>
-        </div>
-        <div class="row2"><span class="t3">ANICADE</span></div>
+        <span class="hero-t1">ANIME WRLD <span class="wars">WARS</span></span>
+        <span class="hero-t2">ANICADE</span>
       </h1>
       <p class="hero-desc">Your go-to source for daily anime news, seasonal picks, trending titles, fan community events and exclusive ANICADE drops. Stay informed. Stay in the wrld.</p>
       <div class="hero-actions">
@@ -304,54 +352,46 @@
     </div>
   </section>
 
-  <!-- ── NEWS ── -->
+  <!-- NEWS -->
   <div class="section" id="news">
     <div class="section-header">
       <div class="section-title-wrap">
         <span class="section-num">01</span>
         <h2 class="section-title">LATEST <span class="acc">NEWS</span></h2>
       </div>
-      <span class="section-sub"><span class="live-dot"></span> Live · Via MAL &amp; ANN</span>
+      <span class="section-sub"><span class="live-dot"></span> Live · MAL &amp; AniList</span>
     </div>
     <div class="news-grid" id="newsGrid">
-      <!-- skeletons -->
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
-      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:12px;width:60%;margin-bottom:8px"></div><div class="skel" style="height:20px;margin-bottom:6px"></div><div class="skel" style="height:12px;width:80%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
+      <div class="news-card"><div class="skel skel-news"></div><div class="news-body"><div class="skel" style="height:11px;width:55%;margin-bottom:7px"></div><div class="skel" style="height:18px;margin-bottom:5px"></div><div class="skel" style="height:11px;width:75%"></div></div></div>
     </div>
   </div>
 
-  <div class="divider"><i class="fas fa-star"></i></div>
+  <div class="divider"><i class="fas fa-fire"></i></div>
 
-  <!-- ── TRENDING ── -->
+  <!-- TRENDING -->
   <div class="section" id="trending">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <span class="section-num">02</span>
-        <h2 class="section-title">TRENDING <span class="acc">ANIME</span></h2>
-      </div>
+      <div class="section-title-wrap"><span class="section-num">02</span><h2 class="section-title">TRENDING <span class="acc">ANIME</span></h2></div>
       <span class="section-sub">Via AniList · This Week</span>
     </div>
     <div class="carousel" id="trendingCarousel">
-      <div class="skel skel-card"></div><div class="skel skel-card"></div>
-      <div class="skel skel-card"></div><div class="skel skel-card"></div>
-      <div class="skel skel-card"></div><div class="skel skel-card"></div>
+      <div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div>
+      <div class="skel skel-card"></div><div class="skel skel-card"></div><div class="skel skel-card"></div>
     </div>
   </div>
 
   <div class="divider"><i class="fas fa-calendar-alt"></i></div>
 
-  <!-- ── SEASONAL ── -->
+  <!-- SEASONAL -->
   <div class="section" id="seasonal">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <span class="section-num">03</span>
-        <h2 class="section-title">THIS <span class="acc">SEASON</span></h2>
-      </div>
-      <span class="section-sub" id="seasonLabel">Loading season…</span>
+      <div class="section-title-wrap"><span class="section-num">03</span><h2 class="section-title">THIS <span class="acc">SEASON</span></h2></div>
+      <span class="section-sub" id="seasonLabel">Loading…</span>
     </div>
     <div class="seasonal-grid" id="seasonalGrid">
       <div class="skel skel-card"></div><div class="skel skel-card"></div>
@@ -361,125 +401,102 @@
 
   <div class="divider"><i class="fas fa-play"></i></div>
 
-  <!-- ── WATCH ANIME ── -->
+  <!-- WATCH ANIME -->
   <div class="section" id="watch">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <span class="section-num">04</span>
-        <h2 class="section-title">WATCH <span class="acc">ANIME</span></h2>
-      </div>
-      <span class="section-sub">Free & Legal Streaming</span>
+      <div class="section-title-wrap"><span class="section-num">04</span><h2 class="section-title">WATCH <span class="acc">ANIME</span></h2></div>
+      <span class="section-sub">Free &amp; Legal Streaming</span>
     </div>
-
     <div class="watch-notice">
       <i class="fas fa-info-circle"></i>
-      <p>ANICADE does not host any anime content. The platforms below are <strong>free, legal, and publicly available</strong> streaming services where you can watch anime. Some titles may vary by region.</p>
+      <p>ANICADE is currently not hosting any anime content. The platforms listed below are <strong>free, legal, and publicly available</strong> streaming services. Availability may vary by region.</p>
     </div>
-
-    <div class="watch-platforms">
-
-      <a href="https://www.crunchyroll.com" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(255,103,0,.15);color:#ff6700;"><i class="fas fa-dragon"></i></div>
-          <div><div class="plat-name">Crunchyroll</div><div class="plat-tag">Free with Ads · Premium Available</div></div>
-        </div>
-        <p class="plat-desc">The world's largest anime streaming library. Simulcasts, dubs, and thousands of episodes available free with ads.</p>
-        <div class="plat-genres"><span class="plat-genre">Action</span><span class="plat-genre">Shonen</span><span class="plat-genre">Romance</span><span class="plat-genre">Isekai</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Watch Free</div>
-      </a>
-
-      <a href="https://www.netflix.com/browse/genre/7424" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(229,9,20,.15);color:#e50914;"><i class="fas fa-film"></i></div>
-          <div><div class="plat-name">Netflix Anime</div><div class="plat-tag">Subscription · Originals</div></div>
-        </div>
-        <p class="plat-desc">Netflix Anime originals including Cyberpunk Edgerunners, Castlevania, and exclusive dubs of popular titles.</p>
-        <div class="plat-genres"><span class="plat-genre">Originals</span><span class="plat-genre">Dubs</span><span class="plat-genre">Sci-Fi</span><span class="plat-genre">Dark</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Browse Anime</div>
-      </a>
-
-      <a href="https://www.youtube.com/@AnimelabofficialpageEN" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(255,0,0,.15);color:#ff0000;"><i class="fab fa-youtube"></i></div>
-          <div><div class="plat-name">YouTube Anime</div><div class="plat-tag">100% Free · Official Channels</div></div>
-        </div>
-        <p class="plat-desc">Many studios post official free episodes on YouTube. Channels like Muse Asia, Ani-One, and TOEI Animation offer free legal streams.</p>
-        <div class="plat-genres"><span class="plat-genre">Free</span><span class="plat-genre">Subbed</span><span class="plat-genre">Classic</span><span class="plat-genre">New</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Watch on YouTube</div>
-      </a>
-
-      <a href="https://www.animepahe.ru" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-tv"></i></div>
-          <div><div class="plat-name">AnimePahe</div><div class="plat-tag">Free · Mini Encodes</div></div>
-        </div>
-        <p class="plat-desc">Lightweight, fast-loading anime streams. Known for small file sizes and clean UI. Great for mobile data.</p>
-        <div class="plat-genres"><span class="plat-genre">All Genres</span><span class="plat-genre">Subbed</span><span class="plat-genre">Mobile</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Stream Now</div>
-      </a>
-
-      <a href="https://aniwatch.to" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-play-circle"></i></div>
-          <div><div class="plat-name">AniWatch</div><div class="plat-tag">Free · Sub & Dub</div></div>
-        </div>
-        <p class="plat-desc">Full catalogue of anime with both sub and dub options. Fast streams, minimal ads, and a massive library of new and old titles.</p>
-        <div class="plat-genres"><span class="plat-genre">Sub</span><span class="plat-genre">Dub</span><span class="plat-genre">HD</span><span class="plat-genre">All Genres</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Watch Now</div>
-      </a>
-
-      <a href="https://gogoanime.gg" target="_blank" rel="noopener" class="platform-card">
-        <div class="plat-header">
-          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-bolt"></i></div>
-          <div><div class="plat-name">GogoAnime</div><div class="plat-tag">Free · Huge Library</div></div>
-        </div>
-        <p class="plat-desc">One of the most established free anime platforms. Thousands of titles, regular updates, and a large community of anime fans.</p>
-        <div class="plat-genres"><span class="plat-genre">Classic</span><span class="plat-genre">New</span><span class="plat-genre">Movies</span><span class="plat-genre">OVA</span></div>
-        <div class="plat-btn"><i class="fas fa-play"></i> Go Watch</div>
-      </a>
-
+    <button class="platforms-toggle" id="platformsToggle" onclick="togglePlatforms()">
+      <span><i class="fas fa-play-circle" style="margin-right:8px"></i>SEE ALL STREAMING PLATFORMS</span>
+      <i class="fas fa-chevron-down toggle-arrow"></i>
+    </button>
+    <div class="platforms-body" id="platformsBody">
+      <div class="watch-platforms" style="margin-top:16px">
+        <a href="https://www.crunchyroll.com" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(255,103,0,.15);color:#ff6700"><i class="fas fa-dragon"></i></div><div><div class="plat-name">Crunchyroll</div><div class="plat-tag">Free with Ads · Premium Available</div></div></div>
+          <p class="plat-desc">World's largest anime library. Simulcasts, dubs and thousands of episodes free with ads.</p>
+          <div class="plat-genres"><span class="plat-genre">Action</span><span class="plat-genre">Shonen</span><span class="plat-genre">Isekai</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Watch Free</div>
+        </a>
+        <a href="https://www.netflix.com/browse/genre/7424" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(229,9,20,.15);color:#e50914"><i class="fas fa-film"></i></div><div><div class="plat-name">Netflix Anime</div><div class="plat-tag">Subscription · Originals</div></div></div>
+          <p class="plat-desc">Exclusive anime originals including Cyberpunk Edgerunners, Castlevania and more.</p>
+          <div class="plat-genres"><span class="plat-genre">Originals</span><span class="plat-genre">Dubs</span><span class="plat-genre">Dark</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Browse Anime</div>
+        </a>
+        <a href="https://www.youtube.com/@AnimelabofficialpageEN" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(255,0,0,.15);color:#f00"><i class="fab fa-youtube"></i></div><div><div class="plat-name">YouTube Anime</div><div class="plat-tag">100% Free · Official Channels</div></div></div>
+          <p class="plat-desc">Muse Asia, Ani-One, TOEI Animation and more post full legal episodes free.</p>
+          <div class="plat-genres"><span class="plat-genre">Free</span><span class="plat-genre">Subbed</span><span class="plat-genre">Classic</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Watch on YouTube</div>
+        </a>
+        <a href="https://animepahe.ru" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon)"><i class="fas fa-tv"></i></div><div><div class="plat-name">AnimePahe</div><div class="plat-tag">Free · Mini Encodes</div></div></div>
+          <p class="plat-desc">Lightweight, fast-loading streams. Great for mobile data — small file sizes.</p>
+          <div class="plat-genres"><span class="plat-genre">All Genres</span><span class="plat-genre">Mobile</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Stream Now</div>
+        </a>
+        <a href="https://aniwatch.to" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon)"><i class="fas fa-play-circle"></i></div><div><div class="plat-name">AniWatch</div><div class="plat-tag">Free · Sub &amp; Dub</div></div></div>
+          <p class="plat-desc">Full catalogue with sub and dub. Fast streams and massive library.</p>
+          <div class="plat-genres"><span class="plat-genre">Sub</span><span class="plat-genre">Dub</span><span class="plat-genre">HD</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Watch Now</div>
+        </a>
+        <a href="https://gogoanime.gg" target="_blank" rel="noopener" class="platform-card">
+          <div class="plat-header"><div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon)"><i class="fas fa-bolt"></i></div><div><div class="plat-name">GogoAnime</div><div class="plat-tag">Free · Huge Library</div></div></div>
+          <p class="plat-desc">One of the most established free anime platforms. Thousands of titles.</p>
+          <div class="plat-genres"><span class="plat-genre">Classic</span><span class="plat-genre">New</span><span class="plat-genre">Movies</span></div>
+          <div class="plat-btn"><i class="fas fa-play"></i> Go Watch</div>
+        </a>
+      </div>
     </div>
   </div>
 
   <div class="divider"><i class="fas fa-star"></i></div>
 
-  <!-- ── EVENTS ── -->
+  <!-- EVENTS -->
   <div class="section" id="events">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <span class="section-num">05</span>
-        <h2 class="section-title">UPCOMING <span class="acc">EVENTS</span></h2>
-      </div>
+      <div class="section-title-wrap"><span class="section-num">05</span><h2 class="section-title">UPCOMING <span class="acc">EVENTS</span></h2></div>
     </div>
     <div class="events-grid">
 
       <div class="event-card">
         <div class="event-tag">Giveaway</div>
         <div class="event-title">ANICADE Anniversary Giveaway</div>
-        <div class="event-date"><i class="fas fa-calendar"></i> July 27, 2026</div>
-        <p class="event-desc">We're going all out for the ANICADE anniversary! Join the community channels below to participate in our biggest giveaway yet. All platforms, all genres, one wrld.</p>
+        <div class="event-date-row"><i class="fas fa-calendar"></i> July 27, 2026</div>
+        <div class="countdown-box" id="giveawayCountdown">
+          <div class="cd-unit"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Hrs</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl">Sec</div></div>
+        </div>
+        <p class="event-desc">We're going all out for the ANICADE anniversary! Join the channels below to participate in our biggest giveaway yet.</p>
         <div class="event-links">
-          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link"><span><i class="fas fa-brain" style="margin-right:7px"></i>Psychology & Motivation Channel</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link"><span><i class="fas fa-brain" style="margin-right:7px"></i>Psychology &amp; Motivation</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link"><span><i class="fas fa-music" style="margin-right:7px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link"><span><i class="fas fa-globe" style="margin-right:7px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
         </div>
       </div>
 
-      <div class="event-card">
-        <div class="event-tag">Community</div>
-        <div class="event-title">Weekly Fan Art Showcase</div>
-        <div class="event-date"><i class="fas fa-calendar"></i> Every Sunday</div>
-        <p class="event-desc">Submit your anime fan art, edits and illustrations every week. The best submissions get featured on the ANICADE main channel and pinned for the community.</p>
-        <div class="event-links">
-          <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="event-link"><span><i class="fas fa-image" style="margin-right:7px"></i>Submit Fan Art</span><i class="fas fa-external-link-alt"></i></a>
-        </div>
+      <div class="event-card" id="upcomingAnimeCard">
+        <div class="event-tag">New Season</div>
+        <div class="event-title" id="upcomingTitle">Loading upcoming anime…</div>
+        <div id="upcomingTimer"></div>
+        <p class="event-desc" id="upcomingDesc">Fetching the next big release from AniList…</p>
+        <div class="event-links" id="upcomingLinks"></div>
       </div>
 
       <div class="event-card">
         <div class="event-tag">Discussion</div>
         <div class="event-title">Seasonal Anime Rankings</div>
-        <div class="event-date"><i class="fas fa-calendar"></i> End of Each Season</div>
-        <p class="event-desc">Vote for the best anime of the season. ANICADE community rankings are compiled every season and shared across all channels with commentary from the team.</p>
+        <div class="event-date-row"><i class="fas fa-calendar"></i> End of Each Season</div>
+        <p class="event-desc">Vote for the best anime of the season. ANICADE community rankings are shared every season with commentary.</p>
         <div class="event-links">
           <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="event-link"><span><i class="fas fa-poll" style="margin-right:7px"></i>Submit Your Vote</span><i class="fas fa-external-link-alt"></i></a>
         </div>
@@ -490,231 +507,276 @@
 
   <div class="divider"><i class="fas fa-users"></i></div>
 
-  <!-- ── COMMUNITY ── -->
+  <!-- COMMUNITY -->
   <div class="section" id="community">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <span class="section-num">06</span>
-        <h2 class="section-title">JOIN THE <span class="acc">COMMUNITY</span></h2>
-      </div>
+      <div class="section-title-wrap"><span class="section-num">06</span><h2 class="section-title">JOIN THE <span class="acc">COMMUNITY</span></h2></div>
     </div>
     <div class="channels-grid">
-      <a href="https://github.com/TresforWrld" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fab fa-github"></i></div>
-        <div><div class="ch-name">GitHub</div><div class="ch-desc">@TresforWrld · Projects & Code</div></div>
-      </a>
-      <a href="https://t.me/TresforWrld" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fab fa-telegram"></i></div>
-        <div><div class="ch-name">Telegram</div><div class="ch-desc">@TresforWrld · Quick Responses</div></div>
-      </a>
-      <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fab fa-whatsapp"></i></div>
-        <div><div class="ch-name">Main Channel</div><div class="ch-desc">ANICADE HQ · Updates & Drops</div></div>
-      </a>
-      <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fas fa-comment-dots"></i></div>
-        <div><div class="ch-name">Direct Chat</div><div class="ch-desc">TresforWrld · +260 777 083 995</div></div>
-      </a>
-      <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fas fa-brain"></i></div>
-        <div><div class="ch-name">Psychology & Motivation</div><div class="ch-desc">Facts · Mindset · Growth</div></div>
-      </a>
-      <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fas fa-music"></i></div>
-        <div><div class="ch-name">Music Channel</div><div class="ch-desc">OSTs · AMVs · Anime Music</div></div>
-      </a>
+      <a href="https://github.com/TresforWrld" target="_blank" class="channel-card"><div class="ch-icon"><i class="fab fa-github"></i></div><div><div class="ch-name">GitHub</div><div class="ch-desc">@TresforWrld · Projects & Code</div></div></a>
+      <a href="https://t.me/TresforWrld" target="_blank" class="channel-card"><div class="ch-icon"><i class="fab fa-telegram"></i></div><div><div class="ch-name">Telegram</div><div class="ch-desc">@TresforWrld · Quick Responses</div></div></a>
+      <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="channel-card"><div class="ch-icon"><i class="fab fa-whatsapp"></i></div><div><div class="ch-name">Main Channel</div><div class="ch-desc">ANICADE HQ · Updates & Drops</div></div></a>
+      <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="channel-card"><div class="ch-icon"><i class="fas fa-comment-dots"></i></div><div><div class="ch-name">Direct Chat</div><div class="ch-desc">TresforWrld · +260 777 083 995</div></div></a>
+      <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="channel-card"><div class="ch-icon"><i class="fas fa-brain"></i></div><div><div class="ch-name">Psychology & Motivation</div><div class="ch-desc">Facts · Mindset · Growth</div></div></a>
+      <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="channel-card"><div class="ch-icon"><i class="fas fa-music"></i></div><div><div class="ch-name">Music Channel</div><div class="ch-desc">OSTs · AMVs · Anime Music</div></div></a>
     </div>
 
-    <!-- Reviews -->
-    <div style="margin-top:40px;">
-      <div class="section-header" style="margin-bottom:20px;">
-        <div class="section-title-wrap"><span class="section-num">05b</span><h2 class="section-title">COMMUNITY <span class="acc">REVIEWS</span></h2></div>
+    <div style="margin-top:36px">
+      <div class="section-header" style="margin-bottom:18px">
+        <div class="section-title-wrap"><span class="section-num">06b</span><h2 class="section-title">COMMUNITY <span class="acc">REVIEWS</span></h2></div>
       </div>
       <div class="reviews-grid">
         <div class="review-card"><p class="review-text">"This anime community is the best. The edits, the vibes, the energy — unmatched. Best decision joining ANICADE."</p><div class="review-author">— Otaku_King</div></div>
         <div class="review-card"><p class="review-text">"The events and giveaways are insane! The team puts in real work. Happy to be part of this family."</p><div class="review-author">— AnimeQueen_77</div></div>
-        <div class="review-card"><p class="review-text">"ANICADE delivers news faster than any other source I follow. And the community is genuinely welcoming."</p><div class="review-author">— ShinobiX</div></div>
+        <div class="review-card"><p class="review-text">"ANICADE delivers news faster than any other source I follow. Genuinely welcoming community."</p><div class="review-author">— ShinobiX</div></div>
       </div>
     </div>
 
-    <!-- Contact strip -->
-    <div style="margin-top:36px;">
+    <div style="margin-top:32px">
       <div class="contact-strip">
-        <div class="contact-strip-text">
-          <h3>Get In Touch</h3>
-          <p>Questions, feedback, collabs or just want to talk anime? We're always around.</p>
-        </div>
+        <div class="contact-strip-text"><h3>Get In Touch</h3><p>Questions, feedback, collabs or just want to talk anime?</p></div>
         <div class="contact-strip-links">
-          <a href="/cdn-cgi/l/email-protection#adccc3c4c0c8dadfc1c9daccdfdeccc3c4ceccc9c8edcac0ccc4c183cec2c0" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
-          <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Send Feedback</a>
+          <a href="mailto:animewrldwarsanicade@gmail.com" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Feedback</a>
           <a href="contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-brand">
-        <img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" />
-        <div class="footer-name">ANICADE <span>ANIME</span></div>
-      </div>
+      <div class="footer-brand"><img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/><div class="footer-name">ANICADE <span>ANIME</span></div></div>
       <div class="footer-copy">© 2026 Anime Wrld Wars · ANICADE<br>Brought to you by <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
-      <div class="footer-links">
-        <a href="index.html">Manga</a>
-        <a href="contact.html">Contact</a>
-        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Feedback</a>
-      </div>
+      <div class="footer-links"><a href="https://tresforwrld.github.io/Anicade-Manga/" target="_blank">Manga</a><a href="contact.html">Contact</a><a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Feedback</a></div>
     </div>
   </footer>
 
   <div class="toast-container" id="toastContainer"></div>
   <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
-  <!-- Chatbase Chatbot -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  (function(){
-    if(!window.chatbase||window.chatbase("getState")!=="initialized"){
-      window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};
-      window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});
-    }
-    const onLoad=()=>{ const s=document.createElement("script"); s.src="https://www.chatbase.co/embed.min.js"; s.id="xda32KgOFfKmwpwKmpWtw"; document.body.appendChild(s); };
-    document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);
-  })();
-  </script>
+  <!-- Chatbase -->
+  <script>(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});}const onLoad=()=>{const s=document.createElement("script");s.src="https://www.chatbase.co/embed.min.js";s.id="xda32KgOFfKmwpwKmpWtw";document.body.appendChild(s);};document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);})();</script>
 
   <script>
   // ── UTILS ──
-  function showToast(msg) {
-    const tc = document.getElementById('toastContainer');
-    const t = document.createElement('div'); t.className='toast';
-    t.innerHTML=`<i class="fas fa-info-circle" style="color:var(--neon)"></i> ${msg}`;
-    tc.appendChild(t); setTimeout(()=>t.remove(), 3200);
-  }
-  function fmtDate(str) {
-    if (!str) return '';
-    try { return new Date(str).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch(e){ return str; }
-  }
-  function currentSeason() {
-    const m = new Date().getMonth();
-    const y = new Date().getFullYear();
-    const seasons = ['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
-    return { season: seasons[m], year: y };
+  function showToast(msg,type=''){
+    const tc=document.getElementById('toastContainer');
+    const t=document.createElement('div');t.className='toast '+(type||'');
+    const icons={success:'check-circle',warning:'exclamation-triangle',error:'times-circle'};
+    t.innerHTML=`<i class="fas fa-${icons[type]||'info-circle'}" style="color:var(--neon)"></i> ${msg}`;
+    tc.appendChild(t);setTimeout(()=>t.remove(),3500);
   }
 
-  // ── THEME TOGGLE ──
-  let dark = localStorage.getItem('anicade_theme') !== 'light';
-  function applyTheme() {
-    document.body.classList.toggle('light', !dark);
-    const icon = document.querySelector('#themeToggle i');
-    if (icon) icon.className = dark ? 'fas fa-moon' : 'fas fa-sun';
+  // ── THEME ──
+  let dark=localStorage.getItem('anicade_theme')!=='light';
+  function applyTheme(){
+    document.body.classList.toggle('light',!dark);
+    const i=document.querySelector('#themeToggle i');
+    if(i)i.className=dark?'fas fa-moon':'fas fa-sun';
   }
   applyTheme();
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    dark = !dark;
-    localStorage.setItem('anicade_theme', dark ? 'dark' : 'light');
-    applyTheme();
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    dark=!dark;localStorage.setItem('anicade_theme',dark?'dark':'light');applyTheme();
   });
 
   // ── MOBILE NAV ──
-  const navLinks = document.getElementById('navLinks');
-  document.getElementById('menuToggle').addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  const navLinks=document.getElementById('navLinks');
+  document.getElementById('menuToggle').addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
   // ── BACK TO TOP ──
-  const btt = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 400));
-  btt.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  const btt=document.getElementById('backToTop');
+  window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>400));
+  btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // ── PLATFORMS COLLAPSIBLE ──
+  function togglePlatforms(){
+    const btn=document.getElementById('platformsToggle');
+    const body=document.getElementById('platformsBody');
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
+  // ── GIVEAWAY COUNTDOWN (July 27, 2026) ──
+  function updateGiveawayCountdown(){
+    const target=new Date('2026-07-27T00:00:00').getTime();
+    function tick(){
+      const now=Date.now(),diff=target-now;
+      if(diff<=0){document.getElementById('giveawayCountdown').innerHTML='<div style="grid-column:1/-1;font-family:\'Bebas Neue\',sans-serif;font-size:18px;color:var(--neon);letter-spacing:2px;">🎉 IT\'S HAPPENING NOW!</div>';return;}
+      const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+      document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+      document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+      document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+      document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+    }
+    tick();setInterval(tick,1000);
+  }
+  updateGiveawayCountdown();
 
   // ── ANIME CARD BUILDER ──
-  function buildAnimeCard(anime, delay=0) {
-    const title = anime.title?.english || anime.title?.romaji || 'Unknown';
-    const cover = anime.coverImage?.large || anime.coverImage?.medium || '';
-    const score = anime.averageScore ? (anime.averageScore/10).toFixed(1) : null;
-    const fmt = anime.format || '';
-    const eps = anime.nextAiringEpisode?.episode ? `EP ${anime.nextAiringEpisode.episode}` : anime.episodes ? `${anime.episodes} EPS` : '';
-    const genres = (anime.genres||[]).slice(0,2).join(' · ');
+  function buildAnimeCard(anime,delay=0){
+    const title=anime.title?.english||anime.title?.romaji||'Unknown';
+    const cover=anime.coverImage?.large||anime.coverImage?.medium||'';
+    const score=anime.averageScore?(anime.averageScore/10).toFixed(1):null;
+    const fmt=anime.format||'';
+    const airingAt=anime.nextAiringEpisode?.airingAt;
+    const epNum=anime.nextAiringEpisode?.episode;
+    const eps=epNum?`EP ${epNum}`:anime.episodes?`${anime.episodes} EPS`:'';
+    const genres=(anime.genres||[]).slice(0,2).join(' · ');
+    // Build per-card airing timer if airingAt is within 7 days
+    let timerHtml='';
+    if(airingAt){
+      const diff=(airingAt*1000)-Date.now();
+      if(diff>0&&diff<7*86400000){
+        const id='act'+Math.random().toString(36).slice(2,7);
+        const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000);
+        timerHtml=`<div class="airing-countdown" id="${id}"><i class="fas fa-clock"></i> EP${epNum} in ${h}h ${m}m</div>`;
+      }
+    }
     return `<div class="anime-card" style="animation-delay:${delay}s">
       <div class="anime-card-frame">
-        <img class="anime-cover" src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/300x400/0d1120/00d4ff?text=NO+IMG'" />
+        <img class="anime-cover" src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/300x400/0d1120/00d4ff?text=NO+IMG'"/>
         ${score?`<div class="anime-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>`:''}
         ${fmt?`<div class="anime-format">${fmt}</div>`:''}
         <div class="anime-overlay">
           <div class="anime-name">${title}</div>
           <div class="anime-meta">${genres}${eps?` · <span class="ep">${eps}</span>`:''}</div>
+          ${timerHtml}
         </div>
       </div>
     </div>`;
   }
 
-  // ── AniList Trending ──
-  async function loadTrending() {
-    const q = `query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
-    try {
-      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const data = await res.json();
-      document.getElementById('trendingCarousel').innerHTML = data.data.Page.media.map((a,i)=>buildAnimeCard(a,i*0.04)).join('');
-    } catch(e) { document.getElementById('trendingCarousel').innerHTML='<p style="color:var(--muted);padding:20px;">Could not load trending anime.</p>'; }
+  // ── ANILIST TRENDING ──
+  async function loadTrending(){
+    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode airingAt}}}}`;
+    try{
+      const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const d=await r.json();
+      document.getElementById('trendingCarousel').innerHTML=d.data.Page.media.map((a,i)=>buildAnimeCard(a,i*0.04)).join('');
+    }catch(e){document.getElementById('trendingCarousel').innerHTML='<p style="color:var(--muted);padding:18px;font-size:13px;">Could not load trending anime.</p>';}
   }
 
-  // ── AniList Seasonal ──
-  async function loadSeasonal() {
+  // ── ANILIST SEASONAL ──
+  async function loadSeasonal(){
     const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
-    const season=seasons[new Date().getMonth()], year=new Date().getFullYear();
+    const season=seasons[new Date().getMonth()],year=new Date().getFullYear();
     document.getElementById('seasonLabel').textContent=`${season} ${year}`;
-    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
-    try {
-      const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const data=await res.json();
-      const items=data.data.Page.media;
+    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode airingAt}}}}`;
+    try{
+      const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const d=await r.json();
+      const items=d.data.Page.media;
       document.getElementById('statSeasonalCount').textContent=items.length;
       document.getElementById('seasonalGrid').innerHTML=items.map((a,i)=>buildAnimeCard(a,i*0.03)).join('');
-    } catch(e){ document.getElementById('seasonalGrid').innerHTML='<p style="color:var(--muted);padding:20px;">Could not load seasonal anime.</p>'; }
+    }catch(e){document.getElementById('seasonalGrid').innerHTML='<p style="color:var(--muted);padding:18px;">Could not load seasonal anime.</p>';}
   }
 
-  // ── COLLAPSIBLE NEWS CARD ──
-  let _ncId = 0;
-  function buildNewsCard(item) {
-    const uid = 'nc' + (++_ncId);
-    const imgEl = item.image
-      ? `<img class="news-img" src="${item.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas fa-newspaper></i></div>'" />`
-      : `<div class="news-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
-    const epBadge = item.ep ? `<span style="color:var(--neon);font-size:9px;font-family:'Space Mono',monospace;"> · EP ${item.ep}</span>` : '';
-    const excerpt = (item.excerpt||'').replace(/<[^>]+>/g,'').trim();
-    const preview = excerpt.slice(0,130);
-    const hasMore = excerpt.length > 130;
+  // ── UPCOMING ANIME EVENT CARD ──
+  async function loadUpcomingAnime(){
+    const q=`query{Page(perPage:10){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}coverImage{large}description(asHtml:false)startDate{year month day}nextAiringEpisode{airingAt episode}}}}`;
+    try{
+      const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const d=await r.json();
+      const items=(d.data.Page.media||[]).filter(a=>a.startDate?.year);
+      if(!items.length)return;
+      const a=items[0];
+      const title=a.title?.english||a.title?.romaji||'Upcoming Anime';
+      const desc=(a.description||'No synopsis available.').replace(/<[^>]+>/g,'').slice(0,140)+'…';
+      const sd=a.startDate;
+      const dateStr=sd.year?`${sd.year}-${String(sd.month||1).padStart(2,'0')}-${String(sd.day||1).padStart(2,'0')}`:'';
+      document.getElementById('upcomingTitle').textContent=title;
+      document.getElementById('upcomingDesc').textContent=desc;
+      // Timer
+      if(dateStr){
+        const target=new Date(dateStr+'T00:00:00').getTime();
+        const timerEl=document.getElementById('upcomingTimer');
+        timerEl.innerHTML=`<div class="countdown-box" style="margin-bottom:12px">
+          <div class="cd-unit"><div class="cd-num" id="uc-d">--</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-unit"><div class="cd-num" id="uc-h">--</div><div class="cd-lbl">Hrs</div></div>
+          <div class="cd-unit"><div class="cd-num" id="uc-m">--</div><div class="cd-lbl">Min</div></div>
+          <div class="cd-unit"><div class="cd-num" id="uc-s">--</div><div class="cd-lbl">Sec</div></div>
+        </div>
+        <div class="event-date-row"><i class="fas fa-calendar"></i> ${dateStr}</div>`;
+        function tickUC(){
+          const diff=target-Date.now();
+          if(diff<=0){document.getElementById('upcomingTimer').innerHTML='<div class="release-timer"><i class="fas fa-rocket"></i> OUT NOW!</div>';return;}
+          const d2=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+          const setT=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+          setT('uc-d',d2);setT('uc-h',h);setT('uc-m',m);setT('uc-s',s);
+        }
+        tickUC();setInterval(tickUC,1000);
+      }
+      document.getElementById('upcomingLinks').innerHTML=`<a href="https://anilist.co/anime/${a.id}" target="_blank" class="event-link"><span><i class="fas fa-external-link-alt" style="margin-right:7px"></i>View on AniList</span><i class="fas fa-chevron-right"></i></a>`;
+    }catch(e){}
+  }
+
+  // ── SHARE COUNTS (stored in localStorage per news title hash) ──
+  function getShareCount(uid){return parseInt(localStorage.getItem('sc_'+uid)||'0');}
+  function incShareCount(uid){const n=getShareCount(uid)+1;localStorage.setItem('sc_'+uid,n);return n;}
+
+  // ── NEWS CARD BUILDER ──
+  let _ncId=0;
+  function buildNewsCard(item){
+    const uid='nc'+(++_ncId);
+    const imgEl=item.image
+      ?`<img class="news-img" src="${item.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas\\ fa-newspaper></i></div>'"/>`
+      :`<div class="news-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
+    const epBadge=item.ep?`<span style="color:var(--neon);font-size:9px;font-family:'Space Mono',monospace;"> · EP ${item.ep}</span>`:'';
+    const excerpt=(item.excerpt||'').replace(/<[^>]+>/g,'').trim();
+    const preview=excerpt.slice(0,130);
+    const hasMore=excerpt.length>130;
+    const shares=getShareCount(uid);
+    const shareUrl=encodeURIComponent(location.href);
+    const shareTitle=encodeURIComponent((item.title||'Anime Update')+' — ANICADE');
     return `<div class="news-card">
       ${imgEl}
       <div class="news-body">
         <div class="news-source">${item.source||'ANICADE'}${epBadge}</div>
         <div class="news-title">${item.title||'Anime Update'}</div>
-        ${preview?`<p class="news-excerpt">${preview}${hasMore?'...':''}</p>`:''}
+        ${preview?`<p class="news-excerpt">${preview}${hasMore?'…':''}</p>`:''}
         ${hasMore?`<div class="news-full" id="${uid}-full">${excerpt}</div>`:''}
         <div class="news-footer">
-          ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:4px"></i>${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:'<div></div>'}
+          ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:3px"></i>${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:'<div></div>'}
           ${hasMore?`<button class="news-view-btn" id="${uid}-btn" onclick="toggleNews('${uid}')"><i class="fas fa-chevron-down"></i> VIEW</button>`:''}
         </div>
+      </div>
+      <div class="news-share-row">
+        <button class="share-btn" onclick="shareNews('${uid}','${shareUrl}','${shareTitle}')"><i class="fas fa-share-alt"></i> Share</button>
+        <button class="share-btn" onclick="shareWA('${shareUrl}','${shareTitle}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</button>
+        <button class="share-btn" onclick="shareTG('${shareUrl}','${shareTitle}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</button>
+        <span class="share-count" id="${uid}-sc">${shares>0?shares+' shares':''}</span>
       </div>
     </div>`;
   }
 
-  function toggleNews(uid) {
-    const full = document.getElementById(uid+'-full');
-    const btn  = document.getElementById(uid+'-btn');
-    if (!full||!btn) return;
-    const open = full.classList.toggle('open');
-    btn.classList.toggle('open', open);
-    btn.innerHTML = open ? '<i class="fas fa-chevron-up"></i> CLOSE' : '<i class="fas fa-chevron-down"></i> VIEW';
+  function toggleNews(uid){
+    const full=document.getElementById(uid+'-full');
+    const btn=document.getElementById(uid+'-btn');
+    if(!full||!btn)return;
+    const open=full.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.innerHTML=open?'<i class="fas fa-chevron-up"></i> CLOSE':'<i class="fas fa-chevron-down"></i> VIEW';
   }
 
-  // ── Jikan News ──
-  async function loadNewsJikan() {
+  function shareNews(uid,url,title){
+    const n=incShareCount(uid);
+    const sc=document.getElementById(uid+'-sc');
+    if(sc)sc.textContent=n+' share'+(n>1?'s':'');
+    if(navigator.share){navigator.share({title:decodeURIComponent(title),url:decodeURIComponent(url)}).catch(()=>{});}
+    else{navigator.clipboard?.writeText(decodeURIComponent(url));showToast('Link copied!','success');}
+  }
+  function shareWA(url,title){window.open(`https://wa.me/?text=${title}%20${url}`,'_blank');}
+  function shareTG(url,title){window.open(`https://t.me/share/url?url=${url}&text=${title}`,'_blank');}
+
+  // ── NEWS APIs ──
+  async function loadNewsJikan(){
     const ids=[21,1535,269,16498,1,6702,918,11061,38524,40748];
     const picked=ids.sort(()=>Math.random()-.5).slice(0,4);
     const results=[];
     await Promise.all(picked.map(async id=>{
-      try {
+      try{
         const r=await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`,{signal:AbortSignal.timeout(8000)});
         if(!r.ok)return;
         const d=await r.json();
@@ -724,37 +786,84 @@
     return results;
   }
 
-  // ── AniList News ──
-  async function loadNewsAniList() {
-    const q=`query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false)nextAiringEpisode{episode airingAt}}}}`;
-    try {
-      const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const data=await res.json();
-      return (data.data.Page.media||[]).map(a=>({
-        title:`${a.title?.english||a.title?.romaji} — Episode Update`,
+  async function loadNewsAniList(){
+    // Fetch truly live recently-updated airing/upcoming anime as news
+    const q=`query{Page(perPage:15){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false)nextAiringEpisode{episode airingAt}startDate{year month}}}}`;
+    try{
+      const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const d=await r.json();
+      return(d.data.Page.media||[]).map(a=>({
+        title:`${a.title?.english||a.title?.romaji}${a.nextAiringEpisode?.episode?' — EP '+a.nextAiringEpisode.episode+' Coming Up':''}`,
         excerpt:a.description?a.description.replace(/<[^>]+>/g,'').trim():'',
         image:a.coverImage?.large||null,
         date:a.nextAiringEpisode?.airingAt?new Date(a.nextAiringEpisode.airingAt*1000).toISOString():null,
         source:'AniList',ep:a.nextAiringEpisode?.episode
       }));
-    }catch(e){return [];}
+    }catch(e){return[];}
   }
 
-  async function loadNews() {
+  async function loadNews(){
     const grid=document.getElementById('newsGrid');
-    try {
-      const [a,b]=await Promise.all([loadNewsJikan(),loadNewsAniList()]);
+    try{
+      const[a,b]=await Promise.all([loadNewsJikan(),loadNewsAniList()]);
       let all=[...a,...b].sort(()=>Math.random()-.5).slice(0,12);
       if(!all.length)throw new Error('empty');
       grid.innerHTML=all.map(buildNewsCard).join('');
+      // Notify if permission granted
+      if(Notification.permission==='granted'){
+        new Notification('ANICADE News Updated',{body:`${all.length} fresh updates loaded`,icon:'https://i.imgur.com/qgZhkhV.jpeg'});
+      }
     }catch(e){
       try{const f=await loadNewsAniList();if(f.length){grid.innerHTML=f.slice(0,9).map(buildNewsCard).join('');return;}}catch(e2){}
-      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:14px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
+      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:12px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
     }
   }
 
-  loadNews(); loadTrending(); loadSeasonal();
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  // Auto-refresh news every 5 minutes
+  setInterval(()=>{_ncId=0;loadNews();},5*60*1000);
+
+  // ── NOTIFICATIONS ──
+  function showNotifBanner(){
+    if(Notification.permission==='default'&&!localStorage.getItem('notif_dismissed')){
+      document.getElementById('notifBanner').classList.add('show');
+    }
+  }
+  document.getElementById('notifEnableBtn').addEventListener('click',()=>{
+    Notification.requestPermission().then(p=>{
+      document.getElementById('notifBanner').classList.remove('show');
+      if(p==='granted')showToast('Notifications enabled! You\'ll get updates live.','success');
+      else showToast('Notifications blocked in browser settings.','warning');
+    });
+  });
+  document.getElementById('notifCloseBtn').addEventListener('click',()=>{
+    document.getElementById('notifBanner').classList.remove('show');
+    localStorage.setItem('notif_dismissed','1');
+  });
+
+  // ── PWA INSTALL ──
+  let deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();deferredPrompt=e;
+    if(!localStorage.getItem('pwa_dismissed'))
+      setTimeout(()=>document.getElementById('installPopup').classList.add('show'),3000);
+  });
+  document.getElementById('installBtn').addEventListener('click',async()=>{
+    document.getElementById('installPopup').classList.remove('show');
+    if(deferredPrompt){await deferredPrompt.prompt();deferredPrompt=null;}
+  });
+  document.getElementById('installDismiss').addEventListener('click',()=>{
+    document.getElementById('installPopup').classList.remove('show');
+    localStorage.setItem('pwa_dismissed','1');
+  });
+
+  // ── INIT ──
+  loadNews();
+  loadTrending();
+  loadSeasonal();
+  loadUpcomingAnime();
+  setTimeout(showNotifBanner,2000);
+
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
   </script>
 </body>
 </html>
