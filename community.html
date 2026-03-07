@@ -1,259 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Community & Contact | ANICADE</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Join the ANICADE community across WhatsApp, Telegram, Discord, YouTube, TikTok and more. Send feedback or get in touch."/>
+  <meta property="og:title" content="Community & Contact | ANICADE"/>
+  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg"/>
+  <meta name="theme-color" content="#00d4ff"/>
+  <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    /* Community page specific styles */
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-      width: 100%;
-      box-sizing: border-box;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--ink:#06080f;--panel:#0d1120;--panel2:#111827;--border:#1e2d4a;--paper:#e8eef8;--aged:#a8b8d0;--muted:#546480;--neon:#00d4ff;--neon2:#0099cc;--neon-glow:rgba(0,212,255,.25)}
+    html{scroll-behavior:smooth}
+    body{background:var(--ink);color:var(--paper);font-family:'Rajdhani',sans-serif;font-size:16px;overflow-x:hidden;touch-action:pan-y}
+    body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(0,212,255,.015) 1px,transparent 1px);background-size:6px 6px;pointer-events:none;z-index:0}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--ink)}
+    ::-webkit-scrollbar-thumb{background:var(--neon);border-radius:3px}
+
+    /* ── NAVBAR ── */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;background:rgba(6,8,15,.96);border-bottom:2px solid var(--neon);backdrop-filter:blur(14px);padding:0 20px;box-shadow:0 0 30px rgba(0,212,255,.12)}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+    .brand-logo{height:42px;width:auto;display:block;object-fit:contain;border-radius:4px}
+    .brand-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper);line-height:1;white-space:nowrap}
+    .brand-name .bh{color:var(--neon);text-shadow:0 0 12px var(--neon)}
+    .nav-pill{margin-left:10px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:3px 8px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+    .nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .nav-icon-btn{width:44px;height:44px;border:2px solid var(--border);background:rgba(0,212,255,.05);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:16px;flex-shrink:0;border-radius:2px}
+    .nav-icon-btn:hover{color:var(--neon);border-color:var(--neon);background:rgba(0,212,255,.12)}
+    .nav-links{display:flex;align-items:center;gap:2px}
+    .nav-links a{display:flex;align-items:center;gap:6px;padding:8px 11px;color:var(--aged);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+    .nav-links a:hover,.nav-links a.active{color:var(--neon);border-color:var(--border);background:rgba(0,212,255,.07)}
+    .nav-links a.home-btn{background:rgba(0,212,255,.12);color:var(--neon);border-color:var(--neon);clip-path:polygon(0 0,94% 0,100% 20%,100% 100%,6% 100%,0 80%)}
+    .nav-links a.home-btn:hover{background:rgba(0,212,255,.25)}
+    @media(max-width:820px){
+      .nav-pill{display:none}
+      .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--panel2);border-bottom:2px solid var(--neon);padding:14px;gap:6px;z-index:999}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px 16px;font-size:15px;border:1px solid var(--border);width:100%}
     }
-    
-    .social-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.5rem;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(155, 89, 182, 0.08));
-      border-radius: 10px;
-      border-left: 4px solid var(--gojo-blue);
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.1);
+
+    /* ── PAGE HERO ── */
+    .page-hero{position:relative;padding:120px 40px 60px;overflow:hidden;background:linear-gradient(135deg,rgba(0,212,255,.07) 0%,transparent 55%),linear-gradient(to bottom,var(--ink),#070c18);border-bottom:1px solid var(--border)}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:url('https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg');background-size:cover;background-position:center;opacity:.05;pointer-events:none}
+    .page-hero-inner{position:relative;z-index:2;max-width:900px}
+    .page-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .page-eyebrow::before{content:'';display:block;width:36px;height:2px;background:var(--neon);box-shadow:0 0 8px var(--neon)}
+    .page-eyebrow span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--neon)}
+    .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,8vw,96px);letter-spacing:-1px;line-height:.92;margin-bottom:16px}
+    .page-title .acc{color:var(--neon);text-shadow:0 0 30px rgba(0,212,255,.5)}
+    .page-desc{font-size:16px;color:var(--muted);line-height:1.7;max-width:540px}
+
+    /* ── MAIN LAYOUT ── */
+    .page-main{max-width:1200px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:2}
+    @media(max-width:700px){
+      .page-hero{padding:100px 18px 44px}
+      .page-main{padding:40px 16px 60px}
     }
-    
-    .social-link:hover {
-      transform: translateY(-5px) translateX(5px);
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(155, 89, 182, 0.15));
-      border-left-color: var(--gojo-purple);
-      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
-    }
-    
-    .social-link img {
-      width: 40px;
-      height: 40px;
-      filter: drop-shadow(0 0 5px var(--gojo-blue-glow));
-    }
-    
-    .form-container {
-      max-width: 100%;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
-      padding: 1.5rem 2rem;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      width: 100%;
-      box-sizing: border-box;
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--gojo-blue);
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(0, 212, 255, 0.3);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--gojo-blue);
-      box-shadow: 0 0 15px var(--gojo-blue-glow);
-    }
-    
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-    
-    .submit-btn {
-      width: 100%;
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px var(--gojo-blue-glow);
-    }
-    
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px var(--gojo-blue-glow);
-    }
-    
-    .section-divider {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gojo-blue), var(--gojo-purple), transparent);
-      margin: 3rem 0;
-      opacity: 0.5;
-    }
+
+    /* ── SECTION HEADERS ── */
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .sec-num{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:3px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid var(--neon);padding:3px 7px}
+    .sec-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--paper)}
+    .sec-title .acc{color:var(--neon);text-shadow:0 0 10px rgba(0,212,255,.3)}
+    .sec-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:22px}
+
+    /* ── DIVIDER ── */
+    .divider{display:flex;align-items:center;gap:16px;color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin:52px 0}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border))}
+    .divider::after{background:linear-gradient(to left,transparent,var(--border))}
+    .divider i{color:var(--neon)}
+
+    /* ── SOCIAL GRID ── */
+    .social-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:8px}
+    .social-card{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-left:3px solid transparent;padding:16px 18px;text-decoration:none;color:var(--paper);transition:all .25s;position:relative;overflow:hidden;clip-path:polygon(0 0,97% 0,100% 8%,100% 100%,0 100%)}
+    .social-card::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 22px 22px 0;border-color:transparent var(--border) transparent transparent;transition:border-color .2s}
+    .social-card:hover{border-left-color:var(--neon);background:rgba(0,212,255,.05);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,212,255,.1)}
+    .social-card:hover::after{border-color:transparent var(--neon) transparent transparent}
+    .social-icon{width:46px;height:46px;border-radius:50%;background:rgba(0,212,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;transition:all .25s}
+    .social-card:hover .social-icon{border-color:var(--neon);box-shadow:0 0 12px rgba(0,212,255,.25)}
+    .social-icon img{width:26px;height:26px;object-fit:contain}
+    .social-icon i{font-size:20px;color:var(--neon)}
+    .social-text .soc-name{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--paper);line-height:1.1}
+    .social-text .soc-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .social-card .ext-arrow{position:absolute;right:14px;bottom:12px;font-size:11px;color:var(--border);transition:color .2s}
+    .social-card:hover .ext-arrow{color:var(--neon)}
+
+    /* platform colour accents */
+    .social-card.wa:hover{border-left-color:#25d366}
+    .social-card.wa:hover .social-icon{border-color:#25d366;box-shadow:0 0 10px rgba(37,211,102,.25)}
+    .social-card.tg:hover{border-left-color:#229ed9}
+    .social-card.tg:hover .social-icon{border-color:#229ed9}
+    .social-card.dc:hover{border-left-color:#5865f2}
+    .social-card.dc:hover .social-icon{border-color:#5865f2}
+    .social-card.ig:hover{border-left-color:#e1306c}
+    .social-card.ig:hover .social-icon{border-color:#e1306c}
+    .social-card.tt:hover{border-left-color:#ff0050}
+    .social-card.tt:hover .social-icon{border-color:#ff0050}
+    .social-card.yt:hover{border-left-color:#ff0000}
+    .social-card.yt:hover .social-icon{border-color:#ff0000}
+    .social-card.fb:hover{border-left-color:#1877f2}
+    .social-card.fb:hover .social-icon{border-color:#1877f2}
+    .social-card.em:hover{border-left-color:#ea4335}
+    .social-card.em:hover .social-icon{border-color:#ea4335}
+
+    /* category label */
+    .cat-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--neon);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .cat-label::before{content:'';display:block;width:20px;height:1px;background:var(--neon)}
+
+    /* ── STATS ROW ── */
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:32px}
+    .stat-chip{background:var(--panel);border:1px solid var(--border);padding:14px 16px;display:flex;flex-direction:column;gap:4px;clip-path:polygon(0 0,94% 0,100% 10%,100% 100%,6% 100%,0 90%)}
+    .stat-chip .sc-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--neon);line-height:1;text-shadow:0 0 10px rgba(0,212,255,.35)}
+    .stat-chip .sc-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+
+    /* ── CONTACT CARDS ── */
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+
+    /* ── FEEDBACK FORM ── */
+    .form-wrap{background:var(--panel);border:1px solid var(--border);padding:32px 36px;clip-path:polygon(0 0,99% 0,100% 1%,100% 100%,1% 100%,0 99%);position:relative}
+    .form-wrap::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 42px 42px 0;border-color:transparent var(--neon) transparent transparent;opacity:.4}
+    .form-group{margin-bottom:20px}
+    .form-label{display:block;margin-bottom:7px;color:var(--neon);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+    .form-input,.form-textarea{width:100%;padding:12px 16px;background:rgba(0,0,0,.25);border:1px solid var(--border);color:var(--paper);font-family:'Rajdhani',sans-serif;font-size:15px;transition:all .2s;border-radius:0;outline:none;-webkit-appearance:none}
+    .form-input:focus,.form-textarea:focus{border-color:var(--neon);box-shadow:0 0 0 2px rgba(0,212,255,.12);background:rgba(0,212,255,.04)}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--muted)}
+    .form-textarea{min-height:140px;resize:vertical}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:560px){.form-row{grid-template-columns:1fr}}
+    .submit-btn{width:100%;padding:14px 24px;background:var(--neon);border:2px solid var(--neon);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;cursor:pointer;transition:all .2s;clip-path:polygon(0 0,97% 0,100% 12%,100% 100%,0 100%);display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
+    .submit-btn:hover{background:#33ddff;box-shadow:0 0 24px rgba(0,212,255,.3)}
+    .submit-btn:active{transform:scale(.98)}
+
+    /* ── TOAST ── */
+    .toast-container{position:fixed;bottom:20px;right:20px;z-index:3000;display:flex;flex-direction:column;gap:8px}
+    .toast{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--neon);padding:10px 16px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;color:var(--paper);display:flex;align-items:center;gap:8px;animation:slideIn .3s ease;min-width:240px}
+    @keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+    .toast.success{border-left-color:#22c55e}
+
+    /* ── BACK TO TOP ── */
+    .back-to-top{position:fixed;bottom:28px;left:28px;z-index:500;width:40px;height:40px;background:var(--neon);border:none;color:var(--ink);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:14px;clip-path:polygon(50% 0%,100% 50%,85% 50%,85% 100%,15% 100%,15% 50%,0% 50%);transition:background .2s}
+    .back-to-top.show{display:flex}
+    .back-to-top:hover{background:#33ddff}
+
+    /* ── FOOTER ── */
+    footer{position:relative;z-index:2;background:rgba(6,8,15,.95);border-top:1px solid var(--border);padding:32px 40px}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-logo{height:34px;border-radius:3px}
+    .footer-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--paper)}
+    .footer-name span{color:var(--neon);text-shadow:0 0 10px var(--neon)}
+    .footer-copy{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-align:center}
+    .footer-links{display:flex;gap:14px}
+    .footer-links a{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
+    .footer-links a:hover{color:var(--neon)}
+    @media(max-width:700px){footer{padding:22px 16px}.footer-inner{flex-direction:column;text-align:center}}
+
+    /* ── LIGHT MODE ── */
+    body.light{--ink:#f0f4fc;--panel:#e4eaf6;--panel2:#dce4f0;--border:#b8c8e0;--paper:#0d1828;--aged:#2a3a56;--muted:#5a7090}
+    body.light .navbar,body.light footer{background:rgba(240,244,252,.96)}
+    body.light .form-input,body.light .form-textarea{background:rgba(255,255,255,.5);color:var(--paper)}
   </style>
-<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
-
 <body>
-  <header>Community & Contact | ANICADE</header>
 
-  <main>
-    <!-- Community Section -->
-    <section>
-      <h2>Join the Community</h2>
-      <p>Connect with us across multiple platforms and stay updated with the latest anime content!</p>
-      
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="nav-brand" href="index.html">
+      <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+      <span class="brand-name">ANICADE<span class="bh"> ANIME</span></span>
+    </a>
+    <span class="nav-pill"><i class="fas fa-users" style="margin-right:4px"></i>Community</span>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="nav-icon-btn" id="menuToggle" title="Menu"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html"><i class="fas fa-newspaper"></i> News</a>
+      <a href="index.html#trending"><i class="fas fa-fire"></i> Trending</a>
+      <a href="index.html#events"><i class="fas fa-star"></i> Events</a>
+      <a href="#community" class="active"><i class="fas fa-users"></i> Community</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="https://tresforwrld.github.io/Anicade-Manga/" class="home-btn" target="_blank"><i class="fas fa-book"></i> Manga</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow"><span>ANICADE · Anime Wrld Wars</span></div>
+      <h1 class="page-title">JOIN THE<br><span class="acc">COMMUNITY</span></h1>
+      <p class="page-desc">Connect across every platform. Chat, share, discover — it's all happening in the ANICADE universe.</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-main">
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-chip"><div class="sc-val">14K+</div><div class="sc-lbl">WA Channel</div></div>
+      <div class="stat-chip"><div class="sc-val">11</div><div class="sc-lbl">Platforms</div></div>
+      <div class="stat-chip"><div class="sc-val">Daily</div><div class="sc-lbl">Updates</div></div>
+      <div class="stat-chip"><div class="sc-val">Global</div><div class="sc-lbl">Community</div></div>
+    </div>
+
+    <!-- COMMUNITY -->
+    <section id="community">
+      <div class="sec-header">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">COMMUNITY <span class="acc">PLATFORMS</span></h2>
+      </div>
+      <p class="sec-desc">Stay connected, get daily anime drops, fan art, music and community events.</p>
+
+      <div class="cat-label">Messaging & Groups</div>
+      <div class="social-grid" style="margin-bottom:28px">
+
+        <a href="https://chat.whatsapp.com/EzBa9R9BocWFrkq91zeCvW?mode=ac_t" target="_blank" rel="noopener" class="social-card wa">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WA"/></div>
+          <div class="social-text"><div class="soc-name">WhatsApp Group Chat</div><div class="soc-sub">Join the conversation</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" rel="noopener" class="social-card wa">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WA"/></div>
+          <div class="social-text"><div class="soc-name">WhatsApp Channel</div><div class="soc-sub">14K+ followers · Updates & Drops</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank" rel="noopener" class="social-card tg">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="TG"/></div>
+          <div class="social-text"><div class="soc-name">Telegram Group</div><div class="soc-sub">Chat · Share · Discuss</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank" rel="noopener" class="social-card tg">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="TG"/></div>
+          <div class="social-text"><div class="soc-name">Telegram Channel</div><div class="soc-sub">Official announcements</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://t.me/TresforwrldBot" target="_blank" rel="noopener" class="social-card tg">
+          <div class="social-icon"><img src="https://img.icons8.com/fluency/48/robot-2.png" alt="Bot"/></div>
+          <div class="social-text"><div class="soc-name">Telegram Anime Bot</div><div class="soc-sub">@TresforwrldBot · Auto-updates</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://discord.gg/yQkthryT" target="_blank" rel="noopener" class="social-card dc">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/discord-logo.png" alt="Discord"/></div>
+          <div class="social-text"><div class="soc-name">Discord Server</div><div class="soc-sub">Channels · Voice · Events</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+      </div>
+
+      <div class="cat-label">Social Media</div>
       <div class="social-grid">
-        <a href="https://chat.whatsapp.com/EzBa9R9BocWFrkq91zeCvW?mode=ac_t" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" />
-          <span>WhatsApp Group Chat</span>
+
+        <a href="https://www.instagram.com/reel/DK_waUqNHeE/?utm_source=ig_web_copy_link" target="_blank" rel="noopener" class="social-card ig">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="IG"/></div>
+          <div class="social-text"><div class="soc-name">Instagram</div><div class="soc-sub">Reels · Clips · Fan Art</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" />
-          <span>WhatsApp Channel (14K+)</span>
+
+        <a href="https://vm.tiktok.com/ZMHbNe8UXTHm2-iUteL/" target="_blank" rel="noopener" class="social-card tt">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/tiktok--v1.png" alt="TikTok"/></div>
+          <div class="social-text"><div class="soc-name">TikTok</div><div class="soc-sub">Short anime clips & edits</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="Telegram" />
-          <span>Telegram Group</span>
+
+        <a href="https://www.youtube.com/@AnimeWrldWars_ANICADE" target="_blank" rel="noopener" class="social-card yt">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"/></div>
+          <div class="social-text"><div class="soc-name">YouTube Channel</div><div class="soc-sub">@AnimeWrldWars_ANICADE</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="Telegram" />
-          <span>Telegram Channel</span>
+
+        <a href="https://www.facebook.com/tresforwrldanicade" target="_blank" rel="noopener" class="social-card fb">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/></div>
+          <div class="social-text"><div class="soc-name">Facebook Page</div><div class="soc-sub">tresforwrldanicade</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://t.me/TresforwrldBot" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/fluency/48/robot-2.png" alt="Bot" />
-          <span>Telegram Anime Bot</span>
+
+        <a href="https://facebook.com/groups/1158584398690857/" target="_blank" rel="noopener" class="social-card fb">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"/></div>
+          <div class="social-text"><div class="soc-name">Facebook Group</div><div class="soc-sub">Community discussions</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://discord.gg/yQkthryT" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/discord-logo.png" alt="Discord" />
-          <span>Discord Server</span>
-        </a>
-        
-        <a href="https://www.instagram.com/reel/DK_waUqNHeE/?utm_source=ig_web_copy_link" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" />
-          <span>Instagram</span>
-        </a>
-        
-        <a href="https://vm.tiktok.com/ZMHbNe8UXTHm2-iUteL/" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/tiktok--v1.png" alt="TikTok" />
-          <span>TikTok</span>
-        </a>
-        
-        <a href="https://www.youtube.com/@AnimeWrldWars_ANICADE" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube" />
-          <span>YouTube Channel</span>
-        </a>
-        
-        <a href="https://www.facebook.com/tresforwrldanicade" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
-          <span>Facebook Page</span>
-        </a>
-        
-        <a href="https://facebook.com/groups/1158584398690857/" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" />
-          <span>Facebook Group</span>
-        </a>
+
       </div>
     </section>
 
-    <div class="section-divider"></div>
+    <div class="divider"><i class="fas fa-envelope"></i></div>
 
-    <!-- Contact Section -->
-    <section>
-      <h2>Contact Us</h2>
-      <p>Have questions or feedback? Reach out to us directly!</p>
-      
-      <div class="social-grid">
-        <a href="mailto:tresforzulu@gmail.com" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/gmail--v1.png" alt="Email" />
-          <span>Email: tresforzulu@gmail.com</span>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sec-header">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">CONTACT <span class="acc">US</span></h2>
+      </div>
+      <p class="sec-desc">Questions, collabs, bug reports or just want to say hey — reach out directly.</p>
+
+      <div class="contact-grid" style="margin-bottom:0">
+
+        <a href="mailto:tresforzulu@gmail.com" class="social-card em">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/gmail--v1.png" alt="Email"/></div>
+          <div class="social-text"><div class="soc-name">Email Us</div><div class="soc-sub">tresforzulu@gmail.com</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/external-flat-juicy-fish/48/external-anonymous-social-media-flat-flat-juicy-fish.png" alt="NGL" />
-          <span>Send Anonymous Feedback</span>
+
+        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fas fa-comment-slash" style="font-size:18px;color:var(--neon)"></i></div>
+          <div class="social-text"><div class="soc-name">Anonymous Feedback</div><div class="soc-sub">Send via NGL · No login needed</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://bit.ly/AnimeANICADE" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/color/48/000000/internet.png" alt="Website" />
-          <span>Official Website</span>
+
+        <a href="https://bit.ly/AnimeANICADE" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fas fa-globe" style="font-size:18px;color:var(--neon)"></i></div>
+          <div class="social-text"><div class="soc-name">Official Website</div><div class="soc-sub">bit.ly/AnimeANICADE</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
-        
-        <a href="https://m.webnovel.com/profile/4501474390" target="_blank" class="social-link">
-          <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/external-webnovel-a-website-and-mobile-app-that-provides-online-literature-logo-color-tal-revivo.png" alt="Webnovel" />
-          <span>Read on Webnovel</span>
+
+        <a href="https://m.webnovel.com/profile/4501474390" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fas fa-book-open" style="font-size:18px;color:var(--neon)"></i></div>
+          <div class="social-text"><div class="soc-name">Read on Webnovel</div><div class="soc-sub">Original stories · Fan fiction</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
         </a>
+
+        <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" rel="noopener" class="social-card wa">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WA"/></div>
+          <div class="social-text"><div class="soc-name">Direct WhatsApp</div><div class="soc-sub">+260 777 083 995</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
+        <a href="https://t.me/TresforWrld" target="_blank" rel="noopener" class="social-card tg">
+          <div class="social-icon"><img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt="TG"/></div>
+          <div class="social-text"><div class="soc-name">Direct Telegram</div><div class="soc-sub">@TresforWrld · Quick replies</div></div>
+          <i class="fas fa-external-link-alt ext-arrow"></i>
+        </a>
+
       </div>
     </section>
 
-    <div class="section-divider"></div>
+    <div class="divider"><i class="fas fa-paper-plane"></i></div>
 
-    <!-- Feedback Form -->
+    <!-- FEEDBACK FORM -->
     <section id="feedback">
-      <h2>💬 Send Us Feedback</h2>
-      <p>We'd love to hear from you! Share your thoughts, suggestions, or questions.</p>
-      
-      <div class="form-container">
-        <form action="https://formspree.io/f/xovwbden" method="POST">
-          <input type="hidden" name="_next" value="https://tresforwrld.github.io/Anime-Wrld-Wars-ANICADE/thank-you.html">
-          
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" required placeholder="Your name" />
+      <div class="sec-header">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">SEND <span class="acc">FEEDBACK</span></h2>
+      </div>
+      <p class="sec-desc">Share thoughts, suggestions, bug reports or just say hello. We read everything.</p>
+
+      <div class="form-wrap">
+        <form id="feedbackForm" action="https://formspree.io/f/xovwbden" method="POST">
+          <input type="hidden" name="_next" value="https://tresforwrld.github.io/Anime-Wrld-Wars-ANICADE/thank-you.html"/>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">Your Name</label>
+              <input class="form-input" type="text" id="fname" name="name" required placeholder="e.g. Naruto Uzumaki"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="femail">Email</label>
+              <input class="form-input" type="email" id="femail" name="_replyto" required placeholder="your@email.com"/>
+            </div>
           </div>
-          
+
           <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="_replyto" required placeholder="your@email.com" />
+            <label class="form-label" for="fsubject">Subject</label>
+            <input class="form-input" type="text" id="fsubject" name="subject" placeholder="e.g. Feature request, bug, collab…"/>
           </div>
-          
+
           <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea name="message" rows="5" required placeholder="Your message here..."></textarea>
+            <label class="form-label" for="fmessage">Message</label>
+            <textarea class="form-textarea" id="fmessage" name="message" required placeholder="Write your message here…"></textarea>
           </div>
-          
-          <button type="submit" class="submit-btn">Send Feedback</button>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> SEND MESSAGE
+          </button>
         </form>
       </div>
     </section>
+
   </main>
 
   <footer>
-    &copy; 2025 Anime Wrld Wars | ANICADE | — BROUGHT TO YOU BY TRESFOR WRLD ✌️🔥
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+        <div class="footer-name">ANICADE <span>ANIME</span></div>
+      </div>
+      <div class="footer-copy">© 2026 Anime Wrld Wars · ANICADE<br>Brought to you by <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://tresforwrld.github.io/Anicade-Manga/" target="_blank">Manga</a>
+        <a href="#feedback">Feedback</a>
+      </div>
+    </div>
   </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+  // THEME
+  let dark=localStorage.getItem('anicade_theme')!=='light';
+  function applyTheme(){document.body.classList.toggle('light',!dark);const i=document.querySelector('#themeToggle i');if(i)i.className=dark?'fas fa-moon':'fas fa-sun';}
+  applyTheme();
+  document.getElementById('themeToggle').addEventListener('click',()=>{dark=!dark;localStorage.setItem('anicade_theme',dark?'dark':'light');applyTheme();});
+
+  // MOBILE NAV
+  const nl=document.getElementById('navLinks');
+  document.getElementById('menuToggle').addEventListener('click',()=>nl.classList.toggle('open'));
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
+  // BACK TO TOP
+  const btt=document.getElementById('backToTop');
+  window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>400));
+  btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // TOAST
+  function showToast(msg,type=''){
+    const tc=document.getElementById('toastContainer');
+    const t=document.createElement('div');t.className='toast '+(type||'');
+    t.innerHTML=`<i class="fas fa-${type==='success'?'check-circle':'info-circle'}" style="color:var(--neon)"></i> ${msg}`;
+    tc.appendChild(t);setTimeout(()=>t.remove(),3500);
+  }
+
+  // FORM SUBMIT (AJAX via Formspree)
+  document.getElementById('feedbackForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const btn=document.getElementById('submitBtn');
+    btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> SENDING…';btn.disabled=true;
+    try{
+      const fd=new FormData(e.target);
+      const res=await fetch(e.target.action,{method:'POST',body:fd,headers:{Accept:'application/json'}});
+      if(res.ok){
+        showToast('Message sent! We\'ll get back to you soon.','success');
+        e.target.reset();
+      } else { showToast('Something went wrong. Try again or email us directly.'); }
+    }catch(err){showToast('Network error. Please try again.');}
+    btn.innerHTML='<i class="fas fa-paper-plane"></i> SEND MESSAGE';btn.disabled=false;
+  });
+
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  </script>
 </body>
 </html>
