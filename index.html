@@ -104,17 +104,6 @@
 
     /* ── NEWS GRID ── */
     .news-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; }
-    .news-card { background:var(--panel); border:1px solid var(--border); overflow:hidden; transition:all .25s; cursor:default; clip-path:polygon(0 0,97% 0,100% 3%,100% 100%,3% 100%,0 97%); position:relative; }
-    .news-card:hover { border-color:var(--neon); box-shadow:0 0 24px rgba(0,212,255,.12); transform:translateY(-3px); }
-    .news-card:hover::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent var(--neon) transparent transparent; z-index:2; }
-    .news-img { width:100%; height:190px; object-fit:cover; display:block; background:var(--panel2); }
-    .news-img-placeholder { width:100%; height:190px; background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%); display:flex; align-items:center; justify-content:center; color:var(--border); font-size:32px; }
-    .news-body { padding:16px; }
-    .news-source { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
-    .news-source::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
-    .news-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:8px; }
-    .news-excerpt { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px; }
-    .news-date { font-family:'Space Mono',monospace; font-size:9px; color:var(--border); letter-spacing:1px; }
 
     /* ── TRENDING CAROUSEL ── */
     .carousel-wrap { position:relative; overflow:hidden; }
@@ -205,10 +194,56 @@
     .back-to-top.show { display:flex; }
     .back-to-top:hover { background:#33ddff; }
 
+    /* ── THEME TOGGLE ── */
+    .theme-toggle { width:36px; height:36px; border:1px solid var(--border); background:transparent; color:var(--aged); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; margin-left:8px; font-size:14px; flex-shrink:0; }
+    .theme-toggle:hover { color:var(--neon); border-color:var(--neon); }
+
+    /* ── NEWS COLLAPSIBLE ── */
+    .news-card { background:var(--panel); border:1px solid var(--border); overflow:hidden; transition:all .25s; clip-path:polygon(0 0,97% 0,100% 3%,100% 100%,3% 100%,0 97%); position:relative; }
+    .news-card:hover { border-color:var(--neon); box-shadow:0 0 24px rgba(0,212,255,.12); }
+    .news-card:hover::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent var(--neon) transparent transparent; z-index:2; }
+    .news-img { width:100%; height:190px; object-fit:cover; display:block; background:var(--panel2); }
+    .news-img-placeholder { width:100%; height:190px; background:linear-gradient(135deg,var(--panel) 0%,var(--panel2) 100%); display:flex; align-items:center; justify-content:center; color:var(--border); font-size:32px; }
+    .news-body { padding:16px; }
+    .news-source { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--neon); text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+    .news-source::before { content:''; display:block; width:16px; height:1px; background:var(--neon); }
+    .news-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; color:var(--paper); line-height:1.2; margin-bottom:8px; }
+    .news-excerpt { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:12px; }
+    .news-full { font-size:13px; color:var(--aged); line-height:1.7; margin-bottom:12px; display:none; border-top:1px solid var(--border); padding-top:12px; margin-top:4px; }
+    .news-full.open { display:block; animation:fadeIn .25s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .news-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .news-date { font-family:'Space Mono',monospace; font-size:9px; color:var(--border); letter-spacing:1px; }
+    .news-view-btn { background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:2px; padding:5px 12px; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:5px; }
+    .news-view-btn:hover { border-color:var(--neon); color:var(--neon); }
+    .news-view-btn i { font-size:10px; transition:transform .2s; }
+    .news-view-btn.open i { transform:rotate(180deg); }
+
+    /* ── WATCH SECTION ── */
+    .watch-notice { background:var(--panel); border:1px solid var(--neon); border-left:3px solid var(--neon); padding:18px 22px; margin-bottom:28px; display:flex; align-items:flex-start; gap:14px; }
+    .watch-notice i { color:var(--neon); font-size:18px; margin-top:2px; flex-shrink:0; }
+    .watch-notice p { font-size:14px; color:var(--aged); line-height:1.65; }
+    .watch-notice strong { color:var(--neon); }
+    .watch-platforms { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; }
+    .platform-card { background:var(--panel); border:1px solid var(--border); padding:22px; transition:all .22s; position:relative; overflow:hidden; text-decoration:none; display:block; clip-path:polygon(0 0,95% 0,100% 5%,100% 100%,5% 100%,0 95%); }
+    .platform-card::before { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 32px 32px 0; border-color:transparent var(--border) transparent transparent; transition:border-color .2s; }
+    .platform-card:hover { border-color:var(--neon); box-shadow:0 0 20px rgba(0,212,255,.1); transform:translateY(-2px); }
+    .platform-card:hover::before { border-color:transparent var(--neon) transparent transparent; }
+    .plat-header { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .plat-icon { width:42px; height:42px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+    .plat-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; color:var(--paper); }
+    .plat-tag { font-family:'Space Mono',monospace; font-size:9px; color:var(--neon); letter-spacing:1px; margin-top:1px; }
+    .plat-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+    .plat-genres { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+    .plat-genre { font-family:'Space Mono',monospace; font-size:9px; color:var(--aged); background:rgba(0,212,255,.06); border:1px solid var(--border); padding:2px 8px; letter-spacing:1px; }
+    .plat-btn { display:inline-flex; align-items:center; gap:7px; background:rgba(0,212,255,.1); border:1px solid var(--neon); color:var(--neon); font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:2px; padding:7px 16px; transition:all .2s; }
+    .platform-card:hover .plat-btn { background:rgba(0,212,255,.2); }
+
     /* ── LIGHT MODE ── */
     body.light { --ink:#f0f4fc; --panel:#e4eaf6; --panel2:#dce4f0; --border:#b8c8e0; --paper:#0d1828; --aged:#2a3a56; --muted:#5a7090; }
     body.light .navbar { background:rgba(240,244,252,.96); }
     body.light footer { background:rgba(240,244,252,.96); }
+    body.light .news-full { border-top-color:var(--border); }
 
     @media(max-width:700px) {
       .hero { padding:90px 18px 140px; }
@@ -232,13 +267,15 @@
     </a>
     <span class="nav-pill"><span class="live-dot"></span>Live Updates</span>
     <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
     <div class="nav-links" id="navLinks">
       <a href="#news" class="active"><i class="fas fa-newspaper"></i> News</a>
       <a href="#trending"><i class="fas fa-fire"></i> Trending</a>
       <a href="#seasonal"><i class="fas fa-calendar-alt"></i> Seasonal</a>
+      <a href="#watch"><i class="fas fa-play-circle"></i> Watch</a>
       <a href="#events"><i class="fas fa-star"></i> Events</a>
       <a href="#community"><i class="fas fa-users"></i> Community</a>
-      <a href="index.html" class="manga-btn"><i class="fas fa-book"></i> Manga</a>
+      <a href="https://tresforwrld.github.io/Anicade-Manga/" class="manga-btn" target="_blank"><i class="fas fa-book"></i> Manga</a>
     </div>
   </nav>
 
@@ -249,10 +286,9 @@
       <div class="hero-eyebrow"><span>Official Anime News Hub</span></div>
       <h1 class="hero-title">
         <div class="row1">
-          <span class="t1">ANIME</span>
-          <span class="t2">WRLD</span>
+          <span class="t1">ANIME WRLD </span><span class="t2">WARS</span>
         </div>
-        <div class="row2"><span class="t3">WARS · ANICADE</span></div>
+        <div class="row2"><span class="t3">ANICADE</span></div>
       </h1>
       <p class="hero-desc">Your go-to source for daily anime news, seasonal picks, trending titles, fan community events and exclusive ANICADE drops. Stay informed. Stay in the wrld.</p>
       <div class="hero-actions">
@@ -323,13 +359,95 @@
     </div>
   </div>
 
+  <div class="divider"><i class="fas fa-play"></i></div>
+
+  <!-- ── WATCH ANIME ── -->
+  <div class="section" id="watch">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-num">04</span>
+        <h2 class="section-title">WATCH <span class="acc">ANIME</span></h2>
+      </div>
+      <span class="section-sub">Free & Legal Streaming</span>
+    </div>
+
+    <div class="watch-notice">
+      <i class="fas fa-info-circle"></i>
+      <p>ANICADE does not host any anime content. The platforms below are <strong>free, legal, and publicly available</strong> streaming services where you can watch anime. Some titles may vary by region.</p>
+    </div>
+
+    <div class="watch-platforms">
+
+      <a href="https://www.crunchyroll.com" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(255,103,0,.15);color:#ff6700;"><i class="fas fa-dragon"></i></div>
+          <div><div class="plat-name">Crunchyroll</div><div class="plat-tag">Free with Ads · Premium Available</div></div>
+        </div>
+        <p class="plat-desc">The world's largest anime streaming library. Simulcasts, dubs, and thousands of episodes available free with ads.</p>
+        <div class="plat-genres"><span class="plat-genre">Action</span><span class="plat-genre">Shonen</span><span class="plat-genre">Romance</span><span class="plat-genre">Isekai</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Watch Free</div>
+      </a>
+
+      <a href="https://www.netflix.com/browse/genre/7424" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(229,9,20,.15);color:#e50914;"><i class="fas fa-film"></i></div>
+          <div><div class="plat-name">Netflix Anime</div><div class="plat-tag">Subscription · Originals</div></div>
+        </div>
+        <p class="plat-desc">Netflix Anime originals including Cyberpunk Edgerunners, Castlevania, and exclusive dubs of popular titles.</p>
+        <div class="plat-genres"><span class="plat-genre">Originals</span><span class="plat-genre">Dubs</span><span class="plat-genre">Sci-Fi</span><span class="plat-genre">Dark</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Browse Anime</div>
+      </a>
+
+      <a href="https://www.youtube.com/@AnimelabofficialpageEN" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(255,0,0,.15);color:#ff0000;"><i class="fab fa-youtube"></i></div>
+          <div><div class="plat-name">YouTube Anime</div><div class="plat-tag">100% Free · Official Channels</div></div>
+        </div>
+        <p class="plat-desc">Many studios post official free episodes on YouTube. Channels like Muse Asia, Ani-One, and TOEI Animation offer free legal streams.</p>
+        <div class="plat-genres"><span class="plat-genre">Free</span><span class="plat-genre">Subbed</span><span class="plat-genre">Classic</span><span class="plat-genre">New</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Watch on YouTube</div>
+      </a>
+
+      <a href="https://www.animepahe.ru" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-tv"></i></div>
+          <div><div class="plat-name">AnimePahe</div><div class="plat-tag">Free · Mini Encodes</div></div>
+        </div>
+        <p class="plat-desc">Lightweight, fast-loading anime streams. Known for small file sizes and clean UI. Great for mobile data.</p>
+        <div class="plat-genres"><span class="plat-genre">All Genres</span><span class="plat-genre">Subbed</span><span class="plat-genre">Mobile</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Stream Now</div>
+      </a>
+
+      <a href="https://aniwatch.to" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-play-circle"></i></div>
+          <div><div class="plat-name">AniWatch</div><div class="plat-tag">Free · Sub & Dub</div></div>
+        </div>
+        <p class="plat-desc">Full catalogue of anime with both sub and dub options. Fast streams, minimal ads, and a massive library of new and old titles.</p>
+        <div class="plat-genres"><span class="plat-genre">Sub</span><span class="plat-genre">Dub</span><span class="plat-genre">HD</span><span class="plat-genre">All Genres</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Watch Now</div>
+      </a>
+
+      <a href="https://gogoanime.gg" target="_blank" rel="noopener" class="platform-card">
+        <div class="plat-header">
+          <div class="plat-icon" style="background:rgba(0,212,255,.12);color:var(--neon);"><i class="fas fa-bolt"></i></div>
+          <div><div class="plat-name">GogoAnime</div><div class="plat-tag">Free · Huge Library</div></div>
+        </div>
+        <p class="plat-desc">One of the most established free anime platforms. Thousands of titles, regular updates, and a large community of anime fans.</p>
+        <div class="plat-genres"><span class="plat-genre">Classic</span><span class="plat-genre">New</span><span class="plat-genre">Movies</span><span class="plat-genre">OVA</span></div>
+        <div class="plat-btn"><i class="fas fa-play"></i> Go Watch</div>
+      </a>
+
+    </div>
+  </div>
+
   <div class="divider"><i class="fas fa-star"></i></div>
 
   <!-- ── EVENTS ── -->
   <div class="section" id="events">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-num">04</span>
+        <span class="section-num">05</span>
         <h2 class="section-title">UPCOMING <span class="acc">EVENTS</span></h2>
       </div>
     </div>
@@ -341,7 +459,7 @@
         <div class="event-date"><i class="fas fa-calendar"></i> July 27, 2026</div>
         <p class="event-desc">We're going all out for the ANICADE anniversary! Join the community channels below to participate in our biggest giveaway yet. All platforms, all genres, one wrld.</p>
         <div class="event-links">
-          <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="event-link"><span><i class="fas fa-palette" style="margin-right:7px"></i>Fanart & Wallpaper Channel</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link"><span><i class="fas fa-brain" style="margin-right:7px"></i>Psychology & Motivation Channel</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link"><span><i class="fas fa-music" style="margin-right:7px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link"><span><i class="fas fa-globe" style="margin-right:7px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
         </div>
@@ -376,7 +494,7 @@
   <div class="section" id="community">
     <div class="section-header">
       <div class="section-title-wrap">
-        <span class="section-num">05</span>
+        <span class="section-num">06</span>
         <h2 class="section-title">JOIN THE <span class="acc">COMMUNITY</span></h2>
       </div>
     </div>
@@ -397,9 +515,9 @@
         <div class="ch-icon"><i class="fas fa-comment-dots"></i></div>
         <div><div class="ch-name">Direct Chat</div><div class="ch-desc">TresforWrld · +260 777 083 995</div></div>
       </a>
-      <a href="https://whatsapp.com/channel/0029VakPy2o2ER6iIOkYIK3Q" target="_blank" class="channel-card">
-        <div class="ch-icon"><i class="fas fa-palette"></i></div>
-        <div><div class="ch-name">Fanart Channel</div><div class="ch-desc">Wallpapers · Edits · Fan Art</div></div>
+      <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="channel-card">
+        <div class="ch-icon"><i class="fas fa-brain"></i></div>
+        <div><div class="ch-name">Psychology & Motivation</div><div class="ch-desc">Facts · Mindset · Growth</div></div>
       </a>
       <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="channel-card">
         <div class="ch-icon"><i class="fas fa-music"></i></div>
@@ -427,7 +545,7 @@
           <p>Questions, feedback, collabs or just want to talk anime? We're always around.</p>
         </div>
         <div class="contact-strip-links">
-          <a href="mailto:animewrldwarsanicade@gmail.com" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
+          <a href="/cdn-cgi/l/email-protection#adccc3c4c0c8dadfc1c9daccdfdeccc3c4ceccc9c8edcac0ccc4c183cec2c0" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Send Feedback</a>
           <a href="contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
         </div>
@@ -455,7 +573,7 @@
   <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
   <!-- Chatbase Chatbot -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function(){
     if(!window.chatbase||window.chatbase("getState")!=="initialized"){
       window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};
@@ -485,10 +603,19 @@
     return { season: seasons[m], year: y };
   }
 
-  // ── THEME ──
-  let dark = true;
-  function applyTheme() { document.body.classList.toggle('light', !dark); }
+  // ── THEME TOGGLE ──
+  let dark = localStorage.getItem('anicade_theme') !== 'light';
+  function applyTheme() {
+    document.body.classList.toggle('light', !dark);
+    const icon = document.querySelector('#themeToggle i');
+    if (icon) icon.className = dark ? 'fas fa-moon' : 'fas fa-sun';
+  }
   applyTheme();
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    dark = !dark;
+    localStorage.setItem('anicade_theme', dark ? 'dark' : 'light');
+    applyTheme();
+  });
 
   // ── MOBILE NAV ──
   const navLinks = document.getElementById('navLinks');
@@ -506,7 +633,7 @@
     const cover = anime.coverImage?.large || anime.coverImage?.medium || '';
     const score = anime.averageScore ? (anime.averageScore/10).toFixed(1) : null;
     const fmt = anime.format || '';
-    const eps = anime.episodes || anime.nextAiringEpisode?.episode ? `EP ${anime.nextAiringEpisode?.episode || anime.episodes}` : '';
+    const eps = anime.nextAiringEpisode?.episode ? `EP ${anime.nextAiringEpisode.episode}` : anime.episodes ? `${anime.episodes} EPS` : '';
     const genres = (anime.genres||[]).slice(0,2).join(' · ');
     return `<div class="anime-card" style="animation-delay:${delay}s">
       <div class="anime-card-frame">
@@ -521,127 +648,113 @@
     </div>`;
   }
 
-  // ── API 1: AniList — Trending ──
+  // ── AniList Trending ──
   async function loadTrending() {
     const q = `query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
     try {
       const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const data = await res.json();
-      const items = data.data.Page.media;
-      const el = document.getElementById('trendingCarousel');
-      el.innerHTML = items.map((a,i) => buildAnimeCard(a, i*0.04)).join('');
-    } catch(e) {
-      document.getElementById('trendingCarousel').innerHTML = '<p style="color:var(--muted);font-family:Space Mono,monospace;font-size:11px;padding:20px;">Could not load trending anime.</p>';
-    }
+      document.getElementById('trendingCarousel').innerHTML = data.data.Page.media.map((a,i)=>buildAnimeCard(a,i*0.04)).join('');
+    } catch(e) { document.getElementById('trendingCarousel').innerHTML='<p style="color:var(--muted);padding:20px;">Could not load trending anime.</p>'; }
   }
 
-  // ── API 2: AniList — Seasonal ──
+  // ── AniList Seasonal ──
   async function loadSeasonal() {
-    const {season, year} = currentSeason();
-    document.getElementById('seasonLabel').textContent = `${season} ${year}`;
-    const q = `query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
+    const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
+    const season=seasons[new Date().getMonth()], year=new Date().getFullYear();
+    document.getElementById('seasonLabel').textContent=`${season} ${year}`;
+    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode}}}}`;
     try {
-      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const data = await res.json();
-      const items = data.data.Page.media;
-      document.getElementById('statSeasonalCount').textContent = items.length;
-      const el = document.getElementById('seasonalGrid');
-      el.innerHTML = items.map((a,i) => buildAnimeCard(a, i*0.03)).join('');
-    } catch(e) {
-      document.getElementById('seasonalGrid').innerHTML = '<p style="color:var(--muted);font-family:Space Mono,monospace;font-size:11px;padding:20px;">Could not load seasonal anime.</p>';
-    }
+      const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const data=await res.json();
+      const items=data.data.Page.media;
+      document.getElementById('statSeasonalCount').textContent=items.length;
+      document.getElementById('seasonalGrid').innerHTML=items.map((a,i)=>buildAnimeCard(a,i*0.03)).join('');
+    } catch(e){ document.getElementById('seasonalGrid').innerHTML='<p style="color:var(--muted);padding:20px;">Could not load seasonal anime.</p>'; }
   }
 
-  // ── API 3: News — Jikan (MAL) with images ──
-  async function loadNewsJikan() {
-    // Jikan returns MAL news with images
-    // We pull recent reviews/news from popular anime via Jikan
-    const topAnimeIds = [21,1535,269,16498,1,6702,918,11061,38524,40748]; // One Piece, Death Note, etc.
-    const picked = topAnimeIds.sort(()=>Math.random()-.5).slice(0,4);
-    const results = [];
-    await Promise.all(picked.map(async (id) => {
-      try {
-        const r = await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`, {signal:AbortSignal.timeout(8000)});
-        if (!r.ok) return;
-        const d = await r.json();
-        (d.data||[]).slice(0,2).forEach(item => {
-          results.push({
-            title: item.title,
-            excerpt: item.excerpt||'',
-            image: item.images?.jpg?.image_url || null,
-            date: item.date,
-            source: 'MyAnimeList'
-          });
-        });
-      } catch(e){}
-    }));
-    return results;
-  }
-
-  // ── API 4: News — AniList recent activity ──
-  async function loadNewsAniList() {
-    const q = `query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false) updatedAt genres startDate{year month day} nextAiringEpisode{episode airingAt}}}}`;
-    try {
-      const res = await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const data = await res.json();
-      return (data.data.Page.media||[]).map(a=>({
-        title: `${a.title?.english||a.title?.romaji} — New Episode Update`,
-        excerpt: a.description ? a.description.slice(0,140)+'…' : '',
-        image: a.coverImage?.large || null,
-        date: a.nextAiringEpisode?.airingAt ? new Date(a.nextAiringEpisode.airingAt*1000).toISOString() : null,
-        source: 'AniList',
-        ep: a.nextAiringEpisode?.episode
-      }));
-    } catch(e) { return []; }
-  }
-
-  // ── NEWS CARD BUILDER ──
+  // ── COLLAPSIBLE NEWS CARD ──
+  let _ncId = 0;
   function buildNewsCard(item) {
+    const uid = 'nc' + (++_ncId);
     const imgEl = item.image
-      ? `<img class="news-img" src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas fa-newspaper></i></div>'" />`
+      ? `<img class="news-img" src="${item.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas fa-newspaper></i></div>'" />`
       : `<div class="news-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
-    const epBadge = item.ep ? `<span style="color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;"> · EP ${item.ep} AIRING</span>` : '';
+    const epBadge = item.ep ? `<span style="color:var(--neon);font-size:9px;font-family:'Space Mono',monospace;"> · EP ${item.ep}</span>` : '';
+    const excerpt = (item.excerpt||'').replace(/<[^>]+>/g,'').trim();
+    const preview = excerpt.slice(0,130);
+    const hasMore = excerpt.length > 130;
     return `<div class="news-card">
       ${imgEl}
       <div class="news-body">
         <div class="news-source">${item.source||'ANICADE'}${epBadge}</div>
         <div class="news-title">${item.title||'Anime Update'}</div>
-        ${item.excerpt?`<p class="news-excerpt">${item.excerpt.replace(/<[^>]+>/g,'').slice(0,120)}…</p>`:''}
-        ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:4px"></i>${fmtDate(item.date)}</div>`:''}
+        ${preview?`<p class="news-excerpt">${preview}${hasMore?'...':''}</p>`:''}
+        ${hasMore?`<div class="news-full" id="${uid}-full">${excerpt}</div>`:''}
+        <div class="news-footer">
+          ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:4px"></i>${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:'<div></div>'}
+          ${hasMore?`<button class="news-view-btn" id="${uid}-btn" onclick="toggleNews('${uid}')"><i class="fas fa-chevron-down"></i> VIEW</button>`:''}
+        </div>
       </div>
     </div>`;
   }
 
-  // ── LOAD ALL NEWS ──
-  async function loadNews() {
-    const grid = document.getElementById('newsGrid');
-    try {
-      // Run both sources in parallel
-      const [jikanNews, anilistNews] = await Promise.all([loadNewsJikan(), loadNewsAniList()]);
-      // Merge and shuffle for variety
-      let all = [...jikanNews, ...anilistNews];
-      all = all.sort(()=>Math.random()-.5).slice(0,12);
-      if (!all.length) throw new Error('No news');
-      grid.innerHTML = all.map(item => buildNewsCard(item)).join('');
-    } catch(e) {
-      // Final fallback: just AniList seasonal news cards
+  function toggleNews(uid) {
+    const full = document.getElementById(uid+'-full');
+    const btn  = document.getElementById(uid+'-btn');
+    if (!full||!btn) return;
+    const open = full.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.innerHTML = open ? '<i class="fas fa-chevron-up"></i> CLOSE' : '<i class="fas fa-chevron-down"></i> VIEW';
+  }
+
+  // ── Jikan News ──
+  async function loadNewsJikan() {
+    const ids=[21,1535,269,16498,1,6702,918,11061,38524,40748];
+    const picked=ids.sort(()=>Math.random()-.5).slice(0,4);
+    const results=[];
+    await Promise.all(picked.map(async id=>{
       try {
-        const anilistNews = await loadNewsAniList();
-        if (anilistNews.length) { grid.innerHTML = anilistNews.slice(0,9).map(i=>buildNewsCard(i)).join(''); return; }
-      } catch(e2){}
-      grid.innerHTML = `<div style="grid-column:1/-1;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;padding:40px;text-align:center;letter-spacing:2px;"><i class="fas fa-wifi-slash" style="font-size:28px;display:block;margin-bottom:14px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
+        const r=await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`,{signal:AbortSignal.timeout(8000)});
+        if(!r.ok)return;
+        const d=await r.json();
+        (d.data||[]).slice(0,2).forEach(it=>results.push({title:it.title,excerpt:it.excerpt||'',image:it.images?.jpg?.image_url||null,date:it.date,source:'MyAnimeList'}));
+      }catch(e){}
+    }));
+    return results;
+  }
+
+  // ── AniList News ──
+  async function loadNewsAniList() {
+    const q=`query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false)nextAiringEpisode{episode airingAt}}}}`;
+    try {
+      const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+      const data=await res.json();
+      return (data.data.Page.media||[]).map(a=>({
+        title:`${a.title?.english||a.title?.romaji} — Episode Update`,
+        excerpt:a.description?a.description.replace(/<[^>]+>/g,'').trim():'',
+        image:a.coverImage?.large||null,
+        date:a.nextAiringEpisode?.airingAt?new Date(a.nextAiringEpisode.airingAt*1000).toISOString():null,
+        source:'AniList',ep:a.nextAiringEpisode?.episode
+      }));
+    }catch(e){return [];}
+  }
+
+  async function loadNews() {
+    const grid=document.getElementById('newsGrid');
+    try {
+      const [a,b]=await Promise.all([loadNewsJikan(),loadNewsAniList()]);
+      let all=[...a,...b].sort(()=>Math.random()-.5).slice(0,12);
+      if(!all.length)throw new Error('empty');
+      grid.innerHTML=all.map(buildNewsCard).join('');
+    }catch(e){
+      try{const f=await loadNewsAniList();if(f.length){grid.innerHTML=f.slice(0,9).map(buildNewsCard).join('');return;}}catch(e2){}
+      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:14px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
     }
   }
 
-  // ── INIT ──
-  loadNews();
-  loadTrending();
-  loadSeasonal();
-
-  // ── SERVICE WORKER ──
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(()=>{});
-  }
+  loadNews(); loadTrending(); loadSeasonal();
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
   </script>
 </body>
 </html>
