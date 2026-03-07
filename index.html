@@ -4,9 +4,9 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <meta name="google-site-verification" content="lBPiX1jM3a66tLKs2ulxfZP69VYg8Tass3XNj8C80xo"/>
-  <title>ANICADE — Anime News+</title>
+  <title>ANICADE — Anime News & Hub</title>
   <meta name="description" content="ANICADE — Your official anime news hub. Daily updates, seasonal picks, trending anime and community events."/>
-  <meta property="og:title" content="ANICADE — Anime News+"/>
+  <meta property="og:title" content="ANICADE — Anime News & Hub"/>
   <meta property="og:description" content="Daily anime news, trending titles, seasonal picks & community events from ANICADE."/>
   <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg"/>
   <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/"/>
@@ -136,8 +136,11 @@
     /* airing countdown badge */
     .airing-countdown{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);padding:2px 6px;margin-top:4px;letter-spacing:1px}
 
-    /* SEASONAL */
-    .seasonal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
+    /* SEASONAL — 2 per row */
+    .seasonal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    @media(min-width:600px){.seasonal-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.seasonal-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(min-width:1200px){.seasonal-grid{grid-template-columns:repeat(5,1fr)}}
 
     /* WATCH SECTION */
     .watch-notice{background:rgba(0,212,255,.05);border:1px solid var(--neon);border-left:4px solid var(--neon);padding:16px 20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;border-radius:2px}
@@ -536,7 +539,7 @@
       <div class="contact-strip">
         <div class="contact-strip-text"><h3>Get In Touch</h3><p>Questions, feedback, collabs or just want to talk anime?</p></div>
         <div class="contact-strip-links">
-          <a href="mailto:animewrldwarsanicade@gmail.com" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
+          <a href="/cdn-cgi/l/email-protection#31505f585c5446435d5546504342505f585250555471565c50585d1f525e5c" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Feedback</a>
           <a href="contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
         </div>
@@ -556,7 +559,7 @@
   <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
   <!-- Chatbase -->
-  <script>(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});}const onLoad=()=>{const s=document.createElement("script");s.src="https://www.chatbase.co/embed.min.js";s.id="xda32KgOFfKmwpwKmpWtw";document.body.appendChild(s);};document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);})();</script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...a)=>{(window.chatbase.q=window.chatbase.q||[]).push(a)};window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q")return t.q;return(...a)=>t(p,...a)}});}const onLoad=()=>{const s=document.createElement("script");s.src="https://www.chatbase.co/embed.min.js";s.id="xda32KgOFfKmwpwKmpWtw";document.body.appendChild(s);};document.readyState==="complete"?onLoad():window.addEventListener("load",onLoad);})();</script>
 
   <script>
   // ── UTILS ──
@@ -861,9 +864,9 @@
   loadTrending();
   loadSeasonal();
   loadUpcomingAnime();
-  setTimeout(showNotifBanner,2000);
+  setTimeout(showNotifBanner, 2000);
 
-  if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
   </script>
 </body>
 </html>
