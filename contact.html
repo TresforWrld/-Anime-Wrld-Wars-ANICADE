@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Contact — ANICADE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#06080f; --panel:#0d1120; --panel2:#111827; --border:#1e2d4a;
+      --paper:#e8eef8; --aged:#a8b8d0; --muted:#546480;
+      --neon:#00d4ff; --neon2:#0099cc; --neon-glow:rgba(0,212,255,.25);
+    }
+    html { scroll-behavior:smooth; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* halftone */
+    body::before {
+      content:''; position:fixed; inset:0;
+      background-image:radial-gradient(circle,rgba(0,212,255,.015) 1px,transparent 1px);
+      background-size:6px 6px; pointer-events:none; z-index:0;
+    }
+    /* speed lines */
+    body::after {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(0,212,255,.018) 0deg, transparent 1deg, transparent 5deg, rgba(0,212,255,.01) 6deg, transparent 7deg);
+    }
+
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:var(--ink); }
+    ::-webkit-scrollbar-thumb { background:var(--neon); border-radius:3px; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      height:64px; display:flex; align-items:center;
+      background:rgba(6,8,15,.95); border-bottom:2px solid var(--neon);
+      backdrop-filter:blur(14px); padding:0 28px;
+      box-shadow:0 0 30px rgba(0,212,255,.12);
+    }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .brand-logo { height:42px; width:auto; display:block; object-fit:contain; border-radius:4px; }
+    .brand-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--paper); line-height:1; }
+    .brand-name .bh { color:var(--neon); text-shadow:0 0 12px var(--neon); }
+    .nav-back {
+      margin-left:auto; display:flex; align-items:center; gap:8px;
+      background:transparent; border:1px solid var(--border);
+      color:var(--aged); padding:8px 16px; cursor:pointer;
+      font-family:'Rajdhani',sans-serif; font-weight:600; font-size:13px;
+      letter-spacing:1.5px; text-transform:uppercase; text-decoration:none;
+      transition:all .2s;
+    }
+    .nav-back:hover { border-color:var(--neon); color:var(--neon); }
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrapper {
+      position:relative; z-index:1;
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center;
+      padding:100px 24px 60px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header { text-align:center; margin-bottom:52px; }
+    .page-eyebrow { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; }
+    .page-eyebrow::before, .page-eyebrow::after { content:''; display:block; width:36px; height:2px; background:var(--neon); box-shadow:0 0 8px var(--neon); }
+    .page-eyebrow span { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--neon); }
+    .page-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,96px); letter-spacing:-1px; line-height:.9; margin-bottom:16px; }
+    .page-title .t1 { display:block; color:var(--paper); }
+    .page-title .t2 { display:block; color:var(--neon); text-shadow:0 0 30px rgba(0,212,255,.5), 0 0 60px rgba(0,212,255,.25); }
+    .page-subtitle { font-family:'Space Mono',monospace; font-size:12px; letter-spacing:3px; color:var(--muted); text-transform:uppercase; }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:20px;
+      width:100%;
+      max-width:1100px;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-card {
+      position:relative;
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center;
+      padding:36px 24px 28px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--paper);
+      overflow:hidden;
+      transition:all .3s;
+      clip-path:polygon(0 0,96% 0,100% 4%,100% 100%,4% 100%,0 96%);
+    }
+    /* animated corner accent */
+    .contact-card::before {
+      content:''; position:absolute; top:0; right:0;
+      width:0; height:0; border-style:solid;
+      border-width:0 32px 32px 0;
+      border-color:transparent var(--border) transparent transparent;
+      transition:border-color .3s;
+    }
+    .contact-card::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(0,212,255,.04) 0%, transparent 60%);
+      opacity:0; transition:opacity .3s;
+    }
+    .contact-card:hover {
+      border-color:var(--neon);
+      transform:translateY(-6px);
+      box-shadow:0 16px 48px rgba(0,212,255,.18), 0 0 0 1px rgba(0,212,255,.15);
+    }
+    .contact-card:hover::before { border-color:transparent var(--neon) transparent transparent; }
+    .contact-card:hover::after { opacity:1; }
+    .contact-card:hover .card-icon { box-shadow:0 0 24px rgba(0,212,255,.5); border-color:var(--neon); }
+    .contact-card:hover .card-icon i { color:var(--neon); }
+
+    .card-icon {
+      width:68px; height:68px; border-radius:50%;
+      border:2px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-size:26px; margin-bottom:20px;
+      background:rgba(0,212,255,.06);
+      transition:all .3s;
+      position:relative; z-index:1;
+    }
+    .card-icon i { color:var(--aged); transition:color .3s; }
+
+    .card-name {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:20px; letter-spacing:3px;
+      color:var(--paper); margin-bottom:8px;
+      position:relative; z-index:1;
+    }
+    .card-desc {
+      font-size:13px; color:var(--muted);
+      line-height:1.6; margin-bottom:16px;
+      position:relative; z-index:1;
+    }
+    .card-handle {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(0,212,255,.1);
+      border:1px solid rgba(0,212,255,.3);
+      color:var(--neon);
+      padding:6px 14px;
+      font-family:'Space Mono',monospace;
+      font-size:11px; letter-spacing:1px;
+      word-break:break-all;
+      position:relative; z-index:1;
+      transition:all .3s;
+    }
+    .contact-card:hover .card-handle { background:rgba(0,212,255,.18); border-color:var(--neon); }
+
+    /* ── FOOTER LINE ── */
+    .page-footer {
+      margin-top:60px;
+      text-align:center;
+      font-family:'Space Mono',monospace;
+      font-size:10px; letter-spacing:3px;
+      color:var(--border); text-transform:uppercase;
+    }
+    .page-footer span { color:var(--neon); }
+
+    @media(max-width:600px) {
+      .navbar { padding:0 14px; }
+      .cards-grid { grid-template-columns:1fr; max-width:400px; }
+      .page-title { font-size:clamp(40px,12vw,72px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="nav-brand" href="index.html">
+      <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="Anicade" />
+      <span class="brand-name">ANIME<span class="bh">ANICADE</span></span>
+    </a>
+    <a class="nav-back" href="index.html"><i class="fas fa-arrow-left"></i> Back</a>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- HEADER -->
+    <div class="page-header">
+      <div class="page-eyebrow"><span>Get in Touch</span></div>
+      <h1 class="page-title">
+        <span class="t1">CONTACT</span>
+        <span class="t2">ANICADE</span>
+      </h1>
+      <p class="page-subtitle">Reach out — we're just a message away</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards-grid">
+
+      <a href="https://github.com/TresforWrld" target="_blank" class="contact-card">
+        <div class="card-icon"><i class="fab fa-github"></i></div>
+        <div class="card-name">GitHub</div>
+        <p class="card-desc">Browse our open source projects and code repositories.</p>
+        <span class="card-handle"><i class="fas fa-at"></i> TresforWrld</span>
+      </a>
+
+      <a href="https://t.me/TresforWrld" target="_blank" class="contact-card">
+        <div class="card-icon"><i class="fab fa-telegram"></i></div>
+        <div class="card-name">Telegram</div>
+        <p class="card-desc">Quick responses from TresforWrld — fastest way to reach us.</p>
+        <span class="card-handle"><i class="fas fa-at"></i> TresforWrld</span>
+      </a>
+
+      <a href="https://whatsapp.com/channel/0029VbCPHZt3wtbBJqO33T2I" target="_blank" class="contact-card">
+        <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+        <div class="card-name">WhatsApp Channel</div>
+        <p class="card-desc">Follow the ANICADE channel for updates, announcements and new releases.</p>
+        <span class="card-handle"><i class="fas fa-satellite-dish"></i> Channel</span>
+      </a>
+
+      <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="contact-card">
+        <div class="card-icon"><i class="fas fa-comment-dots"></i></div>
+        <div class="card-name">Direct WhatsApp</div>
+        <p class="card-desc">Chat directly with TresforWrld for support or collabs.</p>
+        <span class="card-handle"><i class="fas fa-phone"></i> +260 777 083 995</span>
+      </a>
+
+      <a href="mailto:animewrldwarsanicade@gmail.com" class="contact-card">
+        <div class="card-icon"><i class="fas fa-envelope"></i></div>
+        <div class="card-name">Gmail</div>
+        <p class="card-desc">Send a detailed message — for business inquiries or feedback.</p>
+        <span class="card-handle"><i class="fas fa-at"></i> animewrldwarsanicade@gmail.com</span>
+      </a>
+
+    </div>
+
+    <div class="page-footer">
+      &copy; 2026 <span>ANICADE tech</span> .All Rights reserved.
+    </div>
+
+  </div>
+
+</body>
+</html>
