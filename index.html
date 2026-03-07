@@ -8,9 +8,12 @@
   <meta name="description" content="ANICADE — Your official anime news hub. Daily updates, seasonal picks, trending anime and community events."/>
   <meta property="og:title" content="ANICADE — Anime News & Hub"/>
   <meta property="og:description" content="Daily anime news, trending titles, seasonal picks & community events from ANICADE."/>
-  <meta property="og:image" content="https://i.postimg.cc/qznXCMWh/Anime-Wrld-Wars-20250623-081403.jpg"/>
+  <meta property="og:image" content="https://i.imgur.com/qgZhkhV.jpeg"/>
+  <meta property="og:image:width" content="400"/>
+  <meta property="og:image:height" content="400"/>
   <meta property="og:url" content="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/"/>
   <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://i.imgur.com/qgZhkhV.jpeg"/>
   <meta name="theme-color" content="#00d4ff"/>
   <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg"/>
   <link rel="manifest" href="manifest.webmanifest"/>
@@ -122,6 +125,8 @@
     .carousel::-webkit-scrollbar{height:3px}
     .carousel::-webkit-scrollbar-thumb{background:var(--neon)}
     .anime-card{flex-shrink:0;width:180px;scroll-snap-align:start;cursor:default;animation:fadeUp .4s ease both}
+    /* In grids, cards fill column naturally */
+    .seasonal-grid .anime-card,.events-grid .anime-card{width:100%;flex-shrink:1}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .anime-card-frame{border:2px solid var(--border);overflow:hidden;aspect-ratio:3/4;background:var(--panel);transition:all .22s;clip-path:polygon(0 0,92% 0,100% 8%,100% 100%,8% 100%,0 92%);position:relative}
     .anime-card:hover .anime-card-frame{border-color:var(--neon);box-shadow:0 0 16px rgba(0,212,255,.16)}
@@ -136,11 +141,13 @@
     /* airing countdown badge */
     .airing-countdown{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);padding:2px 6px;margin-top:4px;letter-spacing:1px}
 
-    /* SEASONAL — 2 per row */
-    .seasonal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    @media(min-width:600px){.seasonal-grid{grid-template-columns:repeat(2,1fr)}}
+    /* SEASONAL — 2 per row, fully fluid, no cropping */
+    .seasonal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     @media(min-width:900px){.seasonal-grid{grid-template-columns:repeat(4,1fr)}}
     @media(min-width:1200px){.seasonal-grid{grid-template-columns:repeat(5,1fr)}}
+    .seasonal-grid .anime-card{width:100%;min-width:0;flex-shrink:1}
+    .seasonal-grid .anime-card-frame{width:100%;clip-path:none;border-radius:2px}
+    .seasonal-grid .anime-cover{width:100%;height:100%;object-fit:cover;display:block}
 
     /* WATCH SECTION */
     .watch-notice{background:rgba(0,212,255,.05);border:1px solid var(--neon);border-left:4px solid var(--neon);padding:16px 20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;border-radius:2px}
@@ -314,7 +321,7 @@
   <nav class="navbar">
     <a class="nav-brand" href="#">
       <img class="brand-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
-      <span class="brand-name">ANICADE<span class="bh"> ANIME</span></span>
+      <span class="brand-name">ANICADE</span>
     </a>
     <span class="nav-pill"><span class="live-dot"></span>Live</span>
     <div class="nav-actions">
@@ -327,8 +334,9 @@
       <a href="#seasonal"><i class="fas fa-calendar-alt"></i> Seasonal</a>
       <a href="#watch"><i class="fas fa-play-circle"></i> Watch</a>
       <a href="#events"><i class="fas fa-star"></i> Events</a>
-      <a href="#community"><i class="fas fa-users"></i> Community</a>
-      <a href="https://tresforwrld.github.io/Anicade-Manga/" class="manga-btn" target="_blank"><i class="fas fa-book"></i> Manga</a>
+      <a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/community.html"><i class="fas fa-users"></i> Community</a>
+      <a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" class="manga-btn" target="_blank"><i class="fas fa-book"></i> Manga</a>
     </div>
   </nav>
 
@@ -344,7 +352,7 @@
       <p class="hero-desc">Your go-to source for daily anime news, seasonal picks, trending titles, fan community events and exclusive ANICADE drops. Stay informed. Stay in the wrld.</p>
       <div class="hero-actions">
         <a href="#news" class="btn-primary"><i class="fas fa-newspaper"></i> Latest News</a>
-        <a href="#community" class="btn-outline"><i class="fas fa-users"></i> Join Community</a>
+        <a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/community.html" class="btn-outline"><i class="fas fa-users"></i> Join Community</a>
       </div>
     </div>
     <div class="stats-strip">
@@ -541,7 +549,7 @@
         <div class="contact-strip-links">
           <a href="/cdn-cgi/l/email-protection#31505f585c5446435d5546504342505f585250555471565c50585d1f525e5c" class="contact-chip"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-chip"><i class="fas fa-comment"></i> Feedback</a>
-          <a href="contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
+          <a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/contact.html" class="contact-chip"><i class="fas fa-address-card"></i> All Contacts</a>
         </div>
       </div>
     </div>
@@ -551,7 +559,7 @@
     <div class="footer-inner">
       <div class="footer-brand"><img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/><div class="footer-name">ANICADE <span>ANIME</span></div></div>
       <div class="footer-copy">© 2026 Anime Wrld Wars · ANICADE<br>Brought to you by <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
-      <div class="footer-links"><a href="https://tresforwrld.github.io/Anicade-Manga/" target="_blank">Manga</a><a href="contact.html">Contact</a><a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Feedback</a></div>
+      <div class="footer-links"><a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank">Manga</a><a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/community.html">Community</a><a href="https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/contact.html">Contact</a><a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank">Feedback</a></div>
     </div>
   </footer>
 
