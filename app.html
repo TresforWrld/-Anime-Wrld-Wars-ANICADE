@@ -258,27 +258,57 @@ img{max-width:100%;display:block}
 .share-chip{flex:1;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 6px;cursor:pointer;transition:all .2s;text-align:center;border-radius:2px}
 .share-chip:hover{border-color:var(--neon);color:var(--neon)}
 
-/* Manga reader */
-.manga-detail-cover{width:100%;max-height:260px;object-fit:cover;border:1px solid var(--border);margin-bottom:14px;border-radius:2px}
-.chapter-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.chapter-item{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--border);padding:11px 14px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;border-radius:2px}
+/* Manga detail */
+.manga-detail-cover{width:100%;max-height:280px;object-fit:cover;border:1px solid var(--border);margin-bottom:14px;border-radius:2px}
+.manga-action-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.manga-action-btn{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border:1px solid var(--border);background:rgba(0,212,255,.05);color:var(--aged);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;transition:all .2s;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.manga-action-btn:hover,.manga-action-btn:active{border-color:var(--neon);color:var(--neon);background:rgba(0,212,255,.1)}
+.manga-action-btn.fav-active{border-color:#f59e0b;color:#f59e0b;background:rgba(245,158,11,.1)}
+.manga-action-btn i{font-size:14px}
+.chapter-list{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.chapter-item{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--border);padding:12px 14px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;border-radius:2px}
 .chapter-item:hover,.chapter-item:active{border-color:var(--neon);background:rgba(0,212,255,.06)}
+.chapter-item.read{opacity:.55}
 .chapter-num{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--paper)}
-.chapter-title{font-size:12px;color:var(--muted);margin-top:1px}
+.chapter-title-sm{font-size:11px;color:var(--muted);margin-top:1px}
 .chapter-src{font-family:'Space Mono',monospace;font-size:8px;color:var(--neon);letter-spacing:1px}
+.ch-right{display:flex;align-items:center;gap:8px}
+.ch-read-dot{width:7px;height:7px;border-radius:50%;background:var(--neon);opacity:.5}
 .ch-arrow{color:var(--muted);font-size:12px}
-/* Reader view */
-.reader-topbar{display:flex;align-items:center;gap:10px;padding:10px 0 14px;border-bottom:1px solid var(--border);margin-bottom:10px}
-.reader-back{background:transparent;border:1px solid var(--border);color:var(--aged);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;transition:all .2s;border-radius:2px}
-.reader-back:hover{border-color:var(--neon);color:var(--neon)}
-.reader-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--paper);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.reader-pages{display:flex;flex-direction:column;gap:4px}
-.reader-page-img{width:100%;display:block;border-radius:1px}
-.reader-nav{display:flex;gap:8px;padding:14px 0;border-top:1px solid var(--border);margin-top:10px}
-.reader-nav-btn{flex:1;background:var(--panel);border:1px solid var(--border);color:var(--aged);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:11px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;border-radius:2px}
-.reader-nav-btn:hover{border-color:var(--neon);color:var(--neon)}
-.reader-nav-btn.primary{background:rgba(0,212,255,.1);border-color:var(--neon);color:var(--neon)}
-.reader-loading{text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px}
+
+/* FULL PAGE READER — takes over entire screen */
+.full-reader{position:fixed;inset:0;z-index:800;background:var(--ink);display:none;flex-direction:column;overflow:hidden}
+.full-reader.open{display:flex}
+.reader-header{background:rgba(6,8,15,.97);border-bottom:2px solid var(--neon);padding:0 12px;height:54px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.reader-hbtn{width:38px;height:38px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:2px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.reader-hbtn:hover,.reader-hbtn:active{border-color:var(--neon);color:var(--neon);background:rgba(0,212,255,.12)}
+.reader-htitle{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--paper);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reader-hinfo{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);flex-shrink:0}
+.reader-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:var(--ink)}
+.reader-pages{display:flex;flex-direction:column;gap:2px;max-width:800px;margin:0 auto}
+.reader-page-img{width:100%;display:block}
+.reader-page-img.loaded{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reader-footer{background:rgba(6,8,15,.97);border-top:1px solid var(--border);padding:10px 12px;display:flex;gap:8px;flex-shrink:0}
+.reader-fnav{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;background:var(--panel);border:1px solid var(--border);color:var(--aged);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;transition:all .2s;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.reader-fnav:active,.reader-fnav:hover{border-color:var(--neon);color:var(--neon)}
+.reader-fnav.primary{background:rgba(0,212,255,.1);border-color:var(--neon);color:var(--neon)}
+.reader-fnav:disabled{opacity:.35;pointer-events:none}
+.reader-progress{position:fixed;top:54px;left:0;height:2px;background:var(--neon);z-index:801;transition:width .2s;box-shadow:0 0 6px var(--neon)}
+
+/* Download modal */
+.dl-modal{position:fixed;inset:0;z-index:900;background:rgba(6,8,15,.85);display:none;align-items:center;justify-content:center;padding:20px}
+.dl-modal.open{display:flex}
+.dl-box{background:var(--panel2);border:2px solid var(--neon);padding:24px;width:100%;max-width:360px;border-radius:2px}
+.dl-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper);margin-bottom:4px}
+.dl-sub{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:16px}
+.dl-progress-bar{width:100%;height:6px;background:var(--border);border-radius:3px;margin-bottom:14px;overflow:hidden}
+.dl-progress-fill{height:100%;background:var(--neon);width:0%;transition:width .3s;box-shadow:0 0 8px var(--neon)}
+.dl-status{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:16px;text-align:center}
+.dl-close-btn{width:100%;padding:11px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;border-radius:2px;transition:all .2s}
+.dl-close-btn:hover{border-color:var(--neon);color:var(--neon)}
+
+.reader-loading{text-align:center;padding:60px 20px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px}
 
 /* ══════════════════════════
    INSTALL POPUP
@@ -526,6 +556,35 @@ body.light .overlay-sheet{background:#e4eaf6}
 
 </div><!-- /pages -->
 
+<!-- FULL PAGE MANGA READER -->
+<div class="full-reader" id="fullReader">
+  <div class="reader-progress" id="readerProgress" style="width:0%"></div>
+  <div class="reader-header">
+    <button class="reader-hbtn" id="readerBackBtn"><i class="fas fa-arrow-left"></i></button>
+    <div class="reader-htitle" id="readerTitle">Loading…</div>
+    <div class="reader-hinfo" id="readerInfo"></div>
+    <button class="reader-hbtn" id="readerDlBtn" title="Download chapter"><i class="fas fa-download"></i></button>
+  </div>
+  <div class="reader-scroll" id="readerScroll">
+    <div class="reader-pages" id="readerPages"></div>
+  </div>
+  <div class="reader-footer">
+    <button class="reader-fnav" id="readerPrevBtn" disabled><i class="fas fa-chevron-left"></i> PREV</button>
+    <button class="reader-fnav primary" id="readerNextBtn" disabled>NEXT <i class="fas fa-chevron-right"></i></button>
+  </div>
+</div>
+
+<!-- DOWNLOAD MODAL -->
+<div class="dl-modal" id="dlModal">
+  <div class="dl-box">
+    <div class="dl-title">DOWNLOADING CHAPTER</div>
+    <div class="dl-sub" id="dlSub">Preparing pages…</div>
+    <div class="dl-progress-bar"><div class="dl-progress-fill" id="dlFill"></div></div>
+    <div class="dl-status" id="dlStatus">0 / 0 pages</div>
+    <button class="dl-close-btn" id="dlCloseBtn"><i class="fas fa-times" style="margin-right:6px"></i>CLOSE</button>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <div class="bnav-item active" data-page="home"><i class="fas fa-home"></i><span>Home</span></div>
@@ -547,489 +606,616 @@ body.light .overlay-sheet{background:#e4eaf6}
 <!-- TOAST -->
 <div class="toast-wrap" id="toastWrap"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── GLOBALS ──
+<script>
+// ══════════════════════════════════════════════════════
+//  ANICADE APP — Clean JS with data-store pattern
+//  No JSON in onclick attrs — uses indexed store instead
+// ══════════════════════════════════════════════════════
+
+// ── DATA STORE (avoids JSON-in-onclick bugs) ──
+const STORE = {};
+let storeIdx = 0;
+function stash(obj){ const k = 's'+(++storeIdx); STORE[k]=obj; return k; }
+function unstash(k){ return STORE[k]||{}; }
+
+// ── STATE ──
 let dark = localStorage.getItem('anicade_theme') !== 'light';
 let mangaPage = 1, mangaGenre = '', mangaQuery = '', mangaLoading = false;
-let currentChapters = [], currentMangaTitle = '', currentChapIdx = 0;
-let shareCountsStore = JSON.parse(localStorage.getItem('anicade_sc') || '{}');
-
-function saveShareCounts(){ localStorage.setItem('anicade_sc', JSON.stringify(shareCountsStore)); }
+let currentChapters = [], currentMangaTitle = '', currentMangaData = {};
+let shareCountsStore = JSON.parse(localStorage.getItem('anicade_sc')||'{}');
+function saveShares(){ localStorage.setItem('anicade_sc', JSON.stringify(shareCountsStore)); }
 
 // ── THEME ──
 function applyTheme(){
-  document.body.classList.toggle('light', !dark);
+  document.body.classList.toggle('light',!dark);
   const i = document.querySelector('#themeBtn i');
   if(i) i.className = dark ? 'fas fa-moon' : 'fas fa-sun';
 }
 applyTheme();
-document.getElementById('themeBtn').addEventListener('click', () => {
-  dark = !dark; localStorage.setItem('anicade_theme', dark ? 'dark' : 'light'); applyTheme();
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  dark=!dark; localStorage.setItem('anicade_theme',dark?'dark':'light'); applyTheme();
 });
 
 // ── BOTTOM NAV ──
-document.querySelectorAll('.bnav-item').forEach(btn => {
-  btn.addEventListener('click', () => {
+document.querySelectorAll('.bnav-item').forEach(btn=>{
+  btn.addEventListener('click',()=>{
     const pg = btn.dataset.page;
-    document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById('page-' + pg);
-    target.classList.add('active');
-    // lazy load
-    if(pg === 'manga' && !target.dataset.loaded){ loadManga(); target.dataset.loaded = '1'; }
-    if(pg === 'events' && !target.dataset.loaded){ loadUpcoming(); target.dataset.loaded = '1'; }
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const target = document.getElementById('page-'+pg);
+    if(target) target.classList.add('active');
+    if(pg==='manga' && !target.dataset.loaded){ loadManga(); target.dataset.loaded='1'; }
+    if(pg==='events' && !target.dataset.loaded){ loadUpcoming(); target.dataset.loaded='1'; }
   });
 });
 
 // ── TOAST ──
-function toast(msg, type=''){
-  const w = document.getElementById('toastWrap');
-  const t = document.createElement('div'); t.className = 'toast ' + type;
-  t.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':'info-circle'}" style="color:var(--neon)"></i> ${msg}`;
-  w.appendChild(t); setTimeout(() => t.remove(), 3000);
+function toast(msg,type=''){
+  const w=document.getElementById('toastWrap');
+  const t=document.createElement('div'); t.className='toast '+(type||'');
+  t.innerHTML=`<i class="fas fa-${type==='success'?'check-circle':'info-circle'}" style="color:var(--neon)"></i> ${msg}`;
+  w.appendChild(t); setTimeout(()=>t.remove(),3000);
 }
 
 // ── OVERLAY ──
-const overlay = document.getElementById('overlay');
-const overlayContent = document.getElementById('overlayContent');
+const overlay=document.getElementById('overlay');
+const overlayContent=document.getElementById('overlayContent');
 function openOverlay(html){
-  overlayContent.innerHTML = html;
+  overlayContent.innerHTML=html;
   overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
+  // scroll overlay to top
+  const sheet=document.getElementById('overlaySheet');
+  if(sheet) sheet.scrollTop=0;
 }
 function closeOverlay(){
   overlay.classList.remove('open');
-  document.body.style.overflow = '';
-  // small delay so animation plays before resetting reader state
-  setTimeout(() => { overlayContent.innerHTML = ''; }, 350);
+  document.body.style.overflow='';
+  setTimeout(()=>{ overlayContent.innerHTML=''; },350);
 }
-document.getElementById('overlayClose').addEventListener('click', closeOverlay);
-overlay.addEventListener('click', e => { if(e.target === overlay) closeOverlay(); });
+document.getElementById('overlayClose').addEventListener('click',closeOverlay);
+overlay.addEventListener('click',e=>{ if(e.target===overlay) closeOverlay(); });
 
-// ── ANILIST FETCH ──
-async function anilist(query, vars={}){
-  const r = await fetch('https://graphql.anilist.co', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({query, variables: vars})
+// ── ANILIST ──
+async function anilist(query,vars={}){
+  const r=await fetch('https://graphql.anilist.co',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({query,variables:vars})
   });
   return r.json();
 }
 
-// ── NEWS ──
+// ══════════════════════════
+//  NEWS
+// ══════════════════════════
 async function loadNews(){
-  const list = document.getElementById('homeNewsList');
+  const list=document.getElementById('homeNewsList');
   try{
-    // AniList live news
-    const q = `query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{medium}description(asHtml:false)nextAiringEpisode{episode airingAt}averageScore genres}}}`;
-    const d = await anilist(q);
-    const items = d.data.Page.media || [];
-    document.getElementById('statCount').textContent = items.length;
-    list.innerHTML = items.map((a,i) => {
-      const title = a.title?.english || a.title?.romaji || 'Unknown';
-      const ep = a.nextAiringEpisode?.episode;
-      const desc = (a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,120);
-      const date = a.nextAiringEpisode?.airingAt ? new Date(a.nextAiringEpisode.airingAt*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
-      const img = a.coverImage?.medium || '';
-      const uid = 'n'+i;
-      return `<div class="news-item" onclick="openNewsDetail(${JSON.stringify({title,desc:a.description||'',img,source:'AniList',date,ep,id:a.id,genres:a.genres||[],score:a.averageScore}).replace(/"/g,'&quot;')})">
-        ${img ? `<img class="news-thumb" src="${img}" alt="" loading="lazy" onerror="this.style.display='none'"/>` : `<div class="news-thumb-ph"><i class="fas fa-newspaper"></i></div>`}
+    const q=`query{Page(perPage:15){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{medium}description(asHtml:false)nextAiringEpisode{episode airingAt}averageScore genres}}}`;
+    const d=await anilist(q);
+    const items=d.data.Page.media||[];
+    document.getElementById('statCount').textContent=items.length;
+    list.innerHTML=items.map(a=>{
+      const title=a.title?.english||a.title?.romaji||'Unknown';
+      const ep=a.nextAiringEpisode?.episode;
+      const desc=(a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,120);
+      const rawDate=a.nextAiringEpisode?.airingAt;
+      const date=rawDate?new Date(rawDate*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+      const img=a.coverImage?.medium||'';
+      // store full data, reference by key
+      const k=stash({title,desc:a.description||'',img,source:'AniList',date,ep,id:a.id,genres:a.genres||[],score:a.averageScore});
+      return `<div class="news-item" onclick="openNewsDetail('${k}')">
+        ${img?`<img class="news-thumb" src="${img}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=news-thumb-ph><i class=fas\\ fa-newspaper></i></div>'"/>`:`<div class="news-thumb-ph"><i class="fas fa-newspaper"></i></div>`}
         <div class="news-text">
           <div class="news-src">AniList${ep?' · EP '+ep:''}</div>
           <div class="news-title-sm">${title}</div>
-          ${desc ? `<div class="news-excerpt-sm">${desc}</div>` : ''}
-          ${date ? `<div class="news-date-sm"><i class="fas fa-clock" style="margin-right:3px"></i>${date}</div>` : ''}
+          ${desc?`<div class="news-excerpt-sm">${desc}</div>`:''}
+          ${date?`<div class="news-date-sm"><i class="fas fa-clock" style="margin-right:3px"></i>${date}</div>`:''}
         </div>
       </div>`;
     }).join('');
-  } catch(e){
-    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load news. Check connection.</div>';
+  }catch(e){
+    list.innerHTML='<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load news.</div>';
   }
 }
 
-function openNewsDetail(d){
-  if(typeof d === 'string') d = JSON.parse(d.replace(/&quot;/g,'"'));
-  const desc = (d.desc||'').replace(/<[^>]+>/g,'').trim() || 'No synopsis available.';
-  const uid = 'nd_' + d.id;
-  const sc = shareCountsStore[uid] || 0;
-  const shareUrl = encodeURIComponent('https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/');
-  const shareTitle = encodeURIComponent((d.title||'Anime Update') + ' — ANICADE');
+function openNewsDetail(k){
+  const d=unstash(k);
+  const desc=(d.desc||'').replace(/<[^>]+>/g,'').trim()||'No synopsis available.';
+  const uid='nd_'+(d.id||k);
+  const sc=shareCountsStore[uid]||0;
   openOverlay(`
-    ${d.img ? `<img class="det-news-img" src="${d.img}" alt=""/>` : ''}
-    <div class="det-info" style="margin-bottom:12px">
-      <div class="det-title">${d.title||'Anime Update'}</div>
-      <div class="det-badges">
+    ${d.img?`<img class="det-news-img" src="${d.img}" alt="" onerror="this.style.display='none'"/>`:''}
+    <div style="margin-bottom:12px">
+      <div class="det-title">${escH(d.title||'')}</div>
+      <div class="det-badges" style="margin-top:6px">
         <div class="det-badge neon">${d.source||'AniList'}</div>
-        ${d.ep ? `<div class="det-badge neon">EP ${d.ep}</div>` : ''}
-        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${g}</div>`).join('')}
+        ${d.ep?`<div class="det-badge neon">EP ${d.ep}</div>`:''}
+        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${escH(g)}</div>`).join('')}
       </div>
-      ${d.date ? `<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:8px"><i class="fas fa-clock" style="margin-right:4px;color:var(--neon)"></i>${d.date}</div>` : ''}
+      ${d.date?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:8px"><i class="fas fa-clock" style="margin-right:4px;color:var(--neon)"></i>${d.date}</div>`:''}
     </div>
     <div class="det-synopsis-title">Synopsis</div>
-    <div class="det-synopsis">${desc}</div>
-    <div class="det-news-share" style="margin-bottom:14px">
-      <div class="share-chip" onclick="doShare('${uid}','${shareUrl}','${shareTitle}',this)"><i class="fas fa-share-alt"></i> Share</div>
-      <a class="share-chip" href="https://wa.me/?text=${shareTitle}%20${shareUrl}" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</a>
-      <a class="share-chip" href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</a>
-      <div class="share-chip" id="${uid}-sc" style="pointer-events:none">${sc>0?sc+' shares':''}</div>
+    <div class="det-synopsis">${escH(desc)}</div>
+    <div class="det-news-share" style="margin-bottom:14px;margin-top:14px">
+      <div class="share-chip" onclick="doShare('${uid}','${escH(d.title||'')}',this)"><i class="fas fa-share-alt"></i> Share</div>
+      <div class="share-chip" onclick="shareWA('${escH(d.title||'')}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</div>
+      <div class="share-chip" onclick="shareTG('${escH(d.title||'')}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</div>
+      <div class="share-chip" id="${uid}-sc" style="pointer-events:none;color:var(--neon)">${sc>0?sc+' shares':''}</div>
     </div>
-    <a href="https://anilist.co/anime/${d.id}" target="_blank" class="det-source-btn"><i class="fas fa-external-link-alt"></i> VIEW SOURCE ON ANILIST</a>
-  `);
-}
-
-// ── ANIME DETAIL OVERLAY ──
-function openAnimeDetail(a){
-  if(typeof a === 'string') a = JSON.parse(a.replace(/&quot;/g,'"'));
-  const title = a.english || a.romaji || 'Unknown';
-  const desc = (a.description||'').replace(/<[^>]+>/g,'').trim() || 'No synopsis.';
-  const score = a.score ? (a.score/10).toFixed(1) : null;
-  openOverlay(`
-    <div class="det-header">
-      <img class="det-cover" src="${a.cover||''}" alt="${title}" onerror="this.src='https://placehold.co/100x150/0d1120/00d4ff?text=NO+IMG'"/>
-      <div class="det-info">
-        <div class="det-title">${title}</div>
-        <div class="det-badges">
-          ${a.format ? `<div class="det-badge neon">${a.format}</div>` : ''}
-          ${a.status ? `<div class="det-badge">${a.status}</div>` : ''}
-          ${a.episodes ? `<div class="det-badge">${a.episodes} EPS</div>` : ''}
-          ${a.season ? `<div class="det-badge">${a.season} ${a.year||''}</div>` : ''}
-        </div>
-        ${score ? `<div class="det-score-row"><div class="det-score">${score}</div><div class="det-score-lbl">/ 10<br>Rating</div></div>` : ''}
-        ${a.ep ? `<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);margin-top:4px"><i class="fas fa-clock" style="margin-right:4px"></i>EP ${a.ep} airing soon</div>` : ''}
-      </div>
-    </div>
-    ${(a.genres||[]).length ? `<div class="det-genres">${a.genres.map(g=>`<div class="det-genre-tag">${g}</div>`).join('')}</div>` : ''}
-    <div class="det-synopsis-title">Synopsis</div>
-    <div class="det-synopsis">${desc}</div>
-    <a href="https://anilist.co/anime/${a.id}" target="_blank" class="det-source-btn" style="margin-top:4px"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>
+    ${d.id?`<a href="https://anilist.co/anime/${d.id}" target="_blank" class="det-source-btn"><i class="fas fa-external-link-alt"></i> VIEW SOURCE ON ANILIST</a>`:''}
   `);
 }
 
 // ── SHARE ──
-function doShare(uid, url, title, el){
-  shareCountsStore[uid] = (shareCountsStore[uid]||0) + 1;
-  saveShareCounts();
-  const sc = document.getElementById(uid+'-sc');
-  if(sc) sc.textContent = shareCountsStore[uid] + ' share' + (shareCountsStore[uid]>1?'s':'');
-  const raw = decodeURIComponent(url);
-  if(navigator.share){ navigator.share({title:decodeURIComponent(title),url:raw}).catch(()=>{}); }
-  else { navigator.clipboard?.writeText(raw); toast('Link copied!','success'); }
+function doShare(uid,title,el){
+  shareCountsStore[uid]=(shareCountsStore[uid]||0)+1; saveShares();
+  const sc=document.getElementById(uid+'-sc');
+  if(sc) sc.textContent=shareCountsStore[uid]+' share'+(shareCountsStore[uid]>1?'s':'');
+  const url='https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/app.html';
+  if(navigator.share){ navigator.share({title,url}).catch(()=>{}); }
+  else{ navigator.clipboard?.writeText(url); toast('Link copied!','success'); }
+}
+function shareWA(title){
+  const url='https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/app.html';
+  window.open(`https://wa.me/?text=${encodeURIComponent(title+' — ANICADE '+url)}`,'_blank');
+}
+function shareTG(title){
+  const url='https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/app.html';
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,'_blank');
 }
 
-// ── TRENDING ──
+// ── ESCAPE HTML ATTR ──
+function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ══════════════════════════
+//  ANIME DETAIL
+// ══════════════════════════
+function openAnimeDetail(k){
+  const a=unstash(k);
+  const title=a.english||a.romaji||'Unknown';
+  const desc=(a.description||'').replace(/<[^>]+>/g,'').trim()||'No synopsis.';
+  const score=a.score?(a.score/10).toFixed(1):null;
+  openOverlay(`
+    <div class="det-header">
+      <img class="det-cover" src="${a.cover||''}" alt="${escH(title)}" onerror="this.src='https://placehold.co/100x150/0d1120/00d4ff?text=N/A'"/>
+      <div class="det-info">
+        <div class="det-title">${escH(title)}</div>
+        <div class="det-badges" style="margin-top:6px">
+          ${a.format?`<div class="det-badge neon">${a.format}</div>`:''}
+          ${a.status?`<div class="det-badge">${a.status.replace(/_/g,' ')}</div>`:''}
+          ${a.episodes?`<div class="det-badge">${a.episodes} EPS</div>`:''}
+          ${a.season?`<div class="det-badge">${a.season} ${a.year||''}</div>`:''}
+        </div>
+        ${score?`<div class="det-score-row" style="margin-top:8px"><div class="det-score">★ ${score}</div><div class="det-score-lbl" style="margin-left:6px">/ 10</div></div>`:''}
+        ${a.ep?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);margin-top:6px"><i class="fas fa-clock" style="margin-right:4px"></i>EP ${a.ep} airing soon</div>`:''}
+      </div>
+    </div>
+    ${(a.genres||[]).length?`<div class="det-genres">${a.genres.map(g=>`<div class="det-genre-tag">${escH(g)}</div>`).join('')}</div>`:''}
+    <div class="det-synopsis-title">Synopsis</div>
+    <div class="det-synopsis">${escH(desc)}</div>
+    ${a.id?`<a href="https://anilist.co/anime/${a.id}" target="_blank" class="det-source-btn" style="margin-top:14px"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>`:''}
+  `);
+}
+
+// ══════════════════════════
+//  TRENDING
+// ══════════════════════════
 async function loadTrending(){
-  const q = `query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode airingAt}status season seasonYear}}}`;
+  const container=document.getElementById('homeTrending');
   try{
-    const d = await anilist(q);
-    const items = d.data.Page.media || [];
-    document.getElementById('homeTrending').innerHTML = items.map(a => {
-      const title = a.title?.english||a.title?.romaji||'Unknown';
-      const cover = a.coverImage?.large||'';
-      const score = a.averageScore ? (a.averageScore/10).toFixed(1) : null;
-      const ep = a.nextAiringEpisode?.episode;
-      const payload = JSON.stringify({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres,episodes:a.episodes,description:a.description,ep,status:a.status,season:a.season,year:a.seasonYear}).replace(/"/g,'&quot;');
-      return `<div class="anime-chip" onclick="openAnimeDetail('${payload}')">
+    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status season seasonYear}}}`;
+    const d=await anilist(q);
+    const items=d.data.Page.media||[];
+    container.innerHTML=items.map(a=>{
+      const title=a.title?.english||a.title?.romaji||'Unknown';
+      const cover=a.coverImage?.large||'';
+      const score=a.averageScore?(a.averageScore/10).toFixed(1):null;
+      const ep=a.nextAiringEpisode?.episode;
+      const k=stash({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres||[],episodes:a.episodes,description:a.description||'',ep,status:a.status,season:a.season,year:a.seasonYear});
+      return `<div class="anime-chip" onclick="openAnimeDetail('${k}')">
         <div class="anime-chip-frame">
-          <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/110x155/0d1120/00d4ff?text=N/A'"/>
-          ${score ? `<div class="chip-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>` : ''}
-          ${a.format ? `<div class="chip-fmt">${a.format}</div>` : ''}
+          <img src="${cover}" alt="${escH(title)}" loading="lazy" onerror="this.src='https://placehold.co/110x155/0d1120/00d4ff?text=N/A'"/>
+          ${score?`<div class="chip-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>`:''}
+          ${a.format?`<div class="chip-fmt">${a.format}</div>`:''}
           <div class="chip-overlay">
-            <div class="chip-name">${title}</div>
-            ${ep ? `<div class="chip-ep"><i class="fas fa-clock" style="font-size:8px"></i> EP${ep}</div>` : ''}
+            <div class="chip-name">${escH(title)}</div>
+            ${ep?`<div class="chip-ep"><i class="fas fa-clock" style="font-size:8px"></i> EP${ep}</div>`:''}
           </div>
         </div>
       </div>`;
     }).join('');
-  } catch(e){}
+  }catch(e){
+    container.innerHTML='<div style="padding:20px;color:var(--muted);font-size:13px">Could not load trending anime.</div>';
+  }
 }
 
-// ── SEASONAL ──
+// ══════════════════════════
+//  SEASONAL
+// ══════════════════════════
 async function loadSeasonal(){
-  const seasons = ['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
-  const season = seasons[new Date().getMonth()], year = new Date().getFullYear();
-  document.getElementById('seasonBadge').textContent = season + ' ' + year;
-  const q = `query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status}}}`;
+  const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
+  const season=seasons[new Date().getMonth()], year=new Date().getFullYear();
+  document.getElementById('seasonBadge').textContent=season+' '+year;
+  const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status}}}`;
   try{
-    const d = await anilist(q);
-    const items = d.data.Page.media || [];
-    document.getElementById('homeSeasonGrid').innerHTML = items.map(a => {
-      const title = a.title?.english||a.title?.romaji||'Unknown';
-      const cover = a.coverImage?.large||'';
-      const score = a.averageScore ? (a.averageScore/10).toFixed(1) : null;
-      const ep = a.nextAiringEpisode?.episode;
-      const genres = (a.genres||[]).slice(0,2).join(' · ');
-      const payload = JSON.stringify({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres,episodes:a.episodes,description:a.description,ep,status:a.status,season,year}).replace(/"/g,'&quot;');
-      return `<div class="season-card" onclick="openAnimeDetail('${payload}')">
+    const d=await anilist(q);
+    const items=d.data.Page.media||[];
+    document.getElementById('homeSeasonGrid').innerHTML=items.map(a=>{
+      const title=a.title?.english||a.title?.romaji||'Unknown';
+      const cover=a.coverImage?.large||'';
+      const score=a.averageScore?(a.averageScore/10).toFixed(1):null;
+      const ep=a.nextAiringEpisode?.episode;
+      const genres=(a.genres||[]).slice(0,2).join(' · ');
+      const k=stash({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres||[],episodes:a.episodes,description:a.description||'',ep,status:a.status,season,year});
+      return `<div class="season-card" onclick="openAnimeDetail('${k}')">
         <div class="season-frame">
-          <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/200x300/0d1120/00d4ff?text=N/A'"/>
-          ${score ? `<div class="season-score">${score}</div>` : ''}
-          ${a.format ? `<div class="season-fmt">${a.format}</div>` : ''}
+          <img src="${cover}" alt="${escH(title)}" loading="lazy" onerror="this.src='https://placehold.co/200x300/0d1120/00d4ff?text=N/A'"/>
+          ${score?`<div class="season-score">${score}</div>`:''}
+          ${a.format?`<div class="season-fmt">${a.format}</div>`:''}
           <div class="season-overlay">
-            <div class="season-name">${title}</div>
-            <div class="season-meta">${genres}${ep?' · EP '+ep:''}</div>
+            <div class="season-name">${escH(title)}</div>
+            <div class="season-meta">${escH(genres)}${ep?' · EP'+ep:''}</div>
           </div>
         </div>
       </div>`;
     }).join('');
-  } catch(e){}
+  }catch(e){}
 }
 
-// ── MANGA ──
-const MANGA_GENRES = ['Action','Adventure','Comedy','Drama','Fantasy','Horror','Mystery','Romance','Sci-Fi','Slice of Life','Supernatural','Thriller','Sports','Psychological','Historical'];
+// ══════════════════════════
+//  MANGA
+// ══════════════════════════
+const MANGA_GENRES=['Action','Adventure','Comedy','Drama','Fantasy','Horror','Mystery','Romance','Sci-Fi','Slice of Life','Supernatural','Thriller','Sports','Psychological','Historical'];
 
 function buildMangaGenres(){
-  document.getElementById('mangaGenres').innerHTML = ['All',...MANGA_GENRES].map(g =>
+  document.getElementById('mangaGenres').innerHTML=['All',...MANGA_GENRES].map(g=>
     `<div class="genre-pill${g==='All'?' active':''}" onclick="selectMangaGenre('${g}',this)">${g}</div>`
   ).join('');
 }
 
-function selectMangaGenre(g, el){
-  document.querySelectorAll('.genre-pill').forEach(p => p.classList.remove('active'));
+function selectMangaGenre(g,el){
+  document.querySelectorAll('.genre-pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
-  mangaGenre = g === 'All' ? '' : g;
-  mangaPage = 1;
-  loadManga(true);
+  mangaGenre=g==='All'?'':g;
+  mangaPage=1; loadManga(true);
 }
 
 async function loadManga(reset=false){
   if(mangaLoading) return;
-  mangaLoading = true;
-  const grid = document.getElementById('mangaGrid');
-  if(reset){ grid.innerHTML = ''; mangaPage = 1; }
-  const genreFilter = mangaGenre ? `,genre_in:["${mangaGenre}"]` : '';
-  const searchFilter = mangaQuery ? `,search:"${mangaQuery}"` : '';
-  const q = `query{Page(page:${mangaPage},perPage:18){media(type:MANGA,sort:POPULARITY_DESC${genreFilter}${searchFilter}){id title{english romaji}coverImage{large medium}averageScore chapters genres}}}`;
+  mangaLoading=true;
+  const grid=document.getElementById('mangaGrid');
+  if(reset){ grid.innerHTML=''; mangaPage=1; }
+  const gf=mangaGenre?`,genre_in:["${mangaGenre}"]`:'';
+  const sf=mangaQuery?`,search:"${mangaQuery}"`:'';
+  const q=`query{Page(page:${mangaPage},perPage:18){media(type:MANGA,sort:POPULARITY_DESC${gf}${sf}){id title{english romaji}coverImage{large medium}averageScore chapters genres}}}`;
   try{
-    const d = await anilist(q);
-    const items = d.data.Page.media || [];
-    if(!items.length && reset){ grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">No manga found.</div>'; mangaLoading=false; return; }
-    items.forEach(m => {
-      const title = m.title?.english||m.title?.romaji||'Unknown';
-      const cover = m.coverImage?.large||m.coverImage?.medium||'';
-      const score = m.averageScore ? (m.averageScore/10).toFixed(1) : null;
-      const ch = m.chapters ? m.chapters+'ch' : '—';
-      const payload = JSON.stringify({id:m.id,title,cover,score:m.averageScore,chapters:m.chapters,genres:m.genres}).replace(/"/g,'&quot;');
-      const card = document.createElement('div');
-      card.className = 'manga-card';
-      card.setAttribute('onclick', `openMangaDetail('${payload}')`);
-      card.innerHTML = `<div class="manga-frame">
-        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/120x180/0d1120/00d4ff?text=N/A'"/>
-        ${score ? `<div class="manga-score-sm">${score}</div>` : ''}
+    const d=await anilist(q);
+    const items=d.data.Page.media||[];
+    if(!items.length&&reset){ grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">No manga found.</div>'; mangaLoading=false; return; }
+    items.forEach(m=>{
+      const title=m.title?.english||m.title?.romaji||'Unknown';
+      const cover=m.coverImage?.large||m.coverImage?.medium||'';
+      const score=m.averageScore?(m.averageScore/10).toFixed(1):null;
+      const ch=m.chapters?m.chapters+'ch':'—';
+      const k=stash({id:m.id,title,cover,score:m.averageScore,chapters:m.chapters,genres:m.genres||[]});
+      const card=document.createElement('div');
+      card.className='manga-card';
+      card.onclick=()=>openMangaDetail(k);
+      card.innerHTML=`<div class="manga-frame">
+        <img src="${cover}" alt="${escH(title)}" loading="lazy" onerror="this.src='https://placehold.co/120x180/0d1120/00d4ff?text=N/A'"/>
+        ${score?`<div class="manga-score-sm">${score}</div>`:''}
         <div class="manga-ov">
-          <div class="manga-name-sm">${title}</div>
+          <div class="manga-name-sm">${escH(title)}</div>
           <div class="manga-ch-sm">${ch}</div>
         </div>
       </div>`;
       grid.appendChild(card);
     });
     mangaPage++;
-  } catch(e){ if(reset) grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load manga.</div>'; }
-  mangaLoading = false;
+  }catch(e){ if(reset) grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load manga.</div>'; }
+  mangaLoading=false;
 }
 
-document.getElementById('mangaLoadMore').addEventListener('click', () => loadManga());
-document.getElementById('mangaSearchBtn').addEventListener('click', () => {
-  mangaQuery = document.getElementById('mangaSearchInput').value.trim();
-  mangaPage = 1; loadManga(true);
-});
-document.getElementById('mangaSearchInput').addEventListener('keydown', e => {
-  if(e.key === 'Enter'){ mangaQuery = e.target.value.trim(); mangaPage=1; loadManga(true); }
-});
+document.getElementById('mangaLoadMore').addEventListener('click',()=>loadManga());
+document.getElementById('mangaSearchBtn').addEventListener('click',()=>{ mangaQuery=document.getElementById('mangaSearchInput').value.trim(); mangaPage=1; loadManga(true); });
+document.getElementById('mangaSearchInput').addEventListener('keydown',e=>{ if(e.key==='Enter'){ mangaQuery=e.target.value.trim(); mangaPage=1; loadManga(true); } });
 
 // ── MANGA DETAIL ──
-async function openMangaDetail(d){
-  if(typeof d === 'string') d = JSON.parse(d.replace(/&quot;/g,'"'));
+async function openMangaDetail(k){
+  const d=unstash(k);
+  currentMangaData=d;
   openOverlay(`<div class="reader-loading"><div class="spinner"></div><br><br>Loading manga info…</div>`);
   try{
-    // get full details + chapters via MangaDex
-    const mdId = await mdxFindId(d.title);
-    let chapters = [];
-    if(mdId) chapters = await mdxGetChapters(mdId);
-    // fallback ComicK
-    if(!chapters.length){ const ckId = await ckFindId(d.title); if(ckId) chapters = await ckGetChapters(ckId); }
-    currentChapters = chapters;
-    currentMangaTitle = d.title;
-    const score = d.score ? (d.score/10).toFixed(1) : null;
-    openOverlay(`
-      <img class="manga-detail-cover" src="${d.cover||''}" alt="${d.title||''}" onerror="this.style.display='none'"/>
-      <div class="det-title" style="margin-bottom:6px">${d.title||'Unknown'}</div>
-      <div class="det-badges" style="margin-bottom:10px">
-        ${score?`<div class="det-badge neon">★ ${score}</div>`:''}
-        ${d.chapters?`<div class="det-badge">${d.chapters} CH</div>`:''}
-        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${g}</div>`).join('')}
-      </div>
-      <a href="https://anilist.co/manga/${d.id}" target="_blank" class="det-source-btn" style="margin-bottom:14px"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>
-      <div class="sec-label" style="margin-top:0;margin-bottom:10px"><span>CHAPTERS</span><div class="badge">${chapters.length ? chapters.length+' found' : 'Via MangaDex / ComicK'}</div></div>
-      ${chapters.length ? `<div class="chapter-list">${chapters.slice(0,40).map((c,i) => `
-        <div class="chapter-item" onclick="openReader(${i})">
-          <div>
-            <div class="chapter-num">Chapter ${c.num||c.ch||i+1}${c.title?' — '+c.title:''}</div>
-            <div class="chapter-src">${c.source||'MangaDex'}</div>
-          </div>
-          <i class="fas fa-book-open ch-arrow"></i>
-        </div>`).join('')}</div>`
-      : `<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px"><i class="fas fa-info-circle" style="display:block;font-size:24px;margin-bottom:8px;color:var(--border)"></i>No chapters found in reader APIs.<br>Try viewing on AniList above.</div>`}
-    `);
-  } catch(e){
+    let chapters=[];
+    // Try MangaDex first
+    const mdId=await mdxFindId(d.title);
+    if(mdId) chapters=await mdxGetChapters(mdId);
+    // Fallback ComicK
+    if(!chapters.length){ const ckId=await ckFindId(d.title); if(ckId) chapters=await ckGetChapters(ckId); }
+    currentChapters=chapters;
+    currentMangaTitle=d.title;
+    renderMangaDetail(d,chapters);
+  }catch(e){
     openOverlay(`<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Could not load manga details.</div>`);
   }
 }
 
-// ── READER ──
-async function openReader(idx){
-  currentChapIdx = idx;
-  const ch = currentChapters[idx];
-  if(!ch) return;
-  overlayContent.innerHTML = `<div class="reader-loading"><div class="spinner"></div><br><br>Loading pages…</div>`;
-  try{
-    let pages = [];
-    if(ch.source === 'MangaDex' || !ch.source){ pages = await mdxGetPages(ch); }
-    if(!pages.length && ch.source === 'ComicK'){ pages = await ckGetPages(ch); }
-    if(!pages.length){ pages = await ckGetPages(ch); }
-    if(!pages.length){ overlayContent.innerHTML = `<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Could not load pages for this chapter.</div>`; return; }
-    overlayContent.innerHTML = `
-      <div class="reader-topbar">
-        <button class="reader-back" onclick="openMangaDetailById()"><i class="fas fa-arrow-left"></i></button>
-        <div class="reader-title">${currentMangaTitle} — Ch.${ch.num||ch.ch||idx+1}</div>
-      </div>
-      <div class="reader-pages" id="readerPages">${pages.map((p,i)=>`<img class="reader-page-img" src="${p}" alt="Page ${i+1}" loading="lazy" onerror="this.style.opacity='.3'"/>`).join('')}</div>
-      <div class="reader-nav">
-        ${idx>0 ? `<button class="reader-nav-btn" onclick="openReader(${idx-1})"><i class="fas fa-chevron-left"></i> PREV</button>` : '<div></div>'}
-        ${idx<currentChapters.length-1 ? `<button class="reader-nav-btn primary" onclick="openReader(${idx+1})">NEXT <i class="fas fa-chevron-right"></i></button>` : ''}
-      </div>`;
-  } catch(e){
-    overlayContent.innerHTML = `<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Failed to load pages.</div>`;
-  }
+// ── FAVORITES (localStorage) ──
+const FAV_KEY='anicade_manga_favs';
+function getFavs(){try{return JSON.parse(localStorage.getItem(FAV_KEY)||'{}')}catch(e){return{}}}
+function isFav(id){return!!getFavs()[id]}
+function toggleFav(id,title,cover){
+  const favs=getFavs();
+  if(favs[id]){delete favs[id];toast('Removed from favorites');}
+  else{favs[id]={id,title,cover,added:Date.now()};toast('Added to favorites ★','success');}
+  localStorage.setItem(FAV_KEY,JSON.stringify(favs));
+  return!!favs[id];
 }
 
-function openMangaDetailById(){
-  // go back to chapter list — re-render with cached data
-  if(!currentChapters.length){ closeOverlay(); return; }
+// ── READ HISTORY ──
+const READ_KEY='anicade_read';
+function getReadMap(){try{return JSON.parse(localStorage.getItem(READ_KEY)||'{}')}catch(e){return{}}}
+function markRead(mangaId,chIdx){
+  const m=getReadMap();if(!m[mangaId])m[mangaId]={};
+  m[mangaId][chIdx]=Date.now();localStorage.setItem(READ_KEY,JSON.stringify(m));
+}
+
+function renderMangaDetail(d,chapters){
+  const score=d.score?(d.score/10).toFixed(1):null;
+  const fav=isFav(d.id);
+  const readMap=(getReadMap()[d.id])||{};
   openOverlay(`
-    <div class="sec-label" style="margin-top:4px;margin-bottom:10px"><span>← ${currentMangaTitle}</span></div>
-    <div class="chapter-list">${currentChapters.slice(0,40).map((c,i)=>`
-      <div class="chapter-item" onclick="openReader(${i})">
-        <div><div class="chapter-num">Chapter ${c.num||c.ch||i+1}${c.title?' — '+c.title:''}</div><div class="chapter-src">${c.source||'MangaDex'}</div></div>
-        <i class="fas fa-book-open ch-arrow"></i>
-      </div>`).join('')}
+    <img class="manga-detail-cover" src="${d.cover||''}" alt="${escH(d.title||'')}" onerror="this.style.display='none'"/>
+    <div class="det-title" style="margin-bottom:6px">${escH(d.title||'Unknown')}</div>
+    <div class="det-badges" style="margin-bottom:10px">
+      ${score?`<div class="det-badge neon">\u2605 ${score}</div>`:''}
+      ${d.chapters?`<div class="det-badge">${d.chapters} CH</div>`:''}
+      ${(d.genres||[]).slice(0,4).map(g=>`<div class="det-badge">${escH(g)}</div>`).join('')}
     </div>
+    <div class="manga-action-row">
+      <button class="manga-action-btn${fav?' fav-active':''}" id="favBtn" onclick="doToggleFav(${d.id},'${escH(d.title||'')}\ ','${d.cover||''}')">
+        <i class="fas fa-star"></i> ${fav?'SAVED':'FAVORITE'}
+      </button>
+      ${d.id?`<a href="https://anilist.co/manga/${d.id}" target="_blank" class="manga-action-btn" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> ANILIST</a>`:'<div></div>'}
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--paper)">CHAPTERS</div>
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--neon);background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);padding:2px 8px">
+        ${chapters.length?chapters.length+' chapters':'No chapters found'}
+      </div>
+    </div>
+    ${chapters.length?
+      `<div class="chapter-list">${chapters.slice(0,80).map((c,i)=>{
+        const read=!!(readMap[i]);
+        return `<div class="chapter-item${read?' read':''}" onclick="launchReader(${i})">
+          <div>
+            <div class="chapter-num">Chapter ${escH(String(c.num||c.ch||i+1))}${c.title?' \u2014 '+escH(c.title.slice(0,30)):''}</div>
+            <div class="chapter-src">${c.source||'MangaDex'}</div>
+          </div>
+          <div class="ch-right">
+            ${read?'<div class="ch-read-dot"></div>':''}<i class="fas fa-book-open ch-arrow"></i>
+          </div>
+        </div>`;
+      }).join('')}</div>` :
+      `<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">
+        <i class="fas fa-info-circle" style="display:block;font-size:28px;margin-bottom:10px;color:var(--border)"></i>
+        No chapters found via MangaDex or ComicK.
+      </div>`
+    }
   `);
 }
 
-// ── MANGADEX API ──
-const CORS = [
-  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
-  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u => u
+function doToggleFav(id,title,cover){
+  const now=toggleFav(id,title,cover);
+  const btn=document.getElementById('favBtn');
+  if(btn){btn.className='manga-action-btn'+(now?' fav-active':'');btn.innerHTML=`<i class="fas fa-star"></i> ${now?'SAVED':'FAVORITE'}`;}
+}
+
+// ── FULL PAGE READER ──
+const fullReader=document.getElementById('fullReader');
+const readerScrollEl=document.getElementById('readerScroll');
+const readerPagesEl=document.getElementById('readerPages');
+const readerTitleEl=document.getElementById('readerTitle');
+const readerInfoEl=document.getElementById('readerInfo');
+const readerProgressEl=document.getElementById('readerProgress');
+const readerPrevBtn=document.getElementById('readerPrevBtn');
+const readerNextBtn=document.getElementById('readerNextBtn');
+
+function openFullReader(){fullReader.classList.add('open');document.body.style.overflow='hidden';}
+function closeFullReader(){fullReader.classList.remove('open');document.body.style.overflow='';}
+
+document.getElementById('readerBackBtn').addEventListener('click',()=>{
+  closeFullReader();
+  if(currentMangaData&&currentChapters.length) renderMangaDetail(currentMangaData,currentChapters);
+});
+
+readerScrollEl.addEventListener('scroll',()=>{
+  const el=readerScrollEl;
+  const pct=el.scrollHeight-el.clientHeight>0?(el.scrollTop/(el.scrollHeight-el.clientHeight))*100:100;
+  readerProgressEl.style.width=pct+'%';
+});
+
+async function launchReader(idx){
+  const ch=currentChapters[idx];
+  if(!ch)return;
+  if(currentMangaData&&currentMangaData.id) markRead(currentMangaData.id,idx);
+  closeOverlay();
+  readerTitleEl.textContent=`${currentMangaTitle} — Ch.${ch.num||ch.ch||idx+1}`;
+  readerInfoEl.textContent='';
+  readerPagesEl.innerHTML='<div class="reader-loading"><div class="spinner"></div><br><br>Loading pages\u2026</div>';
+  readerScrollEl.scrollTop=0;
+  readerProgressEl.style.width='0%';
+  openFullReader();
+  readerPrevBtn.disabled=idx<=0;
+  readerNextBtn.disabled=idx>=currentChapters.length-1;
+  readerPrevBtn.onclick=()=>launchReader(idx-1);
+  readerNextBtn.onclick=()=>launchReader(idx+1);
+  document.getElementById('readerDlBtn').onclick=()=>startDownload(idx);
+  try{
+    let pages=[];
+    if(ch.source==='MangaDex'||!ch.source) pages=await mdxGetPages(ch);
+    if(!pages.length) pages=await ckGetPages(ch);
+    if(!pages.length){
+      readerPagesEl.innerHTML='<div class="reader-loading"><i class="fas fa-exclamation-triangle" style="font-size:28px;display:block;margin-bottom:10px;color:var(--border)"></i>Pages unavailable for this chapter.</div>';
+      return;
+    }
+    readerInfoEl.textContent=`${pages.length}p`;
+    readerPagesEl.innerHTML=pages.map((p,i)=>
+      `<img class="reader-page-img" src="${p}" alt="Page ${i+1}" loading="${i<3?'eager':'lazy'}" onerror="this.style.opacity='.15'"/>`
+    ).join('');
+    readerScrollEl.scrollTop=0;
+  }catch(e){
+    readerPagesEl.innerHTML='<div class="reader-loading">Failed to load pages.</div>';
+  }
+}
+
+// ── DOWNLOAD ──
+async function startDownload(idx){
+  const ch=currentChapters[idx];if(!ch)return;
+  const dlModal=document.getElementById('dlModal');
+  const dlFill=document.getElementById('dlFill');
+  const dlStatus=document.getElementById('dlStatus');
+  const dlSub=document.getElementById('dlSub');
+  dlSub.textContent=`${currentMangaTitle} — Chapter ${ch.num||ch.ch||idx+1}`;
+  dlFill.style.width='0%';dlFill.style.background='var(--neon)';
+  dlStatus.textContent='Fetching pages\u2026';
+  dlModal.classList.add('open');
+  try{
+    let pages=[];
+    if(ch.source==='MangaDex'||!ch.source) pages=await mdxGetPages(ch);
+    if(!pages.length) pages=await ckGetPages(ch);
+    if(!pages.length){dlStatus.textContent='No pages to download.';return;}
+    let done=0;const total=pages.length;
+    for(let i=0;i<total;i++){
+      try{
+        const res=await fetch(pages[i]);const blob=await res.blob();
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+        a.download=`${currentMangaTitle}_Ch${ch.num||ch.ch||idx+1}_Page${i+1}.jpg`.replace(/[^a-z0-9_.]/gi,'_');
+        a.click();URL.revokeObjectURL(a.href);
+      }catch(e){}
+      done++;
+      dlFill.style.width=Math.round((done/total)*100)+'%';
+      dlStatus.textContent=`${done} / ${total} pages`;
+      await new Promise(r=>setTimeout(r,100));
+    }
+    dlStatus.textContent=`\u2713 All ${total} pages downloaded!`;
+    dlFill.style.background='#22c55e';
+  }catch(e){dlStatus.textContent='Download failed.';}
+}
+document.getElementById('dlCloseBtn').addEventListener('click',()=>{
+  document.getElementById('dlModal').classList.remove('open');
+});
+
+// ══════════════════════════
+//  MANGADEX API
+// ══════════════════════════
+const CORS_PROXIES=[
+  u=>`https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u=>u
 ];
 async function corsGet(url){
-  for(const fn of CORS){
-    try{ const r = await fetch(fn(url), {signal:AbortSignal.timeout(7000)}); if(r.ok){ const t=await r.text(); return JSON.parse(t); } }catch(e){}
+  for(const fn of CORS_PROXIES){
+    try{
+      const r=await fetch(fn(url),{signal:AbortSignal.timeout(8000)});
+      if(r.ok){ const t=await r.text(); return JSON.parse(t); }
+    }catch(e){}
   }
-  throw new Error('All CORS failed');
+  throw new Error('All CORS proxies failed');
 }
-
 async function mdxFindId(title){
-  try{
-    const d = await corsGet(`https://api.mangadex.org/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive`);
-    return d?.data?.[0]?.id || null;
-  } catch(e){ return null; }
+  try{ const d=await corsGet(`https://api.mangadex.org/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive`); return d?.data?.[0]?.id||null; }
+  catch(e){ return null; }
 }
 async function mdxGetChapters(id){
-  try{
-    const d = await corsGet(`https://api.mangadex.org/manga/${id}/feed?limit=50&translatedLanguage[]=en&order[chapter]=asc&contentRating[]=safe`);
-    return (d?.data||[]).map(c=>({id:c.id,num:c.attributes?.chapter,title:c.attributes?.title||'',source:'MangaDex',_raw:c}));
-  } catch(e){ return []; }
+  try{ const d=await corsGet(`https://api.mangadex.org/manga/${id}/feed?limit=96&translatedLanguage[]=en&order[chapter]=asc&contentRating[]=safe&contentRating[]=suggestive`); return(d?.data||[]).map(c=>({id:c.id,num:c.attributes?.chapter,title:c.attributes?.title||'',source:'MangaDex'})); }
+  catch(e){ return []; }
 }
 async function mdxGetPages(ch){
-  try{
-    const d = await corsGet(`https://api.mangadex.org/at-home/server/${ch.id}`);
-    if(!d?.chapter) return [];
-    const base = d.baseUrl + '/data/' + d.chapter.hash + '/';
-    return (d.chapter.data||[]).map(p => base+p);
-  } catch(e){ return []; }
+  try{ const d=await corsGet(`https://api.mangadex.org/at-home/server/${ch.id}`); if(!d?.chapter) return []; const base=d.baseUrl+'/data/'+d.chapter.hash+'/'; return(d.chapter.data||[]).map(p=>base+p); }
+  catch(e){ return []; }
 }
 
-// ── COMICK API ──
+// ══════════════════════════
+//  COMICK API
+// ══════════════════════════
 async function ckFindId(title){
-  try{
-    const d = await corsGet(`https://api.comick.fun/v1.0/search?q=${encodeURIComponent(title)}&limit=1`);
-    return d?.[0]?.hid || null;
-  } catch(e){ return null; }
+  try{ const d=await corsGet(`https://api.comick.fun/v1.0/search?q=${encodeURIComponent(title)}&limit=1`); return d?.[0]?.hid||null; }
+  catch(e){ return null; }
 }
 async function ckGetChapters(hid){
-  try{
-    const d = await corsGet(`https://api.comick.fun/comic/${hid}/chapters?lang=en&limit=50`);
-    return (d?.chapters||[]).map(c=>({id:c.hid,ch:c.chap,num:c.chap,title:c.title||'',source:'ComicK'}));
-  } catch(e){ return []; }
+  try{ const d=await corsGet(`https://api.comick.fun/comic/${hid}/chapters?lang=en&limit=96`); return(d?.chapters||[]).map(c=>({id:c.hid,ch:c.chap,num:c.chap,title:c.title||'',source:'ComicK'})); }
+  catch(e){ return []; }
 }
 async function ckGetPages(ch){
-  try{
-    const d = await corsGet(`https://api.comick.fun/chapter/${ch.id}`);
-    return (d?.chapter?.images||[]).map(i=>i.url).filter(Boolean);
-  } catch(e){ return []; }
+  try{ const d=await corsGet(`https://api.comick.fun/chapter/${ch.id}`); return(d?.chapter?.images||[]).map(i=>i.url).filter(Boolean); }
+  catch(e){ return []; }
 }
 
-// ── UPCOMING EVENT ──
+// ══════════════════════════
+//  EVENTS — UPCOMING
+// ══════════════════════════
 async function loadUpcoming(){
-  const q = `query{Page(perPage:5){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}description(asHtml:false)startDate{year month day}}}}`;
+  const q=`query{Page(perPage:5){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}description(asHtml:false)startDate{year month day}}}}`;
   try{
-    const d = await anilist(q);
-    const a = (d.data.Page.media||[]).find(m=>m.startDate?.year);
+    const d=await anilist(q);
+    const a=(d.data.Page.media||[]).find(m=>m.startDate?.year);
     if(!a) return;
-    const title = a.title?.english||a.title?.romaji||'Upcoming Anime';
-    const desc = (a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,140)+'…';
-    const sd = a.startDate;
-    const dateStr = sd.year ? `${sd.year}-${String(sd.month||1).padStart(2,'0')}-${String(sd.day||1).padStart(2,'0')}` : '';
-    document.getElementById('ucTitle').textContent = title;
-    document.getElementById('ucDesc').textContent = desc;
-    document.getElementById('ucLinks').innerHTML = `<a href="https://anilist.co/anime/${a.id}" target="_blank" class="event-link-app"><span><i class="fas fa-external-link-alt" style="margin-right:6px"></i>View on AniList</span><i class="fas fa-chevron-right"></i></a>`;
+    const title=a.title?.english||a.title?.romaji||'Upcoming Anime';
+    const desc=(a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,140)+'…';
+    const sd=a.startDate;
+    const dateStr=sd.year?`${sd.year}-${String(sd.month||1).padStart(2,'0')}-${String(sd.day||1).padStart(2,'0')}`:'';
+    document.getElementById('ucTitle').textContent=title;
+    document.getElementById('ucDesc').textContent=desc;
+    document.getElementById('ucLinks').innerHTML=`<a href="https://anilist.co/anime/${a.id}" target="_blank" class="event-link-app"><span><i class="fas fa-external-link-alt" style="margin-right:6px"></i>View on AniList</span><i class="fas fa-chevron-right"></i></a>`;
     if(dateStr){
-      const target = new Date(dateStr+'T00:00:00').getTime();
-      document.getElementById('ucDate').innerHTML = `<i class="fas fa-calendar"></i> ${dateStr}`;
-      document.getElementById('ucCdRow').style.display = 'grid';
+      const target=new Date(dateStr+'T00:00:00').getTime();
+      document.getElementById('ucDate').innerHTML=`<i class="fas fa-calendar"></i> ${dateStr}`;
+      document.getElementById('ucCdRow').style.display='grid';
       function tickUC(){
-        const diff = target-Date.now();
+        const diff=target-Date.now();
         if(diff<=0){ document.getElementById('ucCdRow').style.display='none'; return; }
-        const setv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
-        setv('u-d',Math.floor(diff/86400000));
-        setv('u-h',Math.floor((diff%86400000)/3600000));
-        setv('u-m',Math.floor((diff%3600000)/60000));
-        setv('u-s',Math.floor((diff%60000)/1000));
+        const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+        sv('u-d',Math.floor(diff/86400000));
+        sv('u-h',Math.floor((diff%86400000)/3600000));
+        sv('u-m',Math.floor((diff%3600000)/60000));
+        sv('u-s',Math.floor((diff%60000)/1000));
       }
       tickUC(); setInterval(tickUC,1000);
     }
-  } catch(e){}
+  }catch(e){}
 }
 
 // ── GIVEAWAY COUNTDOWN ──
 (function(){
-  const target = new Date('2026-07-27T00:00:00').getTime();
+  const target=new Date('2026-07-27T00:00:00').getTime();
   function tick(){
-    const diff = target-Date.now();
-    if(diff<=0){ ['g-d','g-h','g-m','g-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';}); return; }
-    const setv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
-    setv('g-d',Math.floor(diff/86400000));
-    setv('g-h',Math.floor((diff%86400000)/3600000));
-    setv('g-m',Math.floor((diff%3600000)/60000));
-    setv('g-s',Math.floor((diff%60000)/1000));
+    const diff=target-Date.now();
+    if(diff<=0) return;
+    const sv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+    sv('g-d',Math.floor(diff/86400000));
+    sv('g-h',Math.floor((diff%86400000)/3600000));
+    sv('g-m',Math.floor((diff%3600000)/60000));
+    sv('g-s',Math.floor((diff%60000)/1000));
   }
   tick(); setInterval(tick,1000);
 })();
 
 // ── PWA INSTALL ──
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault(); deferredPrompt = e;
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
   if(!localStorage.getItem('pwa_dismissed'))
     setTimeout(()=>document.getElementById('installPopup').classList.add('show'),3500);
 });
-document.getElementById('installBtn').addEventListener('click', async () => {
+document.getElementById('installBtn').addEventListener('click',async()=>{
   document.getElementById('installPopup').classList.remove('show');
   if(deferredPrompt){ await deferredPrompt.prompt(); deferredPrompt=null; }
 });
-document.getElementById('installDismiss').addEventListener('click', () => {
+document.getElementById('installDismiss').addEventListener('click',()=>{
   document.getElementById('installPopup').classList.remove('show');
   localStorage.setItem('pwa_dismissed','1');
 });
