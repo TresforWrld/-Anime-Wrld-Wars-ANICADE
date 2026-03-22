@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="ANICADE"/>
 <link rel="apple-touch-icon" href="https://i.imgur.com/qgZhkhV.jpeg"/>
-<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="manifest" href="./manifest.webmanifest"/>
 <link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
@@ -510,7 +510,7 @@ body.light .overlay-sheet{background:#e4eaf6}
 
       <div class="sec-label"><span>CONTACT <span class="acc">DEVELOPER</span></span></div>
       <div class="contact-links">
-        <a href="mailto:tresforzulu@gmail.com" class="contact-link-row"><i class="fas fa-envelope"></i><div><div class="clr-name">Email</div><div class="clr-val">tresforzulu@gmail.com</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+        <a href="/cdn-cgi/l/email-protection#07737562746168757d726b7247606a666e6b2964686a" class="contact-link-row"><i class="fas fa-envelope"></i><div><div class="clr-name">Email</div><div class="clr-val"><span class="__cf_email__" data-cfemail="d5a1a7b0a6b3baa7afa0b9a095b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
         <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="contact-link-row"><i class="fab fa-whatsapp" style="color:#25d366"></i><div><div class="clr-name">WhatsApp</div><div class="clr-val">+260 777 083 995</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
         <a href="https://t.me/TresforWrld" target="_blank" class="contact-link-row"><i class="fab fa-telegram" style="color:#229ed9"></i><div><div class="clr-name">Telegram</div><div class="clr-val">@TresforWrld</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
         <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-link-row"><i class="fas fa-comment-slash"></i><div><div class="clr-name">Anonymous Feedback</div><div class="clr-val">via NGL · No login needed</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
@@ -547,7 +547,7 @@ body.light .overlay-sheet{background:#e4eaf6}
 <!-- TOAST -->
 <div class="toast-wrap" id="toastWrap"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── GLOBALS ──
 let dark = localStorage.getItem('anicade_theme') !== 'light';
 let mangaPage = 1, mangaGenre = '', mangaQuery = '', mangaLoading = false;
@@ -1040,7 +1040,7 @@ loadNews();
 loadTrending();
 loadSeasonal();
 
-if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
 </body>
 </html>
