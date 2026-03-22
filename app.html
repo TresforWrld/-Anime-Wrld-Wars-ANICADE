@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>ANICADE — App</title>
+<meta name="description" content="ANICADE — Anime news, manga reader, trending and community in one app."/>
+<meta property="og:title" content="ANICADE App"/>
+<meta property="og:image" content="https://i.imgur.com/qgZhkhV.jpeg"/>
+<meta name="theme-color" content="#00d4ff"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="ANICADE"/>
+<link rel="apple-touch-icon" href="https://i.imgur.com/qgZhkhV.jpeg"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="icon" href="https://i.imgur.com/qgZhkhV.jpeg" type="image/jpeg"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#06080f;--panel:#0d1120;--panel2:#111827;--panel3:#161f30;
+  --border:#1e2d4a;--paper:#e8eef8;--aged:#a8b8d0;--muted:#546480;
+  --neon:#00d4ff;--neon2:#0099cc;--neon-glow:rgba(0,212,255,.25);
+  --nav-h:60px;--bot-h:64px;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--ink);color:var(--paper);font-family:'Rajdhani',sans-serif;font-size:16px;overscroll-behavior:none;touch-action:pan-y}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(0,212,255,.012) 1px,transparent 1px);background-size:6px 6px;pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--neon);border-radius:2px}
+img{max-width:100%;display:block}
+
+/* ── TOP BAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;background:rgba(6,8,15,.97);border-bottom:2px solid var(--neon);backdrop-filter:blur(16px);padding:0 16px;box-shadow:0 0 28px rgba(0,212,255,.1)}
+.topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.topbar-logo{width:36px;height:36px;border-radius:6px;object-fit:cover;border:1px solid var(--neon);box-shadow:0 0 10px rgba(0,212,255,.3)}
+.topbar-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--paper)}
+.topbar-name span{color:var(--neon);text-shadow:0 0 10px var(--neon)}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-pill{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--neon);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:3px 8px;display:flex;align-items:center;gap:4px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--neon);animation:pulse 1.4s ease infinite;display:inline-block}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.icon-btn{width:38px;height:38px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.icon-btn:hover,.icon-btn.active{color:var(--neon);border-color:var(--neon);background:rgba(0,212,255,.12)}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;height:var(--bot-h);display:flex;background:rgba(6,8,15,.98);border-top:1px solid var(--border);backdrop-filter:blur(16px)}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--muted);transition:all .2s;-webkit-tap-highlight-color:transparent;padding:6px 0;position:relative}
+.bnav-item.active{color:var(--neon)}
+.bnav-item.active::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2px;background:var(--neon);box-shadow:0 0 8px var(--neon);border-radius:0 0 2px 2px}
+.bnav-item i{font-size:18px}
+.bnav-item span{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase}
+
+/* ── PAGE CONTAINER ── */
+.pages{position:fixed;top:var(--nav-h);bottom:var(--bot-h);left:0;right:0;overflow:hidden}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:none;opacity:0;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease}
+.page.active{display:block;opacity:1;transform:translateY(0)}
+.page-inner{padding:16px 14px 20px;max-width:600px;margin:0 auto}
+
+/* ── SECTION LABELS ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:14px;margin-top:4px}
+.sec-label::before{content:'';width:18px;height:2px;background:var(--neon);box-shadow:0 0 6px var(--neon);flex-shrink:0}
+.sec-label span{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--paper)}
+.sec-label .acc{color:var(--neon)}
+.sec-label .badge{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--neon);background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);padding:2px 6px;margin-left:auto}
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,var(--panel) 25%,var(--panel2) 50%,var(--panel) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:2px}
+@keyframes shimmer{to{background-position:-200% 0}}
+
+/* ══════════════════════════
+   HOME PAGE
+══════════════════════════ */
+/* Hero strip */
+.home-hero{background:linear-gradient(135deg,rgba(0,212,255,.08),transparent);border:1px solid var(--border);border-left:3px solid var(--neon);padding:18px 16px;margin-bottom:20px;position:relative;overflow:hidden;clip-path:polygon(0 0,98% 0,100% 4%,100% 100%,2% 100%,0 96%)}
+.home-hero::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 70%);pointer-events:none}
+.home-hero-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1;margin-bottom:4px}
+.home-hero-title .neon{color:var(--neon);text-shadow:0 0 16px rgba(0,212,255,.5)}
+.home-hero-sub{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.hstat{background:rgba(0,212,255,.06);border:1px solid var(--border);padding:8px;text-align:center}
+.hstat-val{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--neon);line-height:1}
+.hstat-lbl{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* News cards */
+.news-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.news-item{display:flex;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.news-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:background .2s}
+.news-item:active,.news-item:hover{background:rgba(0,212,255,.06);border-color:var(--neon)}
+.news-item:active::before,.news-item:hover::before{background:var(--neon)}
+.news-thumb{width:74px;height:74px;flex-shrink:0;object-fit:cover;background:var(--panel2)}
+.news-thumb-ph{width:74px;height:74px;flex-shrink:0;background:var(--panel2);display:flex;align-items:center;justify-content:center;color:var(--border);font-size:22px}
+.news-text{flex:1;min-width:0}
+.news-src{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:4px}
+.news-title-sm{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.5px;color:var(--paper);line-height:1.2;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-excerpt-sm{font-size:12px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-date-sm{font-family:'Space Mono',monospace;font-size:8px;color:var(--border);margin-top:5px}
+
+/* Trending horizontal scroll */
+.h-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;margin-bottom:24px;-webkit-overflow-scrolling:touch}
+.h-scroll::-webkit-scrollbar{display:none}
+.anime-chip{flex-shrink:0;width:110px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.anime-chip-frame{width:110px;height:155px;overflow:hidden;border:2px solid var(--border);position:relative;transition:border-color .2s;border-radius:2px}
+.anime-chip:active .anime-chip-frame,.anime-chip:hover .anime-chip-frame{border-color:var(--neon);box-shadow:0 0 14px rgba(0,212,255,.2)}
+.anime-chip img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.anime-chip:hover img{transform:scale(1.06)}
+.chip-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,15,.95) 0%,transparent 55%);padding:8px 6px;display:flex;flex-direction:column;justify-content:flex-end}
+.chip-score{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;padding:1px 5px;display:flex;align-items:center;gap:2px}
+.chip-fmt{position:absolute;top:5px;right:5px;background:var(--neon);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:9px;padding:1px 5px}
+.chip-name{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.5px;color:var(--paper);line-height:1.2}
+.chip-ep{font-family:'Space Mono',monospace;font-size:8px;color:var(--neon);margin-top:2px}
+
+/* Season 2-col grid */
+.season-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px}
+.season-card{cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}
+.season-frame{width:100%;aspect-ratio:2/3;overflow:hidden;border:2px solid var(--border);position:relative;transition:border-color .2s;border-radius:2px}
+.season-card:active .season-frame,.season-card:hover .season-frame{border-color:var(--neon);box-shadow:0 0 12px rgba(0,212,255,.18)}
+.season-frame img{width:100%;height:100%;object-fit:cover}
+.season-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,15,.97) 0%,rgba(6,8,15,.1) 55%,transparent 100%);padding:8px;display:flex;flex-direction:column;justify-content:flex-end}
+.season-name{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.5px;color:var(--paper);line-height:1.2}
+.season-meta{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);margin-top:2px}
+.season-score{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);font-family:'Space Mono',monospace;font-size:9px;padding:1px 5px}
+.season-fmt{position:absolute;top:6px;right:6px;background:var(--neon);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:9px;padding:1px 5px}
+
+/* ══════════════════════════
+   MANGA PAGE
+══════════════════════════ */
+.manga-search-bar{display:flex;gap:8px;margin-bottom:16px}
+.manga-search-input{flex:1;background:var(--panel);border:1px solid var(--border);color:var(--paper);font-family:'Rajdhani',sans-serif;font-size:15px;padding:10px 14px;outline:none;transition:border-color .2s;border-radius:2px}
+.manga-search-input:focus{border-color:var(--neon);box-shadow:0 0 0 2px rgba(0,212,255,.1)}
+.manga-search-input::placeholder{color:var(--muted)}
+.search-btn{background:var(--neon);border:none;color:var(--ink);width:44px;flex-shrink:0;font-size:16px;cursor:pointer;transition:background .2s;border-radius:2px}
+.search-btn:hover{background:#33ddff}
+.manga-genres{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin-bottom:14px}
+.manga-genres::-webkit-scrollbar{display:none}
+.genre-pill{flex-shrink:0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;text-transform:uppercase;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.genre-pill.active,.genre-pill:hover{background:rgba(0,212,255,.15);border-color:var(--neon);color:var(--neon)}
+.manga-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.manga-card{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.manga-frame{width:100%;aspect-ratio:2/3;overflow:hidden;border:2px solid var(--border);position:relative;transition:border-color .2s;border-radius:2px}
+.manga-card:active .manga-frame,.manga-card:hover .manga-frame{border-color:var(--neon)}
+.manga-frame img{width:100%;height:100%;object-fit:cover}
+.manga-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,8,15,.97) 0%,transparent 55%);padding:6px;display:flex;flex-direction:column;justify-content:flex-end}
+.manga-name-sm{font-family:'Bebas Neue',sans-serif;font-size:11px;color:var(--paper);line-height:1.2}
+.manga-ch-sm{font-family:'Space Mono',monospace;font-size:8px;color:var(--neon);margin-top:1px}
+.manga-score-sm{position:absolute;top:4px;left:4px;background:rgba(0,0,0,.8);border:1px solid var(--neon);color:var(--neon);font-family:'Space Mono',monospace;font-size:8px;padding:1px 4px}
+.load-more-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;padding:12px;cursor:pointer;transition:all .2s;margin-bottom:8px;border-radius:2px}
+.load-more-btn:hover{border-color:var(--neon);color:var(--neon)}
+
+/* ══════════════════════════
+   EVENTS PAGE
+══════════════════════════ */
+.event-card-app{background:var(--panel);border:1px solid var(--border);padding:18px;margin-bottom:12px;position:relative;overflow:hidden;clip-path:polygon(0 0,96% 0,100% 4%,100% 100%,4% 100%,0 96%)}
+.event-card-app::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 28px 28px 0;border-color:transparent var(--neon) transparent transparent;opacity:.5}
+.event-tag-app{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.event-tag-app::before{content:'';width:12px;height:1px;background:var(--neon)}
+.event-title-app{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper);line-height:1.1;margin-bottom:6px}
+.event-date-app{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.event-date-app i{color:var(--neon)}
+.event-desc-app{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+/* countdown */
+.cd-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.cd-box{background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);padding:8px 4px;text-align:center;border-radius:2px}
+.cd-n{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--neon);line-height:1;text-shadow:0 0 8px rgba(0,212,255,.4)}
+.cd-l{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.event-links-app{display:flex;flex-direction:column;gap:7px}
+.event-link-app{display:flex;align-items:center;justify-content:space-between;background:rgba(0,212,255,.05);border:1px solid var(--border);padding:9px 12px;text-decoration:none;color:var(--aged);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;transition:all .2s;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.event-link-app:hover,.event-link-app:active{border-color:var(--neon);color:var(--neon)}
+.event-link-app i{font-size:10px;color:var(--neon)}
+
+/* ══════════════════════════
+   COMMUNITY PAGE
+══════════════════════════ */
+.comm-hero{background:linear-gradient(135deg,rgba(0,212,255,.07),transparent);border:1px solid var(--border);border-left:3px solid var(--neon);padding:16px;margin-bottom:18px;clip-path:polygon(0 0,97% 0,100% 5%,100% 100%,0 100%)}
+.comm-hero-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--paper);line-height:1}
+.comm-hero-title span{color:var(--neon)}
+.comm-hero-sub{font-size:13px;color:var(--muted);margin-top:4px}
+.comm-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.comm-card{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);padding:14px;text-decoration:none;color:var(--paper);transition:all .2s;-webkit-tap-highlight-color:transparent;border-radius:2px}
+.comm-card:active,.comm-card:hover{border-color:var(--neon);background:rgba(0,212,255,.05)}
+.comm-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,212,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--neon);flex-shrink:0;transition:all .2s}
+.comm-card:hover .comm-icon{border-color:var(--neon);box-shadow:0 0 12px rgba(0,212,255,.25)}
+.comm-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--paper);line-height:1.1}
+.comm-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.comm-arrow{margin-left:auto;color:var(--muted);font-size:12px}
+/* platform colours */
+.comm-card.wa:hover .comm-icon{border-color:#25d366;box-shadow:0 0 10px rgba(37,211,102,.2);color:#25d366}
+.comm-card.tg:hover .comm-icon{border-color:#229ed9;box-shadow:0 0 10px rgba(34,158,217,.2);color:#229ed9}
+.comm-card.dc:hover .comm-icon{border-color:#5865f2;color:#5865f2}
+.comm-card.yt:hover .comm-icon{border-color:#f00;color:#f00}
+.comm-card.ig:hover .comm-icon{border-color:#e1306c;color:#e1306c}
+.comm-card.tt:hover .comm-icon{border-color:#ff0050;color:#ff0050}
+.comm-card.fb:hover .comm-icon{border-color:#1877f2;color:#1877f2}
+
+/* ══════════════════════════
+   ABOUT PAGE
+══════════════════════════ */
+.about-logo-wrap{text-align:center;padding:24px 0 20px}
+.about-logo{width:90px;height:90px;border-radius:16px;object-fit:cover;border:2px solid var(--neon);box-shadow:0 0 24px rgba(0,212,255,.3);margin:0 auto 14px}
+.about-app-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:var(--paper)}
+.about-app-name span{color:var(--neon);text-shadow:0 0 14px rgba(0,212,255,.5)}
+.about-version{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:4px}
+.about-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--neon);padding:16px 18px;margin-bottom:12px;border-radius:2px}
+.about-card-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--neon);margin-bottom:8px}
+.about-card p{font-size:13px;color:var(--muted);line-height:1.7}
+.about-card p strong{color:var(--aged)}
+.about-features{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.about-feature{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--aged)}
+.about-feature i{color:var(--neon);width:18px;text-align:center;font-size:14px}
+.about-dev-card{background:linear-gradient(135deg,rgba(0,212,255,.07),rgba(0,212,255,.02));border:1px solid var(--border);padding:18px;margin-bottom:12px;display:flex;align-items:center;gap:14px;border-radius:2px}
+.about-dev-avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--neon);object-fit:cover;flex-shrink:0;box-shadow:0 0 14px rgba(0,212,255,.25)}
+.about-dev-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--paper)}
+.about-dev-role{font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);letter-spacing:2px;margin-top:2px}
+.about-dev-bio{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
+.contact-links{display:flex;flex-direction:column;gap:8px}
+.contact-link-row{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px 14px;text-decoration:none;color:var(--paper);transition:all .2s;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.contact-link-row:hover,.contact-link-row:active{border-color:var(--neon);background:rgba(0,212,255,.05)}
+.contact-link-row i{color:var(--neon);width:20px;text-align:center;font-size:16px;flex-shrink:0}
+.contact-link-row .clr-name{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--paper)}
+.contact-link-row .clr-val{font-size:12px;color:var(--muted);margin-top:1px}
+.contact-link-row .clr-arrow{margin-left:auto;color:var(--muted);font-size:11px}
+
+/* ══════════════════════════
+   DETAIL OVERLAY (full screen)
+══════════════════════════ */
+.overlay{position:fixed;inset:0;z-index:500;background:rgba(6,8,15,.0);pointer-events:none;transition:background .3s}
+.overlay.open{background:rgba(6,8,15,.85);pointer-events:all}
+.overlay-sheet{position:fixed;bottom:0;left:0;right:0;z-index:501;background:var(--panel2);border-top:2px solid var(--neon);max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-radius:0}
+.overlay.open .overlay-sheet{transform:translateY(0)}
+.overlay-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
+.overlay-close{position:absolute;top:14px;right:14px;width:36px;height:36px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:2px;z-index:2}
+.overlay-close:hover{border-color:var(--neon);color:var(--neon)}
+.overlay-content{padding:8px 16px 40px}
+/* Detail header */
+.det-header{display:flex;gap:14px;padding:14px 0 16px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.det-cover{width:100px;flex-shrink:0;aspect-ratio:2/3;object-fit:cover;border:2px solid var(--border);border-radius:2px}
+.det-info{flex:1;min-width:0}
+.det-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--paper);line-height:1.1;margin-bottom:6px}
+.det-badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.det-badge{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 7px;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--aged)}
+.det-badge.neon{border-color:var(--neon);color:var(--neon);background:rgba(0,212,255,.12)}
+.det-score-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.det-score{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--neon);text-shadow:0 0 10px rgba(0,212,255,.4);line-height:1}
+.det-score-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px}
+.det-synopsis{font-size:13px;color:var(--aged);line-height:1.7;margin-bottom:14px}
+.det-synopsis-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:6px}
+.det-genres{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.det-genre-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 9px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted)}
+.det-source-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;padding:11px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:2px}
+.det-source-btn:hover{border-color:var(--neon);color:var(--neon)}
+/* News detail specific */
+.det-news-img{width:100%;height:180px;object-fit:cover;border:1px solid var(--border);margin-bottom:14px;border-radius:2px}
+.det-news-body{font-size:14px;color:var(--aged);line-height:1.8;margin-bottom:16px}
+.det-news-share{display:flex;gap:8px}
+.share-chip{flex:1;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 6px;cursor:pointer;transition:all .2s;text-align:center;border-radius:2px}
+.share-chip:hover{border-color:var(--neon);color:var(--neon)}
+
+/* Manga reader */
+.manga-detail-cover{width:100%;max-height:260px;object-fit:cover;border:1px solid var(--border);margin-bottom:14px;border-radius:2px}
+.chapter-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.chapter-item{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--border);padding:11px 14px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;border-radius:2px}
+.chapter-item:hover,.chapter-item:active{border-color:var(--neon);background:rgba(0,212,255,.06)}
+.chapter-num{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--paper)}
+.chapter-title{font-size:12px;color:var(--muted);margin-top:1px}
+.chapter-src{font-family:'Space Mono',monospace;font-size:8px;color:var(--neon);letter-spacing:1px}
+.ch-arrow{color:var(--muted);font-size:12px}
+/* Reader view */
+.reader-topbar{display:flex;align-items:center;gap:10px;padding:10px 0 14px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.reader-back{background:transparent;border:1px solid var(--border);color:var(--aged);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;transition:all .2s;border-radius:2px}
+.reader-back:hover{border-color:var(--neon);color:var(--neon)}
+.reader-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--paper);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reader-pages{display:flex;flex-direction:column;gap:4px}
+.reader-page-img{width:100%;display:block;border-radius:1px}
+.reader-nav{display:flex;gap:8px;padding:14px 0;border-top:1px solid var(--border);margin-top:10px}
+.reader-nav-btn{flex:1;background:var(--panel);border:1px solid var(--border);color:var(--aged);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:11px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;border-radius:2px}
+.reader-nav-btn:hover{border-color:var(--neon);color:var(--neon)}
+.reader-nav-btn.primary{background:rgba(0,212,255,.1);border-color:var(--neon);color:var(--neon)}
+.reader-loading{text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px}
+
+/* ══════════════════════════
+   INSTALL POPUP
+══════════════════════════ */
+.install-popup{position:fixed;bottom:calc(var(--bot-h) + 12px);left:12px;right:12px;z-index:600;background:var(--panel2);border:2px solid var(--neon);padding:14px 16px;display:none;align-items:center;gap:12px;box-shadow:0 0 40px rgba(0,212,255,.2);animation:slideUp .4s ease;border-radius:4px}
+.install-popup.show{display:flex}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.install-popup img{width:44px;height:44px;border-radius:8px;flex-shrink:0}
+.install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--paper)}
+.install-popup-text span{font-size:11px;color:var(--muted)}
+.install-actions{display:flex;gap:7px;margin-left:auto;flex-shrink:0}
+.inst-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;padding:8px 12px;cursor:pointer;border-radius:2px}
+.inst-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:11px;padding:8px 10px;cursor:pointer;border-radius:2px}
+.inst-dismiss:hover{border-color:var(--neon);color:var(--neon)}
+
+/* ── TOAST ── */
+.toast-wrap{position:fixed;top:calc(var(--nav-h) + 10px);left:50%;transform:translateX(-50%);z-index:700;display:flex;flex-direction:column;gap:6px;pointer-events:none;width:calc(100% - 28px);max-width:380px}
+.toast{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--neon);padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:var(--paper);display:flex;align-items:center;gap:8px;animation:toastIn .3s ease;border-radius:2px}
+.toast.success{border-left-color:#22c55e}
+@keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+
+/* LIGHT MODE */
+body.light{--ink:#f0f4fc;--panel:#e4eaf6;--panel2:#dce4f0;--panel3:#d0daea;--border:#b8c8e0;--paper:#0d1828;--aged:#2a3a56;--muted:#5a7090}
+body.light .topbar,body.light .bottom-nav{background:rgba(240,244,252,.97)}
+body.light .overlay-sheet{background:#e4eaf6}
+
+/* loading spinner */
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--neon);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-center{display:flex;justify-content:center;padding:40px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- INSTALL POPUP -->
+<div class="install-popup" id="installPopup">
+  <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+  <div class="install-popup-text"><p>Install ANICADE</p><span>Add to home screen</span></div>
+  <div class="install-actions">
+    <button class="inst-btn" id="installBtn"><i class="fas fa-download"></i> Install</button>
+    <button class="inst-dismiss" id="installDismiss">Later</button>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">
+    <img class="topbar-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+    <span class="topbar-name">ANI<span>CADE</span></span>
+  </a>
+  <div class="topbar-right">
+    <div class="topbar-pill"><span class="live-dot"></span> LIVE</div>
+    <button class="icon-btn" id="themeBtn" title="Theme"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+
+<!-- PAGES -->
+<div class="pages">
+
+  <!-- ═══ HOME ═══ -->
+  <div class="page active" id="page-home">
+    <div class="page-inner">
+      <div class="home-hero">
+        <div class="home-hero-title">ANIME WRLD <span class="neon">WARS</span></div>
+        <div class="home-hero-sub"><span class="live-dot"></span> &nbsp;Live updates · ANICADE</div>
+        <div class="home-stats">
+          <div class="hstat"><div class="hstat-val neon">Daily</div><div class="hstat-lbl">Updates</div></div>
+          <div class="hstat"><div class="hstat-val" id="statCount">—</div><div class="hstat-lbl">Airing</div></div>
+          <div class="hstat"><div class="hstat-val neon">10K+</div><div class="hstat-lbl">Members</div></div>
+        </div>
+      </div>
+
+      <div class="sec-label"><span>LATEST <span class="acc">NEWS</span></span><div class="badge"><span class="live-dot"></span> LIVE</div></div>
+      <div class="news-list" id="homeNewsList">
+        <div class="news-item"><div class="news-thumb-ph"><div class="skel" style="width:100%;height:100%"></div></div><div class="news-text"><div class="skel" style="height:9px;width:50%;margin-bottom:6px"></div><div class="skel" style="height:15px;margin-bottom:4px"></div><div class="skel" style="height:11px;width:80%"></div></div></div>
+        <div class="news-item"><div class="news-thumb-ph"><div class="skel" style="width:100%;height:100%"></div></div><div class="news-text"><div class="skel" style="height:9px;width:50%;margin-bottom:6px"></div><div class="skel" style="height:15px;margin-bottom:4px"></div><div class="skel" style="height:11px;width:80%"></div></div></div>
+        <div class="news-item"><div class="news-thumb-ph"><div class="skel" style="width:100%;height:100%"></div></div><div class="news-text"><div class="skel" style="height:9px;width:50%;margin-bottom:6px"></div><div class="skel" style="height:15px;margin-bottom:4px"></div><div class="skel" style="height:11px;width:80%"></div></div></div>
+      </div>
+
+      <div class="sec-label"><span>TRENDING <span class="acc">ANIME</span></span></div>
+      <div class="h-scroll" id="homeTrending">
+        <div class="anime-chip"><div class="anime-chip-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="anime-chip"><div class="anime-chip-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="anime-chip"><div class="anime-chip-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="anime-chip"><div class="anime-chip-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+      </div>
+
+      <div class="sec-label"><span>THIS <span class="acc">SEASON</span></span><div class="badge" id="seasonBadge">LOADING</div></div>
+      <div class="season-grid" id="homeSeasonGrid">
+        <div class="season-card"><div class="season-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="season-card"><div class="season-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="season-card"><div class="season-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="season-card"><div class="season-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MANGA ═══ -->
+  <div class="page" id="page-manga">
+    <div class="page-inner">
+      <div class="sec-label" style="margin-top:4px"><span>MANGA <span class="acc">READER</span></span></div>
+      <div class="manga-search-bar">
+        <input class="manga-search-input" id="mangaSearchInput" type="text" placeholder="Search manga…"/>
+        <button class="search-btn" id="mangaSearchBtn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="manga-genres" id="mangaGenres"></div>
+      <div class="manga-grid" id="mangaGrid">
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+        <div class="manga-card"><div class="manga-frame"><div class="skel" style="width:100%;height:100%"></div></div></div>
+      </div>
+      <button class="load-more-btn" id="mangaLoadMore"><i class="fas fa-plus" style="margin-right:6px"></i>LOAD MORE</button>
+    </div>
+  </div>
+
+  <!-- ═══ EVENTS ═══ -->
+  <div class="page" id="page-events">
+    <div class="page-inner">
+      <div class="sec-label" style="margin-top:4px"><span>UPCOMING <span class="acc">EVENTS</span></span></div>
+
+      <div class="event-card-app">
+        <div class="event-tag-app">Giveaway</div>
+        <div class="event-title-app">ANICADE Anniversary Giveaway</div>
+        <div class="event-date-app"><i class="fas fa-calendar"></i> July 27, 2026</div>
+        <div class="cd-row">
+          <div class="cd-box"><div class="cd-n" id="g-d">--</div><div class="cd-l">Days</div></div>
+          <div class="cd-box"><div class="cd-n" id="g-h">--</div><div class="cd-l">Hrs</div></div>
+          <div class="cd-box"><div class="cd-n" id="g-m">--</div><div class="cd-l">Min</div></div>
+          <div class="cd-box"><div class="cd-n" id="g-s">--</div><div class="cd-l">Sec</div></div>
+        </div>
+        <p class="event-desc-app">Join the community channels to participate in ANICADE's biggest anniversary giveaway. All platforms, all genres, one wrld.</p>
+        <div class="event-links-app">
+          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link-app"><span><i class="fas fa-brain" style="margin-right:6px"></i>Psychology &amp; Motivation</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link-app"><span><i class="fas fa-music" style="margin-right:6px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
+          <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link-app"><span><i class="fas fa-globe" style="margin-right:6px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+
+      <div class="event-card-app" id="upcomingEventCard">
+        <div class="event-tag-app">New Season</div>
+        <div class="event-title-app" id="ucTitle">Loading…</div>
+        <div class="event-date-app" id="ucDate"></div>
+        <div class="cd-row" id="ucCdRow" style="display:none">
+          <div class="cd-box"><div class="cd-n" id="u-d">--</div><div class="cd-l">Days</div></div>
+          <div class="cd-box"><div class="cd-n" id="u-h">--</div><div class="cd-l">Hrs</div></div>
+          <div class="cd-box"><div class="cd-n" id="u-m">--</div><div class="cd-l">Min</div></div>
+          <div class="cd-box"><div class="cd-n" id="u-s">--</div><div class="cd-l">Sec</div></div>
+        </div>
+        <p class="event-desc-app" id="ucDesc">Fetching upcoming release…</p>
+        <div class="event-links-app" id="ucLinks"></div>
+      </div>
+
+      <div class="event-card-app">
+        <div class="event-tag-app">Discussion</div>
+        <div class="event-title-app">Seasonal Anime Rankings</div>
+        <div class="event-date-app"><i class="fas fa-calendar"></i> End of Each Season</div>
+        <p class="event-desc-app">Vote for the best anime of the season. ANICADE rankings shared every season across all channels.</p>
+        <div class="event-links-app">
+          <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="event-link-app"><span><i class="fas fa-poll" style="margin-right:6px"></i>Submit Your Vote</span><i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COMMUNITY ═══ -->
+  <div class="page" id="page-community">
+    <div class="page-inner">
+      <div class="comm-hero">
+        <div class="comm-hero-title">JOIN THE <span>COMMUNITY</span></div>
+        <div class="comm-hero-sub">Connect across every platform. Chat, share, discover.</div>
+      </div>
+
+      <div class="sec-label"><span>MESSAGING <span class="acc">& GROUPS</span></span></div>
+      <div class="comm-grid">
+        <a href="https://chat.whatsapp.com/EzBa9R9BocWFrkq91zeCvW?mode=ac_t" target="_blank" class="comm-card wa"><div class="comm-icon"><i class="fab fa-whatsapp"></i></div><div><div class="comm-name">WhatsApp Group</div><div class="comm-sub">Join the conversation</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" class="comm-card wa"><div class="comm-icon"><i class="fab fa-whatsapp"></i></div><div><div class="comm-name">WhatsApp Channel</div><div class="comm-sub">14K+ followers</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fab fa-telegram"></i></div><div><div class="comm-name">Telegram Group</div><div class="comm-sub">Chat · Share · Discuss</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fab fa-telegram"></i></div><div><div class="comm-name">Telegram Channel</div><div class="comm-sub">Official announcements</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://t.me/TresforwrldBot" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fas fa-robot"></i></div><div><div class="comm-name">Telegram Anime Bot</div><div class="comm-sub">@TresforwrldBot</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://discord.gg/yQkthryT" target="_blank" class="comm-card dc"><div class="comm-icon"><i class="fab fa-discord"></i></div><div><div class="comm-name">Discord Server</div><div class="comm-sub">Channels · Voice · Events</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+      </div>
+
+      <div class="sec-label" style="margin-top:4px"><span>SOCIAL <span class="acc">MEDIA</span></span></div>
+      <div class="comm-grid">
+        <a href="https://www.instagram.com/reel/DK_waUqNHeE/" target="_blank" class="comm-card ig"><div class="comm-icon"><i class="fab fa-instagram"></i></div><div><div class="comm-name">Instagram</div><div class="comm-sub">Reels · Fan Art</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://vm.tiktok.com/ZMHbNe8UXTHm2-iUteL/" target="_blank" class="comm-card tt"><div class="comm-icon"><i class="fab fa-tiktok"></i></div><div><div class="comm-name">TikTok</div><div class="comm-sub">Short anime clips</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://www.youtube.com/@AnimeWrldWars_ANICADE" target="_blank" class="comm-card yt"><div class="comm-icon"><i class="fab fa-youtube"></i></div><div><div class="comm-name">YouTube</div><div class="comm-sub">@AnimeWrldWars_ANICADE</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://www.facebook.com/tresforwrldanicade" target="_blank" class="comm-card fb"><div class="comm-icon"><i class="fab fa-facebook"></i></div><div><div class="comm-name">Facebook Page</div><div class="comm-sub">tresforwrldanicade</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://facebook.com/groups/1158584398690857/" target="_blank" class="comm-card fb"><div class="comm-icon"><i class="fab fa-facebook"></i></div><div><div class="comm-name">Facebook Group</div><div class="comm-sub">Community discussions</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+        <a href="https://github.com/TresforWrld" target="_blank" class="comm-card"><div class="comm-icon"><i class="fab fa-github"></i></div><div><div class="comm-name">GitHub</div><div class="comm-sub">@TresforWrld · Code</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <div class="page" id="page-about">
+    <div class="page-inner">
+      <div class="about-logo-wrap">
+        <img class="about-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
+        <div class="about-app-name">ANI<span>CADE</span></div>
+        <div class="about-version">Version 2.0 · Anime Wrld Wars</div>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-title">About This App</div>
+        <p>ANICADE is your all-in-one anime and manga hub — built for fans, by a fan. Get live news, read manga, track seasonal anime and connect with a growing global community.</p>
+        <div class="about-features" style="margin-top:12px">
+          <div class="about-feature"><i class="fas fa-newspaper"></i><span>Live anime news from MAL &amp; AniList</span></div>
+          <div class="about-feature"><i class="fas fa-book-open"></i><span>Full manga reader via MangaDex &amp; ComicK</span></div>
+          <div class="about-feature"><i class="fas fa-fire"></i><span>Trending &amp; seasonal anime updated daily</span></div>
+          <div class="about-feature"><i class="fas fa-star"></i><span>Events, giveaways &amp; community countdowns</span></div>
+          <div class="about-feature"><i class="fas fa-users"></i><span>Connect across 10+ community platforms</span></div>
+          <div class="about-feature"><i class="fas fa-download"></i><span>Installable PWA — works offline too</span></div>
+        </div>
+      </div>
+
+      <div class="sec-label"><span>THE <span class="acc">DEVELOPER</span></span></div>
+      <div class="about-dev-card">
+        <img class="about-dev-avatar" src="https://i.imgur.com/qgZhkhV.jpeg" alt="Tresfor Zulu"/>
+        <div>
+          <div class="about-dev-name">Tresfor Zulu</div>
+          <div class="about-dev-role">Founder · Developer · Creator</div>
+          <div class="about-dev-bio">Building ANICADE Tech from Kabwe, Zambia. Designer, developer and anime enthusiast behind the entire ANICADE universe.</div>
+        </div>
+      </div>
+
+      <div class="sec-label"><span>CONTACT <span class="acc">DEVELOPER</span></span></div>
+      <div class="contact-links">
+        <a href="mailto:tresforzulu@gmail.com" class="contact-link-row"><i class="fas fa-envelope"></i><div><div class="clr-name">Email</div><div class="clr-val">tresforzulu@gmail.com</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=260777083995" target="_blank" class="contact-link-row"><i class="fab fa-whatsapp" style="color:#25d366"></i><div><div class="clr-name">WhatsApp</div><div class="clr-val">+260 777 083 995</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+        <a href="https://t.me/TresforWrld" target="_blank" class="contact-link-row"><i class="fab fa-telegram" style="color:#229ed9"></i><div><div class="clr-name">Telegram</div><div class="clr-val">@TresforWrld</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+        <a href="https://ngl.link/anime_wrld_wars_anicade_admin11" target="_blank" class="contact-link-row"><i class="fas fa-comment-slash"></i><div><div class="clr-name">Anonymous Feedback</div><div class="clr-val">via NGL · No login needed</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+        <a href="https://github.com/TresforWrld" target="_blank" class="contact-link-row"><i class="fab fa-github"></i><div><div class="clr-name">GitHub</div><div class="clr-val">@TresforWrld</div></div><i class="fas fa-chevron-right clr-arrow"></i></a>
+      </div>
+
+      <div style="text-align:center;padding:28px 0 8px">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px">© 2026 ANICADE · ANIME WRLD WARS</div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px">BROUGHT TO YOU BY <span style="color:var(--neon)">TRESFOR WRLD</span> ✌️</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pages -->
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="bnav-item active" data-page="home"><i class="fas fa-home"></i><span>Home</span></div>
+  <div class="bnav-item" data-page="manga"><i class="fas fa-book-open"></i><span>Manga</span></div>
+  <div class="bnav-item" data-page="events"><i class="fas fa-star"></i><span>Events</span></div>
+  <div class="bnav-item" data-page="community"><i class="fas fa-users"></i><span>Community</span></div>
+  <div class="bnav-item" data-page="about"><i class="fas fa-info-circle"></i><span>About</span></div>
+</nav>
+
+<!-- DETAIL OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-sheet" id="overlaySheet">
+    <div class="overlay-handle"></div>
+    <button class="overlay-close" id="overlayClose"><i class="fas fa-times"></i></button>
+    <div class="overlay-content" id="overlayContent"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+// ── GLOBALS ──
+let dark = localStorage.getItem('anicade_theme') !== 'light';
+let mangaPage = 1, mangaGenre = '', mangaQuery = '', mangaLoading = false;
+let currentChapters = [], currentMangaTitle = '', currentChapIdx = 0;
+let shareCountsStore = JSON.parse(localStorage.getItem('anicade_sc') || '{}');
+
+function saveShareCounts(){ localStorage.setItem('anicade_sc', JSON.stringify(shareCountsStore)); }
+
+// ── THEME ──
+function applyTheme(){
+  document.body.classList.toggle('light', !dark);
+  const i = document.querySelector('#themeBtn i');
+  if(i) i.className = dark ? 'fas fa-moon' : 'fas fa-sun';
+}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  dark = !dark; localStorage.setItem('anicade_theme', dark ? 'dark' : 'light'); applyTheme();
+});
+
+// ── BOTTOM NAV ──
+document.querySelectorAll('.bnav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pg = btn.dataset.page;
+    document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + pg);
+    target.classList.add('active');
+    // lazy load
+    if(pg === 'manga' && !target.dataset.loaded){ loadManga(); target.dataset.loaded = '1'; }
+    if(pg === 'events' && !target.dataset.loaded){ loadUpcoming(); target.dataset.loaded = '1'; }
+  });
+});
+
+// ── TOAST ──
+function toast(msg, type=''){
+  const w = document.getElementById('toastWrap');
+  const t = document.createElement('div'); t.className = 'toast ' + type;
+  t.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':'info-circle'}" style="color:var(--neon)"></i> ${msg}`;
+  w.appendChild(t); setTimeout(() => t.remove(), 3000);
+}
+
+// ── OVERLAY ──
+const overlay = document.getElementById('overlay');
+const overlayContent = document.getElementById('overlayContent');
+function openOverlay(html){
+  overlayContent.innerHTML = html;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  // small delay so animation plays before resetting reader state
+  setTimeout(() => { overlayContent.innerHTML = ''; }, 350);
+}
+document.getElementById('overlayClose').addEventListener('click', closeOverlay);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeOverlay(); });
+
+// ── ANILIST FETCH ──
+async function anilist(query, vars={}){
+  const r = await fetch('https://graphql.anilist.co', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({query, variables: vars})
+  });
+  return r.json();
+}
+
+// ── NEWS ──
+async function loadNews(){
+  const list = document.getElementById('homeNewsList');
+  try{
+    // AniList live news
+    const q = `query{Page(perPage:12){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{medium}description(asHtml:false)nextAiringEpisode{episode airingAt}averageScore genres}}}`;
+    const d = await anilist(q);
+    const items = d.data.Page.media || [];
+    document.getElementById('statCount').textContent = items.length;
+    list.innerHTML = items.map((a,i) => {
+      const title = a.title?.english || a.title?.romaji || 'Unknown';
+      const ep = a.nextAiringEpisode?.episode;
+      const desc = (a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,120);
+      const date = a.nextAiringEpisode?.airingAt ? new Date(a.nextAiringEpisode.airingAt*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
+      const img = a.coverImage?.medium || '';
+      const uid = 'n'+i;
+      return `<div class="news-item" onclick="openNewsDetail(${JSON.stringify({title,desc:a.description||'',img,source:'AniList',date,ep,id:a.id,genres:a.genres||[],score:a.averageScore}).replace(/"/g,'&quot;')})">
+        ${img ? `<img class="news-thumb" src="${img}" alt="" loading="lazy" onerror="this.style.display='none'"/>` : `<div class="news-thumb-ph"><i class="fas fa-newspaper"></i></div>`}
+        <div class="news-text">
+          <div class="news-src">AniList${ep?' · EP '+ep:''}</div>
+          <div class="news-title-sm">${title}</div>
+          ${desc ? `<div class="news-excerpt-sm">${desc}</div>` : ''}
+          ${date ? `<div class="news-date-sm"><i class="fas fa-clock" style="margin-right:3px"></i>${date}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e){
+    list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load news. Check connection.</div>';
+  }
+}
+
+function openNewsDetail(d){
+  if(typeof d === 'string') d = JSON.parse(d.replace(/&quot;/g,'"'));
+  const desc = (d.desc||'').replace(/<[^>]+>/g,'').trim() || 'No synopsis available.';
+  const uid = 'nd_' + d.id;
+  const sc = shareCountsStore[uid] || 0;
+  const shareUrl = encodeURIComponent('https://tresforwrld.github.io/-Anime-Wrld-Wars-ANICADE/');
+  const shareTitle = encodeURIComponent((d.title||'Anime Update') + ' — ANICADE');
+  openOverlay(`
+    ${d.img ? `<img class="det-news-img" src="${d.img}" alt=""/>` : ''}
+    <div class="det-info" style="margin-bottom:12px">
+      <div class="det-title">${d.title||'Anime Update'}</div>
+      <div class="det-badges">
+        <div class="det-badge neon">${d.source||'AniList'}</div>
+        ${d.ep ? `<div class="det-badge neon">EP ${d.ep}</div>` : ''}
+        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${g}</div>`).join('')}
+      </div>
+      ${d.date ? `<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:8px"><i class="fas fa-clock" style="margin-right:4px;color:var(--neon)"></i>${d.date}</div>` : ''}
+    </div>
+    <div class="det-synopsis-title">Synopsis</div>
+    <div class="det-synopsis">${desc}</div>
+    <div class="det-news-share" style="margin-bottom:14px">
+      <div class="share-chip" onclick="doShare('${uid}','${shareUrl}','${shareTitle}',this)"><i class="fas fa-share-alt"></i> Share</div>
+      <a class="share-chip" href="https://wa.me/?text=${shareTitle}%20${shareUrl}" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</a>
+      <a class="share-chip" href="https://t.me/share/url?url=${shareUrl}&text=${shareTitle}" target="_blank"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</a>
+      <div class="share-chip" id="${uid}-sc" style="pointer-events:none">${sc>0?sc+' shares':''}</div>
+    </div>
+    <a href="https://anilist.co/anime/${d.id}" target="_blank" class="det-source-btn"><i class="fas fa-external-link-alt"></i> VIEW SOURCE ON ANILIST</a>
+  `);
+}
+
+// ── ANIME DETAIL OVERLAY ──
+function openAnimeDetail(a){
+  if(typeof a === 'string') a = JSON.parse(a.replace(/&quot;/g,'"'));
+  const title = a.english || a.romaji || 'Unknown';
+  const desc = (a.description||'').replace(/<[^>]+>/g,'').trim() || 'No synopsis.';
+  const score = a.score ? (a.score/10).toFixed(1) : null;
+  openOverlay(`
+    <div class="det-header">
+      <img class="det-cover" src="${a.cover||''}" alt="${title}" onerror="this.src='https://placehold.co/100x150/0d1120/00d4ff?text=NO+IMG'"/>
+      <div class="det-info">
+        <div class="det-title">${title}</div>
+        <div class="det-badges">
+          ${a.format ? `<div class="det-badge neon">${a.format}</div>` : ''}
+          ${a.status ? `<div class="det-badge">${a.status}</div>` : ''}
+          ${a.episodes ? `<div class="det-badge">${a.episodes} EPS</div>` : ''}
+          ${a.season ? `<div class="det-badge">${a.season} ${a.year||''}</div>` : ''}
+        </div>
+        ${score ? `<div class="det-score-row"><div class="det-score">${score}</div><div class="det-score-lbl">/ 10<br>Rating</div></div>` : ''}
+        ${a.ep ? `<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);margin-top:4px"><i class="fas fa-clock" style="margin-right:4px"></i>EP ${a.ep} airing soon</div>` : ''}
+      </div>
+    </div>
+    ${(a.genres||[]).length ? `<div class="det-genres">${a.genres.map(g=>`<div class="det-genre-tag">${g}</div>`).join('')}</div>` : ''}
+    <div class="det-synopsis-title">Synopsis</div>
+    <div class="det-synopsis">${desc}</div>
+    <a href="https://anilist.co/anime/${a.id}" target="_blank" class="det-source-btn" style="margin-top:4px"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>
+  `);
+}
+
+// ── SHARE ──
+function doShare(uid, url, title, el){
+  shareCountsStore[uid] = (shareCountsStore[uid]||0) + 1;
+  saveShareCounts();
+  const sc = document.getElementById(uid+'-sc');
+  if(sc) sc.textContent = shareCountsStore[uid] + ' share' + (shareCountsStore[uid]>1?'s':'');
+  const raw = decodeURIComponent(url);
+  if(navigator.share){ navigator.share({title:decodeURIComponent(title),url:raw}).catch(()=>{}); }
+  else { navigator.clipboard?.writeText(raw); toast('Link copied!','success'); }
+}
+
+// ── TRENDING ──
+async function loadTrending(){
+  const q = `query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode airingAt}status season seasonYear}}}`;
+  try{
+    const d = await anilist(q);
+    const items = d.data.Page.media || [];
+    document.getElementById('homeTrending').innerHTML = items.map(a => {
+      const title = a.title?.english||a.title?.romaji||'Unknown';
+      const cover = a.coverImage?.large||'';
+      const score = a.averageScore ? (a.averageScore/10).toFixed(1) : null;
+      const ep = a.nextAiringEpisode?.episode;
+      const payload = JSON.stringify({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres,episodes:a.episodes,description:a.description,ep,status:a.status,season:a.season,year:a.seasonYear}).replace(/"/g,'&quot;');
+      return `<div class="anime-chip" onclick="openAnimeDetail('${payload}')">
+        <div class="anime-chip-frame">
+          <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/110x155/0d1120/00d4ff?text=N/A'"/>
+          ${score ? `<div class="chip-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>` : ''}
+          ${a.format ? `<div class="chip-fmt">${a.format}</div>` : ''}
+          <div class="chip-overlay">
+            <div class="chip-name">${title}</div>
+            ${ep ? `<div class="chip-ep"><i class="fas fa-clock" style="font-size:8px"></i> EP${ep}</div>` : ''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e){}
+}
+
+// ── SEASONAL ──
+async function loadSeasonal(){
+  const seasons = ['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
+  const season = seasons[new Date().getMonth()], year = new Date().getFullYear();
+  document.getElementById('seasonBadge').textContent = season + ' ' + year;
+  const q = `query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status}}}`;
+  try{
+    const d = await anilist(q);
+    const items = d.data.Page.media || [];
+    document.getElementById('homeSeasonGrid').innerHTML = items.map(a => {
+      const title = a.title?.english||a.title?.romaji||'Unknown';
+      const cover = a.coverImage?.large||'';
+      const score = a.averageScore ? (a.averageScore/10).toFixed(1) : null;
+      const ep = a.nextAiringEpisode?.episode;
+      const genres = (a.genres||[]).slice(0,2).join(' · ');
+      const payload = JSON.stringify({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres,episodes:a.episodes,description:a.description,ep,status:a.status,season,year}).replace(/"/g,'&quot;');
+      return `<div class="season-card" onclick="openAnimeDetail('${payload}')">
+        <div class="season-frame">
+          <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/200x300/0d1120/00d4ff?text=N/A'"/>
+          ${score ? `<div class="season-score">${score}</div>` : ''}
+          ${a.format ? `<div class="season-fmt">${a.format}</div>` : ''}
+          <div class="season-overlay">
+            <div class="season-name">${title}</div>
+            <div class="season-meta">${genres}${ep?' · EP '+ep:''}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e){}
+}
+
+// ── MANGA ──
+const MANGA_GENRES = ['Action','Adventure','Comedy','Drama','Fantasy','Horror','Mystery','Romance','Sci-Fi','Slice of Life','Supernatural','Thriller','Sports','Psychological','Historical'];
+
+function buildMangaGenres(){
+  document.getElementById('mangaGenres').innerHTML = ['All',...MANGA_GENRES].map(g =>
+    `<div class="genre-pill${g==='All'?' active':''}" onclick="selectMangaGenre('${g}',this)">${g}</div>`
+  ).join('');
+}
+
+function selectMangaGenre(g, el){
+  document.querySelectorAll('.genre-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  mangaGenre = g === 'All' ? '' : g;
+  mangaPage = 1;
+  loadManga(true);
+}
+
+async function loadManga(reset=false){
+  if(mangaLoading) return;
+  mangaLoading = true;
+  const grid = document.getElementById('mangaGrid');
+  if(reset){ grid.innerHTML = ''; mangaPage = 1; }
+  const genreFilter = mangaGenre ? `,genre_in:["${mangaGenre}"]` : '';
+  const searchFilter = mangaQuery ? `,search:"${mangaQuery}"` : '';
+  const q = `query{Page(page:${mangaPage},perPage:18){media(type:MANGA,sort:POPULARITY_DESC${genreFilter}${searchFilter}){id title{english romaji}coverImage{large medium}averageScore chapters genres}}}`;
+  try{
+    const d = await anilist(q);
+    const items = d.data.Page.media || [];
+    if(!items.length && reset){ grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">No manga found.</div>'; mangaLoading=false; return; }
+    items.forEach(m => {
+      const title = m.title?.english||m.title?.romaji||'Unknown';
+      const cover = m.coverImage?.large||m.coverImage?.medium||'';
+      const score = m.averageScore ? (m.averageScore/10).toFixed(1) : null;
+      const ch = m.chapters ? m.chapters+'ch' : '—';
+      const payload = JSON.stringify({id:m.id,title,cover,score:m.averageScore,chapters:m.chapters,genres:m.genres}).replace(/"/g,'&quot;');
+      const card = document.createElement('div');
+      card.className = 'manga-card';
+      card.setAttribute('onclick', `openMangaDetail('${payload}')`);
+      card.innerHTML = `<div class="manga-frame">
+        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/120x180/0d1120/00d4ff?text=N/A'"/>
+        ${score ? `<div class="manga-score-sm">${score}</div>` : ''}
+        <div class="manga-ov">
+          <div class="manga-name-sm">${title}</div>
+          <div class="manga-ch-sm">${ch}</div>
+        </div>
+      </div>`;
+      grid.appendChild(card);
+    });
+    mangaPage++;
+  } catch(e){ if(reset) grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">Could not load manga.</div>'; }
+  mangaLoading = false;
+}
+
+document.getElementById('mangaLoadMore').addEventListener('click', () => loadManga());
+document.getElementById('mangaSearchBtn').addEventListener('click', () => {
+  mangaQuery = document.getElementById('mangaSearchInput').value.trim();
+  mangaPage = 1; loadManga(true);
+});
+document.getElementById('mangaSearchInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){ mangaQuery = e.target.value.trim(); mangaPage=1; loadManga(true); }
+});
+
+// ── MANGA DETAIL ──
+async function openMangaDetail(d){
+  if(typeof d === 'string') d = JSON.parse(d.replace(/&quot;/g,'"'));
+  openOverlay(`<div class="reader-loading"><div class="spinner"></div><br><br>Loading manga info…</div>`);
+  try{
+    // get full details + chapters via MangaDex
+    const mdId = await mdxFindId(d.title);
+    let chapters = [];
+    if(mdId) chapters = await mdxGetChapters(mdId);
+    // fallback ComicK
+    if(!chapters.length){ const ckId = await ckFindId(d.title); if(ckId) chapters = await ckGetChapters(ckId); }
+    currentChapters = chapters;
+    currentMangaTitle = d.title;
+    const score = d.score ? (d.score/10).toFixed(1) : null;
+    openOverlay(`
+      <img class="manga-detail-cover" src="${d.cover||''}" alt="${d.title||''}" onerror="this.style.display='none'"/>
+      <div class="det-title" style="margin-bottom:6px">${d.title||'Unknown'}</div>
+      <div class="det-badges" style="margin-bottom:10px">
+        ${score?`<div class="det-badge neon">★ ${score}</div>`:''}
+        ${d.chapters?`<div class="det-badge">${d.chapters} CH</div>`:''}
+        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${g}</div>`).join('')}
+      </div>
+      <a href="https://anilist.co/manga/${d.id}" target="_blank" class="det-source-btn" style="margin-bottom:14px"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>
+      <div class="sec-label" style="margin-top:0;margin-bottom:10px"><span>CHAPTERS</span><div class="badge">${chapters.length ? chapters.length+' found' : 'Via MangaDex / ComicK'}</div></div>
+      ${chapters.length ? `<div class="chapter-list">${chapters.slice(0,40).map((c,i) => `
+        <div class="chapter-item" onclick="openReader(${i})">
+          <div>
+            <div class="chapter-num">Chapter ${c.num||c.ch||i+1}${c.title?' — '+c.title:''}</div>
+            <div class="chapter-src">${c.source||'MangaDex'}</div>
+          </div>
+          <i class="fas fa-book-open ch-arrow"></i>
+        </div>`).join('')}</div>`
+      : `<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px"><i class="fas fa-info-circle" style="display:block;font-size:24px;margin-bottom:8px;color:var(--border)"></i>No chapters found in reader APIs.<br>Try viewing on AniList above.</div>`}
+    `);
+  } catch(e){
+    openOverlay(`<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Could not load manga details.</div>`);
+  }
+}
+
+// ── READER ──
+async function openReader(idx){
+  currentChapIdx = idx;
+  const ch = currentChapters[idx];
+  if(!ch) return;
+  overlayContent.innerHTML = `<div class="reader-loading"><div class="spinner"></div><br><br>Loading pages…</div>`;
+  try{
+    let pages = [];
+    if(ch.source === 'MangaDex' || !ch.source){ pages = await mdxGetPages(ch); }
+    if(!pages.length && ch.source === 'ComicK'){ pages = await ckGetPages(ch); }
+    if(!pages.length){ pages = await ckGetPages(ch); }
+    if(!pages.length){ overlayContent.innerHTML = `<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Could not load pages for this chapter.</div>`; return; }
+    overlayContent.innerHTML = `
+      <div class="reader-topbar">
+        <button class="reader-back" onclick="openMangaDetailById()"><i class="fas fa-arrow-left"></i></button>
+        <div class="reader-title">${currentMangaTitle} — Ch.${ch.num||ch.ch||idx+1}</div>
+      </div>
+      <div class="reader-pages" id="readerPages">${pages.map((p,i)=>`<img class="reader-page-img" src="${p}" alt="Page ${i+1}" loading="lazy" onerror="this.style.opacity='.3'"/>`).join('')}</div>
+      <div class="reader-nav">
+        ${idx>0 ? `<button class="reader-nav-btn" onclick="openReader(${idx-1})"><i class="fas fa-chevron-left"></i> PREV</button>` : '<div></div>'}
+        ${idx<currentChapters.length-1 ? `<button class="reader-nav-btn primary" onclick="openReader(${idx+1})">NEXT <i class="fas fa-chevron-right"></i></button>` : ''}
+      </div>`;
+  } catch(e){
+    overlayContent.innerHTML = `<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px">Failed to load pages.</div>`;
+  }
+}
+
+function openMangaDetailById(){
+  // go back to chapter list — re-render with cached data
+  if(!currentChapters.length){ closeOverlay(); return; }
+  openOverlay(`
+    <div class="sec-label" style="margin-top:4px;margin-bottom:10px"><span>← ${currentMangaTitle}</span></div>
+    <div class="chapter-list">${currentChapters.slice(0,40).map((c,i)=>`
+      <div class="chapter-item" onclick="openReader(${i})">
+        <div><div class="chapter-num">Chapter ${c.num||c.ch||i+1}${c.title?' — '+c.title:''}</div><div class="chapter-src">${c.source||'MangaDex'}</div></div>
+        <i class="fas fa-book-open ch-arrow"></i>
+      </div>`).join('')}
+    </div>
+  `);
+}
+
+// ── MANGADEX API ──
+const CORS = [
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => u
+];
+async function corsGet(url){
+  for(const fn of CORS){
+    try{ const r = await fetch(fn(url), {signal:AbortSignal.timeout(7000)}); if(r.ok){ const t=await r.text(); return JSON.parse(t); } }catch(e){}
+  }
+  throw new Error('All CORS failed');
+}
+
+async function mdxFindId(title){
+  try{
+    const d = await corsGet(`https://api.mangadex.org/manga?title=${encodeURIComponent(title)}&limit=1&contentRating[]=safe&contentRating[]=suggestive`);
+    return d?.data?.[0]?.id || null;
+  } catch(e){ return null; }
+}
+async function mdxGetChapters(id){
+  try{
+    const d = await corsGet(`https://api.mangadex.org/manga/${id}/feed?limit=50&translatedLanguage[]=en&order[chapter]=asc&contentRating[]=safe`);
+    return (d?.data||[]).map(c=>({id:c.id,num:c.attributes?.chapter,title:c.attributes?.title||'',source:'MangaDex',_raw:c}));
+  } catch(e){ return []; }
+}
+async function mdxGetPages(ch){
+  try{
+    const d = await corsGet(`https://api.mangadex.org/at-home/server/${ch.id}`);
+    if(!d?.chapter) return [];
+    const base = d.baseUrl + '/data/' + d.chapter.hash + '/';
+    return (d.chapter.data||[]).map(p => base+p);
+  } catch(e){ return []; }
+}
+
+// ── COMICK API ──
+async function ckFindId(title){
+  try{
+    const d = await corsGet(`https://api.comick.fun/v1.0/search?q=${encodeURIComponent(title)}&limit=1`);
+    return d?.[0]?.hid || null;
+  } catch(e){ return null; }
+}
+async function ckGetChapters(hid){
+  try{
+    const d = await corsGet(`https://api.comick.fun/comic/${hid}/chapters?lang=en&limit=50`);
+    return (d?.chapters||[]).map(c=>({id:c.hid,ch:c.chap,num:c.chap,title:c.title||'',source:'ComicK'}));
+  } catch(e){ return []; }
+}
+async function ckGetPages(ch){
+  try{
+    const d = await corsGet(`https://api.comick.fun/chapter/${ch.id}`);
+    return (d?.chapter?.images||[]).map(i=>i.url).filter(Boolean);
+  } catch(e){ return []; }
+}
+
+// ── UPCOMING EVENT ──
+async function loadUpcoming(){
+  const q = `query{Page(perPage:5){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}description(asHtml:false)startDate{year month day}}}}`;
+  try{
+    const d = await anilist(q);
+    const a = (d.data.Page.media||[]).find(m=>m.startDate?.year);
+    if(!a) return;
+    const title = a.title?.english||a.title?.romaji||'Upcoming Anime';
+    const desc = (a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,140)+'…';
+    const sd = a.startDate;
+    const dateStr = sd.year ? `${sd.year}-${String(sd.month||1).padStart(2,'0')}-${String(sd.day||1).padStart(2,'0')}` : '';
+    document.getElementById('ucTitle').textContent = title;
+    document.getElementById('ucDesc').textContent = desc;
+    document.getElementById('ucLinks').innerHTML = `<a href="https://anilist.co/anime/${a.id}" target="_blank" class="event-link-app"><span><i class="fas fa-external-link-alt" style="margin-right:6px"></i>View on AniList</span><i class="fas fa-chevron-right"></i></a>`;
+    if(dateStr){
+      const target = new Date(dateStr+'T00:00:00').getTime();
+      document.getElementById('ucDate').innerHTML = `<i class="fas fa-calendar"></i> ${dateStr}`;
+      document.getElementById('ucCdRow').style.display = 'grid';
+      function tickUC(){
+        const diff = target-Date.now();
+        if(diff<=0){ document.getElementById('ucCdRow').style.display='none'; return; }
+        const setv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+        setv('u-d',Math.floor(diff/86400000));
+        setv('u-h',Math.floor((diff%86400000)/3600000));
+        setv('u-m',Math.floor((diff%3600000)/60000));
+        setv('u-s',Math.floor((diff%60000)/1000));
+      }
+      tickUC(); setInterval(tickUC,1000);
+    }
+  } catch(e){}
+}
+
+// ── GIVEAWAY COUNTDOWN ──
+(function(){
+  const target = new Date('2026-07-27T00:00:00').getTime();
+  function tick(){
+    const diff = target-Date.now();
+    if(diff<=0){ ['g-d','g-h','g-m','g-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';}); return; }
+    const setv=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');};
+    setv('g-d',Math.floor(diff/86400000));
+    setv('g-h',Math.floor((diff%86400000)/3600000));
+    setv('g-m',Math.floor((diff%3600000)/60000));
+    setv('g-s',Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+// ── PWA INSTALL ──
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e;
+  if(!localStorage.getItem('pwa_dismissed'))
+    setTimeout(()=>document.getElementById('installPopup').classList.add('show'),3500);
+});
+document.getElementById('installBtn').addEventListener('click', async () => {
+  document.getElementById('installPopup').classList.remove('show');
+  if(deferredPrompt){ await deferredPrompt.prompt(); deferredPrompt=null; }
+});
+document.getElementById('installDismiss').addEventListener('click', () => {
+  document.getElementById('installPopup').classList.remove('show');
+  localStorage.setItem('pwa_dismissed','1');
+});
+
+// ── INIT ──
+buildMangaGenres();
+loadNews();
+loadTrending();
+loadSeasonal();
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script>
+</body>
+</html>
