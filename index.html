@@ -241,6 +241,37 @@
     .footer-links a{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .2s}
     .footer-links a:hover{color:var(--neon)}
 
+    /* ── DETAIL OVERLAY ── */
+    .det-overlay{position:fixed;inset:0;z-index:2000;background:rgba(6,8,15,.0);pointer-events:none;transition:background .3s}
+    .det-overlay.open{background:rgba(6,8,15,.88);pointer-events:all}
+    .det-sheet{position:fixed;bottom:0;left:0;right:0;z-index:2001;background:var(--panel2);border-top:2px solid var(--neon);max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+    .det-overlay.open .det-sheet{transform:translateY(0)}
+    .det-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
+    .det-close{position:absolute;top:14px;right:14px;width:36px;height:36px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--aged);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;border-radius:2px}
+    .det-close:hover{border-color:var(--neon);color:var(--neon)}
+    .det-body{padding:8px 16px 36px}
+    .det-hdr{display:flex;gap:14px;padding:14px 0 14px;border-bottom:1px solid var(--border);margin-bottom:14px}
+    .det-cover{width:90px;flex-shrink:0;aspect-ratio:2/3;object-fit:cover;border:2px solid var(--border);border-radius:2px}
+    .det-info{flex:1;min-width:0}
+    .det-title-lg{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--paper);line-height:1.15;margin-bottom:6px}
+    .det-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+    .det-badge{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 7px;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--aged)}
+    .det-badge.neon{border-color:var(--neon);color:var(--neon);background:rgba(0,212,255,.12)}
+    .det-score-big{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--neon);text-shadow:0 0 10px rgba(0,212,255,.4);line-height:1}
+    .det-syn-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--neon);text-transform:uppercase;margin-bottom:6px}
+    .det-syn{font-size:13px;color:var(--aged);line-height:1.75;margin-bottom:14px}
+    .det-genres{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+    .det-genre{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 9px;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted)}
+    .det-src-btn{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;padding:11px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:2px}
+    .det-src-btn:hover{border-color:var(--neon);color:var(--neon)}
+    .det-news-img{width:100%;height:200px;object-fit:cover;border:1px solid var(--border);margin-bottom:14px;border-radius:2px}
+    .det-news-share{display:flex;gap:8px;margin-top:14px}
+    .det-share-chip{flex:1;background:rgba(0,212,255,.06);border:1px solid var(--border);color:var(--muted);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 6px;cursor:pointer;transition:all .2s;text-align:center;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:5px}
+    .det-share-chip:hover{border-color:var(--neon);color:var(--neon)}
+    .news-card{cursor:pointer}
+    .anime-card{cursor:pointer}
+    body.light .det-sheet{background:#e4eaf6}
+
     /* TOAST */
     .toast-container{position:fixed;bottom:20px;right:20px;z-index:3000;display:flex;flex-direction:column;gap:8px}
     .toast{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--neon);padding:10px 16px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;color:var(--paper);display:flex;align-items:center;gap:8px;animation:slideIn .3s ease;min-width:240px;max-width:320px}
@@ -254,16 +285,17 @@
     .back-to-top:hover{background:#33ddff}
 
     /* PWA INSTALL POPUP */
-    .install-popup{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:4000;background:var(--panel2);border:2px solid var(--neon);padding:18px 22px;display:none;align-items:center;gap:14px;max-width:380px;width:calc(100% - 32px);box-shadow:0 0 40px rgba(0,212,255,.2);animation:slideUp .4s ease}
+    .install-popup{position:fixed;bottom:16px;left:12px;right:12px;z-index:4000;background:var(--panel2);border:2px solid var(--neon);padding:12px 14px;display:none;align-items:center;gap:10px;box-shadow:0 0 32px rgba(0,212,255,.2);animation:slideUp .4s ease;border-radius:3px;max-width:480px;margin:0 auto}
     .install-popup.show{display:flex}
-    @keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-    .install-popup img{width:48px;height:48px;border-radius:8px;flex-shrink:0}
-    .install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:var(--paper)}
-    .install-popup-text span{font-size:12px;color:var(--muted)}
-    .install-popup-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0}
-    .install-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:8px 14px;cursor:pointer;transition:all .2s}
+    @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .install-popup-top{display:flex;align-items:center;gap:12px}
+    .install-popup img{width:42px;height:42px;border-radius:8px;flex-shrink:0}
+    .install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--paper);line-height:1.1}
+    .install-popup-text span{font-size:11px;color:var(--muted)}
+    .install-popup-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .install-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:10px;cursor:pointer;transition:all .2s;border-radius:2px}
     .install-btn:hover{background:#33ddff}
-    .install-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:1px;padding:8px 12px;cursor:pointer;transition:all .2s}
+    .install-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:10px;cursor:pointer;transition:all .2s;border-radius:2px;text-align:center}
     .install-dismiss:hover{border-color:var(--neon);color:var(--neon)}
 
     /* NOTIF BANNER */
@@ -306,15 +338,13 @@
 
   <!-- PWA INSTALL POPUP -->
   <div class="install-popup" id="installPopup">
-    <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
-    <div class="install-popup-text">
-      <p>Install ANICADE</p>
-      <span>Add to home screen for fast access</span>
+    <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" style="width:38px;height:38px;border-radius:7px;flex-shrink:0"/>
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:var(--paper);line-height:1">Install ANICADE</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:1px">Add to home screen</div>
     </div>
-    <div class="install-popup-actions">
-      <button class="install-btn" id="installBtn"><i class="fas fa-download"></i> Install</button>
-      <button class="install-dismiss" id="installDismiss">Later</button>
-    </div>
+    <button class="install-btn" id="installBtn" style="flex-shrink:0;padding:9px 14px;font-size:12px"><i class="fas fa-download"></i> Install</button>
+    <button class="install-dismiss" id="installDismiss" style="flex-shrink:0;padding:9px 12px;font-size:11px">Later</button>
   </div>
 
   <!-- NAVBAR -->
@@ -563,6 +593,16 @@
     </div>
   </footer>
 
+
+  <!-- DETAIL OVERLAY -->
+  <div class="det-overlay" id="detOverlay">
+    <div class="det-sheet" id="detSheet">
+      <div class="det-handle"></div>
+      <button class="det-close" id="detClose"><i class="fas fa-times"></i></button>
+      <div class="det-body" id="detBody"></div>
+    </div>
+  </div>
+
   <div class="toast-container" id="toastContainer"></div>
   <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
@@ -587,6 +627,86 @@
     if(i)i.className=dark?'fas fa-moon':'fas fa-sun';
   }
   applyTheme();
+
+  // ── DATA STORE (avoids JSON-in-onclick bugs) ──
+  const _STORE={};let _sid=0;
+  function stash(o){const k='s'+(++_sid);_STORE[k]=o;return k;}
+  function unstash(k){return _STORE[k]||{};}
+
+  // ── OVERLAY ──
+  function escH(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function openDet(html){
+    document.getElementById('detBody').innerHTML=html;
+    document.getElementById('detOverlay').classList.add('open');
+    document.body.style.overflow='hidden';
+    document.getElementById('detSheet').scrollTop=0;
+  }
+  function closeDet(){
+    document.getElementById('detOverlay').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  document.getElementById('detClose').addEventListener('click',closeDet);
+  document.getElementById('detOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('detOverlay'))closeDet();});
+
+  function openAnimeDetail(k){
+    const a=unstash(k);
+    const title=a.english||a.romaji||'Unknown';
+    const desc=(a.description||'').replace(/<[^>]+>/g,'').trim()||'No synopsis available.';
+    const score=a.score?(a.score/10).toFixed(1):null;
+    openDet(`
+      <div class="det-hdr">
+        <img class="det-cover" src="${a.cover||''}" alt="${escH(title)}" onerror="this.src='https://placehold.co/90x135/0d1120/00d4ff?text=N/A'"/>
+        <div class="det-info">
+          <div class="det-title-lg">${escH(title)}</div>
+          <div class="det-badges">
+            ${a.format?`<div class="det-badge neon">${a.format}</div>`:''}
+            ${a.status?`<div class="det-badge">${a.status.replace(/_/g,' ')}</div>`:''}
+            ${a.episodes?`<div class="det-badge">${a.episodes} EPS</div>`:''}
+            ${a.season?`<div class="det-badge">${a.season} ${a.year||''}</div>`:''}
+          </div>
+          ${score?`<div class="det-score-big">★ ${score}</div>`:''}
+          ${a.ep?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--neon);margin-top:5px"><i class="fas fa-clock" style="margin-right:4px"></i>EP ${a.ep} airing soon</div>`:''}
+        </div>
+      </div>
+      ${(a.genres||[]).length?`<div class="det-genres">${a.genres.map(g=>`<div class="det-genre">${escH(g)}</div>`).join('')}</div>`:''}
+      <div class="det-syn-lbl">Synopsis</div>
+      <div class="det-syn">${escH(desc)}</div>
+      ${a.id?`<a href="https://anilist.co/anime/${a.id}" target="_blank" class="det-src-btn"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>`:''}
+    `);
+  }
+
+  function openNewsDetail(k){
+    const d=unstash(k);
+    const desc=(d.desc||'').replace(/<[^>]+>/g,'').trim()||'No details available.';
+    const uid='nd_'+(d.id||k);
+    openDet(`
+      ${d.img?`<img class="det-news-img" src="${d.img}" alt="" onerror="this.style.display='none'"/>`:''}
+      <div class="det-title-lg" style="margin-bottom:6px">${escH(d.title||'Anime Update')}</div>
+      <div class="det-badges" style="margin-bottom:8px">
+        <div class="det-badge neon">${d.source||'AniList'}</div>
+        ${d.ep?`<div class="det-badge neon">EP ${d.ep}</div>`:''}
+        ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${escH(g)}</div>`).join('')}
+      </div>
+      ${d.date?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:10px"><i class="fas fa-clock" style="margin-right:4px;color:var(--neon)"></i>${d.date}</div>`:''}
+      <div class="det-syn-lbl">Synopsis</div>
+      <div class="det-syn">${escH(desc)}</div>
+      <div class="det-news-share">
+        <div class="det-share-chip" onclick="doShareNews('${uid}','${escH(d.title||'')}')"><i class="fas fa-share-alt"></i> Share</div>
+        <div class="det-share-chip" onclick="doShareWA('${escH(d.title||'')}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</div>
+        <div class="det-share-chip" onclick="doShareTG('${escH(d.title||'')}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</div>
+      </div>
+      ${d.id?`<a href="https://anilist.co/anime/${d.id}" target="_blank" class="det-src-btn" style="margin-top:14px"><i class="fas fa-external-link-alt"></i> VIEW SOURCE ON ANILIST</a>`:''}
+    `);
+  }
+
+  function doShareNews(uid,title){
+    const url=location.href;
+    if(navigator.share){navigator.share({title:title+' — ANICADE',url}).catch(()=>{});}
+    else{navigator.clipboard?.writeText(url);showToast('Link copied!','success');}
+  }
+  function doShareWA(title){window.open(`https://wa.me/?text=${encodeURIComponent(title+' — ANICADE '+location.href)}`,'_blank');}
+  function doShareTG(title){window.open(`https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(title)}`,'_blank');}
+
   document.getElementById('themeToggle').addEventListener('click',()=>{
     dark=!dark;localStorage.setItem('anicade_theme',dark?'dark':'light');applyTheme();
   });
@@ -625,7 +745,7 @@
   }
   updateGiveawayCountdown();
 
-  // ── ANIME CARD BUILDER ──
+  // ── ANIME CARD BUILDER (clickable with detail overlay) ──
   function buildAnimeCard(anime,delay=0){
     const title=anime.title?.english||anime.title?.romaji||'Unknown';
     const cover=anime.coverImage?.large||anime.coverImage?.medium||'';
@@ -635,24 +755,23 @@
     const epNum=anime.nextAiringEpisode?.episode;
     const eps=epNum?`EP ${epNum}`:anime.episodes?`${anime.episodes} EPS`:'';
     const genres=(anime.genres||[]).slice(0,2).join(' · ');
-    // Build per-card airing timer if airingAt is within 7 days
     let timerHtml='';
     if(airingAt){
       const diff=(airingAt*1000)-Date.now();
       if(diff>0&&diff<7*86400000){
-        const id='act'+Math.random().toString(36).slice(2,7);
         const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000);
-        timerHtml=`<div class="airing-countdown" id="${id}"><i class="fas fa-clock"></i> EP${epNum} in ${h}h ${m}m</div>`;
+        timerHtml=`<div class="airing-countdown"><i class="fas fa-clock"></i> EP${epNum} in ${h}h ${m}m</div>`;
       }
     }
-    return `<div class="anime-card" style="animation-delay:${delay}s">
+    const k=stash({id:anime.id,english:anime.title?.english,romaji:anime.title?.romaji,cover,score:anime.averageScore,format:fmt,genres:anime.genres||[],episodes:anime.episodes,description:anime.description||'',ep:epNum,status:anime.status,season:anime.season,year:anime.seasonYear});
+    return `<div class="anime-card" style="animation-delay:${delay}s" onclick="openAnimeDetail('${k}')" role="button" tabindex="0">
       <div class="anime-card-frame">
-        <img class="anime-cover" src="${cover}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/300x400/0d1120/00d4ff?text=NO+IMG'"/>
+        <img class="anime-cover" src="${cover}" alt="${escH(title)}" loading="lazy" onerror="this.src='https://placehold.co/300x400/0d1120/00d4ff?text=NO+IMG'"/>
         ${score?`<div class="anime-score"><i class="fas fa-star" style="font-size:8px"></i> ${score}</div>`:''}
         ${fmt?`<div class="anime-format">${fmt}</div>`:''}
         <div class="anime-overlay">
-          <div class="anime-name">${title}</div>
-          <div class="anime-meta">${genres}${eps?` · <span class="ep">${eps}</span>`:''}</div>
+          <div class="anime-name">${escH(title)}</div>
+          <div class="anime-meta">${escH(genres)}${eps?` · <span class="ep">${eps}</span>`:''}</div>
           ${timerHtml}
         </div>
       </div>
@@ -661,7 +780,7 @@
 
   // ── ANILIST TRENDING ──
   async function loadTrending(){
-    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode airingAt}}}}`;
+    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
     try{
       const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const d=await r.json();
@@ -674,7 +793,7 @@
     const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
     const season=seasons[new Date().getMonth()],year=new Date().getFullYear();
     document.getElementById('seasonLabel').textContent=`${season} ${year}`;
-    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes nextAiringEpisode{episode airingAt}}}}`;
+    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
     try{
       const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const d=await r.json();
@@ -730,34 +849,21 @@
   // ── NEWS CARD BUILDER ──
   let _ncId=0;
   function buildNewsCard(item){
-    const uid='nc'+(++_ncId);
+    const excerpt=(item.excerpt||'').replace(/<[^>]+>/g,'').trim();
+    const preview=excerpt.slice(0,120);
+    const epBadge=item.ep?`<span style="color:var(--neon);font-size:9px;font-family:'Space Mono',monospace;"> · EP ${item.ep}</span>`:'';
     const imgEl=item.image
       ?`<img class="news-img" src="${item.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=news-img-placeholder><i class=fas\\ fa-newspaper></i></div>'"/>`
       :`<div class="news-img-placeholder"><i class="fas fa-newspaper"></i></div>`;
-    const epBadge=item.ep?`<span style="color:var(--neon);font-size:9px;font-family:'Space Mono',monospace;"> · EP ${item.ep}</span>`:'';
-    const excerpt=(item.excerpt||'').replace(/<[^>]+>/g,'').trim();
-    const preview=excerpt.slice(0,130);
-    const hasMore=excerpt.length>130;
-    const shares=getShareCount(uid);
-    const shareUrl=encodeURIComponent(location.href);
-    const shareTitle=encodeURIComponent((item.title||'Anime Update')+' — ANICADE');
-    return `<div class="news-card">
+    const k=stash({title:item.title||'Anime Update',desc:item.excerpt||'',img:item.image||null,source:item.source||'ANICADE',date:item.date?new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'',ep:item.ep||null,id:item.id||null,genres:item.genres||[]});
+    return `<div class="news-card" onclick="openNewsDetail('${k}')">
       ${imgEl}
       <div class="news-body">
-        <div class="news-source">${item.source||'ANICADE'}${epBadge}</div>
-        <div class="news-title">${item.title||'Anime Update'}</div>
-        ${preview?`<p class="news-excerpt">${preview}${hasMore?'…':''}</p>`:''}
-        ${hasMore?`<div class="news-full" id="${uid}-full">${excerpt}</div>`:''}
-        <div class="news-footer">
-          ${item.date?`<div class="news-date"><i class="fas fa-clock" style="margin-right:3px"></i>${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:'<div></div>'}
-          ${hasMore?`<button class="news-view-btn" id="${uid}-btn" onclick="toggleNews('${uid}')"><i class="fas fa-chevron-down"></i> VIEW</button>`:''}
-        </div>
-      </div>
-      <div class="news-share-row">
-        <button class="share-btn" onclick="shareNews('${uid}','${shareUrl}','${shareTitle}')"><i class="fas fa-share-alt"></i> Share</button>
-        <button class="share-btn" onclick="shareWA('${shareUrl}','${shareTitle}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</button>
-        <button class="share-btn" onclick="shareTG('${shareUrl}','${shareTitle}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</button>
-        <span class="share-count" id="${uid}-sc">${shares>0?shares+' shares':''}</span>
+        <div class="news-source">${escH(item.source||'ANICADE')}${epBadge}</div>
+        <div class="news-title">${escH(item.title||'Anime Update')}</div>
+        ${preview?`<p class="news-excerpt">${escH(preview)}${excerpt.length>120?'…':''}</p>`:''}
+        ${item.date?`<div class="news-date" style="margin-top:6px"><i class="fas fa-clock" style="margin-right:3px"></i>${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:''}
+        <div style="margin-top:6px;font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px">TAP TO READ MORE →</div>
       </div>
     </div>`;
   }
