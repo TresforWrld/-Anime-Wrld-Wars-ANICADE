@@ -313,15 +313,16 @@ img{max-width:100%;display:block}
 /* ══════════════════════════
    INSTALL POPUP
 ══════════════════════════ */
-.install-popup{position:fixed;bottom:calc(var(--bot-h) + 12px);left:12px;right:12px;z-index:600;background:var(--panel2);border:2px solid var(--neon);padding:14px 16px;display:none;align-items:center;gap:12px;box-shadow:0 0 40px rgba(0,212,255,.2);animation:slideUp .4s ease;border-radius:4px}
+.install-popup{position:fixed;bottom:calc(var(--bot-h) + 10px);left:10px;right:10px;z-index:600;background:var(--panel2);border:2px solid var(--neon);padding:11px 13px;display:none;align-items:center;gap:9px;box-shadow:0 0 30px rgba(0,212,255,.2);animation:slideUp .4s ease;border-radius:4px}
 .install-popup.show{display:flex}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.install-popup img{width:44px;height:44px;border-radius:8px;flex-shrink:0}
-.install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--paper)}
+.install-popup-top{display:flex;align-items:center;gap:12px}
+.install-popup img{width:40px;height:40px;border-radius:8px;flex-shrink:0}
+.install-popup-text p{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--paper);line-height:1.1}
 .install-popup-text span{font-size:11px;color:var(--muted)}
-.install-actions{display:flex;gap:7px;margin-left:auto;flex-shrink:0}
-.inst-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:2px;padding:8px 12px;cursor:pointer;border-radius:2px}
-.inst-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:11px;padding:8px 10px;cursor:pointer;border-radius:2px}
+.install-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.inst-btn{background:var(--neon);border:none;color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;padding:10px;cursor:pointer;border-radius:2px}
+.inst-dismiss{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:12px;padding:10px;cursor:pointer;border-radius:2px;text-align:center}
 .inst-dismiss:hover{border-color:var(--neon);color:var(--neon)}
 
 /* ── TOAST ── */
@@ -345,12 +346,13 @@ body.light .overlay-sheet{background:#e4eaf6}
 
 <!-- INSTALL POPUP -->
 <div class="install-popup" id="installPopup">
-  <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/>
-  <div class="install-popup-text"><p>Install ANICADE</p><span>Add to home screen</span></div>
-  <div class="install-actions">
-    <button class="inst-btn" id="installBtn"><i class="fas fa-download"></i> Install</button>
-    <button class="inst-dismiss" id="installDismiss">Later</button>
+  <img src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE" style="width:36px;height:36px;border-radius:7px;flex-shrink:0"/>
+  <div style="flex:1;min-width:0">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--paper);line-height:1">Install ANICADE</div>
+    <div style="font-size:10px;color:var(--muted);margin-top:1px">Add to home screen</div>
   </div>
+  <button class="inst-btn" id="installBtn" style="flex-shrink:0;padding:9px 13px;font-size:12px"><i class="fas fa-download"></i> Install</button>
+  <button class="inst-dismiss" id="installDismiss" style="flex-shrink:0;padding:9px 11px;font-size:11px">Later</button>
 </div>
 
 <!-- TOP BAR -->
@@ -1063,8 +1065,14 @@ async function launchReader(idx){
       return;
     }
     readerInfoEl.textContent=`${pages.length}p`;
+    // Render all pages eagerly - lazy loading causes broken images in reader
     readerPagesEl.innerHTML=pages.map((p,i)=>
-      `<img class="reader-page-img" src="${p}" alt="Page ${i+1}" loading="${i<3?'eager':'lazy'}" onerror="this.style.opacity='.15'"/>`
+      `<div style="position:relative;min-height:200px;background:var(--panel)">
+        <img class="reader-page-img" src="${p}" alt="" loading="eager"
+          onload="this.style.opacity='1';this.previousElementSibling&&this.previousElementSibling.remove()"
+          onerror="this.outerHTML='<div style=\\'padding:20px;text-align:center;color:var(--muted);font-size:11px;font-family:Space Mono,monospace\\'>Page ${i+1} unavailable</div>'"
+          style="opacity:0;transition:opacity .3s"/>
+       </div>`
     ).join('');
     readerScrollEl.scrollTop=0;
   }catch(e){
@@ -1135,8 +1143,16 @@ async function mdxGetChapters(id){
   catch(e){ return []; }
 }
 async function mdxGetPages(ch){
-  try{ const d=await corsGet(`https://api.mangadex.org/at-home/server/${ch.id}`); if(!d?.chapter) return []; const base=d.baseUrl+'/data/'+d.chapter.hash+'/'; return(d.chapter.data||[]).map(p=>base+p); }
-  catch(e){ return []; }
+  try{
+    const d=await corsGet(`https://api.mangadex.org/at-home/server/${ch.id}`);
+    if(!d?.chapter) return [];
+    // Try data-saver first (smaller images, less likely to fail)
+    const hash = d.chapter.dataSaverHash || d.chapter.hash;
+    const imgs = d.chapter.dataSaver?.length ? d.chapter.dataSaver : d.chapter.data;
+    const base = d.baseUrl + (d.chapter.dataSaver?.length ? '/data-saver/' : '/data/') + hash + '/';
+    // Proxy each image URL through corsproxy to avoid CORS/hotlink blocks
+    return (imgs||[]).map(p => `https://corsproxy.io/?${encodeURIComponent(base+p)}`);
+  }catch(e){ return []; }
 }
 
 // ══════════════════════════
@@ -1151,8 +1167,12 @@ async function ckGetChapters(hid){
   catch(e){ return []; }
 }
 async function ckGetPages(ch){
-  try{ const d=await corsGet(`https://api.comick.fun/chapter/${ch.id}`); return(d?.chapter?.images||[]).map(i=>i.url).filter(Boolean); }
-  catch(e){ return []; }
+  try{
+    const d=await corsGet(`https://api.comick.fun/chapter/${ch.id}`);
+    const urls = (d?.chapter?.images||[]).map(i=>i.url).filter(Boolean);
+    // Proxy images to avoid hotlink blocks
+    return urls.map(u => u.startsWith('http') ? `https://corsproxy.io/?${encodeURIComponent(u)}` : u);
+  }catch(e){ return []; }
 }
 
 // ══════════════════════════
