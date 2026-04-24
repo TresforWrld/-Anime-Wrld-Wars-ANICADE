@@ -446,8 +446,6 @@ body.light .overlay-sheet{background:#e4eaf6}
         </div>
         <p class="event-desc-app">Join the community channels to participate in ANICADE's biggest anniversary giveaway. All platforms, all genres, one wrld.</p>
         <div class="event-links-app">
-          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link-app"><span><i class="fas fa-brain" style="margin-right:6px"></i>Psychology &amp; Motivation</span><i class="fas fa-external-link-alt"></i></a>
-          <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link-app"><span><i class="fas fa-music" style="margin-right:6px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link-app"><span><i class="fas fa-globe" style="margin-right:6px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
         </div>
       </div>
@@ -492,7 +490,6 @@ body.light .overlay-sheet{background:#e4eaf6}
         <a href="https://whatsapp.com/channel/0029VafKed7LY6d7ECh4Dv3x" target="_blank" class="comm-card wa"><div class="comm-icon"><i class="fab fa-whatsapp"></i></div><div><div class="comm-name">WhatsApp Channel</div><div class="comm-sub">14K+ followers</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
         <a href="https://t.me/Tresfor_AnimeWrldllWars" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fab fa-telegram"></i></div><div><div class="comm-name">Telegram Group</div><div class="comm-sub">Chat · Share · Discuss</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
         <a href="https://t.me/Tresfor_anime_wrld_wars" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fab fa-telegram"></i></div><div><div class="comm-name">Telegram Channel</div><div class="comm-sub">Official announcements</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
-        <a href="https://t.me/TresforwrldBot" target="_blank" class="comm-card tg"><div class="comm-icon"><i class="fas fa-robot"></i></div><div><div class="comm-name">Telegram Anime Bot</div><div class="comm-sub">@TresforwrldBot</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
         <a href="https://discord.gg/yQkthryT" target="_blank" class="comm-card dc"><div class="comm-icon"><i class="fab fa-discord"></i></div><div><div class="comm-name">Discord Server</div><div class="comm-sub">Channels · Voice · Events</div></div><i class="fas fa-external-link-alt comm-arrow"></i></a>
       </div>
 
@@ -695,7 +692,7 @@ async function anilist(query,vars={}){
 async function loadNews(){
   const list=document.getElementById('homeNewsList');
   try{
-    const q=`query{Page(perPage:15){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{medium}description(asHtml:false)nextAiringEpisode{episode airingAt}averageScore genres}}}`;
+    const q=`query{Page(perPage:15){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{extraLarge large medium}description(asHtml:false)nextAiringEpisode{episode airingAt}averageScore genres}}}`;
     const d=await anilist(q);
     const items=d.data.Page.media||[];
     document.getElementById('statCount').textContent=items.length;
@@ -705,7 +702,7 @@ async function loadNews(){
       const desc=(a.description||'').replace(/<[^>]+>/g,'').trim().slice(0,120);
       const rawDate=a.nextAiringEpisode?.airingAt;
       const date=rawDate?new Date(rawDate*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
-      const img=a.coverImage?.medium||'';
+      const img=a.coverImage?.extraLarge||a.coverImage?.large||a.coverImage?.medium||'';
       // store full data, reference by key
       const k=stash({title,desc:a.description||'',img,source:'AniList',date,ep,id:a.id,genres:a.genres||[],score:a.averageScore});
       return `<div class="news-item" onclick="openNewsDetail('${k}')">
@@ -808,12 +805,12 @@ function openAnimeDetail(k){
 async function loadTrending(){
   const container=document.getElementById('homeTrending');
   try{
-    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status season seasonYear}}}`;
+    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{extraLarge large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status season seasonYear}}}`;
     const d=await anilist(q);
     const items=d.data.Page.media||[];
     container.innerHTML=items.map(a=>{
       const title=a.title?.english||a.title?.romaji||'Unknown';
-      const cover=a.coverImage?.large||'';
+      const cover=a.coverImage?.extraLarge||a.coverImage?.large||'';
       const score=a.averageScore?(a.averageScore/10).toFixed(1):null;
       const ep=a.nextAiringEpisode?.episode;
       const k=stash({id:a.id,english:a.title?.english,romaji:a.title?.romaji,cover,score:a.averageScore,format:a.format,genres:a.genres||[],episodes:a.episodes,description:a.description||'',ep,status:a.status,season:a.season,year:a.seasonYear});
@@ -841,13 +838,13 @@ async function loadSeasonal(){
   const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
   const season=seasons[new Date().getMonth()], year=new Date().getFullYear();
   document.getElementById('seasonBadge').textContent=season+' '+year;
-  const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status}}}`;
+  const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{extraLarge large}averageScore format genres episodes description(asHtml:false)nextAiringEpisode{episode}status}}}`;
   try{
     const d=await anilist(q);
     const items=d.data.Page.media||[];
     document.getElementById('homeSeasonGrid').innerHTML=items.map(a=>{
       const title=a.title?.english||a.title?.romaji||'Unknown';
-      const cover=a.coverImage?.large||'';
+      const cover=a.coverImage?.extraLarge||a.coverImage?.large||'';
       const score=a.averageScore?(a.averageScore/10).toFixed(1):null;
       const ep=a.nextAiringEpisode?.episode;
       const genres=(a.genres||[]).slice(0,2).join(' · ');
@@ -892,14 +889,14 @@ async function loadManga(reset=false){
   if(reset){ grid.innerHTML=''; mangaPage=1; }
   const gf=mangaGenre?`,genre_in:["${mangaGenre}"]`:'';
   const sf=mangaQuery?`,search:"${mangaQuery}"`:'';
-  const q=`query{Page(page:${mangaPage},perPage:18){media(type:MANGA,sort:POPULARITY_DESC${gf}${sf}){id title{english romaji}coverImage{large medium}averageScore chapters genres}}}`;
+  const q=`query{Page(page:${mangaPage},perPage:18){media(type:MANGA,sort:POPULARITY_DESC${gf}${sf}){id title{english romaji}coverImage{extraLarge large medium}averageScore chapters genres}}}`;
   try{
     const d=await anilist(q);
     const items=d.data.Page.media||[];
     if(!items.length&&reset){ grid.innerHTML='<div style="grid-column:1/-1;padding:24px;text-align:center;color:var(--muted);font-size:13px">No manga found.</div>'; mangaLoading=false; return; }
     items.forEach(m=>{
       const title=m.title?.english||m.title?.romaji||'Unknown';
-      const cover=m.coverImage?.large||m.coverImage?.medium||'';
+      const cover=m.coverImage?.extraLarge||m.coverImage?.large||m.coverImage?.medium||'';
       const score=m.averageScore?(m.averageScore/10).toFixed(1):null;
       const ch=m.chapters?m.chapters+'ch':'—';
       const k=stash({id:m.id,title,cover,score:m.averageScore,chapters:m.chapters,genres:m.genres||[]});

@@ -10,8 +10,8 @@
     /* Manga page specific styles */
     .manga-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
       margin: 2rem 0;
       width: 100%;
       box-sizing: border-box;
@@ -47,7 +47,7 @@
     
     .manga-card img {
       width: 100%;
-      height: 350px;
+      height: 320px;
       object-fit: cover;
       display: block;
       transition: all 0.3s ease;
@@ -64,7 +64,7 @@
     .manga-content h3 {
       color: var(--gojo-blue);
       margin: 0 0 0.6rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-shadow: 0 0 10px var(--gojo-blue-glow);
     }
     
@@ -81,9 +81,68 @@
     
     .manga-content p {
       color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.6;
-      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0 0 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .manga-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .manga-tag {
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--gojo-blue);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+    
+    .manga-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .manga-btn {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+    }
+    
+    .manga-btn-read {
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+    }
+    
+    .manga-btn-read:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    .manga-btn-download {
+      background: rgba(255, 0, 72, 0.15);
+      color: var(--accent-1);
+      border: 1px solid rgba(255, 0, 72, 0.4);
+    }
+    
+    .manga-btn-download:hover {
+      background: rgba(255, 0, 72, 0.25);
+      transform: translateY(-2px);
     }
     
     .back-button {
@@ -133,6 +192,459 @@
       background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple));
       border-radius: 2px;
     }
+    
+    /* Search and Filter */
+    .search-filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border-radius: 30px;
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      background: rgba(26, 26, 37, 0.9);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--gojo-blue);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gojo-blue);
+    }
+    
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    
+    .filter-tag {
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      background: rgba(26, 26, 37, 0.9);
+      color: var(--text-secondary);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .filter-tag:hover, .filter-tag.active {
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border-color: transparent;
+    }
+    
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gojo-blue);
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 212, 255, 0.2);
+      border-top-color: var(--gojo-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Manga Reader Modal */
+    .reader-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .reader-modal.active {
+      display: block;
+    }
+    
+    .reader-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(180deg, rgba(26, 26, 37, 0.98) 0%, rgba(26, 26, 37, 0.9) 100%);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      z-index: 1001;
+    }
+    
+    .reader-title {
+      color: var(--gojo-blue);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    .reader-close {
+      background: rgba(255, 0, 72, 0.2);
+      border: 1px solid rgba(255, 0, 72, 0.4);
+      color: var(--accent-1);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .reader-close:hover {
+      background: rgba(255, 0, 72, 0.3);
+    }
+    
+    .reader-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .reader-content img {
+      width: 100%;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .chapter-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: rgba(26, 26, 37, 0.9);
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    
+    .chapter-nav button {
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .chapter-nav button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    .chapter-nav button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Chapter List */
+    .chapter-list-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .chapter-list-modal.active {
+      display: block;
+    }
+    
+    .chapter-list-content {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    
+    .chapter-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    
+    .chapter-list-header h3 {
+      color: var(--gojo-blue);
+      font-size: 1.3rem;
+    }
+    
+    .chapter-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: rgba(26, 26, 37, 0.9);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      border: 1px solid rgba(0, 212, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .chapter-item:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: rgba(0, 212, 255, 0.3);
+    }
+    
+    .chapter-item-title {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    .chapter-item-date {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    
+    /* Global Chat */
+    .global-chat-section {
+      margin: 3rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(26, 26, 37, 0.95), rgba(18, 18, 26, 0.95));
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .chat-header h3 {
+      color: var(--gojo-blue);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .online-count {
+      background: rgba(0, 255, 136, 0.15);
+      color: #00ff88;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    
+    .chat-messages {
+      height: 300px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    
+    .chat-message {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      background: rgba(26, 26, 37, 0.8);
+      border-radius: 12px;
+      border-left: 3px solid var(--gojo-blue);
+    }
+    
+    .chat-message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.3rem;
+    }
+    
+    .chat-username {
+      color: var(--gojo-purple);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .chat-time {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+    }
+    
+    .chat-text {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+    
+    .chat-input-container {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .chat-input-container input {
+      flex: 1;
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      background: rgba(26, 26, 37, 0.9);
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+    
+    .chat-input-container input:focus {
+      outline: none;
+      border-color: var(--gojo-blue);
+    }
+    
+    .chat-send-btn {
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .chat-send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    }
+    
+    .chat-login-prompt {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+    }
+    
+    .chat-login-prompt input {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      background: rgba(26, 26, 37, 0.9);
+      color: var(--text-primary);
+      margin-right: 0.5rem;
+    }
+    
+    .chat-login-prompt button {
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    
+    .pagination button {
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      background: rgba(26, 26, 37, 0.9);
+      color: var(--text-primary);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .pagination button:hover:not(:disabled), .pagination button.active {
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border-color: transparent;
+    }
+    
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--gojo-blue), var(--gojo-purple));
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 600;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .search-filter-container {
+        flex-direction: column;
+      }
+      
+      .search-box {
+        max-width: 100%;
+      }
+      
+      .manga-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      
+      .chat-messages {
+        height: 250px;
+      }
+      
+      .chat-input-container {
+        flex-direction: column;
+      }
+      
+      .chat-input-container input, .chat-send-btn {
+        width: 100%;
+      }
+    }
   </style>
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
@@ -146,63 +658,672 @@
     </div>
 
     <div class="section-header">
-      <h2>🔥 Top Picks This Week</h2>
+      <h2>🔥 Browse Manga</h2>
     </div>
 
-    <div class="manga-grid">
-      <div class="manga-card">
-        <img src="https://i.postimg.cc/Nfg51486/IMG-20250716-011828-361.jpg" alt="Solo Leveling">
-        <div class="manga-content">
-          <h3>
-            <a href="solo-leveling-ch1.html">
-              📖 Solo Leveling
-            </a>
-          </h3>
-          <p>Follow Sung Jin-Woo, the weakest hunter of all mankind, as he levels up to become the world's strongest in this thrilling manhwa sensation.</p>
-        </div>
+    <!-- Search and Filter -->
+    <div class="search-filter-container">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="mangaSearch" placeholder="Search manga, manhwa, manhua..." />
       </div>
-
-      <div class="manga-card">
-        <img src="https://i.postimg.cc/RVXqGHGj/IMG-20250716-011845-911.jpg" alt="One Piece">
-        <div class="manga-content">
-          <h3>
-            <a href="https://drive.google.com/file/d/1E0mTiAAI8CDAmoR_zed_yZJVrtaju2ym/view?usp=drivesdk" target="_blank">
-              One Piece
-            </a>
-          </h3>
-          <p>Join Monkey D. Luffy and his pirate crew in their search for the legendary One Piece treasure in this epic journey across the Grand Line!</p>
-        </div>
+      <div class="filter-tags">
+        <button class="filter-tag active" data-filter="all">All</button>
+        <button class="filter-tag" data-filter="manga">Manga</button>
+        <button class="filter-tag" data-filter="manhwa">Manhwa</button>
+        <button class="filter-tag" data-filter="manhua">Manhua</button>
       </div>
+    </div>
 
-      <div class="manga-card">
-        <img src="https://i.postimg.cc/hjWGhbP7/IMG-20250716-011922-920.jpg" alt="Tower of God">
-        <div class="manga-content">
-          <h3>
-            <a href="https://drive.google.com/file/d/1m7PJ6oXOpXdMKeZJN8t7pSvybkWJwAfx/view?usp=drivesdk" target="_blank">
-              📕 Tower of God – Season 1
-            </a>
-          </h3>
-          <p>Bam enters the mysterious Tower to find his only friend, Rachel. Each floor brings new challenges, power struggles, and secrets untold.</p>
-        </div>
+    <!-- Loading -->
+    <div class="loading" id="loadingIndicator">
+      <div class="loading-spinner"></div>
+      <p>Loading manga...</p>
+    </div>
+
+    <!-- Manga Grid -->
+    <div class="manga-grid" id="mangaGrid" style="display: none;"></div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination" style="display: none;"></div>
+
+    <!-- Global Chat Section -->
+    <div class="global-chat-section">
+      <div class="chat-header">
+        <h3>💬 Global Chat</h3>
+        <span class="online-count" id="onlineCount">👥 0 online</span>
       </div>
-
-      <div class="manga-card">
-        <img src="https://i.postimg.cc/gkk2w0d4/IMG-20250716-011930-282.jpg" alt="Jujutsu Kaisen">
-        <div class="manga-content">
-          <h3>
-            <a href="https://drive.google.com/file/d/1BtUyJCLhu4yxYzNls6lsvWQGz3cf4zdK/view?usp=drivesdk" target="_blank">
-              📗 Jujutsu Kaisen – Chapter 1
-            </a>
-          </h3>
-          <p>When Yuji Itadori swallows a cursed object, he enters a dangerous world of sorcery, spirits, and one powerful demon—Ryomen Sukuna.</p>
+      
+      <div id="chatLoginPrompt" class="chat-login-prompt">
+        <p>Enter a username to join the chat</p>
+        <input type="text" id="chatUsername" placeholder="Your username..." maxlength="20" />
+        <button onclick="joinChat()">Join</button>
+      </div>
+      
+      <div id="chatContainer" style="display: none;">
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-container">
+          <input type="text" id="chatInput" placeholder="Type a message..." maxlength="500" />
+          <button class="chat-send-btn" onclick="sendMessage()">Send</button>
         </div>
       </div>
     </div>
   </main>
 
+  <!-- Manga Reader Modal -->
+  <div class="reader-modal" id="readerModal">
+    <div class="reader-header">
+      <span class="reader-title" id="readerTitle">Loading...</span>
+      <button class="reader-close" onclick="closeReader()">✕ Close</button>
+    </div>
+    <div class="reader-content" id="readerContent"></div>
+    <div class="chapter-nav">
+      <button id="prevChapter" onclick="prevChapter()">← Previous</button>
+      <button onclick="openChapterList()">📖 Chapters</button>
+      <button id="nextChapter" onclick="nextChapter()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Chapter List Modal -->
+  <div class="chapter-list-modal" id="chapterListModal">
+    <div class="chapter-list-content">
+      <div class="chapter-list-header">
+        <h3 id="chapterListTitle">Chapters</h3>
+        <button class="reader-close" onclick="closeChapterList()">✕ Close</button>
+      </div>
+      <div id="chapterList"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
   <footer>
     © 2025 Anime Wrld Wars | ANICADE ✌️🔥 — BROUGHT TO YOU BY TRESFOR WRLD
   </footer>
 
+  <script>
+    // Configuration
+    const MANGADEX_API = 'https://api.mangadex.org';
+    const JSONBIN_URL = 'https://api.jsonbin.io/v3/b';
+    const JSONBIN_BIN_ID = '682a8c3a8a456b7eb9ea3d74'; // Will be created if needed
+    const JSONBIN_MASTER_KEY = '$2a$10$ANICADE_CHAT_MASTER_KEY_PLACEHOLDER'; // Replace with actual key
+    
+    // State
+    let currentPage = 0;
+    let currentFilter = 'all';
+    let searchTimeout = null;
+    let currentManga = null;
+    let currentChapterIndex = 0;
+    let chapters = [];
+    let chatUsername = localStorage.getItem('chatUsername') || '';
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initFilters();
+      initSearch();
+      loadManga();
+      initChat();
+    });
+    
+    // Filter initialization
+    function initFilters() {
+      document.querySelectorAll('.filter-tag').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          currentPage = 0;
+          loadManga();
+        });
+      });
+    }
+    
+    // Search initialization
+    function initSearch() {
+      document.getElementById('mangaSearch').addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          currentPage = 0;
+          loadManga(e.target.value.trim());
+        }, 500);
+      });
+    }
+    
+    // Load manga from MangaDex API
+    async function loadManga(searchQuery = '') {
+      const loading = document.getElementById('loadingIndicator');
+      const grid = document.getElementById('mangaGrid');
+      const pagination = document.getElementById('pagination');
+      
+      loading.style.display = 'block';
+      grid.style.display = 'none';
+      pagination.style.display = 'none';
+      
+      try {
+        let url = `${MANGADEX_API}/manga?limit=20&offset=${currentPage * 20}&includes[]=cover_art&includes[]=author&availableTranslatedLanguage[]=en&order[followedCount]=desc&order[relevance]=desc`;
+        
+        // Add content rating filter
+        url += '&contentRating[]=safe&contentRating[]=suggestive';
+        
+        // Add type filter
+        if (currentFilter !== 'all') {
+          const tags = {
+            'manga': ['b13b2a48-c720-44a9-9c77-39c9979373fb'],
+            'manhwa': ['f4122d1c-3b44-44d0-9936-ff7502c39ad3'],
+            'manhua': ['e64f6742-c834-471a-91d8-11d33e0f2991']
+          };
+          if (tags[currentFilter]) {
+            url += `&includedTags[]=${tags[currentFilter][0]}`;
+          }
+        }
+        
+        // Add search query
+        if (searchQuery) {
+          url += `&title=${encodeURIComponent(searchQuery)}`;
+        }
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          renderManga(data.data);
+          renderPagination(data.total);
+        } else {
+          grid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);grid-column:1/-1;">No manga found. Try a different search.</p>';
+          grid.style.display = 'grid';
+        }
+      } catch (error) {
+        console.error('Error loading manga:', error);
+        showToast('Failed to load manga. Please try again.');
+      } finally {
+        loading.style.display = 'none';
+        grid.style.display = 'grid';
+        pagination.style.display = 'flex';
+      }
+    }
+    
+    // Render manga cards
+    function renderManga(mangaList) {
+      const grid = document.getElementById('mangaGrid');
+      grid.innerHTML = '';
+      
+      mangaList.forEach(manga => {
+        const coverArt = manga.relationships.find(r => r.type === 'cover_art');
+        const author = manga.relationships.find(r => r.type === 'author');
+        const coverFileName = coverArt?.attributes?.fileName;
+        const mangaId = manga.id;
+        const title = manga.attributes.title.en || Object.values(manga.attributes.title)[0] || 'Unknown';
+        const description = manga.attributes.description?.en || Object.values(manga.attributes.description || {})[0] || '';
+        const tags = manga.attributes.tags?.slice(0, 3) || [];
+        
+        // HD Cover URL from MangaDex
+        const coverUrl = coverFileName 
+          ? `https://uploads.mangadex.org/covers/${mangaId}/${coverFileName}.512.jpg`
+          : 'https://via.placeholder.com/512x728?text=No+Cover';
+        
+        const card = document.createElement('div');
+        card.className = 'manga-card';
+        card.innerHTML = `
+          <img src="${coverUrl}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.src='https://via.placeholder.com/512x728?text=No+Cover'">
+          <div class="manga-content">
+            <h3><a href="#" onclick="openManga('${mangaId}', '${escapeHtml(title)}'); return false;">${escapeHtml(title)}</a></h3>
+            <p>${escapeHtml(description.substring(0, 150))}${description.length > 150 ? '...' : ''}</p>
+            <div class="manga-tags">
+              ${tags.map(t => `<span class="manga-tag">${escapeHtml(t.attributes.name.en || Object.values(t.attributes.name)[0])}</span>`).join('')}
+            </div>
+            <div class="manga-actions">
+              <button class="manga-btn manga-btn-read" onclick="openManga('${mangaId}', '${escapeHtml(title)}')">📖 Read</button>
+              <button class="manga-btn manga-btn-download" onclick="downloadManga('${mangaId}', '${escapeHtml(title)}')">⬇️ Download</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    
+    // Render pagination
+    function renderPagination(total) {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(total / 20);
+      
+      if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+      }
+      
+      let html = '';
+      
+      // Previous button
+      html += `<button ${currentPage === 0 ? 'disabled' : ''} onclick="goToPage(${currentPage - 1})">← Prev</button>`;
+      
+      // Page numbers
+      const startPage = Math.max(0, currentPage - 2);
+      const endPage = Math.min(totalPages - 1, currentPage + 2);
+      
+      for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i + 1}</button>`;
+      }
+      
+      // Next button
+      html += `<button ${currentPage >= totalPages - 1 ? 'disabled' : ''} onclick="goToPage(${currentPage + 1})">Next →</button>`;
+      
+      pagination.innerHTML = html;
+    }
+    
+    function goToPage(page) {
+      if (page < 0) return;
+      currentPage = page;
+      loadManga(document.getElementById('mangaSearch').value.trim());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Open manga and fetch chapters
+    async function openManga(mangaId, title) {
+      currentManga = { id: mangaId, title };
+      showToast('Loading chapters...');
+      
+      try {
+        // Fetch chapters
+        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc&includes[]=scanlation_group`);
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          chapters = data.data;
+          currentChapterIndex = 0;
+          openChapterList();
+        } else {
+          showToast('No chapters available for this manga.');
+        }
+      } catch (error) {
+        console.error('Error loading chapters:', error);
+        showToast('Failed to load chapters.');
+      }
+    }
+    
+    // Open chapter list
+    function openChapterList() {
+      const modal = document.getElementById('chapterListModal');
+      const title = document.getElementById('chapterListTitle');
+      const list = document.getElementById('chapterList');
+      
+      title.textContent = currentManga.title + ' - Chapters';
+      list.innerHTML = '';
+      
+      // Group chapters by number and pick first of each
+      const uniqueChapters = [];
+      const seenChapters = new Set();
+      
+      chapters.forEach(ch => {
+        const chNum = ch.attributes.chapter || '0';
+        if (!seenChapters.has(chNum)) {
+          seenChapters.add(chNum);
+          uniqueChapters.push(ch);
+        }
+      });
+      
+      // Sort by chapter number
+      uniqueChapters.sort((a, b) => parseFloat(a.attributes.chapter || 0) - parseFloat(b.attributes.chapter || 0));
+      
+      uniqueChapters.forEach((ch, index) => {
+        const chNum = ch.attributes.chapter || '0';
+        const chTitle = ch.attributes.title || '';
+        const date = new Date(ch.attributes.publishAt).toLocaleDateString();
+        const groupName = ch.relationships.find(r => r.type === 'scanlation_group')?.attributes?.name || '';
+        
+        const item = document.createElement('div');
+        item.className = 'chapter-item';
+        item.innerHTML = `
+          <span class="chapter-item-title">Chapter ${chNum}${chTitle ? ': ' + escapeHtml(chTitle) : ''}</span>
+          <span class="chapter-item-date">${date}</span>
+        `;
+        item.onclick = () => {
+          currentChapterIndex = index;
+          readChapter(ch);
+          closeChapterList();
+        };
+        list.appendChild(item);
+      });
+      
+      modal.classList.add('active');
+    }
+    
+    function closeChapterList() {
+      document.getElementById('chapterListModal').classList.remove('active');
+    }
+    
+    // Read chapter
+    async function readChapter(chapter) {
+      const reader = document.getElementById('readerModal');
+      const readerContent = document.getElementById('readerContent');
+      const readerTitle = document.getElementById('readerTitle');
+      
+      readerTitle.textContent = `${currentManga.title} - Chapter ${chapter.attributes.chapter || '0'}`;
+      readerContent.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading pages...</p></div>';
+      reader.classList.add('active');
+      
+      try {
+        // Get chapter images from MangaDex @home server
+        const response = await fetch(`${MANGADEX_API}/at-home/server/${chapter.id}`);
+        const data = await response.json();
+        
+        if (data.baseUrl && data.chapter) {
+          const { baseUrl } = data;
+          const { hash, data: pages, dataSaver } = data.chapter;
+          
+          // Use data saver for faster loading, switch to data for HD
+          const imageUrls = pages.map(page => `${baseUrl}/data/${hash}/${page}`);
+          
+          readerContent.innerHTML = imageUrls.map(url => 
+            `<img src="${url}" alt="Page" loading="lazy" onerror="this.style.display='none'">`
+          ).join('');
+        } else {
+          readerContent.innerHTML = '<p style="text-align:center;padding:2rem;color:var(--text-secondary);">Failed to load pages.</p>';
+        }
+      } catch (error) {
+        console.error('Error reading chapter:', error);
+        readerContent.innerHTML = '<p style="text-align:center;padding:2rem;color:var(--text-secondary);">Failed to load chapter.</p>';
+      }
+      
+      // Update navigation buttons
+      document.getElementById('prevChapter').disabled = currentChapterIndex <= 0;
+      document.getElementById('nextChapter').disabled = currentChapterIndex >= chapters.length - 1;
+    }
+    
+    function prevChapter() {
+      if (currentChapterIndex > 0) {
+        currentChapterIndex--;
+        const uniqueChapters = getUniqueChapters();
+        if (uniqueChapters[currentChapterIndex]) {
+          readChapter(uniqueChapters[currentChapterIndex]);
+        }
+      }
+    }
+    
+    function nextChapter() {
+      if (currentChapterIndex < chapters.length - 1) {
+        currentChapterIndex++;
+        const uniqueChapters = getUniqueChapters();
+        if (uniqueChapters[currentChapterIndex]) {
+          readChapter(uniqueChapters[currentChapterIndex]);
+        }
+      }
+    }
+    
+    function getUniqueChapters() {
+      const uniqueChapters = [];
+      const seenChapters = new Set();
+      
+      chapters.forEach(ch => {
+        const chNum = ch.attributes.chapter || '0';
+        if (!seenChapters.has(chNum)) {
+          seenChapters.add(chNum);
+          uniqueChapters.push(ch);
+        }
+      });
+      
+      return uniqueChapters.sort((a, b) => parseFloat(a.attributes.chapter || 0) - parseFloat(b.attributes.chapter || 0));
+    }
+    
+    function closeReader() {
+      document.getElementById('readerModal').classList.remove('active');
+    }
+    
+    // Download manga
+    async function downloadManga(mangaId, title) {
+      showToast('Preparing download...');
+      
+      try {
+        // Fetch chapters
+        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc`);
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          // Get first chapter for download
+          const firstChapter = data.data[0];
+          const chResponse = await fetch(`${MANGADEX_API}/at-home/server/${firstChapter.id}`);
+          const chData = await chResponse.json();
+          
+          if (chData.baseUrl && chData.chapter) {
+            const { baseUrl } = chData;
+            const { hash, data: pages } = chData.chapter;
+            
+            // Create download links
+            const downloadLinks = pages.map((page, i) => ({
+              url: `${baseUrl}/data/${hash}/${page}`,
+              filename: `${title.replace(/[^a-z0-9]/gi, '_')}_ch${firstChapter.attributes.chapter || '1'}_p${i + 1}.jpg`
+            }));
+            
+            // Download first page as sample
+            const link = document.createElement('a');
+            link.href = downloadLinks[0].url;
+            link.download = downloadLinks[0].filename;
+            link.click();
+            
+            showToast(`Downloading Chapter ${firstChapter.attributes.chapter || '1'}...`);
+            
+            // Show info about full download
+            setTimeout(() => {
+              showToast('For full chapter downloads, use a MangaDex downloader app.');
+            }, 2000);
+          }
+        } else {
+          showToast('No chapters available for download.');
+        }
+      } catch (error) {
+        console.error('Error downloading:', error);
+        showToast('Failed to prepare download.');
+      }
+    }
+    
+    // Global Chat Functions
+    function initChat() {
+      if (chatUsername) {
+        document.getElementById('chatLoginPrompt').style.display = 'none';
+        document.getElementById('chatContainer').style.display = 'block';
+        document.getElementById('chatUsername').value = chatUsername;
+        loadMessages();
+        setInterval(loadMessages, 5000); // Poll every 5 seconds
+      }
+      
+      document.getElementById('chatInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+      
+      document.getElementById('chatUsername').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') joinChat();
+      });
+    }
+    
+    function joinChat() {
+      const username = document.getElementById('chatUsername').value.trim();
+      if (!username) {
+        showToast('Please enter a username');
+        return;
+      }
+      
+      chatUsername = username.substring(0, 20);
+      localStorage.setItem('chatUsername', chatUsername);
+      
+      document.getElementById('chatLoginPrompt').style.display = 'none';
+      document.getElementById('chatContainer').style.display = 'block';
+      
+      loadMessages();
+      setInterval(loadMessages, 5000);
+    }
+    
+    async function loadMessages() {
+      try {
+        const response = await fetch(`${JSONBIN_URL}/${JSONBIN_BIN_ID}/latest`, {
+          headers: {
+            'X-Master-Key': JSONBIN_MASTER_KEY
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const messages = data.record?.messages || [];
+          renderMessages(messages);
+          updateOnlineCount(messages);
+        }
+      } catch (error) {
+        console.log('Chat not initialized yet or error loading messages');
+        // Initialize bin if needed
+        initializeChatBin();
+      }
+    }
+    
+    async function initializeChatBin() {
+      try {
+        const response = await fetch(JSONBIN_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': JSONBIN_MASTER_KEY,
+            'X-Bin-Name': 'ANICADE-Global-Chat'
+          },
+          body: JSON.stringify({
+            messages: [],
+            created: new Date().toISOString()
+          })
+        });
+        
+        if (response.ok) {
+          console.log('Chat bin initialized');
+        }
+      } catch (error) {
+        console.log('Could not initialize chat bin');
+      }
+    }
+    
+    function renderMessages(messages) {
+      const container = document.getElementById('chatMessages');
+      
+      // Get last 50 messages
+      const recentMessages = messages.slice(-50);
+      
+      container.innerHTML = recentMessages.map(msg => `
+        <div class="chat-message">
+          <div class="chat-message-header">
+            <span class="chat-username">${escapeHtml(msg.username)}</span>
+            <span class="chat-time">${formatTime(msg.timestamp)}</span>
+          </div>
+          <div class="chat-text">${escapeHtml(msg.text)}</div>
+        </div>
+      `).join('');
+      
+      // Scroll to bottom
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    function updateOnlineCount(messages) {
+      // Count unique users in last 5 minutes
+      const fiveMinAgo = Date.now() - 5 * 60 * 1000;
+      const recentUsers = new Set();
+      
+      messages.forEach(msg => {
+        if (new Date(msg.timestamp).getTime() > fiveMinAgo) {
+          recentUsers.add(msg.username);
+        }
+      });
+      
+      document.getElementById('onlineCount').textContent = `👥 ${recentUsers.size || 1} online`;
+    }
+    
+    async function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      
+      if (!text) return;
+      if (!chatUsername) {
+        showToast('Please join the chat first');
+        return;
+      }
+      
+      input.value = '';
+      
+      // Get existing messages
+      let messages = [];
+      try {
+        const response = await fetch(`${JSONBIN_URL}/${JSONBIN_BIN_ID}/latest`, {
+          headers: {
+            'X-Master-Key': JSONBIN_MASTER_KEY
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          messages = data.record?.messages || [];
+        }
+      } catch (e) {}
+      
+      // Add new message
+      const newMessage = {
+        username: chatUsername,
+        text: text.substring(0, 500),
+        timestamp: new Date().toISOString()
+      };
+      
+      messages.push(newMessage);
+      
+      // Keep only last 200 messages
+      if (messages.length > 200) {
+        messages = messages.slice(-200);
+      }
+      
+      // Save to JSONBin
+      try {
+        await fetch(`${JSONBIN_URL}/${JSONBIN_BIN_ID}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': JSONBIN_MASTER_KEY
+          },
+          body: JSON.stringify({
+            messages,
+            updated: new Date().toISOString()
+          })
+        });
+        
+        renderMessages(messages);
+      } catch (error) {
+        console.error('Error sending message:', error);
+        showToast('Failed to send message');
+      }
+    }
+    
+    // Utility functions
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      const now = new Date();
+      const diff = now - date;
+      
+      if (diff < 60000) return 'Just now';
+      if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+      return date.toLocaleDateString();
+    }
+    
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeReader();
+        closeChapterList();
+      }
+    });
+  </script>
 </body>
 </html>

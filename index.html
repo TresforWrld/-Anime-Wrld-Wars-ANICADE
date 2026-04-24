@@ -519,8 +519,6 @@
         </div>
         <p class="event-desc">We're going all out for the ANICADE anniversary! Join the channels below to participate in our biggest giveaway yet.</p>
         <div class="event-links">
-          <a href="https://whatsapp.com/channel/0029Vb5yeBu8aKvFEuqYot0M" target="_blank" class="event-link"><span><i class="fas fa-brain" style="margin-right:7px"></i>Psychology &amp; Motivation</span><i class="fas fa-external-link-alt"></i></a>
-          <a href="https://whatsapp.com/channel/0029VbB6KzCHrDZpXjztxk3y" target="_blank" class="event-link"><span><i class="fas fa-music" style="margin-right:7px"></i>Music Channel</span><i class="fas fa-external-link-alt"></i></a>
           <a href="https://whatsapp.com/channel/0029Vb6PGBSHFxOtOpOr142p" target="_blank" class="event-link"><span><i class="fas fa-globe" style="margin-right:7px"></i>Main ANICADE Channel</span><i class="fas fa-external-link-alt"></i></a>
         </div>
       </div>
@@ -748,7 +746,7 @@
   // ── ANIME CARD BUILDER (clickable with detail overlay) ──
   function buildAnimeCard(anime,delay=0){
     const title=anime.title?.english||anime.title?.romaji||'Unknown';
-    const cover=anime.coverImage?.large||anime.coverImage?.medium||'';
+    const cover=anime.coverImage?.extraLarge||anime.coverImage?.large||anime.coverImage?.medium||'';
     const score=anime.averageScore?(anime.averageScore/10).toFixed(1):null;
     const fmt=anime.format||'';
     const airingAt=anime.nextAiringEpisode?.airingAt;
@@ -780,7 +778,7 @@
 
   // ── ANILIST TRENDING ──
   async function loadTrending(){
-    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
+    const q=`query{Page(perPage:20){media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{extraLarge large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
     try{
       const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const d=await r.json();
@@ -793,7 +791,7 @@
     const seasons=['WINTER','WINTER','SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER'];
     const season=seasons[new Date().getMonth()],year=new Date().getFullYear();
     document.getElementById('seasonLabel').textContent=`${season} ${year}`;
-    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
+    const q=`query{Page(perPage:24){media(type:ANIME,season:${season},seasonYear:${year},sort:POPULARITY_DESC){id title{english romaji}coverImage{extraLarge large medium}averageScore format genres episodes description(asHtml:false) status season seasonYear nextAiringEpisode{episode airingAt}}}}`;
     try{
       const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const d=await r.json();
@@ -805,7 +803,7 @@
 
   // ── UPCOMING ANIME EVENT CARD ──
   async function loadUpcomingAnime(){
-    const q=`query{Page(perPage:10){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}coverImage{large}description(asHtml:false)startDate{year month day}nextAiringEpisode{airingAt episode}}}}`;
+    const q=`query{Page(perPage:10){media(type:ANIME,sort:POPULARITY_DESC,status:NOT_YET_RELEASED){id title{english romaji}coverImage{extraLarge large}description(asHtml:false)startDate{year month day}nextAiringEpisode{airingAt episode}}}}`;
     try{
       const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
       const d=await r.json();
@@ -888,56 +886,113 @@
   function shareTG(url,title){window.open(`https://t.me/share/url?url=${url}&text=${title}`,'_blank');}
 
   // ── NEWS APIs ──
-  async function loadNewsJikan(){
-    const ids=[21,1535,269,16498,1,6702,918,11061,38524,40748];
-    const picked=ids.sort(()=>Math.random()-.5).slice(0,4);
-    const results=[];
-    await Promise.all(picked.map(async id=>{
-      try{
-        const r=await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`,{signal:AbortSignal.timeout(8000)});
-        if(!r.ok)return;
-        const d=await r.json();
-        (d.data||[]).slice(0,2).forEach(it=>results.push({title:it.title,excerpt:it.excerpt||'',image:it.images?.jpg?.image_url||null,date:it.date,source:'MyAnimeList'}));
-      }catch(e){}
-    }));
-    return results;
-  }
-
-  async function loadNewsAniList(){
-    // Fetch truly live recently-updated airing/upcoming anime as news
-    const q=`query{Page(perPage:15){media(type:ANIME,sort:UPDATED_AT_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){id title{english romaji}coverImage{large}description(asHtml:false)nextAiringEpisode{episode airingAt}startDate{year month}}}}`;
-    try{
-      const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
-      const d=await r.json();
-      return(d.data.Page.media||[]).map(a=>({
-        title:`${a.title?.english||a.title?.romaji}${a.nextAiringEpisode?.episode?' — EP '+a.nextAiringEpisode.episode+' Coming Up':''}`,
-        excerpt:a.description?a.description.replace(/<[^>]+>/g,'').trim():'',
-        image:a.coverImage?.large||null,
-        date:a.nextAiringEpisode?.airingAt?new Date(a.nextAiringEpisode.airingAt*1000).toISOString():null,
-        source:'AniList',ep:a.nextAiringEpisode?.episode
-      }));
-    }catch(e){return[];}
-  }
-
-  async function loadNews(){
-    const grid=document.getElementById('newsGrid');
-    try{
-      const[a,b]=await Promise.all([loadNewsJikan(),loadNewsAniList()]);
-      let all=[...a,...b].sort(()=>Math.random()-.5).slice(0,12);
-      if(!all.length)throw new Error('empty');
-      grid.innerHTML=all.map(buildNewsCard).join('');
-      // Notify if permission granted
-      if(Notification.permission==='granted'){
-        new Notification('ANICADE News Updated',{body:`${all.length} fresh updates loaded`,icon:'https://i.imgur.com/qgZhkhV.jpeg'});
-      }
-    }catch(e){
-      try{const f=await loadNewsAniList();if(f.length){grid.innerHTML=f.slice(0,9).map(buildNewsCard).join('');return;}}catch(e2){}
-      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:12px;color:var(--border)"></i>Could not load news. Check back soon.</div>`;
-    }
-  }
 
   // Auto-refresh news every 5 minutes
   setInterval(()=>{_ncId=0;loadNews();},5*60*1000);
+      const results=[];
+      const now = new Date();
+      const month = now.getMonth();
+      const year = now.getFullYear();
+      const seasons = ['winter', 'winter', 'spring', 'spring', 'spring', 'summer', 'summer', 'summer', 'fall', 'fall', 'fall', 'winter'];
+      const currentSeason = seasons[month];
+      
+      try{
+        // Get current season anime
+        const seasonR = await fetch(`https://api.jikan.moe/v4/seasons/${year}/${currentSeason}?limit=10`,{signal:AbortSignal.timeout(10000)});
+        if(!seasonR.ok) return [];
+        const seasonD = await seasonR.json();
+        const animeIds = (seasonD.data||[]).slice(0,6).map(a => a.mal_id);
+        
+        // Fetch news for current season anime
+        await Promise.all(animeIds.map(async id => {
+          try{
+            await new Promise(r => setTimeout(r, 400)); // Rate limit
+            const r = await fetch(`https://api.jikan.moe/v4/anime/${id}/news?page=1`,{signal:AbortSignal.timeout(8000)});
+            if(!r.ok) return;
+            const d = await r.json();
+            const now = Date.now();
+            const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
+            (d.data||[]).filter(it => {
+              const newsDate = new Date(it.date).getTime();
+              return newsDate > oneWeekAgo; // Only news from last 7 days
+            }).slice(0,2).forEach(it => results.push({
+              title: it.title,
+              excerpt: it.excerpt||'',
+              image: it.images?.jpg?.large_image_url || it.images?.jpg?.image_url || null,
+              date: it.date,
+              source: 'MyAnimeList'
+            }));
+          }catch(e){}
+        }));
+      }catch(e){}
+      return results;
+    }
+  
+    async function loadNewsAniList(){
+      // Fetch recently updated airing anime as news - real-time content
+      const q=`query{
+        Page(perPage:20){
+          media(type:ANIME,sort:TRENDING_DESC,status_in:[RELEASING,NOT_YET_RELEASED]){
+            id
+            title{english romaji}
+            coverImage{extraLarge large}
+            description(asHtml:false)
+            nextAiringEpisode{episode airingAt}
+            startDate{year month day}
+            trending
+            popularity
+          }
+        }
+      }`;
+      try{
+        const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+        const d=await r.json();
+        const now = Date.now();
+        const oneWeekFuture = now + 7 * 24 * 60 * 60 * 1000;
+        return(d.data.Page.media||[])
+          .filter(a => {
+            // Filter to only currently relevant anime
+            const airingAt = a.nextAiringEpisode?.airingAt ? a.nextAiringEpisode.airingAt * 1000 : 0;
+            return a.trending > 0 || a.popularity > 50000 || (airingAt > 0 && airingAt < oneWeekFuture);
+          })
+          .map(a=>({
+            title: `${a.title?.english||a.title?.romaji}${a.nextAiringEpisode?.episode?' - EP '+a.nextAiringEpisode.episode+' Airing Soon':''}`,
+            excerpt: a.description?a.description.replace(/<[^>]+>/g,'').trim().slice(0,200):'',
+            image: a.coverImage?.extraLarge||a.coverImage?.large||null,
+            date: a.nextAiringEpisode?.airingAt?new Date(a.nextAiringEpisode.airingAt*1000).toISOString():new Date().toISOString(),
+            source: 'AniList',
+            ep: a.nextAiringEpisode?.episode
+          }));
+      }catch(e){return[];}
+    }
+  
+    async function loadNews(){
+      const grid=document.getElementById('newsGrid');
+      try{
+        const[a,b]=await Promise.all([loadNewsJikan(),loadNewsAniList()]);
+        // Sort by date, most recent first, and remove duplicates
+        const seen = new Set();
+        let all = [...a,...b]
+          .filter(item => {
+            const key = item.title.toLowerCase().slice(0, 50);
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          })
+          .sort((x,y) => new Date(y.date||0) - new Date(x.date||0))
+          .slice(0,12);
+        if(!all.length)throw new Error('empty');
+        grid.innerHTML=all.map(buildNewsCard).join('');
+        // Notify if permission granted
+        if(Notification.permission==='granted'){
+          new Notification('ANICADE News Updated',{body:all.length+' fresh updates loaded',icon:'https://i.imgur.com/qgZhkhV.jpeg'});
+        }
+      }catch(e){
+        try{const f=await loadNewsAniList();if(f.length){grid.innerHTML=f.slice(0,9).map(buildNewsCard).join('');return;}}catch(e2){}
+        grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:11px"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:12px;color:var(--border)"></i>Could not load news. Check back soon.</div>';
+      }
+    }
+    // Auto-refresh news every 5 minutes\n    setInterval(()=>{_ncId=0;loadNews();},5*60*1000);
 
   // ── NOTIFICATIONS ──
   function showNotifBanner(){

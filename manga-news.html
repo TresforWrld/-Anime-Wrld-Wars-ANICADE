@@ -443,7 +443,7 @@ async function loadMangaNews(){
   const grid=document.getElementById('mangaNewsGrid');
   try{
     // Fetch recently updated manga from AniList
-    const q=`query{Page(perPage:12){media(type:MANGA,sort:UPDATED_AT_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{large}description(asHtml:false)chapters volumes averageScore genres startDate{year}}}}`;
+    const q=`query{Page(perPage:12){media(type:MANGA,sort:UPDATED_AT_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{extraLarge large}description(asHtml:false)chapters volumes averageScore genres startDate{year}}}}`;
     const d=await anilist(q);
     const items=d.data.Page.media||[];
 
@@ -465,7 +465,7 @@ async function loadMangaNews(){
     const aniNews=items.map(m=>({
       title:`${m.title?.english||m.title?.romaji}${m.chapters?' — '+m.chapters+' Chapters':''}`,
       excerpt:(m.description||'').replace(/<[^>]+>/g,'').trim(),
-      image:m.coverImage?.large||null,
+      image:m.coverImage?.extraLarge||m?.coverImage?.large||null,
       date:null,source:'AniList',
       id:m.id,genres:m.genres||[],score:m.averageScore,type:'MANGA'
     }));
@@ -543,7 +543,7 @@ function buildGenreRow(containerId,genres,onSelect){
 
 function buildMangaCard(m,ismanhwa=false){
   const title=m.title?.english||m.title?.romaji||'Unknown';
-  const cover=m.coverImage?.large||m.coverImage?.medium||'';
+  const cover=m.coverImage?.extraLarge||m?.coverImage?.large||m.coverImage?.medium||'';
   const score=m.averageScore?(m.averageScore/10).toFixed(1):null;
   const ch=m.chapters?m.chapters+'ch':'—';
   const country=m.countryOfOrigin||'JP';
