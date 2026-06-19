@@ -226,7 +226,7 @@
     <a href="#trending-manga"><i class="fas fa-fire"></i> Trending</a>
     <a href="#manhwa"><i class="fas fa-book"></i> Manhwa</a>
     <a href="#watch-anime"><i class="fas fa-play-circle"></i> Watch Anime</a>
-    <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" class="hl" target="_blank"><i class="fas fa-glasses"></i> Read Manga</a>
+    <a href="manga.html" class="hl"><i class="fas fa-glasses"></i> Read Manga</a>
   </div>
 </nav>
 
@@ -237,7 +237,7 @@
     <h1 class="hero-title">MANGA <span>&</span> MANHWA</h1>
     <p class="hero-desc">Live news, trending titles, manhwa picks and free legal streaming — all in one place. Stay ahead of every chapter drop.</p>
     <div class="hero-btns">
-      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank" class="btn-neon"><i class="fas fa-glasses"></i> Read & Download</a>
+      <a href="manga.html" class="btn-neon"><i class="fas fa-glasses"></i> Read Manga</a>
       <a href="#trending-manga" class="btn-ghost"><i class="fas fa-fire"></i> Trending Now</a>
     </div>
   </div>
@@ -246,6 +246,7 @@
 <!-- TAB BAR -->
 <div class="tab-bar">
   <button class="tab-btn active" onclick="scrollTo('#manga-news')"><i class="fas fa-newspaper" style="margin-right:6px"></i>Manga News</button>
+  <button class="tab-btn" onclick="location.href='manga.html'"><i class="fas fa-glasses" style="margin-right:6px"></i>Read Manga</button>
   <button class="tab-btn" onclick="scrollTo('#trending-manga')"><i class="fas fa-fire" style="margin-right:6px"></i>Trending Manga</button>
   <button class="tab-btn" onclick="scrollTo('#manhwa')"><i class="fas fa-book" style="margin-right:6px"></i>Manhwa</button>
   <button class="tab-btn" onclick="scrollTo('#watch-anime')"><i class="fas fa-play" style="margin-right:6px"></i>Watch Anime</button>
@@ -255,7 +256,7 @@
 <div class="section" id="manga-news">
   <div class="sec-hdr">
     <div class="sec-title-wrap"><span class="sec-num">01</span><h2 class="sec-title">MANGA <span>NEWS</span></h2></div>
-    <span class="sec-sub"><span class="live-dot"></span>Live · AniList & MAL</span>
+    <span class="sec-sub"><span class="live-dot"></span>Live only · AniList & Jikan/MAL</span>
   </div>
   <div class="news-grid" id="mangaNewsGrid">
     <div class="news-card"><div class="skel" style="height:160px"></div><div class="news-body"><div class="skel" style="height:9px;width:50%;margin-bottom:7px"></div><div class="skel" style="height:16px;margin-bottom:5px"></div><div class="skel" style="height:10px;width:80%"></div></div></div>
@@ -366,8 +367,8 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand"><img class="footer-logo" src="https://i.imgur.com/qgZhkhV.jpeg" alt="ANICADE"/><div class="footer-name">ANICADE <span>MANGA</span></div></div>
-    <div class="footer-copy">© 2026 Anime Wrld Wars · ANICADE<br>By <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank">Read Manga</a><a href="community.html">Community</a><a href="contact.html">Contact</a></div>
+    <div class="footer-copy">© 2026 ANICADE Tech<br>By <strong style="color:var(--neon)">Tresfor Wrld</strong> ✌️</div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="manga.html" target="_blank">Read Manga</a><a href="community.html">Community</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
 
@@ -507,12 +508,12 @@ function openMangaNewsDetail(k){
     <div class="det-syn-lbl">Description</div>
     <div class="det-syn">${escH(desc.slice(0,600))}${desc.length>600?'…':''}</div>
     ${d.id?`<div class="det-actions">
-      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ MANGA</a>
+      <a href="manga.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ MANGA</a>
       <a href="https://anilist.co/manga/${d.id}" target="_blank" class="det-action-btn"><i class="fas fa-external-link-alt"></i> ANILIST</a>
     </div>`:''}
     <div class="det-share-row">
       <div class="det-share-chip" onclick="doShare('${escH(d.title||'')}')"><i class="fas fa-share-alt"></i> Share</div>
-      <div class="det-share-chip" onclick="doShareWA('${escH(d.title||'')}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</div>
+      <div class="det-share-chip" onclick="shareNative('${escH(d.title||'')}')"><i class="fas fa-share-alt" style="color:var(--neon)"></i> SHARE</div>
       <div class="det-share-chip" onclick="doShareTG('${escH(d.title||'')}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</div>
     </div>
   `);
@@ -524,7 +525,12 @@ function doShare(title){
   if(navigator.share){navigator.share({title:title+' — ANICADE',url}).catch(()=>{});}
   else{navigator.clipboard?.writeText(url);toast('Link copied!','success');}
 }
-function doShareWA(title){window.open(`https://wa.me/?text=${encodeURIComponent(title+' — ANICADE Manga '+location.href)}`,'_blank');}
+async function shareNative(title){
+  const text=`${title} — ANICADE Manga ${location.href}`;
+  if(navigator.share){try{await navigator.share({title:'ANICADE Manga',text,url:location.href});return;}catch(e){}}
+  try{await navigator.clipboard.writeText(text);toast('Link copied.','success');}
+  catch(e){prompt('Copy this link:',text);}
+}
 function doShareTG(title){window.open(`https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(title)}`,'_blank');}
 
 // ══════════════════════════
@@ -629,12 +635,12 @@ function openMangaDetail(k){
     <div class="det-syn-lbl">Synopsis</div>
     <div class="det-syn">${escH(desc.slice(0,500))}${desc.length>500?'…':''}</div>
     <div class="det-actions">
-      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ & DOWNLOAD</a>
+      <a href="manga.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ & DOWNLOAD</a>
       ${d.id?`<a href="https://anilist.co/manga/${d.id}" target="_blank" class="det-action-btn"><i class="fas fa-external-link-alt"></i> VIEW ON ANILIST</a>`:''}
     </div>
     <div class="det-share-row">
       <div class="det-share-chip" onclick="doShare('${escH(d.title||'')}')"><i class="fas fa-share-alt"></i> Share</div>
-      <div class="det-share-chip" onclick="doShareWA('${escH(d.title||'')}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</div>
+      <div class="det-share-chip" onclick="shareNative('${escH(d.title||'')}')"><i class="fas fa-share-alt" style="color:var(--neon)"></i> SHARE</div>
       <div class="det-share-chip" onclick="doShareTG('${escH(d.title||'')}')"><i class="fab fa-telegram" style="color:#229ed9"></i> TG</div>
     </div>
   `);

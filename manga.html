@@ -653,12 +653,14 @@
   <header>📚 Manga & Manhwa | ANICADE</header>
 
   <main>
-    <div style="text-align: center; margin: 2rem 0;">
+    <div style="text-align: center; margin: 2rem 0; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
       <a href="index.html" class="back-button">⬅️ Back to Home</a>
+      <a href="manga-news.html" class="back-button">📰 Manga News</a>
     </div>
 
     <div class="section-header">
-      <h2>🔥 Browse Manga</h2>
+      <h2>🔥 Read Manga</h2>
+      <p style="color:var(--text-secondary);margin-top:.5rem;">Use this tab to search and read chapters. Use Manga News for live manga/manhwa updates.</p>
     </div>
 
     <!-- Search and Filter -->
@@ -739,7 +741,7 @@
   <div class="toast" id="toast"></div>
 
   <footer>
-    © 2025 Anime Wrld Wars | ANICADE ✌️🔥 — BROUGHT TO YOU BY TRESFOR WRLD
+    © 2026 ANICADE Tech — BROUGHT TO YOU BY TRESFOR WRLD
   </footer>
 
   <script>
@@ -925,7 +927,7 @@
       
       try {
         // Fetch chapters
-        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc&includes[]=scanlation_group`);
+        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc&includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`);
         const data = await response.json();
         
         if (data.data && data.data.length > 0) {
@@ -975,7 +977,7 @@
         item.className = 'chapter-item';
         item.innerHTML = `
           <span class="chapter-item-title">Chapter ${chNum}${chTitle ? ': ' + escapeHtml(chTitle) : ''}</span>
-          <span class="chapter-item-date">${date}</span>
+          <span class="chapter-item-date">${date} · Tap to read</span>
         `;
         item.onclick = () => {
           currentChapterIndex = index;
@@ -1033,7 +1035,7 @@
     function prevChapter() {
       if (currentChapterIndex > 0) {
         currentChapterIndex--;
-        const uniqueChapters = getUniqueChapters();
+        const uniqueChapters = chapters;
         if (uniqueChapters[currentChapterIndex]) {
           readChapter(uniqueChapters[currentChapterIndex]);
         }
@@ -1043,7 +1045,7 @@
     function nextChapter() {
       if (currentChapterIndex < chapters.length - 1) {
         currentChapterIndex++;
-        const uniqueChapters = getUniqueChapters();
+        const uniqueChapters = chapters;
         if (uniqueChapters[currentChapterIndex]) {
           readChapter(uniqueChapters[currentChapterIndex]);
         }
@@ -1075,7 +1077,7 @@
       
       try {
         // Fetch chapters
-        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc`);
+        const response = await fetch(`${MANGADEX_API}/manga/${mangaId}/feed?limit=500&translatedLanguage[]=en&order[chapter]=asc&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`);
         const data = await response.json();
         
         if (data.data && data.data.length > 0) {
