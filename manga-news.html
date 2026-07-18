@@ -203,6 +203,8 @@
     .footer-links a:hover{color:var(--neon)}
     @media(max-width:700px){footer{padding:20px 14px}.footer-inner{flex-direction:column;text-align:center}}
 
+    .spinner{display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--neon);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
     body.light{--ink:#f0f4fc;--panel:#e4eaf6;--panel2:#dce4f0;--border:#b8c8e0;--paper:#0d1828;--aged:#2a3a56;--muted:#5a7090}
     body.light .navbar,body.light footer{background:rgba(240,244,252,.96)}
     body.light .det-sheet{background:#e4eaf6}
@@ -432,60 +434,122 @@ document.getElementById('detOverlay').addEventListener('click',e=>{if(e.target==
 
 // ── ANILIST ──
 async function anilist(query,vars={}){
-  const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query,variables:vars})});
-  return r.json();
-}
-
-// ══════════════════════════
-//  MANGA NEWS (AniList + Jikan)
-// ══════════════════════════
-async function loadMangaNews(){
+  const r=await fetch('https://graphql.anilist.co',async function loadMangaNews(){
   const grid=document.getElementById('mangaNewsGrid');
-  try{
-    // Fetch recently updated manga from AniList
-    const q=`query{Page(perPage:12){media(type:MANGA,sort:UPDATED_AT_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{extraLarge large}description(asHtml:false)chapters volumes averageScore genres startDate{year}}}}`;
-    const d=await anilist(q);
-    const items=d.data.Page.media||[];
+  grid.innerHTML='<div style="grid-column:1/-1;display:flex;justify-content:center;padding:40px"><div class="spinner"></div></div>';
 
-    // Also fetch manga news from Jikan (MAL)
-    let jikanNews=[];
+  try{
+    // ── Source 1: Jikan top manga — always has proper images + synopsis ──
+    let jikanItems=[];
     try{
-      const mangaIds=[1,2,13,11,23,21759,75989,87216,117778,42897];
-      const picked=mangaIds.sort(()=>Math.random()-.5).slice(0,3);
-      const results=await Promise.all(picked.map(async id=>{
-        const r=await fetch(`https://api.jikan.moe/v4/manga/${id}/news`,{signal:AbortSignal.timeout(6000)});
-        if(!r.ok)return[];
-        const dd=await r.json();
-        return(dd.data||[]).slice(0,2).map(n=>({title:n.title,excerpt:n.excerpt||'',image:n.images?.jpg?.image_url||null,date:n.date,source:'MyAnimeList',isMangaNews:true}));
-      }));
-      jikanNews=results.flat();
+      const r=await fetch('https://api.jikan.moe/v4/top/manga?limit=8',{signal:AbortSignal.timeout(9000)});
+      if(r.ok){
+        const d=await r.json();
+        jikanItems=(d.data||[]).filter(m=>m.synopsis&&m.synopsis.length>20).map(m=>({
+          title:(m.title_english||m.title||'Unknown')+' — Top Manga',
+          excerpt:m.synopsis||'',
+          image:m.images?.jpg?.large_image_url||m.images?.jpg?.image_url||null,
+          date:m.published?.from||null,
+          source:'MyAnimeList',
+          id:null,malId:m.mal_id,
+          genres:(m.genres||[]).map(g=>g.name),
+          score:m.score?Math.round(m.score*10):null,
+          chapters:m.chapters
+        }));
+      }
     }catch(e){}
 
-    // Build AniList items as news
-    const aniNews=items.map(m=>({
-      title:`${m.title?.english||m.title?.romaji}${m.chapters?' — '+m.chapters+' Chapters':''}`,
-      excerpt:(m.description||'').replace(/<[^>]+>/g,'').trim(),
-      image:m.coverImage?.extraLarge||m?.coverImage?.large||null,
-      date:null,source:'AniList',
-      id:m.id,genres:m.genres||[],score:m.averageScore,type:'MANGA'
-    }));
+    // ── Source 2: AniList trending manga with banner images ──
+    const q=`query{
+      trending:Page(perPage:8){media(type:MANGA,sort:TRENDING_DESC,status_in:[RELEASING,FINISHED]){id title{english romaji}coverImage{extraLarge large}bannerImage description(asHtml:false)chapters averageScore genres}}
+      newReleases:Page(perPage:6){media(type:MANGA,sort:START_DATE_DESC,status:RELEASING){id title{english romaji}coverImage{extraLarge large}bannerImage description(asHtml:false)chapters averageScore genres startDate{year month day}}}
+    }`;
+    const d=await anilist(q);
+    const trendingManga=d.data?.trending?.media||[];
+    const newManga=d.data?.newReleases?.media||[];
 
-    const all=[...jikanNews,...aniNews].slice(0,12);
+    const aniItems=[...trendingManga,...newManga].map((m,i)=>{
+      const isNew=i>=trendingManga.length;
+      const title=m.title?.english||m.title?.romaji||'Unknown';
+      const desc=(m.description||'').replace(/<[^>]+>/g,'').trim();
+      // bannerImage is wide/landscape — best for news card header
+      const img=m.bannerImage||m.coverImage?.extraLarge||m.coverImage?.large||null;
+      const sd=m.startDate;
+      return{
+        title:title+(isNew?' — New Release':(m.chapters?' — '+m.chapters+'ch':' — Trending')),
+        excerpt:desc,
+        image:img,
+        isCover:!m.bannerImage,
+        date:sd?.year?new Date(`${sd.year}-${String(sd.month||1).padStart(2,'0')}-${String(sd.day||1).padStart(2,'0')}`).toISOString():null,
+        source:isNew?'AniList · New':'AniList · Trending',
+        id:m.id,genres:m.genres||[],score:m.averageScore,chapters:m.chapters
+      };
+    });
+
+    // Interleave both sources for variety
+    const merged=[];
+    const maxL=Math.max(jikanItems.length,aniItems.length);
+    for(let i=0;i<maxL;i++){
+      if(i<aniItems.length) merged.push(aniItems[i]);
+      if(i<jikanItems.length) merged.push(jikanItems[i]);
+    }
+    const all=merged.filter(x=>x.title&&(x.image||x.excerpt)).slice(0,12);
+    if(!all.length) throw new Error('empty');
+
     grid.innerHTML=all.map(item=>{
-      const k=stash({...item});
+      const desc=(item.excerpt||'').replace(/<[^>]+>/g,'').trim();
+      const preview=desc.slice(0,130);
+      const dateStr=item.date?new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+      const k=stash({
+        title:item.title||'Manga Update',excerpt:item.excerpt||'',
+        image:item.image||null,source:item.source||'AniList',
+        date:dateStr,id:item.id||null,genres:item.genres||[],
+        score:item.score||null,chapters:item.chapters||null,malId:item.malId||null
+      });
       return `<div class="news-card" onclick="openMangaNewsDetail('${k}')">
-        ${item.image?`<img class="news-img" src="${item.image}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=news-img-ph><i class=fas\\ fa-book-open></i></div>'"/>` :`<div class="news-img-ph"><i class="fas fa-book-open"></i></div>`}
+        ${item.image
+          ?`<img class="news-img" src="${item.image}" alt="" loading="lazy" style="${item.isCover?'object-position:top':''}" onerror="this.parentNode.innerHTML='<div class=news-img-ph><i class=fas\ fa-book-open></i></div>'"/>`
+          :`<div class="news-img-ph"><i class="fas fa-book-open"></i></div>`}
         <div class="news-body">
           <div class="news-src">${escH(item.source||'AniList')}</div>
-          <div class="news-title">${escH((item.title||'Manga Update').slice(0,60))}</div>
-          ${item.excerpt?`<div class="news-exc">${escH(item.excerpt.slice(0,150))}</div>`:''}
+          <div class="news-title">${escH((item.title||'').slice(0,65))}</div>
+          ${preview?`<div class="news-exc">${escH(preview)}${desc.length>130?'…':''}</div>`:''}
           <div class="news-foot">
-            ${item.date?`<div class="news-date">${new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:'<div></div>'}
-            <div class="news-tap">TAP FOR MORE →</div>
+            ${dateStr?`<div class="news-date"><i class="fas fa-clock" style="margin-right:2px"></i>${dateStr}</div>`:'<div></div>'}
+            <div class="news-tap">TAP MORE →</div>
           </div>
         </div>
       </div>`;
     }).join('');
+
+  }catch(e){
+    // Hard fallback — AniList trending only
+    try{
+      const q2=`query{Page(perPage:12){media(type:MANGA,sort:TRENDING_DESC){id title{english romaji}coverImage{extraLarge large}bannerImage description(asHtml:false)chapters averageScore genres}}}`;
+      const fb=await anilist(q2);
+      const fbItems=fb.data?.Page?.media||[];
+      if(!fbItems.length) throw new Error('no fallback');
+      grid.innerHTML=fbItems.map(m=>{
+        const title=m.title?.english||m.title?.romaji||'Unknown';
+        const desc=(m.description||'').replace(/<[^>]+>/g,'').trim();
+        const img=m.bannerImage||m.coverImage?.extraLarge||m.coverImage?.large||null;
+        const k=stash({title:title+' — Trending',excerpt:m.description||'',image:img,source:'AniList',id:m.id,genres:m.genres||[],score:m.averageScore,chapters:m.chapters});
+        return `<div class="news-card" onclick="openMangaNewsDetail('${k}')">
+          ${img?`<img class="news-img" src="${img}" alt="" loading="lazy" style="${!m.bannerImage?'object-position:top':''}" onerror="this.parentNode.innerHTML='<div class=news-img-ph><i class=fas\ fa-book-open></i></div>'"/>`:`<div class="news-img-ph"><i class="fas fa-book-open"></i></div>`}
+          <div class="news-body">
+            <div class="news-src">AniList · Trending</div>
+            <div class="news-title">${escH(title.slice(0,65))}</div>
+            ${desc?`<div class="news-exc">${escH(desc.slice(0,130))}…</div>`:''}
+            <div class="news-foot"><div></div><div class="news-tap">TAP MORE →</div></div>
+          </div>
+        </div>`;
+      }).join('');
+    }catch(e2){
+      grid.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px"><i class="fas fa-wifi-slash" style="display:block;font-size:28px;margin-bottom:10px;color:var(--border)"></i>Could not load manga news.</div>';
+    }
+  }
+}
+  }).join('');
   }catch(e){
     grid.innerHTML='<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:11px">Could not load manga news.</div>';
   }
@@ -495,21 +559,23 @@ function openMangaNewsDetail(k){
   const d=unstash(k);
   const desc=(d.excerpt||d.description||'').replace(/<[^>]+>/g,'').trim()||'No description available.';
   const score=d.score?(d.score/10).toFixed(1):null;
+  const srcLink=d.id?`https://anilist.co/manga/${d.id}`:d.malId?`https://myanimelist.net/manga/${d.malId}`:null;
   openDet(`
     ${d.image?`<img class="det-news-img" src="${d.image}" alt="" onerror="this.style.display='none'"/>`:''}
     <div class="det-title-lg" style="margin-bottom:6px">${escH(d.title||'Manga Update')}</div>
     <div class="det-badges" style="margin-bottom:8px">
-      <div class="det-badge neon">${d.source||'AniList'}</div>
-      ${score?`<div class="det-badge neon">★ ${score}</div>`:''}
+      <div class="det-badge neon">${escH(d.source||'AniList')}</div>
+      ${score?`<div class="det-badge neon">&#9733; ${score}/10</div>`:''}
+      ${d.chapters?`<div class="det-badge">${d.chapters} CH</div>`:''}
       ${(d.genres||[]).slice(0,3).map(g=>`<div class="det-badge">${escH(g)}</div>`).join('')}
     </div>
-    ${d.date?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:10px"><i class="fas fa-clock" style="color:var(--neon);margin-right:4px"></i>${new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`:''}
+    ${d.date?`<div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:10px"><i class="fas fa-clock" style="color:var(--neon);margin-right:4px"></i>${d.date}</div>`:''}
     <div class="det-syn-lbl">Description</div>
-    <div class="det-syn">${escH(desc.slice(0,600))}${desc.length>600?'…':''}</div>
-    ${d.id?`<div class="det-actions">
-      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ MANGA</a>
-      <a href="https://anilist.co/manga/${d.id}" target="_blank" class="det-action-btn"><i class="fas fa-external-link-alt"></i> ANILIST</a>
-    </div>`:''}
+    <div class="det-syn">${escH(desc.slice(0,700))}${desc.length>700?'…':''}</div>
+    <div class="det-actions">
+      <a href="https://tresforwrld.github.io/ANICADE-MANGA/index.html" target="_blank" class="det-action-btn primary"><i class="fas fa-book-open"></i> READ & DOWNLOAD</a>
+      ${srcLink?`<a href="${srcLink}" target="_blank" class="det-action-btn"><i class="fas fa-external-link-alt"></i> VIEW SOURCE</a>`:''}
+    </div>
     <div class="det-share-row">
       <div class="det-share-chip" onclick="doShare('${escH(d.title||'')}')"><i class="fas fa-share-alt"></i> Share</div>
       <div class="det-share-chip" onclick="doShareWA('${escH(d.title||'')}')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WA</div>
@@ -543,7 +609,7 @@ function buildGenreRow(containerId,genres,onSelect){
 
 function buildMangaCard(m,ismanhwa=false){
   const title=m.title?.english||m.title?.romaji||'Unknown';
-  const cover=m.coverImage?.extraLarge||m?.coverImage?.large||m.coverImage?.medium||'';
+  const cover=m.coverImage?.large||m.coverImage?.medium||'';
   const score=m.averageScore?(m.averageScore/10).toFixed(1):null;
   const ch=m.chapters?m.chapters+'ch':'—';
   const country=m.countryOfOrigin||'JP';
